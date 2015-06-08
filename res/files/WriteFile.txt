@@ -1,0 +1,2 @@
+WriteFile test 1 array[1]
+WriteFile test 2 array[2]

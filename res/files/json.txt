@@ -1,0 +1,1 @@
+{"weapon":{"colors":["red","green"],"name":"Stick","age":5}}
