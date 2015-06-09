@@ -23,17 +23,18 @@ public class TreeDemo {
 		
 		StopWatch sw = new StopWatch();
 		sw.start();
+		
 		//populate the tree
 		for(int i=0; i<100; i++){
 			Random random = new Random();
 			double rand = random.nextDouble() * 100;
 			tm.put("tim" +i, new Double(rand));
 		}
+		
 		sw.stop();
+		
 		System.out.println("Took " + sw.getTotalTimeSeconds() + " seconds to generate the map");
-		
-		
-		sw = new StopWatch();
+		sw = new StopWatch();	//reset watch
 		/*
 		sw.start();
 		Set set = tm.entrySet();
