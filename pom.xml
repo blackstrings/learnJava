@@ -63,6 +63,7 @@
 	</dependency>
 
 	<!--  OpenGL  -->
+	<!-- 
 	<dependency>
 		<groupId>java3d</groupId>
 		<artifactId>vecmath</artifactId>
@@ -74,6 +75,7 @@
 		<artifactId>j3dcore</artifactId>
 		<version>1.5.2</version>
 	</dependency>
+	-->
 	
 	<dependency>
 		<groupId>org.jogamp.gluegen</groupId>
