@@ -44,6 +44,10 @@ public class Service {
 		getStateManager().getUsers().add(new User(username));
 	}
 	
+	public static List<User> getUsers(){
+		return getStateManager().getUsers();
+	}
+	
 	public static StateManager getStateManager(){
 		return StateManager.getInstance();
 	}

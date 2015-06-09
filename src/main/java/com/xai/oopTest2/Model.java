@@ -6,8 +6,10 @@ import java.util.List;
 public class Model {
 	
 	List<Wep> weps;
-
-	public Model(){
+	String name;
+	
+	public Model(String name){
+		this.name = name;
 		weps = new ArrayList<Wep>();
 	}
 
@@ -17,6 +19,14 @@ public class Model {
 
 	public void setWeps(List<Wep> weps) {
 		this.weps = weps;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

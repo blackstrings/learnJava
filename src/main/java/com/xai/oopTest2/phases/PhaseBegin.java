@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 import com.xai.oopTest2.Phase;
 import com.xai.oopTest2.Service;
+import com.xai.oopTest2.User;
 
-public class PhaseBegin {
+public class PhaseBegin implements IPhase {
 	
 	public PhaseBegin(){
 		System.out.println("PhaseBegin");
@@ -27,7 +28,17 @@ public class PhaseBegin {
 			
 		}while(count < numOfUsers);
 		
-		Service.setPhase(Phase.KEEPGOING);
+		for(User user : Service.getStateManager().getUsers()){
+			System.out.println(user.getName());
+		}
+		
+		setNextPhase(Phase.KEEPGOING);
+	}
+
+	@Override
+	public void setNextPhase(Phase phase) {
+		Service.setPhase(phase);
+		
 	}
 	
 }

@@ -8,6 +8,10 @@ public class User {
 	String name;
 	List<Model> models;
 	
+	public String getName() {
+		return name;
+	}
+	
 	public User(String name){
 		this.name = name;
 		models = new ArrayList<Model>();
