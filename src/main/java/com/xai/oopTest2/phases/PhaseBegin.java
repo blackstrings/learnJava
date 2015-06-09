@@ -9,6 +9,11 @@ import com.xai.oopTest2.User;
 public class PhaseBegin implements IPhase {
 	
 	public PhaseBegin(){
+		
+	}
+	
+	@Override
+	public void execute(){
 		System.out.println("PhaseBegin");
 		System.out.println("How many users?");
 		
@@ -32,11 +37,11 @@ public class PhaseBegin implements IPhase {
 			System.out.println(user.getName());
 		}
 		
-		setNextPhase(Phase.KEEPGOING);
+		setNextPhase(new PhaseKeepGoing());
 	}
 
 	@Override
-	public void setNextPhase(Phase phase) {
+	public void setNextPhase(IPhase phase) {
 		Service.setPhase(phase);
 		
 	}

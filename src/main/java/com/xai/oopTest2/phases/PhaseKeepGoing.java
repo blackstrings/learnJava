@@ -11,6 +11,11 @@ import com.xai.oopTest2.Wep;
 public class PhaseKeepGoing implements IPhase{
 
 	public PhaseKeepGoing(){
+		
+	}
+	
+	@Override
+	public void execute(){
 		System.out.println("PhaseKeepGoing");
 		
 		int index = 0;
@@ -25,11 +30,11 @@ public class PhaseKeepGoing implements IPhase{
 			System.out.println(user.getName() + " out : " + Service.getOutFromUser(user));
 		}
 		
-		setNextPhase(Phase.OVER);
+		setNextPhase(new PhaseOver());
 	}
 
 	@Override
-	public void setNextPhase(Phase phase) {
+	public void setNextPhase(IPhase phase) {
 		Service.setPhase(phase);
 	}
 }

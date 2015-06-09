@@ -2,6 +2,8 @@ package com.xai.oopTest2;
 
 import java.util.List;
 
+import com.xai.oopTest2.phases.IPhase;
+
 public class Service {
 	
 	public static void init(){
@@ -52,12 +54,16 @@ public class Service {
 		return StateManager.getInstance();
 	}
 	
-	public static void setPhase(Phase phase){
+	public static void setPhase(IPhase phase){
 		getStateManager().setCurrPhase(phase);
 	}
 	
-	public static Phase getPhase(){
+	public static IPhase getPhase(){
 		return getStateManager().getCurrPhase();
+	}
+	
+	public static boolean isOver(){
+		return getStateManager().isOver();
 	}
 	
 }

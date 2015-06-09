@@ -187,6 +187,7 @@
 //		//or
 //		Whitebox.invokeMethod(testClass, "privateMethod", param1, param2);
 //		
+//		//the second line tells mockito what static class and method to match for the # of times in line 1
 //		PowerMockito.verifyStatic(Mockito.times(1));
 //		ItemContainerBA.addItemToProfile(Mockito.any(Class.class), Mockito.any(Class.class));
 //		
