@@ -10,6 +10,8 @@ public class Iterators {
 
 	public static void main(String [] args){
 		
+		//yeng test CH3 - mastet ters
+		
 		System.out.println("Early Iterator In Java -----------");
 		Vector names = new Vector();
 		names.addElement("tom");
