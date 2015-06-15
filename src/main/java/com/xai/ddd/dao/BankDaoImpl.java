@@ -1,13 +1,15 @@
-package com.xai.ddd;
+package com.xai.ddd.dao;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-public class BankRepositoryImpl implements IBankRepository {
+import com.xai.ddd.domain.Bank;
 
-	private final static Logger logger = Logger.getLogger(BankRepositoryImpl.class);
+public class BankDaoImpl implements BankDao {
+
+	private final static Logger logger = Logger.getLogger(BankDaoImpl.class);
 	private Map<Long, Bank> map = null;
 	
 	@Override

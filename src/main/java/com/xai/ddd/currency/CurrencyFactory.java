@@ -1,13 +1,9 @@
-package com.xai.ddd;
+package com.xai.ddd.currency;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.xai.ddd.currency.Baht;
-import com.xai.ddd.currency.Currency;
-import com.xai.ddd.currency.Dollar;
-import com.xai.ddd.currency.Euro;
-import com.xai.ddd.currency.Yuan;
+import com.xai.ddd.domain.Country;
 
 public class CurrencyFactory {
 

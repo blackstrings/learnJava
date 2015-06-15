@@ -1,9 +1,13 @@
-package com.xai.ddd;
+package com.xai.ddd.service;
 
 import org.apache.log4j.Logger;
 
 import com.xai.ddd.currency.Currency;
+import com.xai.ddd.currency.CurrencyFactory;
 import com.xai.ddd.currency.ICurrency;
+import com.xai.ddd.dao.BankDaoImpl;
+import com.xai.ddd.domain.Bank;
+import com.xai.ddd.domain.Country;
 
 /**
  * This is the application service.
@@ -12,10 +16,10 @@ import com.xai.ddd.currency.ICurrency;
  */
 public class ApplicationService {
 	
-	private static BankRepositoryImpl bankRepo;
+	private static BankDaoImpl bankRepo;
 	
 	public ApplicationService(){
-		bankRepo = new BankRepositoryImpl();
+		bankRepo = new BankDaoImpl();
 	}
 	
 	private static final Logger logger = Logger.getLogger(ApplicationService.class);
@@ -24,7 +28,7 @@ public class ApplicationService {
 		return new CurrencyConverter().convert(currency, toCountry);
 	}
 	
-	public BankRepositoryImpl getBankRepo(){
+	public BankDaoImpl getBankRepo(){
 		return bankRepo;
 	}
 	

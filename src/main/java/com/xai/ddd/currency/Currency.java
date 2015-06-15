@@ -2,7 +2,7 @@ package com.xai.ddd.currency;
 
 import java.math.BigDecimal;
 
-import com.xai.ddd.Country;
+import com.xai.ddd.domain.Country;
 
 public abstract class Currency implements ICurrency {
 	

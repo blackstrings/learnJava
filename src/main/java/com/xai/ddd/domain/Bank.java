@@ -1,8 +1,9 @@
-package com.xai.ddd;
+package com.xai.ddd.domain;
 
 import org.apache.log4j.Logger;
 
 import com.xai.ddd.currency.ICurrency;
+import com.xai.ddd.service.CurrencyConverter;
 
 public class Bank {
 	

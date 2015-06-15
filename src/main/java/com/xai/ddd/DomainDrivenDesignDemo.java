@@ -1,7 +1,12 @@
 package com.xai.ddd;
 
 import com.xai.ddd.currency.Baht;
+import com.xai.ddd.currency.CurrencyFactory;
 import com.xai.ddd.currency.Dollar;
+import com.xai.ddd.dao.BankDaoImpl;
+import com.xai.ddd.domain.Bank;
+import com.xai.ddd.domain.Country;
+import com.xai.ddd.service.ApplicationService;
 
 /**
  * for more info http://www.informit.com/articles/article.aspx?p=1944876&seqNum=2
@@ -42,7 +47,7 @@ public class DomainDrivenDesignDemo {
 		//---------------------------------------------------------------------
 		printNL(3);
 		ApplicationService as = new ApplicationService();
-		BankRepositoryImpl br = as.getBankRepo();
+		BankDaoImpl br = as.getBankRepo();
 		
 		// add a bank -- this should be handle within applicaiton service but for demo we have it here
 		long bankId1 = 1001L;
@@ -97,11 +102,11 @@ public class DomainDrivenDesignDemo {
 	private static void printNL(int num){
 		System.out.println("\n-- " + num + " --------------------------------------------------");
 	}
-	private static void printBalance(long bankId, BankRepositoryImpl br){
+	private static void printBalance(long bankId, BankDaoImpl br){
 		System.out.println(br.getBankById(bankId).getCurrencyType() 
 				+ " : " + ApplicationService.getBalance(bankId));
 	}
-	private static void printBalance(long bankId, BankRepositoryImpl br, Country toCountry){
+	private static void printBalance(long bankId, BankDaoImpl br, Country toCountry){
 		System.out.println(toCountry.getType()
 				+ " : " + ApplicationService.getBalance(bankId, toCountry));
 	}

@@ -1,4 +1,4 @@
-package com.xai.ddd;
+package com.xai.ddd.domain;
 
 public enum Country {
 	USA("us"), THAILAND("baht"), EUROPE("euro"), CHINESE("yuan");

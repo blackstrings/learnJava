@@ -1,4 +1,4 @@
-package com.xai.ddd;
+package com.xai.ddd.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import com.xai.ddd.currency.Dollar;
 import com.xai.ddd.currency.ICurrency;
+import com.xai.ddd.domain.Country;
 
 public class CurrencyConverter {
 
