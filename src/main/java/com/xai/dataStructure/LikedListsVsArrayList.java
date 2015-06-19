@@ -1,5 +1,9 @@
 package com.xai.dataStructure;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * <p>http://stackoverflow.com/questions/322715/when-to-use-linkedlist-over-arraylist</p>
  *<p>
@@ -31,8 +35,15 @@ package com.xai.dataStructure;
  */
 public class LikedListsVsArrayList {
 
+	
 	public static void main(String [] args){
 		
+		List<String> list = new ArrayList<String>();
+		list.add("list1");
+		
+		List<String> linked = new LinkedList<String>();
+		
+		linked.add("linked1");
 		
 		
 	}
