@@ -65,6 +65,16 @@ public class HashMapDemo {
 			System.out.println(key + " " + val);
 		}
 		*/
+		
+		HashMap hm2 = new HashMap();
+		hm2.put("item", "ball");
+		
+		//if the first check is fale, the 2nd check will not run
+		if(hm2.containsKey("items") && hm2.get("items").equals("ball")){
+			System.out.println("same");
+		}else{
+			System.out.println("no errors");
+		}
 
 		
 		
