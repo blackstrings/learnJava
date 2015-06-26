@@ -1,4 +1,4 @@
-package com.xai.program.tiles.application;
+package com.xai.program.tiles.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,13 +16,11 @@ public class TileConnector {
 	 * so first tile has reference to the next tile
 	 * the last tile has reference to the first tile
 	 * @param tiles
+	 * @param customConnectionMap can be null
 	 */
-	public static void processTileConnections(List<Tile> tiles, Map<Integer, List<Integer>> customConnectionMap){
+	public static void processTileConnections(List<Tile> tiles){
 		forwardConnection(tiles);
 		backwardConnection(tiles);
-		if(customConnectionMap != null){
-			processCustomForwardConnections(tiles, customConnectionMap);
-		}
 	}
 	
 	private static void backwardConnection(List<Tile> tiles){
@@ -37,17 +35,15 @@ public class TileConnector {
 			if(tile.getId()-1 >= 0){
 				//connect tile
 				int currId = tile.getId();
-				if(!tiles.get(currId).addToBackward(currId-1)){
-					System.out.println("connection failed");
-					break;	//break if fails
-				}
+				isSuccess = tiles.get(currId).addToBackward(currId-1);
+				if(isSuccess) tiles.get(currId).setMainBackwardTileId(currId+1);
+				if(!isSuccess) break; //TODO log it instead
 			}else{
 				//connect first tile's backward id to nothing
 				//tile.connectTo(tiles.get(0).getId());
 			}
 		}
 		reversedTiles.clear();
-		
 	}
 	
 	private static void forwardConnection(List<Tile> tiles){
@@ -58,26 +54,33 @@ public class TileConnector {
 			if(tile.getId()+1 < tiles.size()){
 				//connect tile
 				int currId = tile.getId();
-				if(!tiles.get(currId).addToForward(currId+1)){
-					System.out.println("connection failed");
-					break;	//break if fails
-				}
+				isSuccess = tiles.get(currId).addToForward(currId+1);
+				//register main forward
+				if(isSuccess) tiles.get(currId).setMainForwardTileId(currId+1);
+				if(!isSuccess) break; //TODO log it instead
 			}else{
-				//connect last tile to first tile
-				tile.addToForward(tiles.get(0).getId());
+				//connect last tile to first tile if need
+				//tile.addToForward(tiles.get(0).getId());
 			}
 		}
 	}
 	
-	public static void processCustomForwardConnections(List<Tile> tiles, Map<Integer, List<Integer>> customConnectionMap){
-
-		for(Entry<Integer, List<Integer>> entry : customConnectionMap.entrySet()){
-			Integer key = entry.getKey();
-			List<Integer> list = entry.getValue();
-			for(Integer tileId : list){
-				tiles.get(key).addToForward(tileId);
+	/**
+	 * Add additional connections so one tile may have more than one forward connection
+	 * @param tiles
+	 * @param customConnectionMap
+	 */
+	public static boolean processCustomForwardConnections(List<Tile> tiles, Map<Integer, List<Integer>> customConnectionMap){
+		if(tiles != null && customConnectionMap != null){
+			for(Entry<Integer, List<Integer>> entry : customConnectionMap.entrySet()){
+				Integer key = entry.getKey();
+				List<Integer> list = entry.getValue();
+				for(Integer tileId : list){
+					tiles.get(key).addToForward(tileId);
+				}
 			}
+			return true;
 		}
-		
+		return false;
 	}
 }

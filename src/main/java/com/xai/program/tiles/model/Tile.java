@@ -6,7 +6,11 @@ import java.util.List;
 public class Tile {
 
 	private int id;
+	
 	private Type type;
+	
+	private int mainForwardTileId;
+	private int mainBackwardTileId;
 	private List<Integer> forwardTileIds;
 	private List<Integer> backwardTileIds;
 	
@@ -46,7 +50,10 @@ public class Tile {
 	public Type getType() {return type;}
 	public void setType(Type type) {this.type = type;}
 	
-	public String toString(){
-		return backwardTileIds + type.name() + getId() + forwardTileIds;
-	}
+	public int getMainForwardTileId() {return mainForwardTileId;}
+	public void setMainForwardTileId(int mainForwardTileId) {this.mainForwardTileId = mainForwardTileId;}
+	public int getMainBackwardTileId() {return mainBackwardTileId;}
+	public void setMainBackwardTileId(int mainBackwardTileId) {this.mainBackwardTileId = mainBackwardTileId;}
+
+	public String toString(){return backwardTileIds + type.name() + getId() + forwardTileIds;}
 }
