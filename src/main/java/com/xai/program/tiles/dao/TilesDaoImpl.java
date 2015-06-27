@@ -3,7 +3,7 @@ package com.xai.program.tiles.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xai.program.tiles.model.Tile;
+import com.xai.program.tiles.model.tile.Tile;
 
 public class TilesDaoImpl implements TilesDao {
 

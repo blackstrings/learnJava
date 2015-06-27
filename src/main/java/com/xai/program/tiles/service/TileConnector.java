@@ -7,57 +7,54 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.xai.program.tiles.model.Tile;
+import com.xai.program.tiles.model.tile.Tile;
 
 public class TileConnector {
 
 	/**
 	 * connects all tiles in a linear fashion 
-	 * so first tile has reference to the next tile
-	 * the last tile has reference to the first tile
+	 * forward and backward
 	 * @param tiles
 	 * @param customConnectionMap can be null
 	 */
-	public static void processTileConnections(List<Tile> tiles){
-		forwardConnection(tiles);
-		backwardConnection(tiles);
+	public static void processBasicConnections(List<Tile> tiles){
+		processFrontConnections(tiles);
+		processBackConnections(tiles);
 	}
 	
-	private static void backwardConnection(List<Tile> tiles){
+	/*
+	 * the last tile has reference to the previous tileId and so on
+	 * Exception: the first tile has no previous
+	 */
+	private static void processBackConnections(List<Tile> tiles){
 		boolean isSuccess = true;
-		List<Tile> reversedTiles = new ArrayList<Tile>(tiles);
-		Collections.reverse(reversedTiles);
-		
-		for(Tile tile : reversedTiles){
+		int currId;
+		for(Tile tile : tiles){
 			
-			//check so first tile doesn't try to target a non-existing tile before it
-			//because we are going backward
-			if(tile.getId()-1 >= 0){
-				//connect tile
-				int currId = tile.getId();
-				isSuccess = tiles.get(currId).addToBackward(currId-1);
-				if(isSuccess) tiles.get(currId).setMainBackwardTileId(currId+1);
-				if(!isSuccess) break; //TODO log it instead
-			}else{
-				//connect first tile's backward id to nothing
-				//tile.connectTo(tiles.get(0).getId());
+			//first tile don't get any backId
+			if(tile.getId() != 0 && tile.getId()+1 <= tiles.size()){
+				currId = tile.getId();
+				tiles.get(currId).addBackTileId(currId-1);
+				tiles.get(currId).setMainBackTileId(currId-1);
 			}
 		}
-		reversedTiles.clear();
 	}
 	
-	private static void forwardConnection(List<Tile> tiles){
+	/*
+	 * so first tile has reference to the next tileId and so on to the last tile
+	 * Exception: the last tile has no front tileId
+	 */
+	private static void processFrontConnections(List<Tile> tiles){
 		boolean isSuccess = true;
+		int currId;
 		for(Tile tile : tiles){
 			
 			//check so the last tile doesn't target array out of index error
 			if(tile.getId()+1 < tiles.size()){
-				//connect tile
-				int currId = tile.getId();
-				isSuccess = tiles.get(currId).addToForward(currId+1);
+				currId = tile.getId();
+				tiles.get(currId).addFrontTileId(currId+1);
 				//register main forward
-				if(isSuccess) tiles.get(currId).setMainForwardTileId(currId+1);
-				if(!isSuccess) break; //TODO log it instead
+				tiles.get(currId).setMainFrontTileId(currId+1);
 			}else{
 				//connect last tile to first tile if need
 				//tile.addToForward(tiles.get(0).getId());
@@ -66,17 +63,22 @@ public class TileConnector {
 	}
 	
 	/**
-	 * Add additional connections so one tile may have more than one forward connection
+	 * Add additional connections 
+	 * so one tile can have many front connections
 	 * @param tiles
 	 * @param customConnectionMap
 	 */
-	public static boolean processCustomForwardConnections(List<Tile> tiles, Map<Integer, List<Integer>> customConnectionMap){
+	public static boolean addCustomFrontConnections(List<Tile> tiles, Map<Integer, List<Integer>> customConnectionMap){
 		if(tiles != null && customConnectionMap != null){
+			
+			
 			for(Entry<Integer, List<Integer>> entry : customConnectionMap.entrySet()){
 				Integer key = entry.getKey();
 				List<Integer> list = entry.getValue();
+				
+				//for each tile, add the following ids
 				for(Integer tileId : list){
-					tiles.get(key).addToForward(tileId);
+					tiles.get(key).addFrontTileId(tileId);
 				}
 			}
 			return true;
