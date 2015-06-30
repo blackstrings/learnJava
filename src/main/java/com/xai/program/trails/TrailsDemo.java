@@ -2,6 +2,11 @@ package com.xai.program.trails;
 
 public class TrailsDemo {
 
+	/**
+	 * The idea here is that the marker never actually gets put inside a level and is
+	 * able to be kept separate from the level through a controller.
+	 * @param args
+	 */
 	public static void main(String [] args){
 		int i;
 		
