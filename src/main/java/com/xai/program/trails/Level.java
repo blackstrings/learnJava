@@ -23,6 +23,14 @@ public class Level {
 		this.branches = branches;
 	}
 	
+	public MainTile getTile(int[] tilePos){
+		int branchId = tilePos[0];
+		int trailId = tilePos[1];
+		int tileId = tilePos[2];
+		
+		return branches.get(branchId).getTrails().get(trailId).getMainTiles().get(tileId);
+	}
+	
 	//test
 	public int[] getNextMarkerPos(int[] currPos){
 		int branchId = currPos[0];

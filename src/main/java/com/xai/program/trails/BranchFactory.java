@@ -6,15 +6,17 @@ public class BranchFactory {
 		//create tiles into trail
 		int i;
 		Trail t1 = new Trail();
+		t1.setMainTiles(MainTileFactory.getTiles(5));
+
+		//long way
+		/*
 		for(i=0; i<5; i++){
 			t1.add(new MainTile());
-		}
+		}*/
 		
 		//create tiles into trail
 		Trail t2 = new Trail();
-		for(i=0; i<5; i++){
-			t2.add(new MainTile());
-		}
+		t2.setMainTiles(MainTileFactory.getTiles(3));
 		
 		//create branch add trail
 		Branch b1 = new Branch();
@@ -28,15 +30,11 @@ public class BranchFactory {
 		//create tiles into trail
 		int i;
 		Trail t1 = new Trail();
-		for(i=0; i<3; i++){
-			t1.add(new MainTile());
-		}
+		t1.setMainTiles(MainTileFactory.getTiles(3));
 		
 		//create tiles into trail
 		Trail t2 = new Trail();
-		for(i=0; i<3; i++){
-			t2.add(new MainTile());
-		}
+		t2.setMainTiles(MainTileFactory.getTiles(3));
 		
 		//create branch add trail
 		Branch b1 = new Branch();
