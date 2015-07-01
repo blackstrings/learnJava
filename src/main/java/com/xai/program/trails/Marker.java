@@ -1,7 +1,7 @@
 package com.xai.program.trails;
 
 public class Marker {
-	private int[] currPos; //[0,0,0] branch, trail, tile
+	private int[] currPos; //[0,0] branch,tile
 
 	public Marker(){}
 
@@ -14,6 +14,6 @@ public class Marker {
 	}
 	
 	public String toString(){
-		return "" + currPos[0] + "," + currPos[1] + "," + currPos[2];
+		return "" + currPos[0] + "," + currPos[1];
 	}
 }

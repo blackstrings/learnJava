@@ -5,30 +5,18 @@ import java.util.List;
 
 public class Branch {
 
-	private List<Trail> Trails;
+	private List<MainTile> tiles;
 	private List<Integer> frontBranchIds;
 	private List<Integer> backBranchIds;
 
 	public Branch(){
-		Trails = new ArrayList<Trail>();
+		tiles = new ArrayList<MainTile>();
 		frontBranchIds = new ArrayList<Integer>();
 		backBranchIds = new ArrayList<Integer>();
 	}
 	
-	public void add(Trail trail){
-		Trails.add(trail);
-	}
-	
-	public Trail getFirstTrail(){
-		return Trails.get(0);
-	}
-	
-	public List<Trail> getTrails() {
-		return Trails;
-	}
-
-	public void setTrails(List<Trail> Trails) {
-		this.Trails = Trails;
+	public void add(MainTile tile){
+		tiles.add(tile);
 	}
 	
 	public void addFrontBranchId(int id){
@@ -39,12 +27,12 @@ public class Branch {
 		return frontBranchIds;
 	}
 	
+	public void setFrontBranchIds(List<Integer> frontBranchIds){
+		this.frontBranchIds = frontBranchIds;
+	}
+	
 	public void addBackBranchId(int id){
 		backBranchIds.add(id);
-	}
-
-	public void setNextBranchIds(List<Integer> nextBranchIds) {
-		this.frontBranchIds = nextBranchIds;
 	}
 
 	public List<Integer> getBackBranchIds() {
@@ -53,6 +41,14 @@ public class Branch {
 
 	public void setBackBranchIds(List<Integer> backBranchIds) {
 		this.backBranchIds = backBranchIds;
+	}
+
+	public List<MainTile> getTiles() {
+		return tiles;
+	}
+
+	public void setTiles(List<MainTile> tiles) {
+		this.tiles = tiles;
 	}
 	
 
