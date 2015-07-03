@@ -40,7 +40,7 @@ public class Level {
 		//check can go to next tile, basically checking if end of branch
 		if(!(tileId + 1 >= branch.getTiles().size())){	//can go
 			//more tiles are available
-			currPos[1] = tileId += 1;
+			currPos[1] = tileId += 1;	//update the currPos
 			return currPos; 
 			
 		//check if branch has connections
