@@ -4,6 +4,9 @@ import com.xai.gametest2.character.Character;
 
 public class Fish extends Character {
 	
+	public Fish(){
+		
+	}
 	public Fish(String name, double minSize, double maxSize, double lbsPerFoot){
 		setProp(Prop.NAME, name);
 		setProp(Prop.MIN_SIZE, minSize);
