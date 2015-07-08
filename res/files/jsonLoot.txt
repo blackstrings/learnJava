@@ -1,0 +1,1 @@
+{"items":[{"wep":[{"id":1001,"name":"Hard Rock","rare":1,"dmg":1},{"id":1002,"name":"Sharp Rock","rare":1,"dmg":2}],"food":[{"id":2002,"name":"Green Apple","energy":2,"stack":20,"maxStack":99}]}],"mon":[{"id":9001,"name":"Gonder","energy":100,"lvl":2,"rare":1},{"id":9005,"name":"Spader","energy":53,"lvl":1,"rare":1,"equipments":[1001]}],"state":{"mon":1022}}

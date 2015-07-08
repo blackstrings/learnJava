@@ -71,6 +71,8 @@ public class JsonDemo {
 	private static void decodeJson(){
 		//when you have to hard code the string in a class, you have to use this format with the slashes
 		//when you read from a file using a string builder or reader, the quotes will be auto inserted for you
+		//it is best to load from a saved text json file, than manually put in / for each quotes
+		//see jsonDemo2 for loading json file
 		String jsonStr = "{\"name\":\"tom\"},{\"age\":\"9\"}]}";
 		
 		JSONObject obj = new JSONObject(jsonStr);
