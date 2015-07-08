@@ -1,4 +1,4 @@
-package com.xai.oopTest2;
+package com.xai.patterns.state;
 
 public class Wep {
 	

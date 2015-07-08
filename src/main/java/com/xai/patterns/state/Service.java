@@ -1,14 +1,16 @@
-package com.xai.oopTest2;
+package com.xai.patterns.state;
 
 import java.util.List;
 
-import com.xai.oopTest2.phases.IPhase;
+import com.xai.patterns.state.phase.IPhase;
 
 public class Service {
 	
 	public static void init(){
 		getStateManager();
 	}
+	
+	
 	public static int getOutFromUser(User user){
 		List<Model> models = user.getModels();
 		
@@ -64,6 +66,10 @@ public class Service {
 	
 	public static boolean isOver(){
 		return getStateManager().isOver();
+	}
+	
+	public static void reset(){
+		getStateManager().reset();
 	}
 	
 }

@@ -1,12 +1,12 @@
-package com.xai.oopTest2.phases;
+package com.xai.patterns.state.phase;
 
 import java.util.Random;
 
-import com.xai.oopTest2.Model;
-import com.xai.oopTest2.Phase;
-import com.xai.oopTest2.Service;
-import com.xai.oopTest2.User;
-import com.xai.oopTest2.Wep;
+import com.xai.patterns.state.Model;
+import com.xai.patterns.state.Phase;
+import com.xai.patterns.state.Service;
+import com.xai.patterns.state.User;
+import com.xai.patterns.state.Wep;
 
 public class PhaseKeepGoing implements IPhase{
 
@@ -19,6 +19,8 @@ public class PhaseKeepGoing implements IPhase{
 		System.out.println("PhaseKeepGoing");
 		
 		int index = 0;
+		
+		//per user gets an object of some sort
 		for(User user : Service.getUsers()){
 			int rand = new Random().nextInt(10);
 			Wep wep = new Wep(rand);

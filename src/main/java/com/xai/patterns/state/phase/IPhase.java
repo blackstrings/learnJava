@@ -1,6 +1,6 @@
-package com.xai.oopTest2.phases;
+package com.xai.patterns.state.phase;
 
-import com.xai.oopTest2.Phase;
+import com.xai.patterns.state.Phase;
 
 public interface IPhase {
 	public void setNextPhase(IPhase phase);

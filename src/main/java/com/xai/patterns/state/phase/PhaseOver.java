@@ -1,10 +1,6 @@
-package com.xai.oopTest2.phases;
+package com.xai.patterns.state.phase;
 
-import java.util.Scanner;
-
-import com.xai.oopTest2.Phase;
-import com.xai.oopTest2.Service;
-import com.xai.oopTest2.User;
+import com.xai.patterns.state.Service;
 
 public class PhaseOver implements IPhase {
 	
@@ -15,6 +11,9 @@ public class PhaseOver implements IPhase {
 	@Override
 	public void execute(){
 		System.out.println("PhaseOver");
+		
+		//reset everything
+		Service.reset();
 		
 		setNextPhase(new PhaseStart());
 	}

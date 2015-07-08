@@ -1,10 +1,13 @@
-package com.xai.oopTest2.phases;
+package com.xai.patterns.state.phase;
 
 import java.util.Scanner;
 
-import com.xai.oopTest2.Phase;
-import com.xai.oopTest2.Service;
-import com.xai.oopTest2.User;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
+import com.xai.patterns.state.Phase;
+import com.xai.patterns.state.Service;
+import com.xai.patterns.state.User;
 
 public class PhaseBegin implements IPhase {
 	
@@ -15,12 +18,23 @@ public class PhaseBegin implements IPhase {
 	@Override
 	public void execute(){
 		System.out.println("PhaseBegin");
-		System.out.println("How many users?");
+		System.out.println("How many users? 4 Max");
 		
 		Scanner sc = new Scanner(System.in);
-		String numOfUsersTmp = sc.nextLine();
+		
+		String numOfUsersTmp;
+		
+		
+		numOfUsersTmp = sc.nextLine();
+		while(numOfUsersTmp.isEmpty() || !NumberUtils.isNumber(numOfUsersTmp)){
+			
+			System.out.println("Enter a Number between 0-5");
+			numOfUsersTmp = sc.nextLine();
+			
+		}
 		//due to nextInt consuming the new blank line
 		//keep the scanner to the same input type
+		
 		int numOfUsers = Integer.parseInt(numOfUsersTmp);
 		int count = 0;
 		do{

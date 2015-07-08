@@ -1,4 +1,4 @@
-package com.xai.oopTest2;
+package com.xai.patterns.state;
 
 import java.util.ArrayList;
 import java.util.List;

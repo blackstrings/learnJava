@@ -66,15 +66,9 @@ public class JsonTransfer {
 			userMap.put(id, user);
 		}
 		
+		//save
+		
 	}
 	
-	public boolean ruleFall(){
-		
-		if(true){
-			return true;
-		}
-		
-		return false;
-	}
 	
 }

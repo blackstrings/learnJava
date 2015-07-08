@@ -1,9 +1,9 @@
-package com.xai.oopTest2;
+package com.xai.patterns.state;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xai.oopTest2.phases.IPhase;
+import com.xai.patterns.state.phase.IPhase;
 
 public class StateManager {
 
@@ -58,6 +58,10 @@ public class StateManager {
 
 	public void setOver(boolean isOver) {
 		this.isOver = isOver;
+	}
+	
+	public void reset(){
+		users = new ArrayList<User>();
 	}
 	
 }

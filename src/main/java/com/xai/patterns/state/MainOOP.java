@@ -1,8 +1,8 @@
-package com.xai.oopTest2;
+package com.xai.patterns.state;
 
-import com.xai.oopTest2.phases.PhaseBegin;
-import com.xai.oopTest2.phases.PhaseKeepGoing;
-import com.xai.oopTest2.phases.PhaseStart;
+import com.xai.patterns.state.phase.PhaseBegin;
+import com.xai.patterns.state.phase.PhaseKeepGoing;
+import com.xai.patterns.state.phase.PhaseStart;
 
 public class MainOOP {
 
