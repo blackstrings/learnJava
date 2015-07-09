@@ -18,7 +18,7 @@ public class StudentController {
 	}
 	
 	public void updateView(){
-		
+		view.update(student);
 	}
 	
 }

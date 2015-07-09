@@ -1,12 +1,20 @@
 package com.xai.json;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.DatatypeConverter;
+
+import org.eclipse.core.internal.preferences.Base64;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-//how to get inside a json array and grab attributes into a new class
+//how to get inside a json array and grab attributes to hydrate a new class
+//hydrate is filling in info to an existing object
+//serialize is converting an object into another format
+//deserialize is converting the encoded data back into an actual object
 public class JsonTransfer {
 
 	//inner class to hold the json data
@@ -32,7 +40,7 @@ public class JsonTransfer {
 		
 		JSONObject obj = JsonDemo2.getJsonObject("res/files/jsonLoot.txt");
 		
-		System.out.println(obj.toString(5));
+		//System.out.println(obj.toString(5));	//pretty print
 		
 		//store items
 		Map<Integer, Item> itemMap = new HashMap<Integer, Item>();
@@ -58,6 +66,7 @@ public class JsonTransfer {
 			//hydrate user
 			User user = new User(name);
 			
+			//more hydrate if user carry items
 			if(!jsArr.getJSONObject(i).getJSONArray("equipments").isNull(0)){
 				Integer key = jsArr.getJSONObject(i).getJSONArray("equipments").getInt(0);
 				user.setItem(itemMap.get(key));
@@ -69,6 +78,8 @@ public class JsonTransfer {
 		//save
 		
 	}
+	
+
 	
 	
 }
