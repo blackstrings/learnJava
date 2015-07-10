@@ -46,6 +46,12 @@ public class JsonByteArrayDemo {
 		
 	}
 	
+	/**
+	 * 
+	 * @param str
+	 * @param type bytes, kb, mb, all
+	 * @return
+	 */
 	private static String getSize(String str, String type){
 		//test to get size of file
 		long sizeInBytes = str.length();
