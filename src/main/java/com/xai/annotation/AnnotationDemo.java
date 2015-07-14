@@ -38,9 +38,13 @@ public class AnnotationDemo {
 		// Checks if an annotation is present, if so get it
 		if( obj.isAnnotationPresent( CustomAnnotationComplex.class ) )
 		{
-			// Gets the desired annotation
+			// Gets the desired annotation and print all values
 			Annotation annotation = obj.getAnnotation( CustomAnnotationComplex.class );
 			System.out.println( annotation );
+			
+			//get the specific values from the annotation
+			CustomAnnotationComplex cac = (CustomAnnotationComplex) annotation;
+			System.out.println("name:" + cac.author());
 		}
 		
 		//check if all methods have the annotation
