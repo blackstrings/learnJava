@@ -3,7 +3,14 @@ package com.xai.primitiveTypes;
 /**
  * String is immutable meaning it cannot be changed once created. You may not realize, but when you modify a string,
  * what happens is that a new string is created and return.
- * @author xlao
+ * 
+ * For one or two simple concat, the string += is okay
+ * but once the string is big and multiple += are needed, performance will be an issue
+ * therefore use the StringBuffer (sychronized) instead
+ * 
+ * if not logging and no synchronize is needed or on single thread, 
+ * use stringBuilder for faster performance
+ *
  *
  */
 public class StringDemo {
