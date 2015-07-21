@@ -1,7 +1,9 @@
 package com.xai.dataStructure;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.util.StopWatch;
@@ -66,7 +68,7 @@ public class HashMapDemo {
 		}
 		*/
 		
-		HashMap hm2 = new HashMap();
+		HashMap<String, String> hm2 = new HashMap<String, String>();
 		hm2.put("item", "ball");
 		
 		//if the first check is fale, the 2nd check will not run
@@ -75,6 +77,15 @@ public class HashMapDemo {
 		}else{
 			System.out.println("no errors");
 		}
+		
+		
+		//iterate hashmap for keys
+		List<String> ids = new ArrayList<String>();
+		for(String str : hm2.keySet()){
+			ids.add(str);
+		}
+		
+		//iterate hashmap for keys and values (google it)
 
 		
 		

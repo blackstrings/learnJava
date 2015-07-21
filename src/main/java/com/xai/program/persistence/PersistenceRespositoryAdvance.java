@@ -45,10 +45,11 @@ public class PersistenceRespositoryAdvance {
 	
 	private void loadItemTemplates(String file){
 		
-		//get the json
+		//get the root json object
 		JSONObject obj = JsonDemo2.getJsonObject(file);
 		
-		//populate the repositories
+		//populate the repositories which will have to explicitly be implemented
+		//as you need to know what repositories to populate
 		populateMap(monsterReponsitory, obj.getJSONArray("mon"));
 		populateMap(weaponRepository, obj.getJSONArray("wep"));
 		//...
@@ -59,7 +60,7 @@ public class PersistenceRespositoryAdvance {
 	private void populateMap(Map<Integer, HashMap<String, List<String>>> masterMap, JSONArray jsArr){
 		for(int i=0; i<jsArr.length(); i++){
 			
-			//itemAttributeMap
+			//prepare itemAttributeMap
 			HashMap<String, List<String>> itemAttributeMap = new HashMap<String, List<String>>();
 			List<String> attributeList = null;
 			
@@ -105,6 +106,18 @@ public class PersistenceRespositoryAdvance {
 	 */
 	public HashMap<String, List<String>> getMonster(int id){
 		return monsterReponsitory.get(id);
+	}
+	
+	public HashMap<String, List<String>> getWeapon(int id){
+		return weaponRepository.get(id);
+	}
+
+	public Map<Integer, HashMap<String, List<String>>> getWeaponRepository() {
+		return weaponRepository;
+	}
+
+	public Map<Integer, HashMap<String, List<String>>> getMonsterReponsitory() {
+		return monsterReponsitory;
 	}
 	
 	
