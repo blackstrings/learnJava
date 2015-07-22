@@ -1,0 +1,1 @@
+{"mons":[{"DMG":4,"NAME":"Spader","ID":9005},{"DMG":40,"NAME":"Gonder","ID":9001},{"DMG":7,"NAME":"Spader","ID":9005},{"DMG":15,"NAME":"Gonder","ID":9001},{"DMG":36,"NAME":"Gonder","ID":9001},{"DMG":23,"NAME":"Gonder","ID":9001}]}
