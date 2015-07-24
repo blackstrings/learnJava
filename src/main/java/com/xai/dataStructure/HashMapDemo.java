@@ -3,6 +3,7 @@ package com.xai.dataStructure;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -79,10 +80,28 @@ public class HashMapDemo {
 		}
 		
 		
-		//iterate hashmap for keys
+		//iterate hashmap for keys only
 		List<String> ids = new ArrayList<String>();
 		for(String str : hm2.keySet()){
 			ids.add(str);
+		}
+		
+		//values only
+		for(String str : hm2.values()){
+			
+		}
+		
+		//both key and value
+		for(Map.Entry<String, String> entry : hm2.entrySet()){
+			String key = entry.getKey();
+			String value = entry.getValue();
+		}
+		
+		//to remove element while iterating, you'll need to use an iterator
+		Iterator itr = hm2.entrySet().iterator();
+		while(itr.hasNext()){
+			Map.Entry pair = (Map.Entry) itr.next();
+			itr.remove();
 		}
 		
 		//iterate hashmap for keys and values (google it)
