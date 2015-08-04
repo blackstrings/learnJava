@@ -15,7 +15,8 @@ public class ObserverDemo {
 		Computer c1 = new Computer(sub, "mac");
 		Computer c2 = new Computer(sub, "pc");
 		
-		//subject changes state, all observers should be notify
-		sub.setNewNumber(99);
+		//when as soon as subject changes state, 
+		//all observers will be automatically notify with the observer pattern
+		sub.setNewNumber(99);	//subject changes state to a new number
 	}
 }

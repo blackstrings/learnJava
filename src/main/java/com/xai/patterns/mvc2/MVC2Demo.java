@@ -14,7 +14,7 @@ public class MVC2Demo {
 		
 		StudentController controller = new StudentController(student, view);
 		
-		//here on, we should only be able to use the controller
+		//here on, we should only be using the controller
 		//to perform whatever changes to the model and view
 		controller.updateName(student, "Tom");
 		controller.updateView();

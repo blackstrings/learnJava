@@ -27,9 +27,9 @@ public class MVCDemo1 {
 		
 		//example of what to not do
 		//view.display(model);
-			//wrong!! do not touch view or model anymore
+			//wrong!! you should not have to not touch the view or model anymore
 		
-		//use the controller instead beause the controller should have been
+		//use the controller instead because the controller should have been
 		//setup to do all the methods that the model needs to do
 		controller.updateView();
 	}
