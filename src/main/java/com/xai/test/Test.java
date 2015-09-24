@@ -99,6 +99,11 @@ public class Test {
 		System.out.println("total buy len: " + totalBuyLength + " ft");
 		System.out.println("wast: " +  ( totalBuyLength - (requiredLength/12)) + "ft" );
 		System.out.println("\n------------------\n");
+		
+		/*
+		logotitle3d
+		
+		*/
 	}
 	
 }

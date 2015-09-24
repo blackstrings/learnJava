@@ -2,6 +2,7 @@ package com.xai.gui.jframe;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,43 +19,29 @@ import javax.swing.JTextPane;
  */
 public class JFrameDemo2 extends JFrame {
 
-	private JTextPane mainTextPane;
 	
 	public JFrameDemo2(){
 		initUI();
 	}
 	
+	private static int width = 600;
+	private static int height = 300;
+	
 	private void initUI(){
 		//main window container
 		setTitle("JFrame Example 2");
-		setSize(300, 200);
+		setSize(width, height);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLayout(new BorderLayout());
 		
-		mainTextPane = new JTextPane();
+		JTextPane mainTextPane = new JTextPane();
 		mainTextPane.setText("This is some text");
+		mainTextPane.setBounds(10, 200, 200, 200);
 		
-		//button
-		JButton button = new JButton("Test");
-		int width = 100;
-		int height = 30;
-		int xPos = 100;
-		int yPos = 100;
-		button.setBounds(xPos, yPos, width, height);
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				mainTextPane.setText("This is new text you see");
-			}
-		});
+		loadMenu(this, BorderLayout.NORTH);
 		
-		JPanel panel = new JPanel(new GridLayout());
-		panel.add(button);
-		panel.setAlignmentX(LEFT_ALIGNMENT);
-		
-		add(button);
-		add(mainTextPane);
+		add(mainTextPane, BorderLayout.SOUTH);
 	}
 	
 	public static void main(String [] args){ 
@@ -69,6 +56,40 @@ public class JFrameDemo2 extends JFrame {
 
 		});
 		
+	}
+	
+	private void loadMenu(JFrame frame, String layout){
+		
+		//quit
+		JButton btn_exit = new CustomJButton("Quit", 0, 0, 100,30);
+		btn_exit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//mainTextPane.setText("This is new text you see");
+				System.exit(0);
+			}
+		});
+		
+		//test
+		JButton btn_test = new CustomJButton("Test", 0, 0, 200, 30);
+		btn_test.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("test button");
+			}
+		});
+		
+		//when adding jpanel, it is recomended to give it a layout manager
+		//don't use default constructor and set layout after creation
+		//pass in layout manager instead at creation
+		JPanel panelMenu = new JPanel(new GridBagLayout());
+		panelMenu.add(btn_exit);
+		panelMenu.add(btn_test);
+		
+		//add button to frame
+		frame.add(panelMenu, layout);
 	}
 	
 }
