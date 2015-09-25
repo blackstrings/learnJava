@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,7 +16,7 @@ public class JFrameDemo {
 		
 		//---NORTH panel
 		JPanel panelN = new JPanel();
-		panelN.setBackground(Color.YELLOW);
+		panelN.setBackground(Color.BLUE);
 		//label for text
 		JLabel label = new JLabel("My Label");
 		label.setPreferredSize(new Dimension(100,50));
@@ -36,6 +37,9 @@ public class JFrameDemo {
 		//-------- SOUTH panel
 		JPanel panelS = new JPanel();
 		panelS.setBackground(Color.GREEN);
+		CustomComp c = new CustomComp(150,80);	//this jcomponent size will force panelS to enlarge to fit this component
+		c.setSize(100, 100);
+		panelS.add(c);
 		
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.add(panelE, BorderLayout.EAST);
