@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,6 +34,9 @@ public class JFrameDemo {
 		//------- WEST panel
 		JPanel panelW = new JPanel();
 		panelW.setBackground(Color.PINK);
+		JButton jb = new JButton("MyButton");
+		panelW.add(jb);
+		
 		
 		//-------- SOUTH panel
 		JPanel panelS = new JPanel();
