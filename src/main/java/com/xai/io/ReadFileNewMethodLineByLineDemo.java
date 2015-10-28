@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class ReadFileLineByLineDemo {
+public class ReadFileNewMethodLineByLineDemo {
 	
 	final static Charset ENCODING = StandardCharsets.UTF_8;
 	

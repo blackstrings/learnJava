@@ -1,0 +1,16 @@
+ks
+to drop material without changing poly paint = hold alt when drag and dropping
+in ks, render > allow external > enable live linking
+working ver - 5.1.66
+
+zb
+render > enable external render
+
+zmodeler
+nanoMesh
+
+applying multiple nano mesh on same surface
+-hold shft to apply more index to nanomesh without destroying the previous nano mesh
+
+patch pass
+v3-iLh5M!(
