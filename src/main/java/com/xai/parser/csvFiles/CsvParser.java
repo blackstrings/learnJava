@@ -16,14 +16,30 @@ import org.aspectj.org.eclipse.jdt.internal.compiler.flow.FinallyFlowContext;
  * Comma Seperated by Value demo
  * It doesn't really read in csv, but rather a regular text base doc that
  * follows the csv structure
+ * 
+ * This class is not a robust cvs parser that can take in any cvs
+ * It is quite specific to a certain cvs format. Mainly it was created for parsing data
+ * for garage's low and hi res image file.
+ * 
+ * So For each line read from the file, it will create 2 new lines
+ * One line for the low res data, the 2nd one for the high res data
+ * So you get two lines for every line read.
+ * The reason is because one line contains similar data for the high res line
  * @author xlao
  *
  */
 public class CsvParser {
 	
-	//persistent counter as one line/row will generate 2 unique ids
+	public enum Scale { Y, X }
+	
+	/**
+	 * persistent counter as one line/row will generate 2 unique ids or lines
+	 */
 	public Counter counter = new Counter();
+	
 	public final static Charset ENCODING = StandardCharsets.UTF_8;
+	
+	//the final string that will get output
 	public List<String> finalList;
 	
 	public String fileIn;
@@ -38,7 +54,10 @@ public class CsvParser {
 	
 	public void init() throws IOException{
 		
+		//reads in and builds the finalList string
 		readFile();
+		
+		//writes the finalList to the output file
 		writeToFile();
 	}
 	
@@ -80,14 +99,27 @@ public class CsvParser {
 	
 	}
 	
+	/**
+	 * Really it is building the finalList string per call
+	 * but you can choose to turn on/off the print to console, default is off
+	 * which is located at the end of the method
+	 * 
+	 * @param hiTexture although hiTexture is inside hiPath, we want to check if hiTexture was empty or not
+	 * @param lowTexture although lowTexture is inside lowPath, we check if lowTexture was empty or not
+	 * 
+	 */
 	private void printToConsole(Counter counter, 
 			String sku, 
 			String hiPath, String hiXscale, String hiYscale, 
 			String lowPath, String lowXscale, String lowYscale,
-			String textureApp){
+			String textureApp,
+			String hiTexture,
+			String lowTexture){
 		
 		counter.index++;
+		//System.out.println(counter.index);
 		
+		//build first line
 		StringBuilder sb1 = new StringBuilder();
 		sb1.append("INSERT INTO `three_d_attributes` VALUES (");
 		sb1.append(counter.index);
@@ -97,23 +129,27 @@ public class CsvParser {
 		sb1.append(",");
 		
 		sb1.append("'");
-		sb1.append(hiPath);
+		sb1.append(hiPath);		//Roof/Asphalt/Owens-Corning/~OC_Menards_01_Berkshire/Tile1-512x512-47.19inX66.61in.jpg
 		sb1.append("',");
 		
-		sb1.append("'HI_RES'");
+		sb1.append("'HI_RES'");	//HI_RES or LOW_RES
 		sb1.append(",");
 		
 		sb1.append("'");
-		sb1.append(textureApp);
+		sb1.append(textureApp);	//Roof
 		sb1.append("',");
 		
+		//due to a change, hiXscale and hiYscale will not be used anymore, but is replaced
+		//instead we extract the x and y scale string from the texturePath and use those instead
+		hiXscale = getScaleFromPath(hiTexture, Scale.X);	//comment this line if you want to use the original x scale dpi
 		sb1.append(hiXscale);
 		sb1.append(",");
 		
+		hiYscale = getScaleFromPath(hiTexture, Scale.Y);	//comment this line if you want to use the original y scale dpi
 		sb1.append(hiYscale);
 		sb1.append(");");
 		
-		
+		//build 2nd line
 		counter.index++;
 		StringBuilder sb2 = new StringBuilder();
 		sb2.append("INSERT INTO `three_d_attributes` VALUES (");
@@ -134,13 +170,15 @@ public class CsvParser {
 		sb2.append(textureApp);
 		sb2.append("',");
 		
+		lowXscale = getScaleFromPath(lowTexture, Scale.X);	//comment this line if you want to use the original x scale dpi
 		sb2.append(lowXscale);
 		sb2.append(",");
 		
+		lowYscale = getScaleFromPath(lowTexture, Scale.Y);	//comment this line if you want to use the original y scale dpi
 		sb2.append(lowYscale);
 		sb2.append(");");
-		//id sku, path, textureFace, textureApp, xScale, yScale
-		
+
+		//this is how we put everything together to create two lines from each line read in from file
 		finalList.add(sb1.toString());
 		finalList.add(sb2.toString());
 		
@@ -150,7 +188,52 @@ public class CsvParser {
 		
 	}
 	
+	/**
+	 * Help method. the path will look something like this
+	 * Tile1-512x512-29.11inX35.02in.jpg
+	 * we extract the 29.11 out for X
+	 * @param path
+	 * @return
+	 */
+	private String getScaleFromPath(String texturePath, Scale scale){
+		
+		//lines with NA and Soffit paths are not meant to be parse for x and y scale
+		if(texturePath.equals("NA") ){//|| path.startsWith("Soffit")){
+			return "0.0";
+		}
+		
+		//the actual texturePath has a chance of being empty
+		//the fact we stitched texturePath inside rootPath
+		if(texturePath.equals("") 
+				|| texturePath.equals(" ")){
+			return "0.0";	
+		}
+		
+		//the texturePath has a chance to be incorrect, catch these
+		if(texturePath.startsWith("tile_color")){
+			return "0.0";
+		}
+		
+		//ex: Tile1-512x512-29.11inX35.02in.jpg
+		
+		String value = "";
+		if(scale == Scale.X){
+			value = texturePath.split("-")[2];		//>> 29.11inX35.02in.jpg
+		}else if(scale == Scale.Y){
+			value = texturePath.split("X")[1];		//>> 35.02in.jpg
+		}
+		
+		return value.split("i")[0];			//>> split at "i" so we get first index of array >> 29.11 or 35.02
+	}
+	
+	/**
+	 * Make sure that each line in the file has 8 elements, if not fill in and insert commas with a space to make 8 elements
+	 * example: 343433, Roof/Tiles-23x32in/, , , , , , ,
+	 * there needs to be a space between each comma or the element will not be counted in the array
+	 * @throws IOException
+	 */
 	private void readFile() throws IOException{
+		
 		
 		Path p1 = Paths.get(fileIn);
 		//Path p1 = Paths.get("res/files/testcvsdata.txt");
@@ -166,7 +249,9 @@ public class CsvParser {
 			List<String> list = Arrays.asList(s.split(","));
 			
 			String sku = list.get(0);	//we know all data has sku filled in
-			String rootPath = "NA";
+			
+			//set default in case they never get assign a new value
+			String rootPath = "NA";		
 			
 			//hi texture path
 			String hiTexture = "NA";
@@ -183,9 +268,22 @@ public class CsvParser {
 			
 			String category = "NA";
 			
-			//the size must be 8 or the order will be off
+			//the size of the line must be exactly 8 elements
+			//or the order will be off and thus the parse will not work
+			//we are working with 8 elements here
 			//if not 8, columns must have had blank values, so we leave n/a in place
 			//basically this if prevents crashing for rows that are off or not filled in
+			
+			/* each line has 8 parts, thus we split them out into 8 sections
+			1512801,												//0	= sku
+			Roof/Asphalt/Owens-Corning/~OC_Menards_02_Classic/,		//1	= root path
+			Tile0-512x512-95.24inX59.81in.jpg,						//2 = hi-res texture path
+			64.512,													//3	= x-hi-res dpi
+			102.726,												//4	= y-hi-res dpi
+			Tile0-256x256-47.62inX29.90in.jpg,						//5 = low-res texture path
+			32.256,													//6 = x-low-res dpi
+			51.363													//7 = y-low-res dpi
+			*/
 			if(list.size() == 8){
 				//sku = list.get(0);
 				rootPath = list.get(1);
@@ -205,6 +303,11 @@ public class CsvParser {
 				
 				category = list.get(1).split("/")[0];
 				
+			}else if(list.size() > 8){
+				throw new IOException("element greater than 8");
+			}else if(list.size() < 8){
+				System.out.println(list.toString());
+				throw new IOException("element less than 8");	//remove when done testing
 			}
 			
 			printToConsole(counter, 
@@ -215,7 +318,9 @@ public class CsvParser {
 					lowPath,
 					lowXscale,
 					lowYscale,
-					category.toUpperCase());
+					category.toUpperCase(),
+					hiTexture,
+					lowTexture);
 		}
 	}
 	

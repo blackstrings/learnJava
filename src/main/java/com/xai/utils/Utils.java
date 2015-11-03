@@ -20,49 +20,25 @@ public class Utils {
 	 * @param args
 	 */
 	public static void main(String [] args){
-		
 		logger.info("" + Math.random());
+
+
+		int[] nums = new int[]{1,2,3,4,5};
 		
-		int sideLength = 8;
-		
-		for(int row=0; row<sideLength; row++){
-			
-			for(int col=0; col<sideLength; col++){
-				System.out.print("1");
-			}
-			
-			System.out.print("_");
-			
-			if(row == 0 || row == sideLength-1){
-				printFirstLastRow(sideLength);
-			}else{
-				printMiddle(sideLength);
-			}
-			
-			System.out.println();
-			
+		pass(nums);
+		for(int num : nums){
+			System.out.println(num);
 		}
 		
 	}
 	
-	public static void printFirstLastRow(int sideLength){
-		for(int i=0; i<sideLength; i++){
-			System.out.print("2");
+	private static void pass(int[] nums){
+		int[] nums2 = nums;
+		for(int i=0; i<nums2.length; i++){
+			nums2[i] = 0;
 		}
+		
 	}
-	
-	public static void printMiddle(int sideLength){
-		for(int i=0; i<sideLength; i++){
-			
-			if(i==0 || i== sideLength-1){
-				System.out.print("3");
-			}else{
-				System.out.print("0");
-			}
-	
-		}
-	}
-	
 	
 	
 }
