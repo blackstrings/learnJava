@@ -8,6 +8,6 @@ public abstract class Item {
 		this.name = name;
 	}
 	
-	public abstract boolean use(User user);
+	public abstract boolean useOn(Object targetUseOn);
 	
 }

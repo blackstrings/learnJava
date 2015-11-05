@@ -8,6 +8,7 @@ public class Hero extends User{
 	private int hp = 0;
 	private List<Item> items;
 	private int MAXITEMS = 5;
+	Object currTarget = null;
 	
 	public Hero(){
 		hp = 100;
@@ -33,31 +34,56 @@ public class Hero extends User{
 		}
 	}
 	
+	@Override
 	public void modHP(int amt){
 		hp += amt;
 	}
 	
-	public void consume(Item item){
-		boolean isItemFullyEmpty = item.use(this);
+	@Override
+	public void useTool(ToolItem item){
+		
+	}
+	
+	public void use(Item item, Object target){
+		boolean isItemFullyEmpty = item.useOn(target);
 		if(isItemFullyEmpty){
 			removeItem(item);
 		}
 	}
 	
-	public void consume(){
-		if(!items.isEmpty()){	//check we have items to consume
-			consume(items.get(0));	//consumes first item in sack
-		}else{
-			System.out.println("no items are avaliable to consume");
+	public void use(String searchKey, Object target){
+		
+		if(items.size() <= 0){
+			System.out.println("items is empty");
+			return;
 		}
+		
+		for(int i=0; i<items.size(); i++){
+			if(items.get(i).name.equals(searchKey)){
+				use(items.get(i), target);	//consumes target item
+				break;	//once item is found, we stop searching the loop
+			}
+		}
+		
+		
 	}
+		
 	
 	public void getStatus(){
 		System.out.println(this);
 	}
 	
+	@Override
 	public String toString(){
 		return "HP:"+ hp + ", "
 				+ "Items: " + items.size();
+	}
+
+
+	@Override
+	public void applyTool(ToolItem toolItem) {
+		if(toolItem.name.equals("Oxygen Tank")){
+			System.out.println("Applying " + toolItem.name);
+		}
 	}
 }
