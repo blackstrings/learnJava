@@ -2,21 +2,13 @@ package com.xai.program.hero.inventory;
 
 public class ToolItem extends Item{
 
-	private int maxStack = 0;	//maxStack this item can be stacked
-	private int currStack = 0;	//tracks the current stack per use
-	private int effectAmt = 0;	//per consumption this is the amt applied
-	
 	/**
 	 * Basic Items that effect hp
 	 * @param name
-	 * @param effectAmt
 	 * @param maxStack
 	 */
-	public ToolItem(String name, int effectAmt, int maxStack){
-		super(name);
-		this.effectAmt = effectAmt;
-		this.maxStack = maxStack;
-		this.currStack = maxStack;
+	public ToolItem(String name,int maxStack){
+		super(name, maxStack);
 	}
 	
 	/**

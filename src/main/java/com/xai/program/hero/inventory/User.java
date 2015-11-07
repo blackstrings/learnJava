@@ -1,12 +1,9 @@
 package com.xai.program.hero.inventory;
 
-public abstract class User implements IDamagable, IFixable, IInventory {
+public abstract class User implements IDamagable, IFixable, IInventory, IStatusable, IItemReceiver {
 	
-	@Override
-	public abstract void modHP(int amt);
+	public abstract void use(Item item, Object target);
+	public abstract void use(String searchKey, Object target);
 	
-	public abstract void useTool(ToolItem toolItem);
-	
-	@Override
-	public abstract void applyTool(ToolItem toolItem);
+	public abstract void getUserStatus();
 }

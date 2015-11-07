@@ -5,7 +5,7 @@ public class Box extends Item implements IFixable {
 	private boolean unlock = false;
 	
 	public Box(String name){
-		super(name);
+		super(name, 1);
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class Box extends Item implements IFixable {
 		if(unlock){
 			if(targetUseOn instanceof User){
 				User user = (User) targetUseOn;
-				Item item = new ComsumptionItem("Drink", 1, 1);
+				Item item = ItemFactory.getConsumptionItem();
 				user.takeItem(item);
 				System.out.println("item " + item.name + " taken from box");
 				return true;
