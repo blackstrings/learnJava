@@ -6,6 +6,9 @@ import java.util.List;
 public class BasicUser extends User {
 
 	private int hp = 0;
+	
+	//an even more better apporach would be to hold status objects rather
+	//then just a list of enums
 	public List<StatusType> statusList = new ArrayList<StatusType>();
 	private List<Item> items;
 	private int MAXITEMS = 5;

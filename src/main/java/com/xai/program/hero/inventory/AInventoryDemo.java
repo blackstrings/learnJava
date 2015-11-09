@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <p>
+ * For status effect, the idea is to treat each status effect as an obj.
+ * </p>
+ * @author xlao
+ *
+ */
 public class AInventoryDemo {
 
 	

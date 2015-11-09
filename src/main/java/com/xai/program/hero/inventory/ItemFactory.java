@@ -30,10 +30,11 @@ public class ItemFactory {
 		Random rand = new Random();
 		boolean addHPEffector = rand.nextBoolean();
 		if(addHPEffector){
+			//random between 0-50 and add that to the hpEffector
 			effectList.add(new HPEffector(rand.nextInt(50)));
 		}
 		
-		//always add status if hpeffect wasn't added
+		//always add status effect if hpEffect wasn't added
 		boolean addStatusEffector = rand.nextBoolean();
 		if(!addHPEffector || addStatusEffector){
 			StatusType statusType;
