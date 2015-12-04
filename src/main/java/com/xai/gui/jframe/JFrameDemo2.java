@@ -14,6 +14,8 @@ import javax.swing.JTextPane;
 
 /**
  * JavaFX is the newer GUI standard, where Swing and SWT SPI are the old ones.
+ * An even older one is AWT, which Swing is built on top.
+ * Ex: Frame is AWT while anything starting with J is Swing like JFrame
  * @author xlao
  *
  */
@@ -21,9 +23,11 @@ public class JFrameDemo2 extends JFrame {
 
 	
 	public JFrameDemo2(){
+		//the window auto initialize itself when you create the object
 		initUI();
 	}
 	
+	//window dimension
 	private static int width = 600;
 	private static int height = 300;
 	
@@ -46,6 +50,8 @@ public class JFrameDemo2 extends JFrame {
 	
 	public static void main(String [] args){ 
 		
+		//because the setVisible has to be called last in order to see the gui
+		//this helps render the gui after everything has been set
 		EventQueue.invokeLater(new Runnable() {
 
 			@Override
@@ -62,6 +68,8 @@ public class JFrameDemo2 extends JFrame {
 		
 		//quit
 		JButton btn_exit = new CustomJButton("Quit", 0, 0, 100,30);
+		//this is a shortcut version to create and override a method inside aCtionListerner upon creation
+		//instead of extending a wrapper and override the method in the wrapper
 		btn_exit.addActionListener(new ActionListener() {
 			
 			@Override

@@ -1,2 +1,10 @@
-This line will not have spacesthis line 2 will alsoThis line is next line 1
-this line is next line 2
+n/a
+n/a
+n/a
+n/a
+n/a
+
+CatalogItem, catNum: D1001, desc: item descripotion super long long description and super super long 1, price: 2.99
+CatalogItem, catNum: D1001, desc: item descripotion super long long description and super super long 1, price: 2.99
+ClothingItem, catNum: C1002, desc: item descripotion super long long description and super super long 2, price: 3.99, size: 4
+ClothingItem, catNum: C1005, desc: item descripotion super long long description and super super long 5, price: 6.99, size: 66

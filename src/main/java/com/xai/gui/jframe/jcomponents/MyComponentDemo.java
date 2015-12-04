@@ -10,6 +10,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * JFrame
+ * 		JPanel(choose a border layout)
+ * 			JComponent
+ * 			JButton
+ * 			JText
+ * 
+ * Only one JFrame per app for simplicity
+ * 
+ * @author xlao
+ *
+ */
 public class MyComponentDemo {
 
 	static class Compy extends JComponent{

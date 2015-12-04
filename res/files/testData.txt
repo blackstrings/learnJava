@@ -1,0 +1,8 @@
+C1001,Jordan Shoes,19.99,res/images/icon1.png
+C1002,Old Shoes,29.99,res/images/icon1.png
+D1003,Zippers,39.99,res/images/icon1.png
+D1004,Pain Brushes,49.99,res/images/icon1.png
+D1005,Camera,59.99,res/images/icon2.png
+D1006,Bucket,69.99,res/images/icon2.png
+C1007,Gold Necklace,79.99,res/images/icon2.png
+D1008,Toy Car,89.99,res/images/icon2.png
