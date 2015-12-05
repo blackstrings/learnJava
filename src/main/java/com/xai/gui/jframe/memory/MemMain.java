@@ -31,6 +31,10 @@ public class MemMain {
 		
 	}
 	
+	/**
+	 * sets the default font for the entire app
+	 * @param
+	 */
 	public static void setUIFont(javax.swing.plaf.FontUIResource f) {
 		java.util.Enumeration keys = UIManager.getDefaults().keys();
 		while (keys.hasMoreElements()) {
