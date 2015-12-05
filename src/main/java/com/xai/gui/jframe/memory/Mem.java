@@ -8,4 +8,7 @@ public class Mem {
 	public Mem(){
 		
 	}
+	
+	//for Timer see
+	//http://stackoverflow.com/questions/6811064/jlabel-displaying-countdown-java
 }
