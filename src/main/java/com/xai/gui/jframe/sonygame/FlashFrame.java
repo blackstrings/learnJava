@@ -59,7 +59,7 @@ public class FlashFrame extends JFrame {
 		
 		public void startGame(){
 			
-			loadRound();
+			//loadRound();
 			// String userInput = JOptionPane.showInputDialog("Hello World");
 			// System.out.println(userInput);
 		}
