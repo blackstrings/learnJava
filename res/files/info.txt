@@ -14,3 +14,16 @@ applying multiple nano mesh on same surface
 
 patch pass
 v3-iLh5M!(
+
+notes
+The worst case scenario we want to avoid is
+1. create a story for contents that we don't already have.
+2. create a story, using the audio, for which our contents don't match or support
+
+choice
+1. create a story following the audio
+2. create a story based off our content
+
+etc
+there is always a first timer
+positive next one will be better planned

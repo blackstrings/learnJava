@@ -1,4 +1,4 @@
-package com.xai.gui.jframe;
+package com.xai.gui.jframe.quit;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;

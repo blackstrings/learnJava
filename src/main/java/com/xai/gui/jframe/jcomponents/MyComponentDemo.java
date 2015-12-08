@@ -1,78 +1,56 @@
 package com.xai.gui.jframe.jcomponents;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
  * JFrame
- * 		JPanel(choose a border layout)
- * 			JComponent
+ * 		JPanel(choose a border layout)	- must render all pixels in its bounding box
+ * 			JComponent	- doesn't have to render all pixel in its bounding box
+ * 			JLabel - is a JComponent
  * 			JButton
  * 			JText
  * 
  * Only one JFrame per app for simplicity
- * 
- * @author xlao
+ * Be caution of using paintComponent vs paintComponents with 's'
+ * usually you want to use the one without the s
+ * the one with the s seems to have more advance setup for it to display properly
  *
  */
-public class MyComponentDemo {
-
-	static class Compy extends JComponent{
+public class MyComponentDemo extends JFrame{
+	
+	public MyComponentDemo(int w, int h){
+		setSize(w,h);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		
-		public void paintComponent(Graphics g){
-			
-			super.paintComponent(g);
-			
-			Graphics2D g2 = (Graphics2D) g;
-			g2.setPaint(Color.WHITE);
-			g2.drawOval(10, 10, 100, 100);
-			
-		}
-		
-		public Dimension getPreferredSize(){
-			
-			return new Dimension(100,100);
-		
-		}
 		
 	}
 	
 	public static void main(String [] args){
 		
+		MyComponentDemo frame = new MyComponentDemo(400,400);
 		
-		Compy comp = new Compy();
-		
-		
-		JPanel pnl = new JPanel();
-		pnl.setSize(200,200);
-		pnl.setBackground(Color.BLUE);
+		JPanel pnl = new JPanel(new BorderLayout());
+		frame.add(pnl);
+		pnl.setSize(frame.getWidth(),frame.getHeight());
+		pnl.setBackground(Color.GRAY);
 		
 		JLabel label = new JLabel("Test");
-		//pnl.add(label);
+		pnl.add(label, BorderLayout.NORTH);
 		
-		pnl.add(comp);
+		CustomCircleWithStroke circWithStroke = new CustomCircleWithStroke(100,100,10);
+		pnl.add(circWithStroke, BorderLayout.CENTER);
 		
+		CustomCircleNoStroke circNoStroke = new CustomCircleNoStroke(100, 100);
+		pnl.add(circNoStroke, BorderLayout.SOUTH);
 		
-		JFrame frame = new JFrame();
-		frame.setSize(500,500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
-		
-		frame.add(pnl);
-		frame.add(label);
 		
 		frame.setVisible(true);
-		
-		
-		
-		
 	}
 	
 	

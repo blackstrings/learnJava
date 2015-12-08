@@ -1,4 +1,4 @@
-package com.xai.gui.jframe;
+package com.xai.gui.jframe.basic;
 
 import javax.swing.JFrame;
 

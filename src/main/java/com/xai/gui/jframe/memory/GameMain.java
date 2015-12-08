@@ -3,32 +3,59 @@ package com.xai.gui.jframe.memory;
 import java.awt.EventQueue;
 import java.awt.Font;
 
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-public class MemMain {
-
+public class GameMain {
+	
 	public static void main(String [] args){
+		
+		runAppConfig();
+		startApp();
+		
+	}
+	
+	private static void startApp(){
+		
+		//MemFrame gui = new MemFrame(game);
+		//gui.setVisible(true);
 		
 		//because the setVisible has to be called last in order to see the gui
 		//this helps render the gui after everything has been set
+		
+		/*
 		EventQueue.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-				//set ui default font
-				setUIFont (new javax.swing.plaf.FontUIResource("Serif",Font.PLAIN,12));
 				
 				MemFrame gui = new MemFrame();
 				gui.setVisible(true);
+			
 			}
 
 		});
+		*/
+		
+		//use swing to create a new thread
+		SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+            	GameStatus gameStatus = new GameStatus();
+            	GameFrame gui = new GameFrame(gameStatus);
+				gui.setVisible(true);
+            }
+        });
 		
 		
 		
-		//bring the gui
-		
-		
+	}
+	
+	//do any configuration we need
+	private static void runAppConfig(){
+		//set ui default font type and font size
+		//otherwise you will be using the ugly default font type and size
+		setUIFont (new javax.swing.plaf.FontUIResource("Serif",Font.PLAIN,12));
 	}
 	
 	/**

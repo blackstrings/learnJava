@@ -1,13 +1,13 @@
-package com.xai.gui.jframe;
+package com.xai.gui.jframe.quit;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -95,6 +95,7 @@ public class JFrameDemo2 extends JFrame {
 		JPanel panelMenu = new JPanel(new GridBagLayout());
 		panelMenu.add(btn_exit);
 		panelMenu.add(btn_test);
+		
 		
 		//add button to frame
 		frame.add(panelMenu, layout);
