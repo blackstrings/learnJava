@@ -44,10 +44,8 @@ public class CsvReaderDemo {
 		 int num = 0;
 				
 	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	

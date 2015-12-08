@@ -7,13 +7,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
-public class StartButton extends JButton {
+public class BasicButton extends JButton {
 
-	public StartButton(){
+	public BasicButton(String buttonName){
 		setBackground(Color.GRAY);
-		String startBtnTxt = "<html><font color=gray size=+1>START</font></html>";
-		add(new JLabel(startBtnTxt) );
+		String startBtnTxt = "<html><font color=gray size=+1>" + buttonName + "</font></html>";
+		JLabel label = new JLabel(startBtnTxt);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		add(label);
 		//startBtn.setForeground(Color.WHITE);
 		setPreferredSize(new Dimension(100,30));
 		setOpaque(false);

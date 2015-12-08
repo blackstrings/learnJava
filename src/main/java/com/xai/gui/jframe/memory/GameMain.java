@@ -41,8 +41,7 @@ public class GameMain {
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-            	GameStatus gameStatus = new GameStatus();
-            	GameFrame gui = new GameFrame(gameStatus);
+            	GameFrame gui = new GameFrame();
 				gui.setVisible(true);
             }
         });
