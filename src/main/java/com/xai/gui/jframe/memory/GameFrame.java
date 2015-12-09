@@ -73,7 +73,7 @@ public class GameFrame extends JFrame {
 		
 		//update the gui and render the color that was pressed
 		//regardless if the correct or wrong color was preseed
-		this.drawInputToDisplayScreen( selectedColorButton.getColor());
+		this.drawSelectedColorToDisplayScreen( selectedColorButton.getColor());
 		
 		//game logic checks and validation
 		if(gameData.isSelectedColorCorrect && gameData.validateIsRoundComplete()){
@@ -112,49 +112,21 @@ public class GameFrame extends JFrame {
 		//start with fresh data
 		gameData = new GameData();	
 		
-		JPanel welcomPanel = new JPanel(new BorderLayout());
-		welcomPanel.setBackground(Color.BLACK);
-		this.add(welcomPanel);
-		
-		//title
-		String titleText = "<html><font size=+2 color=white>The</font> <font color=red>Memory</font></html>";
-		TitleLabel title = new TitleLabel(titleText);
-		welcomPanel.add(title, BorderLayout.NORTH);
-		
-		//start button
-		BasicButton playBtn = new BasicButton("Play");
-		playBtn.addActionListener(new ActionListener() {
+		//prepare playtBtn action listener for the welcome panel
+		ActionListener playBtnAL = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadRulesScreen();
 			}
-		});
-		
-		//we don't want start button to stretch across the entire screen
-		//so we create a seperate panel for start button
-		//if startBtn is inside its own panel, it won't stretch
-		JPanel playBtnPanel = new JPanel(new FlowLayout()){
-			public void paintComponent(Graphics g){
-				ImageIcon img = new ImageIcon("src/main/java/com/xai/gui/jframe/memory/bg1.png");
-				g.drawImage(img.getImage(), 50, 20, null);
-			}
-			public Dimension getPreferredSize(){
-				return new Dimension(50,50);
-			}
 		};
 		
-		playBtnPanel.add(playBtn);
-		playBtnPanel.setVisible(true);
-		welcomPanel.add(playBtnPanel, BorderLayout.CENTER);
-		
-		//copyright text for bottom of screen
-		String text2 = "<html><font color=gray> copyright&copy;2015 </font></html>";
-		CopyrightLabel copyright = new CopyrightLabel(text2);
-		welcomPanel.add(copyright, BorderLayout.SOUTH);
+		//create welcome screen
+		//this allows the welcome panel's play button to call the loadRulesScreen()
+		//that exist in this class
+		WelcomePanel ws = new WelcomePanel(playBtnAL);
+
+		//add welcome panel to frame
+		this.add(ws);
 	}
-	
-	private HeaderPanel headerPanel;
-	private ColorDisplayPanel centerPanel;
-	private FooterPanel footerPanel;
 	
 	//rules screen
 	//-------------
@@ -172,46 +144,16 @@ public class GameFrame extends JFrame {
 		clearFrame();
 		screenState = ScreenState.Rules;
 		
-		JPanel rulesPanel = new JPanel(new BorderLayout());
-		rulesPanel.setBackground(Color.BLACK);
-		this.add(rulesPanel);
-		
-		//screen title
-		JLabel screenTitle = new JLabel("<html><font size=+2 color=white>Rules</font></html>");
-		screenTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		rulesPanel.add(screenTitle, BorderLayout.NORTH);
-		
-		//rules
-		JTextArea ta = new JTextArea(2,10);
-		ta.setLineWrap( true );
-		ta.setWrapStyleWord(true);
-		ta.setBorder(BorderFactory.createCompoundBorder(
-				rulesPanel.getBorder(),
-				BorderFactory.createEmptyBorder(15,15,15,15)));
-		
-		String ruleText = ""
-				+ "- Every round a pattern will be display for X seconds\n"
-				+ "- After X seconds, pattern will disappear and round will begin\n"
-				+ "- When round begin, player gets X seconds to recite the pattern\n"
-				+ "- Recite the pattern correctly in order and from left to right\n"
-				+ "- Use the 3 buttons at the bottom to make your choices\n"
-				+ "- A wrong color will immediately be gameover\n"
-				+ "- Try to get the highest round possible\n"
-				+ "- At gameover scree, you can choose to input a name to save your score";
-		ta.setText(ruleText);
-		rulesPanel.add(ta, BorderLayout.CENTER);
-		
-		//start
-		BasicButton startBtn = new BasicButton("Start");
-		startBtn.addActionListener(new ActionListener() {
+		//prepare startBtna action listener for rules panel
+		ActionListener startBtnAL = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadNextRoundPhase1Screen();
 			}
-		});
-		JPanel startPanel = new JPanel();
-		startPanel.setBackground(Color.BLACK);
-		startPanel.add(startBtn);
-		rulesPanel.add(startPanel, BorderLayout.SOUTH);
+		};
+		
+		//create rules panel
+		RulesPanel rulesPanel = new RulesPanel(startBtnAL);
+		this.add(rulesPanel);
 	}
 	
 	//phase1 screen
@@ -230,29 +172,15 @@ public class GameFrame extends JFrame {
 		//TODO make sure this is commented off in final
 		//System.out.println("Starting pre round");
 		
-		JPanel prPanel = new JPanel(new BorderLayout());
-		prPanel.setBackground(Color.WHITE);
-		this.add(prPanel);
+		//create next round phase 1 panel
+		NextRoundPhase1Panel phase1Panel = new NextRoundPhase1Panel(gameData);
+		this.add(phase1Panel);
 		
-		//NORTH section
-		int currentRoundTimer = gameData.getCurrentRoundTimer();
-		JLabel info = new JLabel("You have " + currentRoundTimer + " sec for preview starting now");
-		prPanel.add(info, BorderLayout.NORTH);
-		
-		//body
-		centerPanel = new ColorDisplayPanel();
-		prPanel.add(centerPanel, BorderLayout.CENTER);
-		
-		//display the colors to memorize
-		List<Integer> tempRoundColorIdPattern = gameData.getCurrentRoundColorIdPattern();
-		for(int i=0; i<tempRoundColorIdPattern.size(); i++){
-			centerPanel.add(new ColorGraphicIcon(tempRoundColorIdPattern.get(i)));
-		}
-		
-		//The timer
+		//The end of the timer will take us to the next screen
 		//make sure to multiple game seconds by 1000 to get milliseconds as timer functions in milliseconds
 		//1 sec = 1000, 2 sec = 2000, ... 10 sec = 10000 etc
-		timer = new Timer(gameData.getCurrentRoundTimer()*1000, new ActionListener() {
+		int timeGivenToPlayer = gameData.getCurrentRoundTime()*1000;
+		timer = new Timer(timeGivenToPlayer, new ActionListener() {
 			//trigger this method when the time reaches 0
 			public void actionPerformed(ActionEvent e) {
 				timer.stop();	//we have to stop the time or it will keep triggering this method
@@ -264,6 +192,11 @@ public class GameFrame extends JFrame {
 		timer.start();
 	}
 	
+	//this is here for one reason
+	//to allow use to access the panel and draw selected colors to
+	//its color display panel inside this phase2Panel
+	private NextRoundPhase2Panel phase2Panel;
+	
 	// Phase2 screen
 	//-------------------------------------
 	// Time left                    Round 0
@@ -272,36 +205,18 @@ public class GameFrame extends JFrame {
 	//
 	//
 	//-------------------------------------
-	// (redBtn) (greenBtn) (blueBtn)
+	// [redBtn] [greenBtn] [blueBtn]
 	//-------------------------------------
 	//
 	//this is the actual round beginning
 	public void loadNextRoundPhase2Screen(){
 		clearFrame();
 		screenState = ScreenState.Phase2;	//set and update the screen state
-		
-		//
-		clearTimer();
+		clearTimer();	//in case there is a timer still running, clear it
 		
 		//TODO make sure this is off in final
 		//System.out.println("round starting");
 		
-		//container
-		JPanel beginRoundPanel = new JPanel(new BorderLayout());
-		beginRoundPanel.setBackground(Color.BLACK);
-		this.add(beginRoundPanel);
-		
-		//header (includes - count down timer, round);
-		headerPanel = new HeaderPanel(gameData.getCurrentRoundTimer(), gameData.getCurrentRound());
-		beginRoundPanel.add(headerPanel, BorderLayout.NORTH);
-		
-		//body or center panel - displays the color inputs
-		centerPanel = new ColorDisplayPanel();
-		beginRoundPanel.add(centerPanel, BorderLayout.CENTER);
-		
-		//create the footer panel then hook up footer buttons to event
-		footerPanel = new FooterPanel();
-		//AL = short for actionListener
 		ActionListener colorBtnAL = new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				//get the object that got clicked on - e.getSource()
@@ -310,17 +225,15 @@ public class GameFrame extends JFrame {
 				onClickUpdateGame(((ColorButton)e.getSource()));
 			}
 		};
-		//hook up red btn event
-		footerPanel.getRedBtn().addActionListener(colorBtnAL);
-		//hook up green btn event
-		footerPanel.getGreenBtn().addActionListener(colorBtnAL);
-		//hook up blue btn event
-		footerPanel.getBlueBtn().addActionListener(colorBtnAL);
+
+		//create phase 2 panel
+		phase2Panel = new NextRoundPhase2Panel(colorBtnAL, gameData);
+		this.add(phase2Panel);
 		
-		beginRoundPanel.add(footerPanel, BorderLayout.SOUTH);
-		
-		//get 2x more time to select answer
-		timer = new Timer(gameData.getCurrentRoundTimer()*1000*2, new ActionListener() {
+		//we have to turn roundTime to milliseconds because we using Timer, so we multiply by 1000
+		//player gets 2x more time to select answer, so we multiple by 2
+		int timeGivenToPlayer = gameData.getCurrentRoundTime()*1000*2;
+		timer = new Timer(timeGivenToPlayer, new ActionListener() {
 			//trigger this method when the time reaches 0
 			public void actionPerformed(ActionEvent e) {
 				timer.stop();	//we have to stop the time or it will keep triggering this method
@@ -330,6 +243,7 @@ public class GameFrame extends JFrame {
 			}
 		});
 		
+		//start the timer so the above event can trigger which loads the game over screen
 		timer.start();
 	}
 	
@@ -338,11 +252,11 @@ public class GameFrame extends JFrame {
 	//            gameOvertitle
 	//------------------------------------
 	// high scores?
-	//
-	//
+	// tom ... 5
+	// Kim ... 29
 	//
 	//------------------------------------
-	//                           replayBtn
+	//                         [replayBtn]
 	//------------------------------------
 	public void loadGameoverScreen(){
 		clearFrame();
@@ -351,49 +265,16 @@ public class GameFrame extends JFrame {
 		//TODO turn off in final
 		System.out.println("Gameover");
 		
-		//game over panel = goPanel
-		JPanel goPanel = new JPanel(new BorderLayout());
-		goPanel.setBackground(Color.BLACK);
-		this.add(goPanel);
-		
-		JLabel goLabel = new JLabel("<html><font size=+2 color=white>GameOver</font></html>");
-		goLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		goPanel.add(goLabel, BorderLayout.NORTH);
-		
-		//high score
-		JPanel hsPanel = new JPanel(new BorderLayout());
-		goPanel.add(hsPanel, BorderLayout.CENTER);
-		JLabel hsScoreLabel = new JLabel("Highest Round Achieved");
-		hsScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		hsPanel.add(hsScoreLabel, BorderLayout.NORTH);
-		//high score text area
-		JTextArea ta = new JTextArea(3,5);
-		//test dummy scores
-		String scoresText = "Tom ... 22"
-				+ "John ... 20\n"
-				+ "Kim ... 2";
-		ta.setText(scoresText);
-		hsPanel.add(ta, BorderLayout.CENTER);
-		
-		//Replay button
-		JButton replayBtn = new JButton("Replay");
-		//hook up the button to call a method
-		//in this case we go back to welcome screen
-		replayBtn.addActionListener(new ActionListener() {
+		//prepare the replayBtn action listener for gameover panel
+		ActionListener replayBtnAL = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadWelcomeScreen();
 			}
-		});
+		};
 		
-		//we put the replay btn inside another panel
-		//so the btn will not stretch across the entire frame
-		//basically it helps the button stay a normal button and not a stretched button
-		JPanel replayPanel = new JPanel(new FlowLayout(2));	//2 - shifts the button to the far right
-		replayPanel.setBackground(Color.BLACK);
-		replayPanel.add(replayBtn);
-		goPanel.add(replayPanel, BorderLayout.SOUTH);
-		
-		
+		//crate game over panel
+		GameOverPanel gameOverPanel = new GameOverPanel(replayBtnAL, gameData);
+		this.add(gameOverPanel);
 	}
 	
 	//call this each time you want to load a new screen
@@ -409,14 +290,7 @@ public class GameFrame extends JFrame {
 	// Methods to update gui elements such as text, timer text, displays etc
 	//------------------------------------
 	
-	public void setTimerLabel(int value){
-		//only allow if the game state mode is in start mode
-		//if(screenState.equals(ScreenState.Phase2)){
-			headerPanel.setTimerLabel(value);
-		//}
-	}
-	
-	public void drawInputToDisplayScreen(Color color){
+	public void drawSelectedColorToDisplayScreen(Color color){
 		//the ColorGraphicIcon is like an image
 		//when we add to the panel, the icon will draw itself
 		//since centerPanel uses a flowLayout
@@ -426,7 +300,7 @@ public class GameFrame extends JFrame {
 		
 		//the color button that was pressed, passes it's color into this method
 		//this new icon will take the color of that pressed button
-		centerPanel.add(new ColorGraphicIcon(color));
+		phase2Panel.getColorDisplayPanel().add(new ColorGraphicIcon(color));
 		
 		//tell the frame to redraw itself
 		//any child that has changes will redraw itself

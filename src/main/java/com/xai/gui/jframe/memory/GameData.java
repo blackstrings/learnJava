@@ -13,7 +13,7 @@ public class GameData {
 	
 	//the max number a player can memorize up to and win the game
 	//changes are the higher this number, the rarer it is to actually have a player win
-	private final int maxPoolSize = 20;
+	private final int maxPoolSize = 50;
 	
 	//each round this array is the one we will compare against
 	//the color buttons that are pressed will need to follow the order of IDs this array
@@ -40,10 +40,16 @@ public class GameData {
 	
 	//keeps track of what current index we are in within the color pattern array
 	//so we can compare the next selected color button to the correct next id in the array
-	public int currentIndexToMatch = 0;
+	public int currentRoundColorIdPatternIndexToMatch = 0;
+	
+	public boolean isSelectedColorCorrect = false;
 	
 	public GameData(){
 		//generate a pool of random colorIds
+		//the idea of pooling is gathering in advance a bunch of data into a pool/array
+		//and then just reuse them later
+		//rather than generate data at runtime for every action, 
+		//supposedly this increase performance according to forum talk
 		populateColorIdPool(maxPoolSize);
 		
 		//set the first round color pattern for user to play in round 0
@@ -83,24 +89,6 @@ public class GameData {
 		System.out.println(colorIdPool);
 		
 	}
-	
-	//this code doesn't seem to work, turn it off for now, switching to arrayList
-	//when the max is reached, increase the pattern by twice the ammount
-	// [1, 1, 0, 2]				//ex: how array can look when max is reached
-	// [1, 1, 0, 2, 0, 0, 0, 0] 	//ex: the size is increased
-	//when the max is reached again the array will double again for more memory
-	// [1, 1, 0, 2, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0]
-	/*
-	public void increaseColorPoolSize(){
-		int[] oldColorPool = colorPool;
-		colorPool = new int[colorPool.length*2];	//double the size
-		
-		//copy over the values
-		for(int i=0; i<oldColorPool.length; i++){
-			colorPool[i] = oldColorPool[i];
-		}
-	}
-	*/
 	
 	//GETTERS and SETTERS
 
@@ -142,7 +130,7 @@ public class GameData {
 		return currentRoundColorIdPattern;
 	}
 	
-	//at the end of each round we want to perform the following inside this method
+	//at the end of each game round call this
 	public void nextRound(){
 		//increment the round to the next round
 		currentRound++;
@@ -152,11 +140,11 @@ public class GameData {
 		
 		//reset these variables back to default for the next new round
 		selectedColorId = 0;
-		currentIndexToMatch = 0;
+		currentRoundColorIdPatternIndexToMatch = 0;
 	}
 	
 	//helps determine how much time should be given to player per round
-	public int getCurrentRoundTimer(){
+	public int getCurrentRoundTime(){
 		//this will fix the count down timer being zero at round zero
 		if(currentRound == 0){
 			//in this case, make sure baseCountDownTimer is never zero to begin with
@@ -164,10 +152,12 @@ public class GameData {
 			return baseCountDownTimer;
 		}
 		//all rounds after zero, we will return this formula instead
+		//this means player don't get 1 additional sec per round
+		//instead player gets 1 additional second only for every 2 rounds completed
 		return baseCountDownTimer + currentRound/2;
 	}
 	
-	public boolean isSelectedColorCorrect = false;
+	
 	
 	//whenever player selects a color button, call this method under that button's event listener
 	//and pass that buton's id into the argument, as each button has an id
@@ -176,10 +166,10 @@ public class GameData {
 		
 		//compare he selected colorId against the colorId in the array
 		//we need to compare against
-		if(selectedColorId == currentRoundColorIdPattern.get(currentIndexToMatch)){
+		if(selectedColorId == currentRoundColorIdPattern.get(currentRoundColorIdPatternIndexToMatch)){
 			
 			//increment this so next button press will compare to the next index in array
-			currentIndexToMatch++;
+			currentRoundColorIdPatternIndexToMatch++;
 			//System.out.println("correct");
 			
 			//flag that the selectedColor was the correct color pressed
@@ -196,7 +186,7 @@ public class GameData {
 		//validate if we are at the end of the round
 		//if the currentIndexToMatch becomes greather than the array size
 		//we know we are done with the round
-		if(currentIndexToMatch >= currentRoundColorIdPattern.size()){
+		if(currentRoundColorIdPatternIndexToMatch >= currentRoundColorIdPattern.size()){
 			return true;
 		}else{
 			return false;
@@ -215,7 +205,4 @@ public class GameData {
 	private void setSelectedColorId(int selectedColorId) {
 		this.selectedColorId = selectedColorId;
 	}
-
-	//for Timer see
-	//http://stackoverflow.com/questions/6811064/jlabel-displaying-countdown-java
 }
