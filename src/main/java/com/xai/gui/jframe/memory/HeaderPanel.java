@@ -36,11 +36,13 @@ public class HeaderPanel extends JPanel {
 	
 	//call this method as the only way to change the timer label text
 	public void setTimerLabel(int value){
-		timerLabel.setText("Time Rem: " + value);
+		String text = "<html><font size=+1>Time Rem: " + value + "</font></html>";
+		timerLabel.setText(text);
 	}
 	
 	public void setRoundLabel(int value){
-		roundLabel.setText("Round: " + value);
+		String text = "<html><font size=+1>Round " + value + "</font></html>";
+		roundLabel.setText(text);
 	}
 	
 }

@@ -5,10 +5,14 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -73,17 +77,17 @@ public class GameFrame extends JFrame {
 		clearFrame();
 		screenState = ScreenState.Welcome;	//set and update the screen state
 		
-		gameData = new GameData();	//start with fresh data
+		//start with fresh data
+		gameData = new GameData();	
 		
-		JPanel layoutPanel = new JPanel(new BorderLayout());
-		layoutPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
-		layoutPanel.setBackground(Color.GRAY);
-		this.add(layoutPanel);
+		JPanel welcomPanel = new JPanel(new BorderLayout());
+		welcomPanel.setBackground(Color.BLACK);
+		this.add(welcomPanel);
 		
 		//title
-		String titleText = "<html><font size=+2 color=gray>The</font> <font color=gray>Memory</font></html>";
+		String titleText = "<html><font size=+2 color=white>The</font> <font color=red>Memory</font></html>";
 		TitleLabel title = new TitleLabel(titleText);
-		layoutPanel.add(title, BorderLayout.NORTH);
+		welcomPanel.add(title, BorderLayout.NORTH);
 		
 		//start button
 		BasicButton playBtn = new BasicButton("Play");
@@ -95,15 +99,24 @@ public class GameFrame extends JFrame {
 		
 		//we don't want start button to stretch the entire screen
 		//so we create a seperate panel for start button
-		JPanel flowLayout = new JPanel(new FlowLayout());
-		flowLayout.setBackground(Color.GRAY);
-		flowLayout.add(playBtn);
-		layoutPanel.add(flowLayout, BorderLayout.CENTER);
+		JPanel playPanel = new JPanel(new FlowLayout()){
+			public void paintComponent(Graphics g){
+				ImageIcon img = new ImageIcon("src/main/java/com/xai/gui/jframe/memory/bg1.png");
+				g.drawImage(img.getImage(), 50, 20, null);
+			}
+			public Dimension getPreferredSize(){
+				return new Dimension(50,50);
+			}
+		};
+		//flowLayout.setBackground(Color.GRAY);
+		playPanel.add(playBtn);
+		playPanel.setVisible(true);
+		welcomPanel.add(playPanel, BorderLayout.CENTER);
 		
 		//copyright text for bottom of screen
 		String text2 = "<html><font color=gray> copyright&copy;2015 </font></html>";
 		CopyrightLabel copyright = new CopyrightLabel(text2);
-		layoutPanel.add(copyright, BorderLayout.SOUTH);
+		welcomPanel.add(copyright, BorderLayout.SOUTH);
 	}
 	
 	private HeaderPanel headerPanel;
@@ -115,11 +128,11 @@ public class GameFrame extends JFrame {
 		screenState = ScreenState.Rules;
 		
 		JPanel rulesPanel = new JPanel(new BorderLayout());
-		rulesPanel.setBackground(Color.WHITE);
+		rulesPanel.setBackground(Color.BLACK);
 		this.add(rulesPanel);
 		
 		//screen title
-		JLabel screenTitle = new JLabel("Rules");
+		JLabel screenTitle = new JLabel("<html><font size=+2 color=white>Rules</font></html>");
 		screenTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		rulesPanel.add(screenTitle, BorderLayout.NORTH);
 		
@@ -127,6 +140,10 @@ public class GameFrame extends JFrame {
 		JTextArea ta = new JTextArea(2,10);
 		ta.setLineWrap( true );
 		ta.setWrapStyleWord(true);
+		ta.setBorder(BorderFactory.createCompoundBorder(
+				rulesPanel.getBorder(),
+				BorderFactory.createEmptyBorder(15,15,15,15)));
+		
 		String ruleText = ""
 				+ "- Every round a pattern will be display for X seconds\n"
 				+ "- After X seconds, pattern will disappear and round will begin\n"
@@ -147,6 +164,7 @@ public class GameFrame extends JFrame {
 			}
 		});
 		JPanel startPanel = new JPanel();
+		startPanel.setBackground(Color.BLACK);
 		startPanel.add(startBtn);
 		rulesPanel.add(startPanel, BorderLayout.SOUTH);
 	}
@@ -157,7 +175,8 @@ public class GameFrame extends JFrame {
 		clearFrame();
 		screenState = ScreenState.Phase1;
 		
-		System.out.println("Starting pre round");
+		//TODO make sure this is commented off in final
+		//System.out.println("Starting pre round");
 		
 		JPanel prPanel = new JPanel(new BorderLayout());
 		prPanel.setBackground(Color.WHITE);
@@ -198,7 +217,8 @@ public class GameFrame extends JFrame {
 		clearFrame();
 		screenState = ScreenState.Phase2;	//set and update the screen state
 		
-		System.out.println("round starting");
+		//TODO make sure this is off in final
+		//System.out.println("round starting");
 		
 		//container
 		JPanel beginRoundPanel = new JPanel(new BorderLayout());
@@ -243,17 +263,39 @@ public class GameFrame extends JFrame {
 		goPanel.setBackground(Color.BLACK);
 		this.add(goPanel);
 		
-		JLabel goLabel = new JLabel("GameOver");
+		JLabel goLabel = new JLabel("<html><font size=+2 color=white>GameOver</font></html>");
 		goLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		goPanel.add(goLabel, BorderLayout.NORTH);
 		
+		//high score
+		JPanel hsPanel = new JPanel(new BorderLayout());
+		goPanel.add(hsPanel, BorderLayout.CENTER);
+		JLabel hsScoreLabel = new JLabel("Highest Round Achieved");
+		hsScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		hsPanel.add(hsScoreLabel, BorderLayout.NORTH);
+		//high score text area
+		JTextArea ta = new JTextArea(3,5);
+		//test dummy scores
+		String scoresText = "Tom ... 22"
+				+ "John ... 20\n"
+				+ "Kim ... 2";
+		ta.setText(scoresText);
+		hsPanel.add(ta, BorderLayout.CENTER);
+		
+		//Replay button
 		JButton replayBtn = new JButton("Replay");
 		replayBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadWelcomeScreen();
 			}
 		});
-		goPanel.add(replayBtn, BorderLayout.SOUTH);
+		
+		JPanel replayPanel = new JPanel(new FlowLayout(2));
+		replayPanel.setBackground(Color.BLACK);
+		replayPanel.add(replayBtn);
+		goPanel.add(replayPanel, BorderLayout.SOUTH);
+		
+		
 	}
 	
 	//call this each time you want to load a new screen

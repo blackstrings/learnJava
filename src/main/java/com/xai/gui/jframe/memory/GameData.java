@@ -24,7 +24,7 @@ public class GameData {
 	//To allow the game to support more colors, increase this number
 	//but don't forget you'll also have to create buttons for each new color you add
 	private final int gameTotalColors = 3;
-	public final int initialStartingNumberToMemorize = 3;
+	public final int initialStartingNumberToMemorize = 2;
 	
 	//default time remaining per round
 	//every round will include the baseCountDownTimer + currentRound to increase the time
