@@ -32,7 +32,7 @@ public class GameFrame extends JFrame {
 	//with enum, we can just use words, which again is easier to read
 	//ex had we use int:
 	//int ScreenState;	//where 0 = welcome, 1 = Rules, 2 = Phase1, etc ...
-	//you can see using numbers to keep track of the screen stat would be more confusing than
+	//you can see using numbers to keep track of the screen status would be more confusing than
 	//using enums
 	//--------------------------------------------------------------
 	//create our custom enum - this line is like creating a regular class - except it is an enum
@@ -80,6 +80,7 @@ public class GameFrame extends JFrame {
 			//this was kind of annoying so we are turning it off
 			//JOptionPane.showMessageDialog(null, "Congrats! Get Ready For Next Round");
 			gameData.nextRound();
+			clearTimer();
 			this.loadNextRoundPhase1Screen();
 			
 		}else if(!gameData.isSelectedColorCorrect){
@@ -88,6 +89,7 @@ public class GameFrame extends JFrame {
 			
 			//force game over
 			gameData.gameOver();	//update the gamedata that it is gameover
+			clearTimer();
 			loadGameoverScreen();	//load new screen
 			
 		}else{
@@ -253,7 +255,7 @@ public class GameFrame extends JFrame {
 		timer = new Timer(gameData.getCurrentRoundTimer()*1000, new ActionListener() {
 			//trigger this method when the time reaches 0
 			public void actionPerformed(ActionEvent e) {
-				timer.stop();
+				timer.stop();	//we have to stop the time or it will keep triggering this method
 				timer = null;	//we don't need this timer anymore after this method triggers
 				loadNextRoundPhase2Screen();
 			}
@@ -278,6 +280,9 @@ public class GameFrame extends JFrame {
 		clearFrame();
 		screenState = ScreenState.Phase2;	//set and update the screen state
 		
+		//
+		clearTimer();
+		
 		//TODO make sure this is off in final
 		//System.out.println("round starting");
 		
@@ -286,7 +291,7 @@ public class GameFrame extends JFrame {
 		beginRoundPanel.setBackground(Color.BLACK);
 		this.add(beginRoundPanel);
 		
-		//header (count down timer, round);
+		//header (includes - count down timer, round);
 		headerPanel = new HeaderPanel(gameData.getCurrentRoundTimer(), gameData.getCurrentRound());
 		beginRoundPanel.add(headerPanel, BorderLayout.NORTH);
 		
@@ -313,6 +318,19 @@ public class GameFrame extends JFrame {
 		footerPanel.getBlueBtn().addActionListener(colorBtnAL);
 		
 		beginRoundPanel.add(footerPanel, BorderLayout.SOUTH);
+		
+		//get 2x more time to select answer
+		timer = new Timer(gameData.getCurrentRoundTimer()*1000*2, new ActionListener() {
+			//trigger this method when the time reaches 0
+			public void actionPerformed(ActionEvent e) {
+				timer.stop();	//we have to stop the time or it will keep triggering this method
+				timer = null;	//we don't need this timer anymore after this method triggers
+				System.out.println("times up");
+				loadGameoverScreen();
+			}
+		});
+		
+		timer.start();
 	}
 	
 	// gameover screen
@@ -329,6 +347,9 @@ public class GameFrame extends JFrame {
 	public void loadGameoverScreen(){
 		clearFrame();
 		screenState = ScreenState.Gameover;	//set and update the screen state
+		
+		//TODO turn off in final
+		System.out.println("Gameover");
 		
 		//game over panel = goPanel
 		JPanel goPanel = new JPanel(new BorderLayout());
@@ -402,6 +423,9 @@ public class GameFrame extends JFrame {
 		//it works perfectly as the image will auto
 		//align itself into the panel into a grid like layout
 		//as you keep adding more colorGraphicIcon
+		
+		//the color button that was pressed, passes it's color into this method
+		//this new icon will take the color of that pressed button
 		centerPanel.add(new ColorGraphicIcon(color));
 		
 		//tell the frame to redraw itself
@@ -409,6 +433,13 @@ public class GameFrame extends JFrame {
 		//these thow method should be called
 		revalidate();
 		repaint();
+	}
+	
+	private void clearTimer(){
+		if(timer != null){
+			timer.stop();
+			timer = null;
+		}
 	}
 	
 	

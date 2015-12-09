@@ -1,4 +1,4 @@
-package com.xai.gui.jframe42Dgame;
+package com.xai.gui.jframe.herokeyinput;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -11,7 +11,7 @@ import com.xai.gui.jframe.simple.CustomComp;
 /**
  * Main class for the game
  */
-public class JFrame42DMain extends JFrame {
+public class HeroKeyInputDemo extends JFrame {
 	boolean isRunning = true;
 	int fps = 30;
 	int windowWidth = 500;
@@ -27,7 +27,7 @@ public class JFrame42DMain extends JFrame {
 	CustomComp box;
 
 	public static void main(String[] args) {
-		JFrame42DMain game = new JFrame42DMain();
+		HeroKeyInputDemo game = new HeroKeyInputDemo();
 		game.run();
 		System.exit(0);
 	}

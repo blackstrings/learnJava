@@ -1,4 +1,4 @@
-package com.xai.gui.jframe42Dgame;
+package com.xai.gui.jframe.herokeyinput;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;
