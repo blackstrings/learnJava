@@ -10,44 +10,22 @@ public class GameMain {
 	
 	public static void main(String [] args){
 		
+		//handles setting up any configuration
+		//currently the only thing it does is change the default overall gui font type and size
+		//the default font size is kind of lame, so we changed it
 		runAppConfig();
+		
+		//finally start the game
 		startApp();
 		
 	}
 	
 	private static void startApp(){
 		
-		//MemFrame gui = new MemFrame(game);
-		//gui.setVisible(true);
-		
-		//because the setVisible has to be called last in order to see the gui
-		//this helps render the gui after everything has been set
-		
-		/*
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				
-				MemFrame gui = new MemFrame();
-				gui.setVisible(true);
-			
-			}
-
-		});
-		*/
-		
-		//use swing to create a new thread
-		SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-            	GameFrame gui = new GameFrame();
-				gui.setVisible(true);
-            }
-        });
-		
-		
-		
+		//run the gui which carries the entire game contents and gui
+		GameFrame gui = new GameFrame();
+		gui.setVisible(true);
+	
 	}
 	
 	//do any configuration we need

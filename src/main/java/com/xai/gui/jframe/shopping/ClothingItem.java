@@ -1,4 +1,4 @@
-package com.xai.gui.jframeshopping;
+package com.xai.gui.jframe.shopping;
 
 public class ClothingItem extends CatalogItem{
 

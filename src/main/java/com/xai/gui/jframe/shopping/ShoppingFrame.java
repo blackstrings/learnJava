@@ -1,4 +1,4 @@
-package com.xai.gui.jframeshopping;
+package com.xai.gui.jframe.shopping;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

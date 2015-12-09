@@ -24,19 +24,34 @@ import javax.swing.Timer;
 //this class is the gui, it displays the buttons the the selected colors to press and the colors pressed
 public class GameFrame extends JFrame {
 
-	//use enum to help use keep track what screen state we are in
+	//use enum to help us keep track what screen state we are in
+	//enum is really similar to had we use int
+	//enum is word base rather than number base
+	//the fact that word is easier to read for human than numbers, enum is a good choice
+	//with int numbers, you have to translate the number to its true meaning
+	//with enum, we can just use words, which again is easier to read
+	//ex had we use int:
+	//int ScreenState;	//where 0 = welcome, 1 = Rules, 2 = Phase1, etc ...
+	//you can see using numbers to keep track of the screen stat would be more confusing than
+	//using enums
+	//--------------------------------------------------------------
+	//create our custom enum - this line is like creating a regular class - except it is an enum
 	enum ScreenState {Welcome, Rules, Phase1, Phase2, Gameover};
+	//prepare the enum
 	private ScreenState screenState;
 	
+	//where all the game data is stored
 	GameData gameData;
 	
+	//to help with methods that need to happen after X seconds
 	Timer timer;
 	
 	public GameFrame(){
-		init();
-		loadWelcomeScreen();
+		init();					//pretty much does the basic width and height initialization
+		loadWelcomeScreen();	//load the welcome screen
 	}
 	
+	//do width and height initialization stuff for the main frame
 	public void init(){
 		setTitle("Memory");
 		Dimension mainSize = new Dimension(500,300);
@@ -47,24 +62,33 @@ public class GameFrame extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	
-	//checks each time a color button is pressed
-	//it updates the entire game data and checks if is game over or next round etc.
-	public void updateGame(ColorButton selectedColorButton){
+	//every time any of the color button(s) are press at runtime, call this method
+	//checks what button is pressed, and updates the entire game data 
+	//and checks if is game over or next round etc.
+	public void onClickUpdateGame(ColorButton selectedColorButton){
+		
+		//the long method name speaks for itself
+		//note: we made gameData global and was initalized/created at the loadWelcomeScreen()
 		gameData.validateSelectedColorAgainstCurrentPattern(selectedColorButton.getId());
 		
-		//update the gui regardless if correct or wrong color is selected
-		this.updateInputDisplayScreen( selectedColorButton.getColor());
+		//update the gui and render the color that was pressed
+		//regardless if the correct or wrong color was preseed
+		this.drawInputToDisplayScreen( selectedColorButton.getColor());
 		
 		//game logic checks and validation
 		if(gameData.isSelectedColorCorrect && gameData.validateIsRoundComplete()){
+			//this was kind of annoying so we are turning it off
 			//JOptionPane.showMessageDialog(null, "Congrats! Get Ready For Next Round");
 			gameData.nextRound();
 			this.loadNextRoundPhase1Screen();
 			
 		}else if(!gameData.isSelectedColorCorrect){
+			//this was kind of annoying so we are turning it off
 			//JOptionPane.showMessageDialog(null, "Incorrect Color! GameOver");
-			gameData.gameOver();	//force game over
-			loadGameoverScreen();
+			
+			//force game over
+			gameData.gameOver();	//update the gamedata that it is gameover
+			loadGameoverScreen();	//load new screen
 			
 		}else{
 			//allow user to keep going since there is more colors to select and
@@ -73,8 +97,14 @@ public class GameFrame extends JFrame {
 		
 	}
 	
+	// welcome screen
+	//----------------------
+	// WelcomeGameTitle
+	//----------------------
+	// playBtn
+	//----------------------
 	public void loadWelcomeScreen(){
-		clearFrame();
+		clearFrame();	//clear the entire frame and start a fresh empty frame
 		screenState = ScreenState.Welcome;	//set and update the screen state
 		
 		//start with fresh data
@@ -97,9 +127,10 @@ public class GameFrame extends JFrame {
 			}
 		});
 		
-		//we don't want start button to stretch the entire screen
+		//we don't want start button to stretch across the entire screen
 		//so we create a seperate panel for start button
-		JPanel playPanel = new JPanel(new FlowLayout()){
+		//if startBtn is inside its own panel, it won't stretch
+		JPanel playBtnPanel = new JPanel(new FlowLayout()){
 			public void paintComponent(Graphics g){
 				ImageIcon img = new ImageIcon("src/main/java/com/xai/gui/jframe/memory/bg1.png");
 				g.drawImage(img.getImage(), 50, 20, null);
@@ -108,10 +139,10 @@ public class GameFrame extends JFrame {
 				return new Dimension(50,50);
 			}
 		};
-		//flowLayout.setBackground(Color.GRAY);
-		playPanel.add(playBtn);
-		playPanel.setVisible(true);
-		welcomPanel.add(playPanel, BorderLayout.CENTER);
+		
+		playBtnPanel.add(playBtn);
+		playBtnPanel.setVisible(true);
+		welcomPanel.add(playBtnPanel, BorderLayout.CENTER);
 		
 		//copyright text for bottom of screen
 		String text2 = "<html><font color=gray> copyright&copy;2015 </font></html>";
@@ -123,6 +154,18 @@ public class GameFrame extends JFrame {
 	private ColorDisplayPanel centerPanel;
 	private FooterPanel footerPanel;
 	
+	//rules screen
+	//-------------
+	// rulesTitle
+	//-------------
+	// rule 1
+	// rule 2
+	// rule ...
+	// rule 9
+	//-------------
+	// startButton
+	//-------------
+	//
 	public void loadRulesScreen(){
 		clearFrame();
 		screenState = ScreenState.Rules;
@@ -169,6 +212,13 @@ public class GameFrame extends JFrame {
 		rulesPanel.add(startPanel, BorderLayout.SOUTH);
 	}
 	
+	//phase1 screen
+	//-----------------------------
+	// you have X secs for preview
+	//-----------------------------
+	// (red)(red)(green)(blue)	- displays pattern to memorize
+	//-----------------------------
+	//
 	//this pre round screen flashes the pattern for player to memorize
 	//based on a timer it will disappear and the round will begin
 	public void loadNextRoundPhase1Screen(){
@@ -212,6 +262,17 @@ public class GameFrame extends JFrame {
 		timer.start();
 	}
 	
+	// Phase2 screen
+	//-------------------------------------
+	// Time left                    Round 0
+	//-------------------------------------
+	// (red)(blue)(blue) - colors being pressed
+	//
+	//
+	//-------------------------------------
+	// (redBtn) (greenBtn) (blueBtn)
+	//-------------------------------------
+	//
 	//this is the actual round beginning
 	public void loadNextRoundPhase2Screen(){
 		clearFrame();
@@ -241,7 +302,7 @@ public class GameFrame extends JFrame {
 				//get the object that got clicked on - e.getSource()
 				//and cast it to the correct class - (ColorButton)
 				//then pass it to the updateGame as argument
-				updateGame(((ColorButton)e.getSource()));
+				onClickUpdateGame(((ColorButton)e.getSource()));
 			}
 		};
 		//hook up red btn event
@@ -254,6 +315,17 @@ public class GameFrame extends JFrame {
 		beginRoundPanel.add(footerPanel, BorderLayout.SOUTH);
 	}
 	
+	// gameover screen
+	//------------------------------------
+	//            gameOvertitle
+	//------------------------------------
+	// high scores?
+	//
+	//
+	//
+	//------------------------------------
+	//                           replayBtn
+	//------------------------------------
 	public void loadGameoverScreen(){
 		clearFrame();
 		screenState = ScreenState.Gameover;	//set and update the screen state
@@ -284,13 +356,18 @@ public class GameFrame extends JFrame {
 		
 		//Replay button
 		JButton replayBtn = new JButton("Replay");
+		//hook up the button to call a method
+		//in this case we go back to welcome screen
 		replayBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadWelcomeScreen();
 			}
 		});
 		
-		JPanel replayPanel = new JPanel(new FlowLayout(2));
+		//we put the replay btn inside another panel
+		//so the btn will not stretch across the entire frame
+		//basically it helps the button stay a normal button and not a stretched button
+		JPanel replayPanel = new JPanel(new FlowLayout(2));	//2 - shifts the button to the far right
 		replayPanel.setBackground(Color.BLACK);
 		replayPanel.add(replayBtn);
 		goPanel.add(replayPanel, BorderLayout.SOUTH);
@@ -313,18 +390,19 @@ public class GameFrame extends JFrame {
 	
 	public void setTimerLabel(int value){
 		//only allow if the game state mode is in start mode
-		if(screenState.equals(ScreenState.Phase2)){
+		//if(screenState.equals(ScreenState.Phase2)){
 			headerPanel.setTimerLabel(value);
-		}
+		//}
 	}
 	
-	public void updateInputDisplayScreen(Color color){
-		//Integer[] testArr = new Integer[]{1,2,1,0,0,0,2,1};
-		//List<Integer> inputsSoFar = Arrays.asList(testArr);
-		
-		//bodyPanel.updateScreen(inputsSoFar);
+	public void drawInputToDisplayScreen(Color color){
+		//the ColorGraphicIcon is like an image
+		//when we add to the panel, the icon will draw itself
+		//since centerPanel uses a flowLayout
+		//it works perfectly as the image will auto
+		//align itself into the panel into a grid like layout
+		//as you keep adding more colorGraphicIcon
 		centerPanel.add(new ColorGraphicIcon(color));
-		//bodyPanel.repaint();
 		
 		//tell the frame to redraw itself
 		//any child that has changes will redraw itself

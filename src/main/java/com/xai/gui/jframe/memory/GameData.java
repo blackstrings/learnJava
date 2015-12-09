@@ -203,11 +203,13 @@ public class GameData {
 		}
 	}
 	
+	//this is public so we can access it whenever from the gui
 	public boolean isGameOver = false;
 	
 	//forces the game to be game over
 	public void gameOver(){
-		isGameOver = true;
+		//keep track of our game status
+		isGameOver = true;	
 	}
 	
 	private void setSelectedColorId(int selectedColorId) {
