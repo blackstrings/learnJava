@@ -10,13 +10,14 @@ import javax.swing.JPanel;
 public class NextRoundPhase2Panel extends JPanel {
 
 	private JPanel colorDisplayPanel;
+	private HeaderPanel headerPanel;
 	
 	public NextRoundPhase2Panel(ActionListener colorBtnActionListener, GameData gameData){
 		super(new BorderLayout());
 		this.setBackground(Color.BLACK);
 		
 		//header (includes - count down timer, round);
-		HeaderPanel headerPanel = new HeaderPanel(gameData.getCurrentRoundTime(), gameData.getCurrentRound());
+		headerPanel = new HeaderPanel(gameData.currentTimeLeft, gameData.getCurrentRound());
 		this.add(headerPanel, BorderLayout.NORTH);
 		
 		//body or center panel - displays the color inputs
@@ -35,6 +36,10 @@ public class NextRoundPhase2Panel extends JPanel {
 		
 		this.add(footerPanel, BorderLayout.SOUTH);
 		
+	}
+	
+	public void setTimerLabel(int value){
+		headerPanel.setTimerLabel(value);
 	}
 	
 	public JPanel getColorDisplayPanel(){

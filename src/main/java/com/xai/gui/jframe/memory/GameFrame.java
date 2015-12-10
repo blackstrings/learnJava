@@ -38,13 +38,13 @@ public class GameFrame extends JFrame {
 	//create our custom enum - this line is like creating a regular class - except it is an enum
 	enum ScreenState {Welcome, Rules, Phase1, Phase2, Gameover};
 	//prepare the enum
-	private ScreenState screenState;
+	private ScreenState screenState = ScreenState.Welcome;
 	
 	//where all the game data is stored
-	GameData gameData;
+	GameData gameData = null;
 	
 	//to help with methods that need to happen after X seconds
-	Timer timer;
+	Timer timer = null;
 	
 	public GameFrame(){
 		init();					//pretty much does the basic width and height initialization
@@ -179,7 +179,7 @@ public class GameFrame extends JFrame {
 		//The end of the timer will take us to the next screen
 		//make sure to multiple game seconds by 1000 to get milliseconds as timer functions in milliseconds
 		//1 sec = 1000, 2 sec = 2000, ... 10 sec = 10000 etc
-		int timeGivenToPlayer = gameData.getCurrentRoundTime()*1000;
+		int timeGivenToPlayer = gameData.getCurrentRoundTotalTimeForPreview()*1000;
 		timer = new Timer(timeGivenToPlayer, new ActionListener() {
 			//trigger this method when the time reaches 0
 			public void actionPerformed(ActionEvent e) {
@@ -226,20 +226,30 @@ public class GameFrame extends JFrame {
 			}
 		};
 
+		//though player gets a shorter time to preview the pattern
+		//for selected player gets 2x more time to select answer, so we multiple by 2
+		//it is important this comes first before you create the nextRoundPhase2Panel
+		gameData.currentTimeLeft = gameData.getCurrentRoundTotalTimeForPreview();
+
 		//create phase 2 panel
 		phase2Panel = new NextRoundPhase2Panel(colorBtnAL, gameData);
 		this.add(phase2Panel);
 		
-		//we have to turn roundTime to milliseconds because we using Timer, so we multiply by 1000
-		//player gets 2x more time to select answer, so we multiple by 2
-		int timeGivenToPlayer = gameData.getCurrentRoundTime()*1000*2;
-		timer = new Timer(timeGivenToPlayer, new ActionListener() {
-			//trigger this method when the time reaches 0
+		//1000 = 1 second in real time
+		timer = new Timer(1000, new ActionListener() {
+			//trigger this method every second
 			public void actionPerformed(ActionEvent e) {
-				timer.stop();	//we have to stop the time or it will keep triggering this method
-				timer = null;	//we don't need this timer anymore after this method triggers
-				System.out.println("times up");
-				loadGameoverScreen();
+				
+				if(gameData.currentTimeLeft > 0){
+					gameData.currentTimeLeft--;
+					phase2Panel.setTimerLabel(gameData.currentTimeLeft);
+				}else{
+					timer.stop();	//we have to stop the time or it will keep triggering this method
+					timer = null;	//we don't need this timer anymore after this method triggers
+					//2 codse above is same as calling clearTimer();
+					System.out.println("times up");
+					loadGameoverScreen();
+				}
 			}
 		});
 		
@@ -293,7 +303,7 @@ public class GameFrame extends JFrame {
 	public void drawSelectedColorToDisplayScreen(Color color){
 		//the ColorGraphicIcon is like an image
 		//when we add to the panel, the icon will draw itself
-		//since centerPanel uses a flowLayout
+		//since phase2Panel uses a flowLayout
 		//it works perfectly as the image will auto
 		//align itself into the panel into a grid like layout
 		//as you keep adding more colorGraphicIcon

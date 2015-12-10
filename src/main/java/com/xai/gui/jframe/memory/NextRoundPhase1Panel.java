@@ -15,7 +15,7 @@ public class NextRoundPhase1Panel extends JPanel {
 		this.setBackground(Color.WHITE);
 		
 		//NORTH section
-		int currentRoundTimer = gameData.getCurrentRoundTime();
+		int currentRoundTimer = gameData.getCurrentRoundTotalTimeForPreview();
 		JLabel info = new JLabel("You have " + currentRoundTimer + " sec for preview starting now");
 		this.add(info, BorderLayout.NORTH);
 		

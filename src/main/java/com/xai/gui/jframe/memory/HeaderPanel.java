@@ -10,9 +10,9 @@ public class HeaderPanel extends JPanel {
 	private JLabel timerLabel;
 	private JLabel roundLabel;
 	
-	public HeaderPanel(int time, int round){
+	public HeaderPanel(int timeLeft, int round){
 		super(new BorderLayout());	//we force this header panel to have a border layout
-		init(time, round);
+		init(timeLeft, round);
 	}
 	
 	private void init(int time, int round){

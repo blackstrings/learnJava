@@ -31,6 +31,7 @@ public class GameData {
 	//the number is best when it is the same as the initialStartingNumberToMemorize
 	//otherwise feel free to tweak this number to any other number
 	private int baseCountDownTimer = initialStartingNumberToMemorize;
+	public int currentTimeLeft = 0;	//this value will constantly change per round
 	
 	//track what round we are in
 	private int currentRound;
@@ -144,7 +145,7 @@ public class GameData {
 	}
 	
 	//helps determine how much time should be given to player per round
-	public int getCurrentRoundTime(){
+	public int getCurrentRoundTotalTimeForPreview(){
 		//this will fix the count down timer being zero at round zero
 		if(currentRound == 0){
 			//in this case, make sure baseCountDownTimer is never zero to begin with
@@ -155,6 +156,11 @@ public class GameData {
 		//this means player don't get 1 additional sec per round
 		//instead player gets 1 additional second only for every 2 rounds completed
 		return baseCountDownTimer + currentRound/2;
+	}
+	
+	//players get twice the time when selecting colors vs previewing
+	public int getCurrentRoundTimeToSelect(){
+		return getCurrentRoundTotalTimeForPreview()*2;
 	}
 	
 	
