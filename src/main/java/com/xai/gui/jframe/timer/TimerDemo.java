@@ -1,12 +1,7 @@
 package com.xai.gui.jframe.timer;
 
-import java.awt.Color;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
-import com.xai.gui.jframe.basic.DrawImgDemo;
 
 //the idea is to put the timer itself in the panel that it will be affecting.
 public class TimerDemo extends JFrame {
