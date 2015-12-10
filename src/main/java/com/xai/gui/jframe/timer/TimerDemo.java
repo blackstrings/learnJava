@@ -8,13 +8,13 @@ import javax.swing.SwingUtilities;
 
 import com.xai.gui.jframe.basic.DrawImgDemo;
 
+//the idea is to put the timer itself in the panel that it will be affecting.
 public class TimerDemo extends JFrame {
 
 	public TimerDemo(){
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setSize(150, 100);
-		
 		init();
 	}
 	

@@ -12,24 +12,23 @@ import javax.swing.Timer;
 
 public class TimerPanel extends JPanel{
 
-	JLabel timerText;
-	int time;
+	JLabel timerJLabel;
+	int counter;
 	Timer timer;
 	
 	public TimerPanel(){
 		super(new FlowLayout(0));
 		setBackground(Color.GRAY);
 		
-		timerText = new JLabel("0");
-		timerText.setBorder(BorderFactory.createLineBorder(Color.RED));
-		add(timerText);
+		timerJLabel = new JLabel("0");
+		timerJLabel.setBorder(BorderFactory.createLineBorder(Color.RED));
+		add(timerJLabel);
 		
 		timer = new Timer(1000, new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				time++;
+				counter++;
 				updateText();
-				if(time > 10){
+				if(counter > 10){
 					timer.stop();
 					timer = null;
 				}
@@ -39,6 +38,6 @@ public class TimerPanel extends JPanel{
 	}
 	
 	private void updateText(){
-		timerText.setText(""+time);
+		timerJLabel.setText(""+counter);
 	}
 }
