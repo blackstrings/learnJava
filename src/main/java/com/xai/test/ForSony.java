@@ -19,7 +19,7 @@ public class ForSony {
 		float toFloat = Float.valueOf(str);
 		
 		
-		
+		//test
 		
 		//------------------------------------------
 		//String class methods - just know substring and charAt
