@@ -1,4 +1,4 @@
-package com.xai.gui.jframe.herokeyinput;
+package com.xai.gui.jframe.fps;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -9,9 +9,11 @@ import javax.swing.JFrame;
 import com.xai.gui.jframe.simple.CustomComp;
 
 /**
- * Main class for the game
+ * FPS = frames per second. This demo shows you how to render 
+ * animation like by redrawing the screen 30 frames per second.
+ * 
  */
-public class HeroKeyInputDemo extends JFrame {
+public class FPSDemo extends JFrame {
 	boolean isRunning = true;
 	int fps = 30;
 	int windowWidth = 500;
@@ -27,7 +29,7 @@ public class HeroKeyInputDemo extends JFrame {
 	CustomComp box;
 
 	public static void main(String[] args) {
-		HeroKeyInputDemo game = new HeroKeyInputDemo();
+		FPSDemo game = new FPSDemo();
 		game.run();
 		System.exit(0);
 	}

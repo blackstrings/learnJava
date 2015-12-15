@@ -1,4 +1,4 @@
-package com.xai.gui.jframe.herokeyinput;
+package com.xai.gui.jframe.fps;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;
