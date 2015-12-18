@@ -7,8 +7,9 @@ public class RegexPatternDemo {
 
 	public static void main(String [] args){
 		
-		if(validateNumeric("8"))
+		if(validateNumeric("8")){
 				System.out.println("yes");
+		}
 		
 		
 	}
