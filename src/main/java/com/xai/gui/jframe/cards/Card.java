@@ -20,7 +20,7 @@ public class Card extends JComponent {
 	public Card(Suit s, Rank r){
 		suit = s;
 		rank = r;
-		setBorder(BorderFactory.createLineBorder(Color.gray));
+		setBorder(BorderFactory.createLineBorder(Color.white));
 	
 		addMouseListener(new MouseListener() {
 			

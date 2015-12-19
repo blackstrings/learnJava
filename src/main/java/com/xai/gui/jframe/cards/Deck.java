@@ -42,6 +42,10 @@ public class Deck {
 				cs.add(new Card(s,r));
 			}
 		}
+		shuffle();
+	}
+	
+	public void shuffle(){
 		Collections.shuffle(cs);
 	}
 	

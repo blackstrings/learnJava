@@ -18,16 +18,20 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CFrame extends JFrame {
-	private final int width = 220;
-	private final int height = 125;
+	private final int width = 225;
+	private final int height = 143;
 	private Deck deck = null;
+	private CData data = null;
+	
 	public CFrame(){
 		setTitle("C Test");
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
 		
 		//to get frame to appear at lower bottom right
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -47,6 +51,7 @@ public class CFrame extends JFrame {
 	
 	private void init(){
 		deck = new Deck();
+		data = new CData();
 		
 		//loadScreen1001();
 		loadScreen1002();
@@ -80,33 +85,66 @@ public class CFrame extends JFrame {
 	//deal screen
 	private void loadScreen1002(){
 		clear();
-		JPanel p = new JPanel(new BorderLayout());
+		JPanel mainPanel = new JPanel(new BorderLayout());
+		add(mainPanel);
 		
-		CardPanel header = new CardPanel(new GridLayout(1,4,0,0));
-		p.add(header, BorderLayout.NORTH);
-		CardPanel center = new CardPanel(new GridLayout(1,4,0,0));
-		p.add(center, BorderLayout.CENTER);
-		
-		int maxDeal = 2;
+		int maxDeal = 4;
 		List<Card> h1 = deck.deal(maxDeal);
 		List<Card> h2 = deck.deal(maxDeal);
+		
+		//header
+		JPanel headerPnl = new JPanel();
+		JLabel deckLabel = new JLabel("Deck Size: " + deck.getSize() + "/52");
+		headerPnl.add(deckLabel);
+		mainPanel.add(headerPnl, BorderLayout.NORTH);
+		
+		JPanel playerPnl = new JPanel(new GridLayout(2,1,0,0));
+		mainPanel.add(playerPnl, BorderLayout.WEST);
+		JLabel p1Label = new JLabel("P1");
+		p1Label.setBackground(Color.blue);
+		p1Label.setForeground(Color.white);
+		p1Label.setOpaque(true);
+		playerPnl.add(p1Label);
+		
+		JLabel p1Labe2 = new JLabel("P2");
+		p1Labe2.setBackground(Color.red);
+		p1Labe2.setForeground(Color.white);
+		p1Labe2.setOpaque(true);
+		playerPnl.add(p1Labe2);
+		
+		//center
+		JPanel cardDisplayPanel = new JPanel(new BorderLayout());
+		mainPanel.add(cardDisplayPanel, BorderLayout.CENTER);
+		
+		CardPanel p1HandPanel = new CardPanel(new GridLayout(1,4,0,0));
+		cardDisplayPanel.add(p1HandPanel, BorderLayout.NORTH);
+		CardPanel P2HandPanel = new CardPanel(new GridLayout(1,4,0,0));
+		cardDisplayPanel.add(P2HandPanel, BorderLayout.CENTER);
 		
 		if(h1.isEmpty() || h2.isEmpty()){
 			deck.refresh();
 		}
 		
 		for(Card c : h1){
-			header.add(c);
+			p1HandPanel.add(c);
 		}
 		for(Card c : h2){
-			center.add(c);
+			P2HandPanel.add(c);
 		}
 		
 		
-		add(p);
 		
-		JButton dBtn = new JButton("Deal - "+deck.getSize() + " cards left " + Rule.match(h1, h2));
-		p.add(dBtn, BorderLayout.SOUTH);
+		
+		//logic
+		int po = 10;
+		if(Rule.match(h1,h2)){
+			data.add(po);
+		}else{
+			data.add(po*-1);
+		}
+		
+		JButton dBtn = new JButton("Deal");
+		mainPanel.add(dBtn, BorderLayout.SOUTH);
 		dBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
