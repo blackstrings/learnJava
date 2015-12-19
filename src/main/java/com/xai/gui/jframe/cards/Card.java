@@ -50,8 +50,8 @@ public class Card extends JComponent {
 		g.drawString(rank.name().toLowerCase(), 1, 25);
 		*/
 		
-		g.setColor(Color.white);
-		g.fillRect(0, 0, width, height);
+		//g.setColor(Color.white);
+		//g.fillRect(0, 0, width, height);
 		g.setColor(Color.BLACK);
 		g.drawString(rank.symbol(), 25, 15);
 		
