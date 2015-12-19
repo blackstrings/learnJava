@@ -23,7 +23,7 @@ public class Deck {
 		if(canDeal(amount)){
 			List<Card> hand = new ArrayList<Card>();
 			for(int i=0; i<amount; i++){
-				hand.add(cs.remove(i));
+				hand.add(cs.remove(0));		//remove at index 0 always, and not at i, the i is just a counter
 			}
 			return hand;
 		}
