@@ -35,7 +35,9 @@ public class Mon {
 	}
 
 	public String toString(){
-		return "["+id+":"+name+"]";
+		return "id: " + id + "\n"
+				+ "name: " + name +"\n"
+				+ "lvl: " + lvl;
 	}
 
 	public Integer getLvl() {

@@ -20,11 +20,11 @@ public class MonDaoImpl implements MonDao {
 	private void populateMonRepo(){
 		JSONObject obj = new RpgUtil().getJsonObject("res/files/rpg/monData.txt");
 		
-		JSONArray jsArr = obj.getJSONArray("mons");
+		JSONArray jsArr = obj.getJSONArray("monsters");
 		for(int i=0; i<jsArr.length(); i++){
 			String name = jsArr.getJSONObject(i).getString("name");
 			Integer id = jsArr.getJSONObject(i).getInt("id");
-			Integer lvl = jsArr.getJSONObject(i).getInt("lvl");
+			Integer lvl = jsArr.getJSONObject(i).getInt("minLvl");
 			Mon mon = new Mon(id, name, lvl);
 			monMap.put(id, mon);
 			
@@ -40,7 +40,8 @@ public class MonDaoImpl implements MonDao {
 	@Override
 	public Mon getMon(Integer id) {
 		if(monMap.containsKey(id)){
-			return monMap.get(id);
+			Mon copyMon = new Mon(monMap.get(id));
+			return copyMon;
 		}
 		System.out.println("no match found for key: " + id);
 		return null;

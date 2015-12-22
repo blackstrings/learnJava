@@ -5,6 +5,7 @@ import java.util.Random;
 import com.xai.gui.jframe.rp.dao.MonDao;
 import com.xai.gui.jframe.rp.dao.MonDaoImpl;
 import com.xai.gui.jframe.rp.domain.Mon;
+import com.xai.gui.jframe.rp.domain.User;
 
 public class RService {
 	
@@ -31,7 +32,11 @@ public class RService {
 	public Mon getRandMon(){
 		Random rand = new Random();
 		Integer randId = rand.nextInt(monRepo.getSize()) + monRepo.BASE_ID;
-		return new Mon(monRepo.getMon(randId));	//return copy
+		return monRepo.getMon(randId);	//return copy
+	}
+	
+	public Mon getMonById(int id){
+		return monRepo.getMon(id);
 	}
 	
 	public boolean match(Mon m1, Mon m2){
