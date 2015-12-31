@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Reaf");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>REAF</h1>
+		<p>REAF is Menards's in-house framework developed years ago with the intention to keep all utilities under one big package that would fit for all the apps.  But as our application changes it required new ways of doing things and functionalities and thus REAF needed to be broken down in order to work for other apps. The design had this flaw and now our apps are trying to break REAF into smaller parts.</p>
+		<p>
+		Overall, it is a utility framework for our aplications.
+		</p>
+		<section>
+			<h1>Special Notes</h1>
+			<ul>	
+				<li>REAF is used in majority of our kiosk non-web apps</li>
+				<li>REAF is the one responsible for calling out which <a href="designitconfig.html"> designit config</a> version to use</li>
+				<li><a href="reafAppstartUpIssues.html">REAF app start up issues</a></li>
+			</ul>
+		</section>
+	</section>
+
+</div>
+</body>
+</html>

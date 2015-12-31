@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Three jS");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	<section>
+		<h1>Three.js</h1>
+		<p>A 3D framework initially proposed (2014) to be our next 3d engine framework, but Unity Engine (2015) will be become the 3d engine instead.</p>
+		<section>
+			<h1>Features</h1>
+			<p>We are currently not using it in our current applications, however, It was used to create prototypes until Unity came along :).</p>
+		</section>
+	</section>
+</div>
+</body>
+</html>

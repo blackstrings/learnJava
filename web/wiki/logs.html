@@ -1,0 +1,141 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Logs");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Logs and Log4j</h1>
+		<p>Log files are text documents that record most actions and selections during an application session. Such things like errors, exceptions, or warnings will get documented into the log files. Logs are set up in a way so that they will only record information up to a certain Megabyte of data. Once the max limit file size is met, a new log file is automatically created to further hold the log data. </p>
+		
+		<section>
+			<h1>Log4j Highlights</h1>
+			<section>
+				<p>Currently log4j is our logger we commonly use. Lo4j has a xml or properties config files that is quite flexible. You can set the location where the logs should be saved to and what the log fiile name is as well as how large each log file can be before a new log file is created. If there isn't a log file as named, log4j will automatically create one of you and put it in place within the location the log path is set.
+				</p>
+			<ul>
+				<li>Java log files are located under C:/ > logs</li>
+				<li>In deck, logs are broken up into 3 category to make reading logs easier, deckEstimator-estimation.log, deckEstimator-main.log, deckEstimator-product.log -- these different log files were meant to keep un-related logs separated from each other for easy reading
+				</li>
+				<li>WebApps logs can only be accessed using the JBoss servers</li>
+				
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Where our logs reside for each app locally - check both places if not in the other</h1>
+			<table width=100%>
+				<tr><td>Landscaping</td><td>C:/logs as concreteLandscaping</td></tr>
+				<tr><td>Deck</td><td>C:/menards/logs</td></tr>
+				<tr><td>Flooring</td><td>c:/menards/logs</td></tr>
+				<tr><td>Roofing</td><td>jboss or tc server appLogs</td></tr>
+				<tr><td>Siding</td><td>jboss or tc server appLogs</td></tr>
+			</table>
+		</section>
+		
+		<section>
+			<h1>Web app store server logs <a name="server"></h1>
+			<p>When a store gets error running roofing, and you need to see the logs, you would access either App1 or App2 server logs due to the load balancer.
+			But you will need to know what store, the time frame and what kind of error it is, as is it estimation or exception errors or mysql errors. 
+			Server.log logs everything from all apps, but should be the last thing you want to look at. 
+			For roofing, you want to start with main log, Estimator.log, then go to RoofingEst.log, then mysql.log.  
+			</p>
+			
+			<p>Call the store to see what issue it is before you
+			look at logs or do PCAnywhere, if you want it to be faster. Not all things will show up in the log, ex: cosmetic view with computer settings.</p>
+			
+			<p>
+			There are only 2 server apps 1 and 2 that store nation wide uses. Each store does not have their own web app kiosk server.
+			You will first need permission access from the server admins before you can see beyond the logs folder.
+			Recommented software is Putty or WinSCP, but you can use filezilla as well.
+			</p>
+			<ul>
+				<li>Filezilla > web apps (kiosk-app1-kvm) > Prod 1 or Prod 2 > connect</li>
+				<li>home/kioskuser/opt/jboss/jboss-as/server/all/applogs/roofing or siding logs</li>
+			</ul>
+			
+			
+			
+			<p>If you see curhist logs, then it has something to do with DBA, so contact them about it</p>
+		</section>
+		
+		<section>
+			<h1>Installing log4j</h1>
+			<section>
+				<ul>
+					<li>google the maven dependency, and use elcipse maven to add the log4j dependency to the pom</li>
+					<li>In eclipse under the maven pom you can add it like this<br>
+					<img src="images/logs2.png" width="45%" /><img src="images/logs3.png" width="45%"/></li>
+					<li>Create a lo4j.properties file under this location<br> <img src="images/logs1.png" /></li>
+					<li>Modify the settings to your liking, here's a default one
+<pre>
+# Root logger option
+log4j.rootLogger=DEBUG, stdout, file
+ 
+# Redirect log messages to console
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target=System.out
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+ 
+# Redirect log messages to a log file, support file rolling.
+log4j.appender.file=org.apache.log4j.RollingFileAppender
+log4j.appender.file.File=C:\\logs\\learningTest.log
+log4j.appender.file.MaxFileSize=5MB
+log4j.appender.file.MaxBackupIndex=10
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+</pre>
+					</li>
+					<li>To use log4j<br><img src="images/logs4.png" /></li>
+					<li>The import will automatically be imported after you do the above<br><img src="images/logs5.png" /></li>
+					<li>You can start logging like this <br><img src="images/logs6.png" /></li>
+					<li>When you run the app, the log file will be saved in the path location where specified in your log4j config properties file.</li>
+					
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Logging test in Roofing/Siding</h1>
+			<section>
+				<p>
+				If you are getting logging file not found errors when running roofing or siding, it is probably beause your log4j properties are not set correctly.
+				</p>
+				<figCaption>Example in roofing log4j properties</figCaption>
+				<img src="images/logs7.png" />
+				<p>test.dir will give you null in return and throw an error if the variable is not replaced at runtime. The quickest solution would be to use an absolute path and take out the ${}, this path will most likely create the log from your main c: root. Just don't commit the lo4j property changes when you are ready to push to stash.</p>
+				<img src="images/logs8.png" />
+				<p>
+				Another way to use the log, keeping the ${test.dir} as is, is to make sure you call System.setProperty("test.dir","c:\\logs").
+				This way, the test.dir variable will be set at runtime, in this case, creating a RoofingTest.log under the c:\\logs directory.
+				But you have to set this before you actually init the logger so it can be cumbersome.
+				</p>
+				<p>
+				The proper way to use the log however, by keeping the ${test.dir} as it is, is when you debug in eclipse, go into the debug configuration and put<br> -Dtest.dir=c://logs as your vm arguments.
+				<figCaption>You can choose where directory you want to log it to</figCaption>
+				<img src="images/logs9.png" width="100%"/>
+				</p>
+			</section>
+		</section>
+		
+	</section>
+	
+</div>
+</body>
+</html>

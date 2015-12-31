@@ -1,0 +1,479 @@
+<html>
+<head>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<title></title>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Roofing");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<!-- collapse buttons -->
+	<!--
+	<section style="text-align:left; padding-left:300px;">
+		<a class="unCollapseAll" >Uncollapse All</a>
+		<a class="collapseAll" >Collapse All</a>
+	</section>
+	-->
+	<script>
+		//enable common collapser
+		require(['./commonWiki'], function (common) {
+			require(["app/wikiUtils"], function(utils){
+				utils.enableCommonCollapser();
+				utils.removeDisplayBlockOnBoxClass();
+			});
+		});
+	</script>
+	<section id="start">
+		<h1>Roofing</h1>
+		<p>Application that sells roofing materials and <a href="gutter.html" class="link">Gutter</a> materials.
+		</p>
+		
+		<section>
+			<h1>Installation</h1>
+			<section>
+			<ul>
+				<li><a href="tcserver.html">You must install TCserver first to run this app</a></li>
+				<li><a href="webapps.html">Running & Debugging Webapps</a></li>
+				<li>open Configure Java > put in exception list url due to the new java 7 update security reasons. Allows you to run siding/roofing.</li>
+				<img src="images/siding-1.png" width="50%" /><img src="images/siding-1a.png" width="30%" />
+				<li>For each environment dev, stage, prod, and for each app server, you will need to add an exception list for them</li>
+				<li>ex: visit any stage link for roofing, you will see that the url is something like "http://kiosk-stage1-app-kvm:8080"</li>
+				<li>Add that url, with or without the :8080 to your java exception list</li>
+				
+				<h2>environment check</h2>
+				<li>If roofing/siding doesn't work, check sidingEstimator.log or roofingEstimator.log to see if appConfig is found or not</li>
+				<li>environment.properties is where the appConfig path is set</li>
+				<li>Note:environment.properties is still not stable appConfig missing error may occur in log when starting roofing</li>
+				<li>most likly you'll need to append an absolute path appConfig=c:/app/tcserver/designit/opt/Kiosk/Properties/RoofingEstimator/appConfig.properties</li>
+				<li>make sure then in tcserver, you have the correct folders created leading to where appConfig.properties should be in, which you can find in roofing branch</li>
+				
+				<h2>enterprise mode check</h2>
+				<li>If ever roofing or siding isn't showing up, check to make sure that domain url for that app is added to siteList, you are using IE, enterprise is turned on</li>
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1><a href="roofingTerminology.html">Roofing Terminology</a></h1>
+		</section>
+		
+		<section>
+			<h1>Environments & AppConfig.properties error</h1>
+			<section class="box">
+				<p>
+				Our web apps like roofing and siding also utilize using multiple environments.
+				So that for dev we would load properties for dev only, same goes for stage and prod.
+				Siding and roofing tend to have this wierd location where it put its appConfig.properties file.
+				</p>
+				<p style="font-size:8px">
+				opt/Kiosk/RoofingEstimator/appConfig.properties
+				</p>
+			</section>
+			
+			<section class="box">
+				<p>
+				If the appConfig.properties isn't found, the RoofingEstimator.log will log this error (although the app may not crash) 
+				it can get annoying.
+				to fix this, you don't have to touch the properties file location nor the statsLogging.java. Just create these folders
+				under your root C:Drive opt/Kiosk/RoofingEstimator/ and put the appConfig.properties here.
+				</p>
+				<p>This doesn't happen in prob proably because the folders do exist in prod</p>
+			</section>
+		</section>
+			
+		<section>
+			<h1>Estimation</h1>
+			<section>
+				<p>Hint, if a product sku is not in roofingSkuID.properties, which it wont then also have a sCode, then that product will never estimate as it won't exist in the app</p>
+				<p>Overview of the top estimte clases<br> <img src="images/roofing_est3.png" /></p>
+			</section>
+			<section>
+				<p>
+				At the most basic level of adding a product to the estimation, it is this.
+				</p>
+				<img src="images/roofing_est2.png" width="100%"/>
+			</section>
+			<section>
+				<h1>Fasteners</h1>
+				<p>
+				The way how fastener are estimated in roofing is this. During Estimate, it will gather the needed fastener into a temporary hashtable called holdCalculation. Utility is called at the end of each estimate to pass the holdCalculation hashtable to another thread like so for the later final estimation. When FinalMaterial.java is called, each Fasterner.java, FastenerCap.java is called to use those values inside the hold calculations. Each fastener class is what determines the type of fastener sku to use. It is then put inside the preMatList like how other products are added.
+				</p>
+				<img src="images/roofing_est4.png" width="100%" />
+			</section>
+		</section>
+			
+		<section>
+		<h1>Tracking down the css file</h1>
+			<section>
+				<ul>
+					<li>Run the app and go to the screen you want to modify the css for</li>
+					<li>Look at the url - note: the screen indicated is the previous screen, so back out of that screen and look at the url again, that's the screen# you want</li>
+					<li>Open tiles-def > search the screen</li>
+					<li>Check the tiles put info and see if there are jsp related, if so visit those jsp</li>
+					<li>In jsp file, look for the id or classes by the tags</li>
+					<li>search that id or class name in all css file and you should get some results as to which css targets that id or class</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Installing and running Roofing</h1>
+			<section>
+			<ul>
+				<li><a href="tcserver.html">You must install TCserver first to run this app</a></li>
+				<h2>Workspace Setup</h2>
+				<li>Create a java workspace > Roofing > RoofingEstimator (SVN staging into this directory)</li>
+				<li>There is no other folder needed to be in this Roofing workspace</li>
+				<li>Import project: Eclipse > Package Explorer > right click > new project > RoofingEstimator</li>
+				<li>Wait a sec to let the project be converted to Maven</li>
+				<li>Click on debug drop down > Debug Configurations</li>
+				<li>Double click Maven Build to create a new tab<br>
+				<img src="images/roofing1.png" width="90%">
+				</li>
+				<li>select the new M2 config tab and put the following:<br>
+				<img src="images/roofing2.png" width="90%">
+				</li>
+				<li>Do not click on debug yet as it won't work yet</li>
+				
+				<h2>Start server (tcserver designit instance) <a href="tcserver.html" target="_blank">How to start tcserver</a></h2>
+				<li>Back inside eclipse > debug > debug config > Double click on Remote Java Application to generate a RoofingEstimator tab</li>
+				<li>put the following under RoofingEstimator<br>
+					<img src="images/roofing3.png" width="90%">
+				</li>
+				
+				<li>Build > Debug > roofing will create a .war file under Roofing > RoofingEstimator > target</li>
+				
+				<li>Next time if you need to generate a new .war file after new changes are made in the java files, just use the drop down from debug and select the new shortcut "local" tab in eclipse </li>
+				
+				<li>You want to use 7-zip (right click) extract this .war file from <br> C:...\Roofing\RoofingEstimator\target <br>to<br> C:\JBoss\jboss-5.1.0.GA\server\default\deploy\RoofingEstimator.war
+				</li>
+				
+				<li>You can now run the page using this link <a href="http://stageapp1-internal-designit:8080/KioskUrls/index.html">Here</a> and go to local host for your app -- note that you may have to manually type in 8080 after localhost if you don't have apache installed or if the app isn't working. This link here can change, so ask primary if it doesn't work or ask where the kiosk links got moved to.
+				</li>
+				
+				
+				<li>When done testing to shut down JBoss: While focused on run.bat command window > Ctr-C to shutdown > y for yes > enter</li>
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Highlights</h1>
+			<section>
+				<ul>
+					<li>Webapp - Have to use Internet Explorer to debug and run it</li>
+					<li>Unlike C++ apps, to get the material list with SKU numbers you have to either print out the estimation or look in the JBoss server log. If you don't have access to the JBoss server, ask a team member that has access to get SKU</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Debugging Roofing Warmup Practice</h1>
+			<section>
+				<p>
+				Before you start debugging Roofing there are some things you'll need to understand.
+				</p>
+				<ul>
+					<li>You'll need apache installed</li>
+					<li>You need to have java 1.7, or check if Roofing requires 1.8+</li>
+					<li>Know how to build Roofing and deploy to local Jboss or TomCat Server
+						<ul>
+							<li>If not, you'll need to learn how to deploy to server, stop/start server</li>
+							<li>Like any java appilcation Server(JBoss-WildFly, TomCat, GlassFish), it needs to be running for you to debug locally on your PC</li>
+						</ul>
+					</li>
+					<li>How to know what JSP, Java Controller, Display Controller files is called on which page
+						<ul>
+							<li>Short answer: view tiles-def.xml</li>
+							<li>run app > go to a page you want > F12</li>
+							<li>see source and there is a little commented line telling you want JSP</li>
+							<li>Search in eclipse the jsp name without jsp</li>
+							<li>You must search under .jsp and .xml</li>
+							<li>The most important to understand is that the ScreenXXXX.java and layout.jsp are mapped in a file called tiles-defs.xml</li>
+							<li>tiles-def.xml controlls what screens have which jsp loaded and what products to show on screen</li>
+							<li><a href="images/roofingHint2.png" target="_blank"><img src="images/roofingHint2.png" width="30%" style="border:thin solid #000"/></a>
+						</ul>
+					</li>
+					<li>Know that JSP layout files are the ones that create the pages you see on the screen, they become the html or php file</li>
+					<li>Java controller files ScreenXXXX.java are the ones that call/handles what JSP files to call</li>
+					<li>The same JSP layout file may be used by multiple screenXXXX.java so take note on that (i.e. rowColumnLayout.jsp is used by a few screens)</li>
+					<li>Images are located under src/main/resources/web/media/images & all images are stored here<li>
+					<li>JSP uses JSTL and EL langauages c:if, c:set, logic, etc, to work with java objects.</li>
+					<li>For a java object to be usable, a bean is used to grab the java object, visi <a href="jstl.html">JSTL</a> for more info</li>
+					
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Debugging Javascript in JSP</h1>
+			<section class="box">
+				<h2>F12</h2>
+				<p>Any browser will usually work in debugging js. Just press f12</p>
+			</section>
+			
+			<section class="box">
+				<h2>F12</h2>
+				<p>In IE11, look for paging.js, breakpoint there as it seems to play responsibility in modifying item links onto a tag element</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Items Not Loading/showing Debugging</h1>
+			<section>
+			<p>
+			First test stage kioskURL to see if stage is down.
+			If app is working stage isn't down. next try looking into ItemDisplayController. Everyscreen seems to use the class ItemDisplayController 
+			to make the calls to SQL connections.
+			and loads them into a ItemObjects to be ready for jsp to use to display it on screen.
+			</p>
+			<p>
+			If it is your first time setting up Tcserver or roofing on your PC, also <a href="tcserver.html#installation2" target="_blank" /> view checklist </a>
+			</p>
+			<p>
+			It could be that the screenXXXX.do page onload event never was able to call the initPage() method, (method located in paging.js).
+			The initPage() handles appending the item's image path to the document. So go to browser debugger, load up the page, and find and break point at initPage().
+			If the initPage() or start() onload isn't being properly loaded, one solution is to refactor it into a jquery on document ready.
+			This was bug when running roofing/siding locally on tcserver and running in IE8 enterprise mode.
+			
+			</p><img src="images/roofing-onload.png" />
+			</section>
+		</section>
+		
+		<section>
+			<h1>Lab Testing</h1>
+			<section>
+				<ul>
+					<li><a href="labtesting.html">Lab Testing Info</a></li>
+					<li>For roofing, siding and gutter, you have to point the URL to the stage environment when <a href="labtesting.html">lab testing</a>
+						<ul>
+							<li>On 8888 test store, F6 > pass > MyComputer > C > Menards > Utils > MenardAppMenu > dsgnit.xml</li>
+							<li>Right click on dsgnit.xml and open in notepad</li>
+							<li>scroll to the bottom set of tags, one is for gutter, roofing, and siding, set all three to the following</li>
+							<li>Below the & should not be used but the character code should be used instead</li>
+							<li>AppArg should = http://stage-kiosk.mymenards.com/....=restart &-a-m-p-; selection(storeNumber)=3011"...</li>
+							<li>save</li>
+							<li>You will have to kill menardsApp and restart it for the changes to take in effect</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</section>
+		
+		
+		
+		<section>
+			<h1>How to know which screen to go to when updating a java/jsp file.</h1>
+			
+			<section>
+			<p>Run the app in browser > press f12 > at top of html is a hint of what jsp page is running the current page</p>
+			</section>
+			
+			<section>
+			<p>Use the url name. When you go to a new page, in the url you will see something like /screen2002.do. That is the screen name of the previous page (it's not the name of the current page you are viewing, wierd but that's the way it is).  Visit the tiles-def.xml file > search for that screen name > each screen is mapped to a jsp file, and that's how you know what jsp runs that screen. You can further look inside that jsp if it has any other dependents.</p>
+			</section>
+			
+			<section>
+			<p>Need to look up what jsp calls in what image: Look up the image by its prefix doing a file search in eclipse</p>
+			<ul>
+				<li>ex: S979166_XX.image=web/media/images/optionalMaterials/chimneyFlashingKit/selections/S450600_XX.jpg</li>
+				<li>Then you want to search for "S979166" in all files</li>
+				<li>Then you'll get a search result like this below:<br>
+				<img src="images/roofingHint1.png" width="90%"></li>
+				<li>Now you have to know that Pro-Snap is a roofing material and it is steel. When going through the app, you'll want to select steel</li>
+				<li>If you do not know the materials enough, you'll have to ask a primary to help you faster to locate that screen untill you get used to the materials and where they are in the app</li>
+			</ul>
+			</section>
+			
+			
+			
+		</section>
+		
+		<section>
+			<h1>Updating screen flow - Understand the Strut Tile design pattern</h1>
+			<section>
+				<p>
+				Unfortunately it's not a one switch type of deal to modify screen flow changes in roofing. First you want to start with the structs-config.xml. If you modify the structs file, and make screenA able to jump to screenC, you should also modify screenC to enable it to jump back to screenA. It's tedious but a must do.
+				</p>
+				<p>
+				<strong>structs-config.xml</strong><br>
+				Holds all the possible screens that can link between each other going forward and backward.
+				</p>
+				
+				<p>
+				<strong>tiles-def.xml</strong><br>
+				holds data on what (possible) items should be displayed on a specific screen. 
+				Also is a list of all the possible screens in roofing. The first line under each screen tells you want controller 
+				it is using and what jsp that screen is using.
+				</p>
+				<p>
+				tiles-def.xml screen defines the layout.JSP page to use on what screen and what java controller to use. The layout.jsp uses handles displaying items on the screen. It uses JSTL and sometimes
+				javascript to layout the items. layout.jsp may call/include a javascript to sort the items on the page. To know what javascript the JSP
+				layout uses, check the .jsp file near top to see if an include was added or not. Sometimes, javascript is used to target the elemtent by
+				id and then assign the image from the js file rather than use JSTL to assign the image src.
+				</p>
+				
+				<p>
+				<strong>screenXXXXAction.java</strong><br>
+				The class that has the two forward and back method on what screen to jump to. Controlls what screen can or should jump to according to what's selected.
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Sprites</h1>
+			<section>
+				<p><a href="webappSprite.html">More Info Here</a></p>
+				<ul>
+					<li>Images are located under web/resources/media/images</li>
+					<li>Sprites that have multiple states are more tricky to do</li>
+					<li>Avoid JSP pages that are used by multiple screens</li>
+					<li>For dynamic images, understand how they are being loaded insid JSP & XML first before converting the code to be sprite based</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Deploying Roofing (same applies to any web apps)</h1>
+			<section>
+				<p>
+					The web apps like roofing and sidings are deployed differently than the regular standalone apps that goes through altiris and gets released store by store. When the web apps gets released (as they are just a website) the apps is release nation wide to all stores.  The web apps have two types of deployment -- rolling deployement and nightly deployment.
+				</p>
+				<p>
+					When a web app like Roofing is ready to get deploy at the end of every release cycle, we determine if roofing can be a rolling deployment or nightly deployment. The simple rule of thumb is, if there is no media involved or screen changes or new additions, and just some code changes, then it qualifies for rolling deployment.
+				</p>
+				<p>
+					The benefit of rolling deployment is that we can deploy it during the day while we are at work. The only downside is that since we have to deploy the roofing App1 and App2 server both, it has to be done under a time limit, usually we have a 30 minute time frame limit for deploying App1.
+				</p>
+				<p>
+					What happens is that during the deployment at the indicated time on this site you'll need to go to, the server will auto shut down App 1, and then at 30 minutes later, it will shut down App 2.  What we need to do is, as soon as App1 is shut down, we need to start it back up (through command line), run our test quickly with the web app open to see that our changes are on it, and then reactive the App1 server on the site, so customers can get back on app1 server again.  We must do this before App2 server starts its shutdown or else App1 will be shut off and as well as App2 be be shut off, so no one can use Roofing for the time being. Keep in mind we are deploying this live, so one server always has to be up. Once App1 is down and back up and active, app2 can have as much time it needs to do its testing if need be -- because everyone can be using App1 server while App2 is down. So app2 doesn't really have a time frame, just don't keep it off so long. 
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Junit in roofing</h1>
+			<section>
+				<p>If junit test don't run out of the box, and gives you a missing class TestCreatePreliminaryEst.java, try maven update it should fix the problem
+				and you should be able to run the test cases</p>
+				<p>
+				When introducting new propertie files or altering properties files, make sure you also copy the file and paste it under the test folder as the Junit test will run off the test properties files.
+				</p>
+				<p>
+				Junit in roofing is possible but it has a unique setup and you must use it. For gutter Junit, you want to use TestGutterEst.java. 
+				This class calls in  a external file such as (GutterEst1.txt ... gutterEst7.txt). Each text specifies the selections made in Roofing Gutter. 
+				These weren't manually type, they are copied from the selectionsHashTable that can be viewed if you set a break point inside 
+				CreatePreliminaryEst.java or better yet, in Estimate under startEstimate() towards the end of the method. Highlight all the 
+				hash values under selectionsHashTable in the variables window and paste it in the text file to create your custom estimate. 
+				You can then debug the test case to show you what exact values are being put into the material list.
+				</p>
+				<p>
+				Hint: Put a break point in CreatePreliminaryEst.doCreatePreliminaryEst() at finalMaterials = null. 
+				To get the final material list values before it gets rounded off under the prelinimaryMatList hashtable.
+				Hint2: Put a break point in Estimate.startEstimate at return this.finalMaterialList to get final selectionsHashTable to use for Junit.
+				</p>
+				
+				<p>
+				To get the list of selected values to paste onto a testCreate.txt for junit, hover over SelectionsHashTable variable in one of the classes above during
+				a break point.
+				</p>
+				
+				<p>
+				Shortcut to quickly generate asserts for selections, look to testCreatePreliminaryEst.java. 
+				Call the method helpGenerateAsserts(hastable<>) within a setup test method to generete asserts in the console 
+				for you to copy and paste it back into the test case.
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Generating material list for RQM</h1>
+			<section>
+				<p>
+				You want to look at the estimteSummary.java. 
+				turn on the logMaterialiForDev method and put a break point after this method call. 
+				Run the app and it will log the materials you see on screen into a hashtable variable 
+				for you to copy and paste into RQM.
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>The Estimation Process</h1>
+			<section>
+				<img src="images/roofing_est1.png" width="100%">
+				<p>
+				The process is very different from Deck and Landscaping. 
+				The SelectionsForm stores user selections into a map at runtime. When it is time to estimate, 
+				towards the end of the program, The Estimate class will run. It will create another object call 
+				CreatePreliminaryEst (CPE). Inside CPE, it will call objects and their estimation individually. 
+				FinalMaterials is used when all the roofs are ready to be calculated, things like steel shingle options are calculated here.
+				</p>
+			</section>
+		</section>
+		
+		
+		<section>
+			<h1>Flashing</h1>
+			<section>
+				<p>Flashing is a technique and also a long material (usually galvanize, that can be cut into smaller parts). It is used to seal where edges meet on a roof to prevent leak from rain. To calculate flashing material is as simple as finding the perimeter of the edges. The total perimeter length(x2) + width(x2) is how much flashing material you need to cover that length if the shape is a sqare or rectangle. When you have a slope, it is when you may have to do some calculations using formulas like A^2 + B^2 = C^2 to find the hypothenues.</p>
+				<img src="images/roofingFlashing.png" width="100%" />
+			</section>
+		</section>
+		
+		<section>
+			<h1>Building Roofing with the right Java Version</h1>
+			<section>
+				<p>If you try maven update or try to build roofing and the java vesrion keeps switching to another version, it's probably due to the parent pom version. Update that version number of the parent pom.
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>AddOns</h1>
+			<section>
+				<p>When working with addons, such as dormers and entry addOns, one important variable is the addOnRoofIndex. It determines what type of addon was added and is depended on in order to grab the correct quantity (addOnQty) for the correct addOn type.</p>
+				<p>
+				There is a way to know what addOn was selected and to know how to grab the correct addOnQty. Check out flashing, and search for addOnRoofIndex != null. That snippet of code is used to select and figure out how many addons are being added.
+				</p>
+				
+				<p>
+				The way how addOn materials are estimated is quite weird. If you select an addOn selection and enter 9 for qty, the code does not loop through that addOn (Dormer, Entry, etc) class 9 times, it only loops once. Example: If you choose addOn type A and choose qty of 4. That counts as one selection of addOn. If you continue through and proceed to select again another addon, say addOn A again and choose qty of 5, it is now 2 counts of addOn selection. So the code will loop now twice. But inside each loop, it will use the corresponding qty 4 or 5, which ever addOn selection it is on. If you choose to add another addOn selection, say addOn B with 2 qty. The total loop will now become 3, with the third loop having 3 as the multiplier.
+				</p>
+				
+				
+			</section>
+		</section>
+		
+		<section>
+			<h1><a href="roofingAddNewProduct.html">Adding new roof product</a></h1>
+		</section>
+		
+		<section>
+			<h1>Setup Needed</h1>
+			<section>
+				<ul>
+					<li>Eclipse</li>
+					<li>Java</li>
+					<li>TCServer (tomcat)</li>
+					<li>Apache </li>
+				</ul>
+			</section>
+		</section>
+		
+	</section>
+
+</div>
+</body>
+</html>

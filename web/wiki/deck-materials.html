@@ -1,0 +1,66 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "Deck Materials";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+		<h1>Deck Materials</h1>
+		<p>It is important to know the materials for each app so you can identify them easier when debugging for materials.
+		</p>
+		
+		<section>
+			<h1>Ramp</h1>
+			<ul>
+				<li>Deck and Ramps<br/>
+				<img src="images/deck-materials.png" />
+				</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Stairs</h1>
+			<p>
+			Stairs are associated with risers and cladding. When you put cladding on stairs, risers may grow in qty.
+			</p>
+		</section>
+		
+		
+	</section>
+	
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

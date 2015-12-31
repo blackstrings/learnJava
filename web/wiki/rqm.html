@@ -1,0 +1,98 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "RQM";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+	
+		<h1>RQM</h1>
+		
+		<p>
+		A third party online site we use to perform regression test. Regression testing is a way for us to test so that our codes are progressing and not regressing. In other words, our codes are not moving backward but forward. 
+		
+		<p>How it work is that the test cases created from the last code release will eventually be used to test the app (that has the new code changes) AKA regression testing. This is to see that the same functions still works on the updated app. 
+		</p>
+		
+		<p>In other words, we use the previous test cases, even though our codes may have changed, to test the latest release to ensure that our latest release still has the same functionality as the last release. Again, the functionality should be the same, though the codes may have changed.
+		</p>
+		
+		
+		<p>
+		In order to test in RQM, you will need someone to create a test script, put inside a test case, which is put inside a test suite and then have someone run the suite. The actual testing process will have the tester person go down a list of test steps, which is under a test script, one by one as you check yes and no if a certain test passes or not.
+		</p>
+		
+		<p>
+		Do not email every fail test cases to the primary. The primary person will know what failed when reviewing your test cases you have done for them.
+		</p>
+		
+		<p>You will use the computer in the lab to do the testing (usually the beast) as we want to simulate a kiosk that is at a store. You will use one screen for RQM while the other kiosk screen to perform your test.</p>
+		
+		<section>
+			<h1>Setup</h1>
+			<ul>
+				<li>You will need an account to login, this login is separate from all your other accounts</li>
+				<li>When it comes to regression testing, you use one of the computes in the lab, usually the beast to run the regression test</li>
+				<li>Make sure the kiosk is pointing to the right store in order for the right images to show up, ask for help if this needs to be done</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Technical Instructions to Test Suites, Cases, and Scripts</h1>
+			<ul>
+				<li>Lab computer > Login using myMenards > IS Tools > Rational Quality Management (RQM) > Login</li>
+				<li> Query your search if you know what test to perform, otherwise you'll see a bunch of test suites</li>
+				<li>select the appropriate test options and always create a new test sheet so you don't override the old test done by others</li>
+				<li>To pause, there is a little setup you need to do first by hitting the pause button</li>
+				<li>If you stop without finishing the test suite completely, all data of testing will be lost, so either pause it or finish the complete suite to ensure the testing is saved</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Creating Test Suite, Test Cases, Test Scripts</h1>
+			<ul>
+				<li>This is the hierarchy of how test gets created.</li>
+				<li>1 Suite can only have 1 Case, and 1 Case can only have 1 Script</li>
+				<li>1 Script can have multiple steps</li>
+				<li>Recommend creating Test script first, then case, then suite</li>
+			</ul>
+		</section>
+		
+	</section>
+	
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

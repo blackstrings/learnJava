@@ -1,0 +1,45 @@
+<html>
+<head>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<title></title>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Team");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Teams To Be Aware Of</h1>
+		<p>If you get yourself familiarize with who does what, it'll save you time to know who to contact for resolving conflicts or supporting the systems.</p>
+		<section>
+			<h1>People</h1>
+			
+			<section>
+				<table>
+					<td>Design-It TeamLead</td><td>Merica</td></tr>
+					<tr><td>Design-It Deployment - deploys app to store</td><td>Dean Sherry</td></tr>
+					<tr><td>Design-It Product Specialist - manipulates data</td><td>Chris Davern </td></tr>
+					<tr><td>Design-It Business - product Decision Maker</td><td>Gary Vidlund</td></tr>
+					<tr><td>Design-It Business - product decision maker (sub)</td><td>Jim</td></tr>
+					
+				</table>
+				
+			</section>
+			
+		</section>
+		
+	</section>
+	
+</div>
+</body>
+</html>

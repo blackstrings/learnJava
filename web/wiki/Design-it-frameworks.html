@@ -1,0 +1,129 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "Design-it-Frameworks";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+		<h1>Design-It Framworks</h1>
+		
+		<script>
+			var frameWorkCreate = function createFrameworkLinks(){
+				console.log("framework links created");
+				
+				//var jsonStr = '{"cat":[{"catName":"cat1","links":[{"name":"Design-it Config","path":"designitConfig.html"},{"name":"test","path":"test.html"}]}]}';
+				
+				//json obj
+				var categoryLists = 
+				[ 	
+					{
+						"catName":"Reaf Frameworks",
+						"links": [
+								{
+									"name": "Design-it Config",
+									"path": "designitConfig.html"
+								},
+								{
+									"name": "link2",
+									"path": "#1"
+								}
+						]
+					},
+					{
+						"catName":"Not Yet Visited Framworks",
+						"links": [
+								{
+									"name": "Byte Array Processor",
+									"path": "#1"
+								},
+								{
+									"name": "Time Tracker",
+									"path": "#1"
+								}
+						]
+					}
+				];
+				
+				createSectionForLists(categoryLists);
+				
+				//private
+				function createSectionForLists(lists){
+					for(var i in lists){
+						document.write( createASectionByList(lists[i]) );
+					}
+				};
+				
+				//private section
+				function createASectionByList(categoryList){
+				
+					var finalStr = "";
+					var listStr = "";
+					var sectionHeader = "<h1>" + categoryList.catName + "</h1>";
+					var strStart = "<section>" + sectionHeader + "<section>";
+					var strEnd = "</section></section>";
+					
+					//iterate through each link inside the list
+					for(var i in categoryList.links){
+						listStr += createLinkPerItem(categoryList.links[i]);
+					}
+					
+					finalStr += strStart + listStr + strEnd;
+					
+					return finalStr;
+					
+				};
+				
+				//private link
+				function createLinkPerItem(obj){
+					console.log("list created");
+				
+					finalStr = "";
+					var strStart = "<ul>";
+					var strEnd = "</ul>";
+					
+					var strComp = "<li><a href=\"" + obj.path + "\">" + obj.name + "</a></li>";
+					
+					finalStr += strStart + strComp + strEnd;
+					
+					return finalStr;
+					
+				};
+				
+			};
+			frameWorkCreate();
+		</script>
+		
+	</section>
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

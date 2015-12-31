@@ -1,0 +1,147 @@
+<html>
+<head>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<title></title>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Aspect Oriented Programming");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	<script src="javascript/OOP.js"></script>
+	
+	<section>
+	
+		<section>
+			<h1>Aspect Oriented Programming</h1>
+			<p>The idea of intercepting a point/method within your application's execution (before and/or after) and running another method (aspect method) before continuing on with your application. This is useful for things like logging every method in your app or doing metrics without hardcoding codes into every class in your app.
+			</p>
+			<img src="images/aop-1.png" width="100%" />
+		
+		</section>
+		
+		<section>
+			<section>
+				<h1>Ways to use AOP in Eclipse Java </h1>
+				<p>
+				AspectJ is a framework that allows you to use AOP in java. There are some jar files you'll have to install such as AspectJ, AspectJRT, AspectJWeaver.
+				There are 3 ways to use AspectJ in your app. One is through annotations, the other implementing beans inside your applicationContext.xml, or implementing interfaces. The easiest way to use ApsectJ is to implement the Annotation method.
+				</p>
+			</section>
+		</section>
+		
+		
+		<section>
+			<section>
+				<h1>Pointcuts</h1>
+				<section class="box">
+					<p>
+					Pointcuts are what you use to indicate where in your program should another set of code enter.
+					Examples of point cuts:
+					<img src="images/aop-2.png" class="fit popup">
+					</p>
+				</section>
+				
+				<section class="box">
+					<p>
+					Meaning of pointcut syntax
+					<img src="images/aop-3.png" class="fit popup">
+					Visit TimerAspect.java in Siding or Roofing to see examples.
+					</p>
+				</section>
+				
+				<section class="box">
+					<p>
+					Overview of pointcut visually
+					<img src="images/aop-pointcuts2.png" class="popup fit">
+					</p>
+				</section>
+				
+				<section class="box">
+					<p>
+					<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html" target="_blank">Pointcut links</a>
+					<img src="images/aop-pointcuts.png" class="popup fit">
+					</p>
+				</section>
+				
+			</section>
+		</section>
+		
+		<section>
+			<section>
+				<h1>AOP Weaving Modes</h1>
+				<section class="box">
+					<p>AOP uses one of two types of weaving for AOP to work, Load-time and compile-time. 
+					Compile-time requires that your objects are setup as beans
+					(classes that have @Aspect annotation or @Component). Load-time is more suitable for 
+					objects that are not beans which don't have that
+					aspectj annotation.
+					</p>
+				</section>
+				<section class="box">
+					<h2>Compile-time</h2>
+					<p>Compile-time is what some would consider more advance and better,
+					but could be performance costly as all the classes needed to weave will 
+					only get created at compile time or when the app is initiated.
+					</p>
+				</section>
+				<section class="box">
+					<h2>Load-time</h2>
+					<p>
+					When your classes are not beans use Load-time. Load-time is better 
+					performance because you weave all the classes you need at build time. 
+					So at compile-time, the app doesn't
+					 have to weave anymore. Objects that are not beans and cannot be scanned 
+					 using aspectJ (because they don't have the @Aspect annoation)
+					 , load-time weaving is your friend. It turns
+					objects that are non-beans to become noticeable in aop environment be 
+					waeaving them ahead of time into the WEB-INF/classes/ folder.
+					</p>
+				</section>
+				
+				<section class="box">
+					<h2>load-time woven classes</h2>
+					<p>
+					In tecserver, under your webapp's WEB-INF, you'll see a classes folder holding the classes you woven.
+					</p>
+					<img src="images/aop-loadtime.png" class="popup fit">
+					<p>
+					These are the classes that joinpoints will cut, any other classes not in here will not trigger.
+					</p>
+				</section>
+				
+			</section>
+		</section>
+		
+		<section>
+			<section>
+				<h1>AOP Errors</h1>
+				<section class="box">
+					
+					<p>[org.springframework.web.context.support.XmlWebApplicationContext]
+					 Error creating bean with name 'loadTimeWeaver':
+					-javaagent:org.springframework.instrument.jar 
+					</p>
+					<p>
+					It means in your C:\app\tcserver\designit\conf\Catalina\localhost 
+					the application context file was not found. sometimes starting tcserver deletes this file.
+					just copy the file from the app's environment folder stage/dev/prod and paste it inside localhost.
+					</p>
+				</section>
+			</section>
+		</section>
+		
+	</section>
+
+</div>
+</body>
+</html>

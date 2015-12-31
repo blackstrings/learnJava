@@ -1,0 +1,62 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Store Testing");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<script src="javascript/canvas/Canvas1.js"></script>
+
+	<section>
+		<h1>Store Testing</h1>
+		<ul>
+			<li>Before going to the store, spend 10-15 minutes on the tests you will have to be testing or is assigned to test at the store</li>
+			<li>Team lead will provide in the email the people who will be going to the store and the apps each person will be responsbile fore</li>
+			<li>Go to redmine, click on the filter query for the app you will be testing ex: Q1R1 Landscaping</li>
+			<li>This should bring up all the tests you will need to test for the landscaping app</li>
+			<li>Go through each test and print directions somehow so you know what to test for</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h1>Tips while at the store</h1>
+		<ul>
+			<li>Test with data changes will not show up, take note of which tickets have data changes</li>
+			<li>If landscaping has a ticket with data change, that product won't show up, but check so app doesn't crash at least</li>
+			<li>For C Apps, you'll have to kill and restart memcache and memcache updater</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h1>Updating the app before testing</h1>
+		<ul>
+			<li>Ensure that the new data has been pushed to the store, not too sure how to check this</li>
+			<li>f6 > password > go to symantec</li>
+			<li>locate and find designit-config-2015 or 2016 - update that one look for success</li>
+			<li>check the env to see if the correct settings are set<br><br></li>
+			<li>Then look for the designit package - update that one which should download all the apps (garage, fence, deck)</li>
+			<li>Make sure you see the app you are testing otherwise the installer wasn't created - call team lead to check</li>
+			<li>If the download hangs in the progress bar too long, it could be the download isn't going or is too slow</li>
+			<li>check to see if the download is downloading from campus or the site server or if the installer is done uploaded to the site server</li>
+			<li>call jansen - desktop support for resolving this issue</li>
+			<li>Go down the list of each app and update so that each version is up to date, to know that the app is most recent</li>
+			<li>One trick is to look at the date, it should be very close to today's date</li>
+		</ul>
+	</section>
+
+</div>
+</body>
+</html>

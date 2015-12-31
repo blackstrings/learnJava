@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<head>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<title></title>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Roofing-Adding New Products");
+				});
+			});
+		});
+	</script>
+	<style>
+		li { margin-bottom:10px }
+	</style>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<!-- collapse buttons -->
+	<!--
+	<section style="text-align:left; padding-left:300px;">
+		<a class="unCollapseAll" >Uncollapse All</a>
+		<a class="collapseAll" >Collapse All</a>
+	</section>
+	-->
+	<script>
+		//enable common collapser
+		require(['./commonWiki'], function (common) {
+			require(["app/wikiUtils", "jquery"], function(utils,$){
+				//utils.enableCommonCollapser();
+				$(function(){
+					//customize css if you want to use jquery
+					$("ol li").css({"list-style-type":"decimal","color":"rgba(255,255,255,.8"});
+				});
+			});
+		});
+	</script>
+	<section id="start">
+		<h1>Adding new products to Roofing</h1>
+		<p>There are multiple property places that need to be in place for a main roofing style shingle products.</p>
+		
+		<section>
+			<h1>Adding new shingle style</h1>
+			<section>
+				<section class="box">
+					<h2>Add the style</h2>
+					<p>This is where you define how much coverage one bundle is or how much 1 sheet coverage is, 
+					Use square inch per bundle for bundles. If you are given feet, convert it to square inch.
+					Use lengthperpeice if style doesn't come in bundle. In this case, pieceperbundle will be 1 and the length is filled.</p>
+					<img src="images/roofing_addNew_style1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>tiles-def.xml</h2>
+					<p>
+					Add the new style onto the screen. In tiles-def jump to screen 1502, add the style and create a putlist of its shingle colors.
+					See add shingle below to get the Scodes for the shingles of that style.
+					</p>
+					<img src="images/roofing_addNew_style2.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Add the main image</h2>
+					<p>
+					Create image ticket to request image 216x153 size and add it to <br>
+					/media/images/shingleRoofingType/
+					Name the image properly, ex: the first 7 characters shuld be filled followed by underscore = BRIARWD_XX.jpg
+					</p>
+					<img src="images/roofing_addNew_style3.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>extra ref</h2>
+					<img src="images/roofing_addNewRoofProduct_6.png" class="popup fit"><br>
+					<img src="images/roofing_addNewCat_1.png" class="popup fit"><br>
+					<img src="images/roofing_addNewCat_2.png" class="popup fit">
+				</section>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Adding new shingle to existing style</h1>
+			<section>
+				<ol>
+					<li>Give the sku a new Scode in roofingSkuID.properties</li>
+					<img src="images/roofing_addNewRoofProduct_1.png">
+					<li>Start defining its values in tsShingles.properties (ts = traditionalShingle)</li>
+					<img src="images/roofing_addNewRoofProduct_2.png">
+					<li><p>Further down tsShingles.properties, define the property values.
+					You'll have to also create new scode for hipRidge for each color. As every shingle color has a specific hip ridge color (half true).
+					</p>
+					<p>Each shingle sku has 4 basic properties as you see below.<br>
+					in pair, one is for starter strip, and one for hip ridge. All colors of the same style will use the same starter strip.
+					But each color will be mapped to a different hip ridge sku, as hip ridge are on the outside, and they have to match the same color
+					as the shingle. See how to add hip ridge in next section.
+					</p></li>
+					<img src="images/roofing_addNewRoofProduct_3.png">
+					<li>In itemAttributes.properties > sepecify image path and qty > also put image to the correct path</li>
+					<img src="images/roofing_addNewRoofProduct_4.png">
+					<li>roofingDefaultSku.properties - not sure if this part relavant gets used anymore as prices are dynamic now</li>
+					<img src="images/roofing_addNewRoofProduct_5.png">
+					<li>tiles-def.xml - locate screen that product is suppose to be display in</li>
+					<img src="images/roofing_addNewRoofProduct_6.png">
+					<li>tiles-def.xml - Under screen section > Add product scode to the category - category adding is another topic</li>
+					<img src="images/roofing_addNewRoofProduct_7.png">
+					<li>tsShingles.properties from test folder. Unfortunately, we also have to use duplicate codes for testing</li>
+					<img src="images/roofing_addNewRoofProduct_8.png">
+					<li>itemAttributes.properties from test folder. Unfortunately, we also have to use duplicate codes for testing</li>
+					<img src="images/roofing_addNewRoofProduct_9.png">
+					<li>Don't forget underlayment, check whether a new underlayment needs to be added or not, 
+					each roof style may use a different underlayment, 
+					see roofUnderlayment.properties and roofUnderlayment.java to control which underlayment should be used.</li>
+				</ol>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Adding new hip ridge </h1>
+			<section>
+				<p>One shingle usually has one unique hip ridge for it.
+				<br>Example: CastleBrook color GreenOil shingle usually will map to a CastleBrook GreenOil hipRidge.<br>
+				One hip ridge also has a few properties, more than shingle</p>
+				<ol>
+					<li>Adding hipRidge is similar to adding new shingles</li>
+					<li>create a new scode for hipridge in roofingSkuID.properties</li>
+					<li>tsShingles.properies > fill properties </li>
+					<img src="images/roofing_addNewHipRidge_1.png">
+					<li>The roofing shingle product should then map this scode for hipRidge</li>
+				</ol>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Adding underlayment</h1>
+			<section>
+				<section class="box">
+				<h2>roofUnderlayment</h2>
+				<p>
+				Each roof style may need specific or default underlayment.properties. 
+				Define new underlayments here.
+				See RoofUnderlayment.java to control which shingles get which underlayment. Use the if else,
+				for special shingles that require certain underlayment.
+				</p>
+				<img src="images/roofing_addNew_under1.png" class="popup fit">
+				</section>
+			</section>
+		</section>
+		
+			
+		
+	</section>
+
+</div>
+</body>
+</html>

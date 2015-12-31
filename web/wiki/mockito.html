@@ -1,0 +1,56 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Mockito");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	<section>
+		<h1>Mockito</h1>
+		<p>A java framework we use to perform Junit testing with.</p>
+		<section>
+			<h1>Highlights</h1>
+			<p>When we test functions that also calls other functions, we can use Mockito to return values to those fields.</p>
+			<ul>
+				<li>Mockito.when(funcCallB(), ("value1", "value2", "value3") );</li>
+				<li>Each time the testing function is called, it will iterate through the 3 values you give it</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Tips</h1>
+			<ul>
+				<li>IMPORTANT NOTE: When you Mockito.mock(Object.class) an object, you CANNOT set properties to that object or decorate it, although it may sound like you can, the mock object will never have properties</li>
+				<li>you cannot call multiple methods chains like this in mockito
+		instead split chain method calls inside private methods into individual calls
+					<ul>
+					<li>ex: if you get this below inside a private method
+<pre>Mockito.when(profile.getModel().getProducts( ProductType.BEAM )).thenReturn(beamProducts);</pre>
+						</li>
+						<li>You want to break it into two when calls
+<pre>Mockito.when(profile.getModel()).thenReturn(deckModel);
+Mockito.when(deckModel.getProducts( ProductType.BEAM)).thenReturn(beamProducts);
+</pre>
+						</li>
+					</ul>
+					</li>
+			</ul>
+		</section>
+		
+	</section>
+
+</div>
+</body>
+</html>

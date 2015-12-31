@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Selections List");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div id="contents">
+		<section>
+			<h1>Selections List</h1>
+			<p>This is where we store our user's selections as a temporary storage while they use our Design-It applications before the <a class="link" href="estimation.html">Estimation process</a>. In short, the selection list is then rolled out towards the end of the application to be calculated to get the total estimated cost.</p>
+			
+			<p>
+			More specifically, Selections List and Material List are not the same. Material list depends on selection list. What gets selected in the selection list, goes through an estimation process which determines x amount of other materials that comes with that selection. Thos x amount of materials are what that gets added to the material list. The material list is what that the guest sees on the screen and the printout.
+			</p>
+			<section>
+				<h1>Important Notes & Methods</h1>
+				<ul>
+					<li>Putting items in the selection list (upon user clicking an item) does not mean you'll see the selections in the material list automatically, you will need to independently add the items (usually during estimation) to the material list using an Add() method</li>
+					<li>Items will still not show up in the material list if the item does not have an estimation file for itself.</li>
+					<li>There is an estimation CPP or Java file for every item because every item is calculated differently</li>
+				</ul>
+			</section>
+			
+		</section>
+	</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "Garage - Selections List";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+		<h1>Garage Selections List</h1>
+		<p>This page provides some documents on selection list in garage</p>
+		
+		<section>
+			<h1>Knowing if selection List has item</h1>
+			<p>selections->pWCG1 <br> using the selections-> pointer you can name the item "pWCG1" and it will return false or true. There may be no setup needed. "pWCG1" has to be a valid name in order for the function call to work</p>
+<pre>
+// means if selection list don't have wainscot for all four wallls
+// without ! means selectionList has
+!selections->pWCG1 && !selections->pWCG2 && !selections->pWCE1 && !selections->pWCE2
+</pre>	
+		</section>
+		
+		<section>
+			<h1>Accessing selection ID's values in INI</h1>
+			<p>You need to set up 3 things</p>
+			<p>First one gets you the value from the INI in a string format. The itemID is what determines what ini and tag to look under</p>
+<pre>
+// get value by item id
+GetStringINI(temp->ServiceDoorID,"DoorType","",szDoorType,sizeof(szDoorType),PathStrings::getWallIni1());
+
+// get value by just tag name inside INI
+GetIntINI(entry, "qty", 0, PathStrings::getHeaderIni());
+</pre>
+			<p>
+			Then convert the string to the correct type</p>
+<pre>
+// convert string to double
+double windowWidth= atof(width);
+</pre>
+			<p>
+			further gets</p>
+<pre>
+// get the Scode sku (headerSkuID holds a string of the tagName inside INI)
+// "sku" is the nodeName under the tagName within the INI
+CUtil::GppsIniValue(headerSkuID, "sku", PathStrings::getGarageSkuIni1(), headerSku, sizeof(headerSku), LOCATION);
+CResMgr::getCurMatList()->Add(headerSku,(long)headerQuantity,0.0,0,"00","WINDOW HEADER","");
+</pre>
+				
+			</ul>
+		</section>
+		
+
+	</section>
+	
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

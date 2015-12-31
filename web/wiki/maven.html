@@ -1,0 +1,190 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Maven");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Maven</h1>
+		<p>
+		Maven is a build automation tool provided by Apache which more does more than just dependency management.
+		</p>
+		<p>
+		Using eclipse, know that eclipse is always building your project in the background when new files are edited or created.
+		But how do you build a program so that it can be deploy and be used by a user or another program? In java, you may want an executable file (artifact) like a JAR, WAR, EAR file when you build. These artifacts contains all the executeable codes from the program so tha the the JRE can read and run it at runtime.
+		</p>
+		<p>
+		What can be confusing is when you want to write a program for another program. Meaning Program B depends on Program A to exist first, before program B can use Program B during its build process, this can be called writing a plugin for Program B. To build a plugin for another program to use it in their build, you want to compile and build program A first. Once the program A is compile/build and you get a (JAR, WAR, EAR) file, you need to install program A plugin build into program B's build process. This is where Maven comes into handy. Maven will build program A and install (creates a jar snapshot) so that program A plugin build can be used in another program's build. So in recap, when Maven builds a project and installs it, a jar snapshot with version number is created which holds the programs executable codes that can be used by another program by targeting that jar snapshot file.
+		</p>
+		<p>
+		Maven is also a tool that takes care of all your package dependencies. Say if you needed a jar package or library called Aspectj. Instead of the old way of importanting a jar into your workspace or project, using the maven pom (exclusive to maven) and maven will download and install the package for you. Bascially, open the pom file in eclipse > Dependencies > Add > search for the package you want. If too many results pop up and you are unsure of the package, google "org.aspectj.lang maven dependency" and click on the very first link, and at the top of the screen, it will tell you what you are looking for, ex: org.aspectj.aspectjtools, so you want to find aspectjtools in the dependency search in eclipse.
+		</p>
+		<p>An java tool and eclipse plugin that allows you to compile, package and deploy java apps to our Nexus server. It also allows you to get files from our Nexus server which contains usually the most recent source codes that was packaged in the last release.</p>
+		<section>
+			<h1>Highlights</h1>
+			<section>
+				<ul>	
+					<li>Overall Maven is a management tool for building java applications, which that allow us to build projects after projects following a similar build pattern or same structure -- meaning every project built with maven will have a similar build structure which makes the learning curve smaller going from project to project for any individual</li>
+					<li>A POM.xml file organizes and keeps track of all our project's dependencies, which means no need for digging and remembering where things are at and what plugins were used in your app -- as it's all in the POM file</li>
+					<li>Maven applications have a specific folder structure</li>
+				</ul>
+				<table class="small" width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td style="background-color:#C1CEFF;">
+						Directory Name
+						</td>
+						<td style="background-color:#C1CEFF;">
+						Purpose
+						</td>
+					</tr>
+					<tr>
+						<td>
+						src/main/java
+						</td>
+						<td>
+						Contains the deliverable Java sourcecode for the project.
+						</td>
+					</tr>
+					<tr>
+						<td>
+						src/main/resources
+						</td>
+						<td>
+						Contains the deliverable resources for the project, such as property files.
+						</td>
+					</tr>
+					<tr>
+						<td>
+						src/main/webapp
+						</td>
+						<td>
+						Web application sources
+						</td>
+					</tr>
+					<tr>
+						<td>
+						src/test/java
+						</td>
+						<td>
+						Contains the testing classes (JUnit or TestNG test cases, for example) for the project.
+						</td>
+					</tr>
+					<tr>
+						<td>
+						src/test/resources
+						</td>
+						<td>
+						Contains resources necessary for testing.
+						</td>
+					</tr>
+				</table>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Associated Files</h1>
+			<ul>	
+				<li><a href="pom.html">POM</a></li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>How dependencies work</h1>
+			<section>
+				<img src="images/maven1.png">
+			</section>
+		</section>
+		
+		<section>
+			<h1>Common Command Lines</h1>
+			<section>
+				<p>
+				These are called Maven Goals  - they define the life cycle order of how Maven builds an app.
+				</p>
+				<ul>	
+					<li>mvn clean package</li>
+					<li>clean - deletes target folder</li>
+					<li>package - will compile all the Java files, run any tests, and package the deliverable code and resources</li>
+					<li> install - will package the project and install in the local repo</li>
+					<li>deploy - will package the project and deploy to repository. This will install your updated jars into the repository</li>
+					<li>site - generates the project's site documentation, this includes running all test and report plugins. This will create a site folder in the target folder with and index.html document to view reports</li>
+					<li>test - compile and run tests
+					</li>
+					<li>Flags - these should not be used while building stage/prod wars
+						<ul>
+							<li>-Dmaven.test.skip=true - this will skip running unit tests
+							</li>
+							<li>-o - this will skip checking for dependencies</li>
+							<li>-P{name} - this will specify a specific profile
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>POM Versioning</h1>
+			<p>
+			For starters you can manually up the pom version per release. For advance users you may want a workflow where the release should be set to a target version. Say the current ver is 0.0.1. But you want the release to be 0.1. From here on when you build each  version will auto up to 0.0.2, 0.0.3, and so on. On the actual release, the version will jump to 0.1.  This can be done using th emaven-versions-plugin.
+			</p>
+			<p>
+			ArtifactID is the name the jar file will be in appended with the version of the pom.
+			</p>
+		</section>
+		
+		<section>
+			<h1>Dependency Conflicts</h1>
+			<section>
+				<p>
+				If you ever have conflicting dependencies, where one app uses a lower version and the other a higher version, maven will be forced to use the version that is closest to the main app. Anyhow, to figure out which version maven will use, you have a few choices, either open the pom in eclipse or dos-promtp in the folder where the pom file is and > cmd > mvn dependency:tree.
+				</p>
+				<img src="images/mavenDependency1.png" width="100%"/>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Building a Target Version</h1>
+			<ul>
+				<li>Fetch/Pull the branch (Say DesignitConfig, and make sure in eclipse the target branch is opened.</li>
+				<li>In window explorer, browse to git folder or where that branch is.</li>
+				<li>Go into that branch/app folder one level</li>
+				<li>Right click on any folder and dos prompt here</li>
+				<li>type: mvn clean install</li>
+				<li>This will generate a target folder and zip files</li>
+				<li>You can either from here unzip zips or copy paste zip to deploy apps</li>
+				<li>Ex: for designit config, we just copy the stage.ua.campus.zip and extract it to our env under c: drive</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Helpful Links</h1>
+			<ul>
+				<li>
+					<a href="http://maven.apache.org/pom.html">
+					http://maven.apache.org/pom.html
+					</a>
+				</li>
+			</ul>
+		</section>
+		
+		
+	</section>
+	
+
+</div>
+</body>
+</html>

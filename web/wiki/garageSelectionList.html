@@ -1,0 +1,85 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "Garage - Selections List";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+		<h1>Garage Selections List</h1>
+		<p>This page provides some documents on selection list in garage</p>
+		
+		<section>
+			<h1>Knowing if selection List has item</h1>
+			<p>selections->pWCG1 <br> using the selections-> pointer you can name the item "pWCG1" and it will return false or true. There may be no setup needed. "pWCG1" has to be a valid name in order for the function call to work</p>
+<pre>
+// means if selection list don't have wainscot for all four wallls
+// without ! means selectionList has
+!selections->pWCG1 && !selections->pWCG2 && !selections->pWCE1 && !selections->pWCE2
+</pre>	
+		</section>
+		
+		<section>
+			<h1>Accessing items' SKU in the current selections list</h1>
+			<p>You need to set up 3 things</p>
+			<p>Torwards at the top of the function, but inside the function, you need to set a char variable "szSTBOTTOMTRIMSku" can be whatever</p>
+<pre>
+void ClassName::Method()
+{
+	char  szSTBottomTrimSku[MAXLEN8] = "";
+</pre>
+			<p>
+			Then call this method below, take note of where "szSTBOTTOMTRIMSSku" is used<br>
+			"WAINSCOT_ST" has to be valid name in order to call the item you want<br>
+			so change this name to a valid item name for what you want to call
+			</p>
+<pre>
+CUtil::GetSku("WAINSCOT_ST", "skuidBottomTrim", PathStrings::getOptionsIni(), "FindSkuFile", szSTBottomTrimSku, LOCATION);
+</pre>
+			<p>
+			then you can use this code below right after the above code, it will return true if the item exist in the current selections list</p>
+<pre>
+if( strcmp(szSTBottomTrimSku, "none") == 0 ){ ... }
+</pre>
+				
+			</ul>
+		</section>
+		
+
+	</section>
+	
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

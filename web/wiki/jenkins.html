@@ -1,0 +1,66 @@
+<html>
+<head>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<title></title>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Jenkins");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Jenkins</h1>
+		<p>An online site that we use to build our applications for testing purposes. Jenkins will run through our <a class="link" href="junit.html">junits</a> and check for findbugs.</p>
+		<section>
+			<h1>Highlights</h1>
+			<p>You have to log in to be able to browse through applications </p>
+			<p>The server will continuously run our test codes and inform us of any errors that may occur when we do code updates. Jenkins is related to <a href="junit.html">Junit</a> in a way. If we know how, we are suppose to run our code changes/app against jenkins after code review</p>
+			
+		</section>
+		
+		<section>
+			<h1>When does jenkins build our app?</h1>
+			<p>
+			If you already have a MCR created in jenkins, and you update the MCR by pushing the MCR to stash or to the repo, jekins will pick this up and auto start building the app and running it throgh findbugs. You can also force build if there isn't a build currently being built. If you dont' already have an MCR register in jenkins, follow the steps below.
+			</p>
+		</section>
+		
+		<section>
+			<h1>Findbugs</h1>
+			<section>
+				<p>
+				During a build in jenkins, jenkins will use its findbug tool to catch for errors in your application and alert you through its online interface.
+				</p>
+				<p> 
+				Though you can build against jenkin's findbug in eclipse, the setup is a little more tricky to do. Instead, you want to push your MCR to stash or to the repo. Then log into jenkins and create a new job and follow the below instructions.
+				</p>
+				<img src="images/jenkin-1.png" width="100%" /><br><br>
+				<img src="images/jenkin-2.png" width="50%" />
+				<br><br>
+				<img src="images/jenkin-3.png"  /><br>
+				<p>Save and apply and then if the queue isn't full, force the app to build now</p>
+				
+			</section>
+		</section>
+		
+		<section>
+			<h1>Delete a maven mcr build<h1>
+			<section>
+				<p>login > Under the mcr > configure > check the delete button (not on the anonymous row) > save > outside of the mcr > on left hand side > delete maven project</p>
+			</section>
+		</section>
+	</section>
+	
+</div>
+</body>
+</html>

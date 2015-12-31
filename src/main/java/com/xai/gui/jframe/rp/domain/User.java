@@ -16,7 +16,12 @@ public class User {
 	}
 	
 	public void removeMon(int index){
-		mons.remove(index);
+		try{
+			mons.remove(index);
+		}catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("remove failed - index " + index + " not exist");
+		}
+		
 	}
 	
 	public Mon get(int id){

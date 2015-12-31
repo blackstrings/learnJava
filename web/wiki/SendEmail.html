@@ -1,0 +1,109 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Send Email");
+				});
+			});
+		});
+	</script>
+</head>
+	
+<body>
+	<div id="contents">
+		<section>
+		
+			<h1>Sending Email</h1>
+			
+			<p>
+			Our apps can send email to us when an error or SLA issue has occurred.
+			</p>
+			
+			<section>
+				<h1>Don't re-invent the wheel</h1>
+				<section>
+					<p>
+					Use DesignitTools package. Pull that in and use the HttpRequests to send email.
+					Do note that designit tools logger may override your app's current logger, so you may not see logs where you use to see them.
+					There are no username and pass required for credential. The only credential is that you hit the correct url and that the parameters are filled in at minimum.
+					</p>
+				</section>
+				
+				<h1>Parameters</h1>
+				<section>
+					<p>prod: http:// www.menards.com/EmailService/error/sendGeneralErrorEmail.html<br>
+					dev:   http://stageapp1-external-designit.menards.net:8080/EmailService/error/sendGeneralErrorEmail.html<br>
+					stage: http://stageapp2-external-designit.menards.net:8080/EmailService/error/sendGeneralErrorEmail.html<br>
+					<br>
+					<br>
+					both dev and stage sends to the same email. to see the dev/stage email visit http://omdc-devimail/webmail
+					user:collector, pass:menards1<br><br>
+					prod emails goes to the designit email
+					</p>
+					
+					
+					<p>
+
+parameters are:<br>
+*note that the : in the following separates the key from the value in the parameter hashmap. These are all Strings.<br>
+
+storeNumber : youHaveToUseAStoreNumberHere<br>
+jreVersion : testJRE<br>
+arch : testx86<br>
+os : testOS<br>
+appName : Siding<br>
+</p>
+				</section>
+			</section>
+			
+			<section>
+				<h1>Setup Send Email for Webapp</h1>
+				<section>
+				
+					<section class="box">
+						<h2>the three basic classes</h2>
+						<p>EmailBA is all you care about touch</p>
+						<img src="images/sendemail-1.png" class="popup fit">
+					</section>
+					
+					<section classThough it was just a slow day 
+My outlook froze on updating.
+="box">
+						<h2>POM Dependency</h2>
+						<img src="images/sendemail-pom.png" class="popup pix100">
+					</section>
+					
+					<section class="box">
+						<h2>Email URL Setup</h2>
+						<p>Currently we keep email url inside the appconfig.properties.
+						When developing 
+						For roofing, you want to create at C:/ these directories 
+						opt/kiosk/Properties/RoofingEstimator/ directories and put roofing stage appConfig.properties in there.
+						If you are running locally roofing on your pc, this is the appconfig roofing will use</p>
+						<img src="images/sendemail-url.png" class="popup fit">
+						<p>We then use aop arg to get the request at runtime.
+						Then call StatsLogging class to get the emailGroup property from request.</p>
+						<img src="images/sendemail-request.png" class="popup fit">
+						<p>This is a more robust way to get the email url for the correct environment instead of hardcoding it</p>
+					</section>
+					
+					<section class="box">
+						<h2>EmailBA usage</h2>
+						<p>Once you get the parameter built (hashmap), just create and pass it to the emailBA. Check out TimerAspect.java for 
+						better example.</p>
+						<img src="images/sendemail-use.png" class="popup fit">
+					</section>
+				
+				</section>
+			</section>
+			
+		</section>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Landscaping");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Landscaping</h1>
+		<p>Landscaping is different from Landscaping Visualizer. It is not the web application and is based on the REAF framework running on Java. The application estimate materials for common types of Landscaping projects, such as patios, walkways, walls, and ground covers through building the parts individually.</p>
+		<section>
+			<h1>Unique features the app supports</h1>
+			<ul>
+				<li>Products are loaded dynamically, including pictures</li>
+				<li>Has 3d view (REAF 3D)</li>
+				<li>Allow user to add different projects leading to complex design.</li>
+			</ul>
+		</section>
+		<section>
+			<h1>Setup</h1>
+			<ul>
+				<li>Eclipse</li>
+				<li>Java</li>
+				<li>Dependencies: REAF, 3D, Common, Landscaping</li>
+				<li>Aveti - where product information is kept</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Editing & Debugging </h1>
+			<p>
+				When editing with eclipse, You should be able to see your code or property changes 
+				when you hit next or back and come back to the same screen. If not, your eclipse is not set to build automatically.
+				In eclipse go to Project > set to "Build Automatically" if not already set.
+			</p>
+		</section>
+		
+		<section>
+			<h1>Startup Guide if Landscaping Has Issue Starting in Debug Mode</h1>
+			<section>
+				<a href="reafAppStartUpIssues.html">See Info</a>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Database</h1>
+			<p>As of September 2013, Landscaping has moved to the MCOM Database.</p>
+			<ul>
+				<li>Menards.com (MCOM)</li>
+				<li>DIC Items (applies to only versions before Sept. 2013)</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Maintenance</h1>
+			<ul>
+				<li><a href="java-screen.html">Updating & Creating Screens</a></li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>How to debug and verify selected products in Eclipse</h1>
+			<img src="images/avetti_1.png" class="pix100 popup"/>
+			
+		</section>
+		
+		<section>
+			<h1>How to work with patterns in the database</h1>
+			<section>
+				<ul>
+					<li>If you are adding new blocks that have new patterns, you'll have to use the <a href="patterneditor.html" target="_blank">Pattern Editor</a> to figure out the pattern(s)</li>
+					<li>Once you get the pattern in pattern editor, save out the pattern to excel file</li>
+					<li>Open up pattern excel file, copy the long text in the grid column</li>
+					<li>You want to put this into the database when you insert the new pattern</li>
+					<li>Open up Heidi, login into DesignIt tables > patterns > right click add new row</li>
+					<li>patternId=latest_incremend, pattern_name=LandPat(nextHighestNum), display_name=nameOfPattern, display_order_nbr=1, grid_hgt=1, default_display_nbr=1, grid_wdt=1, max_y_nbr=null, max_x_nbr=null, image_name=patterns/imageName.png, grid_val=patternEditorGeneratedString, pattern_group_val=Landscape_Estimator, pattern_subgroup_val=readBelow</li>
+					<li>Pattern_subgroup_val: PATIO will cover all sub patios, Wall will cover all freeStanding and retaining walls, FREESTANDING is use when a block is specifically just freestanding, EDGER, etc.</li>
+					<li>You then want to match the patternPosition with the new pattern you creat, this can be tricky but it follows a pattern once you get the hang of it</li>
+				</ul>
+				
+				<br>
+				<h1>Inserting pattern_position for Walls and Patio blocks with no patterns</h1>
+				<p>Always click on show all, in case HeidiSQL or the sql tool isn't showing all rows, as you want to insert new rows from the very last row.</p>
+				<img src="images/landscape-patternTip.png" class="pix100 popup"/>
+				<br><br>
+				
+				<h1>Inserting pattern_position for patios and walls with patterns</h1>
+				<p>Blocks with different sizes will have one insert per size. One block with 3 color variations  but all same size, will only have 1 insert as they are called by composite_model_number.</p>
+				<img src="images/landscape-patternTip3.png" class="pix100 popup"/>
+				
+				
+				<br><br>
+				<h1>Inserting size dimension into three_d_attributes for walls and patios</h1>
+				<img src="images/landscape-patternTip2.png" class="pix100 popup"/>
+				<img src="images/landscape-patternTip4.png" class="pix100 popup" />
+				<br><br>
+				
+				<h1>Quick snapshot of an overal round trip for adding a new block to landscaping</h1>
+				<ul>
+					<li>Pattern (if it has a new pattern or determine reusable pattern)</li>
+					<li>If new pattern is needed, use patternEditor to create to create that new pattern and put that new pattern intot he database</li>
+					<li>Pattern_Position (map block to the existing or new pattern)</li>
+					<li>three_d_attributes (map each product sku with their side textures)</li>
+					<li>pattern images (if new pattern was created, request image ticket for that new pattern 150x150) put that into the media folder</li>
+					<li>texture images (request texture images for the sides of the block for 3D use in the app) patio only need top texture, wall needs top, front(side1), side(side2)</li>
+					<li>Make sure the new product is pushed to UA stage or so that it shows up in avetti</li>
+					<li>Make sure the new product properties in avetti are set: Item size: length, width, height</li>
+					<li>Make sure the new products are set up on preview for pricing information</li>
+					<li>Make sure the new products property for guest orderability in the ua designit database is set to "V" and not "N"</li>
+					<li>After the orderbilit is change, it may take 30 min to an hour for solar to pick up the new data, so you won't see the product show up in landscaing till solar does</li>
+				</ul>
+				<img src="images/landscape-patternTip5.png" class="pix100 popup" />
+			</section>
+		</section>
+		
+		<section>
+			<h1>Product Search Panel</h1>
+			<section>
+				<section class="box">
+					<img src="images/landscapeSearchPanel1.png" class="fit popup"/>
+					<p>
+					How the screen looks
+					</p>
+				</section>
+				<section class="box">
+					<p>This is a panel where products are loaded and then becomes selectable. Such as patio blocks.
+					The tricky thing is that the xml screen file is in the Common pacakge. The idea was that other apps will use these layouts.
+					The hiearchy is productSearchPanel which then calls AppProductSearchScreenController .getProductPanel to decide which 1 of 3 panels to display.
+					</p>
+					<ul>ProductSearchPanel.xml 
+						<li>productSearchPanel.xml</li>
+						<li>productPanelNoLeftBar.xml
+							<ul>
+								<li>Patio blocks</li>
+							</ul>
+						</li>
+						<li>productPanelWithTextArea.xml</li>
+					</ul>
+				</section>
+				<section class="box">
+					<h2>Controllers</h2>
+					<p>
+					Note: the odd setup is the screens.xml (in commmon) use the Landscape class <span style="color:yellow">AppProductSearchScreenController</span>, which extends the Common class 
+					ProductSearchScreenController. If you want to see all the methods, look at the parent class.
+					</p>
+				</section>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Textures - Format and where they are saved</h1>
+			<section>
+				<p>While most product images are called from MCOM server directly, we have to push the 3D texture into the designit database seperately and the pattern image.</p>
+				<ul>
+					<li>Patio, Walkway, Driveway
+						<ul>
+							<li>Patio3D.java</li>
+							<li>3dTextures are saved in textures/patternEditor</li>
+							<li>Patio has 1 texture only, the top view, ex: 179_1323_t.jpg > png can also be used</li>
+						</ul>
+					</li>
+					<li>Walls
+						<ul>
+							<li>Wall3D.java</li>
+							<li>3dTextures are saved in textures/patternEditor</li>
+							<li>Walls have 3 textures, the front (side1), side (side2), and top view, ex: 179_1323_1.jpg, 175_1323_2.jpg, 179_1323_t.jpg > png can also be used</li>
+							<li>The back and bottom are never used</li>
+						</ul>
+					</li>
+					<li>Pattern Image
+						<ul>
+							<li>created by the designers with the grey color and is 150x150, and gets saved under landscapeImags/patterns</li>
+							<li>The pattern image associated with the ? at runtime is runtime generated using pattern editor however</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Pattern Position Database</h1>
+			<p>
+			Walls and Patio uses pattern when getting their 3D displayed and blocks estimated. Although Walls, don't really use patterns, it still does call its pattern position from the patterns database.
+			</p>
+			<p>
+			Concept is that you create a new pattern for the block if the pattern doesn't exist. This is under the patterns table in the database. Every pattern has a pattern_id. Once the pattern is created or you find that a pre-existing pattern exist, you jump to the pattern_position table to map each product with their pattern from the patterns table. This means every color sku will have an input into the pattern position.
+			</p>
+			<p>
+			Once the block pattern_position is set, you are pretty much set and should not have to alter any codes.
+			</p>
+		</section>
+		
+		<section>
+			<h1>SelectionsList</h1>
+			<p>
+			The SelectionsList class is static. LandscapeSelectionsList extends the SelectionsList. When you get an object such as Locking Sand, it is only the initial state to get locking sand ready and does not mean that locking sand will be esitmated. What has to happen next before Locking Sand can be fully estimated, the productDTO of locking sand has to be retrieved using a SearchBO call and put inside LockingSand's product container. The estimtator will run through the whole estimate classes and if there is a product, it will be estimated.
+			<ul>
+				<li>LandscapeSelectionsList.getInstance()
+					<ul>
+						<li>AdditionalOptions
+							<ul>
+								<li>PaverBase</li>
+								<li>LockingSand
+									<ul>
+										<li>ProductDTO</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>Patio</li>
+					</ul>
+				
+				</li>
+			</ul>
+			</p>
+		</section>
+		
+	</section>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("App Estimation Overview");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div id="contents">
+		<section>
+			<h1>App Estimation Overview</h1>
+			<p>Each of our apps uses different estimation process, but similar concepts.</p>
+			
+			<section>
+				<p>Some of our apps uses INI files to store all product information related to that specific app. So our apps pull data directly from the files inside it. However, some of our apps retrieve product information directly from <a href="mcom.html">Menads.com (MCOM)</a>.
+				</p>
+				<p>
+				Due to the old process, we have a scheduled time throughout the year of when we update our INI files for new/old products in our app. For the new process, we "kinda" not have to update our data as those apps are pulling data directly from MCOM. Eventually all our apps will pull data from MCOM.
+				</p>
+			</section>
+			
+			<section>
+				<h1>Selections List in Java Apps</h1>
+				<p>
+				In java apps, we use <a href="selectionlist.html">selections list</a> to create the estimate.
+				</p>
+			</section>
+			
+		</section>
+	</div>
+</body>
+</html>

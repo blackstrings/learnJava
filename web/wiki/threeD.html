@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("ThreeD Java");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	<section>
+		<h1>3D Java</h1>
+		<section>
+		<p>This is an inhouse framework developed by our team years ago. All our JAVA apps currently use it for 3D viewings. Our legacy C++ apps use a different framework for 3D.</p>
+		<p>Once our new webapps roll out, we will be replacing our in-house 3D framework with the new Unity Engine. Three.js framework was initially proposed but Unity will take over.</p>
+		</section>
+		<section>
+			<h1>Hint</h1>
+			<p>If you need to modify or change something on the java app, ask yourself if this is a change on a certain screen, if so start by looking for the correct XML screen, from there it may be the center source to get to all other functions and screens</p>
+		</section>
+	</section>
+</div>
+</body>
+</html>

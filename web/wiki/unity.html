@@ -1,0 +1,210 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Unity");
+				});
+			});
+		});
+	</script>
+</head>
+
+
+<body>
+
+<div id="contents">
+
+	<section>
+	
+		<section>
+			<h1>Unity</h1>
+			<p>Our new 3d engine that drives our future upcoming apps.
+			</p>
+			<section>
+				<h3>Reasons why Unity should be our next 3D engine to run our apps</h3>
+				<ul>
+					<li><a href="http://www.westpierstudio.com/portfolio-item/deck-tools-inspire/" target="_blank">Deck Tools Demo</a></li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Good Practices</h1>
+			<section>
+				<p>Unity is built around components, so it is best to also build your scripts like components. Think modules. One script specifically does one task.
+				Say you have a hero game object with hp, weapon, and inputs. You'd create 3 classes total to handle each of these components, and you put it on the gameobject</p>
+				
+				<p>
+				Also think, interface. Build your classes around interfaces. For example, HP class should implement a Interface IDamagable if HP class is going to handle damaging system.
+				HP class should also implement a 2nd, 3rd interface or more, if it is handling other functionalities that can be grouped as a category.
+				Class A shouldn't have to access directly methods in Class B, but rather access an interface that class B has implemented.
+				</p>
+				
+				
+			</section>
+		</section>
+		
+		<section>
+			<h1>Best Json parsers</h1>
+			<section>
+			<p>From best to least recommended. Json.net in terms of performance is the fastest 3rd party plugin.
+			</p>
+			<ol>
+				<li>Json.net = $25 - now works on webplayer, ios, android
+					<ul>
+						<li>Serialize from jsonStr straight into c# object</li>
+						<li>Deserialize c# object straight into jsonStr</li>
+						<li>Serialize jsonStr into Json object (JObject) just to get values</li>
+						<li>Deserialize JObject into jsonObject</li>
+					</ul>
+				</li>
+				<li>DataContractJsonSerializer - .net library - but more codes to do the conversion</li>
+				<li>SimpleJSON free, simple converter</li>
+				<li>Do not use the newtonsoft.json directly from .net as unity has some issues with it</li>
+			</ol>
+			</section>
+		</section>
+		
+		<section>
+			<h1>IDE</h1>
+			<section>
+				<ul>
+					<li>MonoDevelop - comes with Unity but getting better each year - small studios use it</li>
+					<li>Visual Studio Express or Pro - bigger studios use this but only for Windows</li>
+					<li>Visual Studio Unity Tools - comes with 5.2 only for Windows </li>
+					<li>Xamarin</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Quaternion</h1>
+			<section>
+				<p>
+				Quaternion is a complex set of rotation that allows objects to rotate around in xyz axis. It defines an angle and a direction kinda.
+				<a href="http://stackoverflow.com/questions/20329460/unity3d-slerp-rotation-speed" target="_blank">Example1 of how to use Quternion to look at something</a>
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>What to use: MonoBehaviour vs ScriptableObject vs Normal</h1>
+			<section>
+				<h2>Monobehaviour</h2>
+				<ul>
+					<li>When you want to attach to gameobjects, use unity editor gui, tweak public variables</li>
+					<li>Allows you to utilize Start, Awake, Update, OnMouse...etc</li>
+				</ul>
+				
+				<h2>ScriptableObject</h2>
+				<ul>
+					<li>When you only need to manage data and will need class to be serialize for saving</li>
+					<li>Reason is because Unity uses special serialization unique only to Unity</li>
+					<li>Avoid passing parameters to constructor, best to leave parameters empty, create init method if need to use parameter</li>
+					<li>to create an instance using new</li>
+					<li>instead do MyClass myClass = ScriptableObject.createInstance&lt;MyClass&gt;();</li>
+					<li>Then follow up with myClass.init() if you wish to run a constructor on it, but don't create a true constructor for it</li>
+					<li>ScriptableObject aren't meant to have a constructor the way it is built</li>
+				</ul>
+				
+				<h2>Normal classes</h2>
+				<ul>
+					<li>The class does not need to be saved or serialized</li>
+					<li>The class does not get attached to game objects</li>
+					<li>The class is not referenced in a another class that will be serialized.</li>
+					<li>Good for utility classes</li>
+				</ul>
+			</section>
+			
+		</section>
+		
+		<section>
+			<h1>Network Communication</h1>
+			<section>
+				<p>You have two options, get using WWW alone or post using WWWForm combined with WWW.
+				To use the class, the instantiating class can't be static due to monobehaviour. 
+				So create a class that can last throughout the app if you are doing scene loading.
+				If you do not make a singleton class of this web call, when you load a scene, 
+				it will stop/interrupt the current communication during a load scene.</p>
+				<p>
+				Webplayer and webGL builds using server calls must have a crossdomainpolicy.xml set at the root level of their domain within the server.
+				Helpful links <a href="http://eyemyapps.com/wp/?p=146" target="_blank">Web comm1</a>
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Custom Mesh Build</h1>
+			<section>
+				<ul>
+					<li><a href="http://catlikecoding.com/unity/tutorials/" target="_blank">custom mesh 1 </a></li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>WebGL Builds</h1>
+			<section>
+				<p>This build usually creates 30MB+ package folder due to all the c# conversion to javascript.
+				</p>
+				<ul>
+					<li>You need to have "write" access permission to your programFiles/Unity folder (contact DesktopSupport)
+						<ul>
+							<li>webGL builds some files to this very folder at buildtime</li>
+						</ul>
+					</li>
+					<li>Build Setting Configs
+						<ul>
+							<li>Unity 5.2+ - Build without having anything selected, not even dev mode - auto optimization in place</li>
+							<li>Unity 5.1 - Build with fast build, stripping may be needed</li>
+						</ul>
+					</li>
+					<li>When running webGL builds on your local machine, and unity is making a call to another server (stage, prod) 
+					on another machine, you need to Allow the server to open security for cross-domain-policy, 
+					put this file on the root directory of server
+					</li>
+					<div style="background-color:black; padding:10px; margin:0 15px 0 15px">
+					&lt;?xml version=&quot;1.0&quot;?&gt; <br>
+					&lt;cross-domain-policy&gt; &lt;allow-access-from domain=&quot;*&quot;/&gt; <br>
+					&lt;allow-access-from secure=&quot;false&quot;/&gt; <br>
+					&lt;/cross-domain-policy&gt;
+					</div>
+					<li>The alternative to this is, while making local builds, run your own local server so you don't have to worry about the crossdomainpolicy.xml
+					file.</li>
+					
+					<li>If build breaks, try increasing memory to 512 and enable exceptions to full in public settings</li>
+					
+					<li>Avoid try catch statements, webGL seems to break in the try catch. If you want to use try catch, you'll have to enable debug mode so that web
+					GL builds the exception package to the build, which is only good for debugging purposes.</li>
+					
+					<li>Full Screen Mode <a href="https://ocias.com/blog/full-browser-window-unity-webgl/" target="_blank">tutorial</a></li>
+					<div>
+						
+					</div>
+				</ul>
+				
+				
+			</section>
+		</section>
+		
+		<section>
+			<section>
+				<section class="box">
+					<h2>Dropdowns</h2>
+					<p>Linking dynamic dropdown btns. to map the button to a method and carry over the selection, we use lambda expression, which allows us
+						to create an annonymous expression and pass in arguments</p>
+					<img src="images/unity-dropdownbtn.png" class="fit popup">
+				</section>
+			</section>
+		</section>
+		
+	</section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Reaf App Start Up Issues");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Start Up Guide</h1>
+		<p>
+		Shortcut to quckly diagnosis why a reaf app isn't starting.
+		</p>
+		<section>
+			<h1>Startup Guide if Reaf App (Deck, Landscaping) Has Issue Starting in Debug Mode</h1>
+			<section>
+				<ul>
+					<li>Is the project name in eclipse pacakge explorer named with a capital letter, say "L" so it is "Landscaping" if not refactor the name appropriately</li>
+					<li>Make sure you don't have any dumb break points covered by icons, so clear all break points in eclipse</li>
+					<li>Does the project in eclipse have the right java JRE version 7, you don't want to be running it on java 6 or using the 64bit
+						<ul>
+							<li>right click on project folder under package explorer > properties > java compilier > uncheck Enable Project specific setting</li>
+							<li>apply</li>
+							<li>Debug configurations > JRE tab > Alternate JRE > select jdk.7.0_45 and up > apply</li>
+							<li>if the java is under the program Files(x86) then it is 32bit, the default folder Program Files is 64 bit</li> 
+						</ul>
+					</li>
+					<li>Is the app missing the correct pom version of another dependency, say it's looking for Reaf 1.5, but you only have reaf 1.4 in your .m2</li>
+					<li>If you are missing dependency, use the mvn clean install method to pull each dependency that you need, so your .m2 folder has the correct version</li>
+					<li>Did you do a fetch from upstream on landscaping git repo to get the latest branche? Some times it could be you are not running the latest branch.</li>
+					<li>Are you running the correct latest RC or branch, sometimes you may have not fetch therefore you don't see the latest RC</li>
+					<li>Do you have the correct DesignIt-Config build version in your menards/env/DesignItConfig folder, if no, grab it from release managers <img src="images/designitconfig2.png"></li>
+					<li>Don't foget to change the override store value to 3011 for dev</li>
+					<li>You do not have to grab it from release manager if you know how to run mvn install. Pull the latest designitConfig from eclipse > Dos Prompt in git folder > mvn install > check target folder > scrolldown to ua-deisgnit-campus.zip > inside it copy the designitConfig properties and paste it in your c:menards/env > under correct version folder > maven update landsscape/reafApp in eclipse and red stuff should go away > run as non-webstart and you should be good to go. 
+					<li>Worsecase, you may have to tweak your pom setting if all the above are correct</li>
+					<li>Dependency issues (common) - Maybe reaf isn't up to date in your m2 folder, pull in reaf and do maven update, pull in the develop branch, close the project, run landscaping</li>
+					<li>Last resort, if you have no other mcr saved under that app, you can delete the whole app repo and re-pull the repo in from stash</li>
+				</ul>
+				<ul>
+					<dl>Tips of what kind of issue if you see the following</dl>
+					<li>Lua break point > design config issue or pom issue</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Dependency Issues - quite common when you pull in a new dev and app stops working<h1>
+			<section class="box">
+					<p>It is common that when you pull in dev branch, the app may stop working because it is missing a dependency jar file.
+					simply make sure that dependency is in your m2 folder. if not, do maven update. if not work still, do a manual pull in and mvn clean install.
+					then mvn update the project again and run.</p>
+			
+			</section>
+			<section class="box">
+					<p>make sure the dependency is indeed the correct version and is in your m2</p>
+			
+			</section>
+			
+			<section class="box">
+				<p>If maven update isn't updating your m2 dependecy properly, check the app's pom to see if the repositroy url to nexus is correct,
+				or is using the new link <a href="nexus.html">See nexus</a>.
+			</section>
+		</section>
+		
+		
+		
+		<section>
+			<h1>No products showing?</h1>
+			<section>
+				<p>Check designit it config if the store number is there or <a href="designitConfig.html">see here</a></p>
+			</section>
+		</section>
+	</section>
+		
+	</section>
+
+</div>
+</body>
+</html>

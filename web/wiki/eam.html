@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("EAM");
+				});
+			});
+		});
+	</script>
+</head>
+
+
+<body>
+
+<div id="contents">
+
+	<section>
+	
+		<h1>EAM</h1>
+		
+		<p>
+		A new third party online software that Menards has moved to since 2013, leaving behind the old software tool "Magic". EAM can be accessed through the MyMenards intranet site.
+		</p>
+		
+		<p>
+		This is how all Menards stores from around the U.S. notify and track issues. The idea is, the stores find an issue, they make a EAM ticket and if the issue is Design-It related, we will be responsible to take care of it. Specifically, Primaries of a certain application will be required to check EAM tickets weekly and check them out to work on if the issue is related to their application.
+		</p>
+		
+		<p>
+		EAM is similar to our Redmine workflow, but the difference is that the tickets issued on EAM is directly from the overall Menards stores vs Redmine tickets which are more from the business team here at the General Office.
+		</p>
+		
+		<section>
+			<h1>Setup</h1>
+			<ul>
+				<li>You will need an account to login, this login is separate from all your other accounts</li>
+				<li>Internet Explorer gives you auto login access where other browsers will require team members to login using their menards pass and user</li>
+				<li><a href="http://mymenards.com/MyMenards/login.do" target="_blank">http://mymenards.com/MyMenards/login.do</a></li>
+				<li>Home page is not filter, so filter tickets using IDS-DESIGN</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Technical</h1>
+			<ul>
+				<li>Assign a ticket that is related to you if you are primary</li>
+				<li>Ticket on wait for store reply should change status to Ticket on hold or in process</li>
+				<li>change ticket status to Closed once you complete it and assign it to yourself</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Handling EAM ticket for store</h1>
+			<ul>
+				<li>EAM ticket should have the store number it was from</li>
+				<li>Use filezilla > you'll have to know which pc you want > get the ip address (ex: entrp01.3011.st.menards.net)</li>
+				<li>Make the <a href="phonecall.html" target="_blank"> call</a> to store estimator guy (using myMenards lookup of the store) > target estimator guy (usualy the person repsonsible for estimating in the building material department
+					<ul>
+						<li>Call Estimator first if can get hold of him/her</li>
+						<li>Building manager 2nd</li>
+						<li>Ask if anyone is using the estimator or not</li>
+					</ul>
+				</li>
+					
+				<li>The estimator usually uses the enterprise pc, not the designit kiosks</li>
+				<li>Remote (ex: estimator pc) ENTRP01.3011.st.menards.net > connect < login using (use admin account mrag)</li>
+				</li>use backslash \Administrator, of regular don't work (this is usually used when you get the double user login screen)
+				<li>If on the line, tell them to click yes, if no one on the line, wait 5 seconds and you'll get auto connnected</li>
+				<li>Tell them to stay on the line and wait patiently when you change the fix. after fix, tell them to log in using userForest and see if the issue is fix</li>
+				<li>You will get kicked out of the PC remote when they log in</li>
+				<li>If everything is good, end the call and close the eam ticket</li>
+			</ul>
+		</section>
+		
+	</section>
+	
+
+</div>
+</body>
+</html>

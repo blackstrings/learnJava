@@ -1,0 +1,61 @@
+<html>
+<head>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<title></title>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Template");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<!-- collapse buttons -->
+	<!--
+	<section style="text-align:left; padding-left:300px;">
+		<a class="unCollapseAll" >Uncollapse All</a>
+		<a class="collapseAll" >Collapse All</a>
+	</section>
+	-->
+	<script>
+		//enable common collapser
+		require(['./commonWiki'], function (common) {
+			require(["app/wikiUtils"], function(utils){
+				utils.enableCommonCollapser();
+			});
+		});
+	</script>
+	<section id="start">
+		<h1>Main Title</h1>
+		<p>Main description here
+		</p>
+		
+		
+		<section>
+			<h1>Heading 1</h1>
+			<section>
+				<p>stuff goes here </p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Heading 2</h1>
+			<section>
+				<p>more stuff here</p>
+			</section>
+		</section>
+			
+		
+	</section>
+
+</div>
+</body>
+</html>

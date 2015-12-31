@@ -1,0 +1,203 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Acc");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Accounts</h1>
+		
+		<!-- Render Data -->
+		<section>
+			<table class="acc" width="100%">
+				<script>
+				require(['./commonWiki'], function (common) {
+					require(["jquery", "app/wikiUtils"], function($, utils){
+						$(function() {
+						
+						
+									// header data
+							var headerData = ["service", "user", "pass"];
+							// 2d data
+							// (url, title) These are direct url links, if the file is moved the link will be broken
+							// [name, link, user, pass]
+							var data2D = [
+								[
+								"DIC Wiki",
+								"http://mmdc-wiki/DICEngineeringBook/index.php", 
+								"xlao", 
+								"AwPUe1lyT1boBiMe1XnaRA=="],
+								
+								[
+								"EAM True Sight SLA",
+								"https://md-tsanalyzer/", 
+								"designit", 
+								"QwMfPfJeY1QTbMz2+holrH3V"],
+								
+							
+								[
+								"EAM/SLA",
+								"http://www.mymenards.com/MyMenards/home.do", 
+								"XLAO", 
+								"AwPUe1lyT1boBiMe1XnaRA=="],
+								
+								[
+								"Redmine", 
+								"http://redmine.menards.net/", 
+								"xlao", 
+								"activeDirectory"],
+								
+								[
+								"RQM",
+								"https://omdc-rqmdb:9443/qm/web/console/IDS#action=com.ibm.rqm.planning.home.actionDispatcher&subAction=viewUserHome", 
+								"xlao", 
+								"activeDirectory"],
+								
+								[
+								"Veracode",
+								"https://analysiscenter.veracode.com", 
+								"xlao@menard-inc.com", 
+								"capltr1"],
+								
+								[
+								"Subversion",
+								"#nolink", 
+								"xlao", 
+								"IwK3xqReY1T37Eo/mVWvCi2VW/hYW4pVo5s9SdHjM+WOvQ3eTlnYMw=="],
+								
+								[
+								"Code Collaborator", 
+								"http://codereview.menards.net/ui", 
+								"xlao", 
+								"activeDirectory"],
+								
+								[
+								"Avetti-UA-old", 
+								"ua-designit-mcom-processing.menards.net/main/loginadmin.html", 
+								"xlao", 
+								"3wPrIPpxT1adSSXc0y2AcA=="],
+								
+								[
+								"Avetti-UA-New", 
+								"https://preview-processing-uadesignit.menards.net/mcomAdmin/loginadmin.html", 
+								"xlao", 
+								"3wPrIPpxT1adSSXc0y2AcA=="],
+								
+								[
+								"Lab Test Kiosk", 
+								"#nolink", 
+								"F6 - to start", 
+								"5ALnUS1zT1br0E1mV73TLAdjpfPqIsWNuAB5ee37g4BsfOZ1vvPFEHIw4s2Pbg=="],
+								
+								[
+								"Access Kiosk in the Lab - ex: 10.88.88.64 for 8888#01", 
+								"#nolink", 
+								"user",
+								"+AIeaVpdY1TQ1Csd6mU="],
+								
+								[
+								"Access Kiosk in the Lab - ex: same with 4444, 64=01,65=02,252=flooring",
+								"#nolink", 					
+								"Administrator", 
+								"mQANf69dY1Tdvw+OqGQ="],
+								
+								[
+								"Access Kiosk Enterprise",
+								"#nolink", 					
+								"none", 
+								"GwF+OFteY1QCLDapA7siaOZlkTJFpUhe9Ca/BufEmPApLwM7E8PJamU="],
+								
+								[
+								"JBoss Local Admin",
+								"http://localhost:8080", 					
+								"admin", 
+								"admin"],
+								
+								[
+								"Tcserver",
+								"http://noaddress", 					
+								"kioskuser", 
+								"pABeyElXyVRRGkIMgUw5Bg=="],
+								
+								[
+								"EAI Deployments",
+								"http://noaddress", 					
+								"kiosk", 
+								"kiosk"],
+								
+								[
+								"FiliZilla PCs",
+								"http://noaddress", 					
+								"team", 
+								"LgJYJ8hL/FV1ZN1S138="],
+								
+								[
+								"ActiveDirectory",
+								"http://noaddress", 					
+								"xlao", 
+								"OADevQ/EglYnzajf0TCLtiay"],
+								
+								[
+								"intermisc Prod database",
+								"tndm-intermiscdb.menards.com", 					
+								"xloa", 
+								"tgCLsW7pRFasfB1s6pHUanXn6YU="],
+								
+								[
+								"Menards.com Save/Load App Prod Login",
+								"#none", 					
+								"xlao@menards.net", 
+								"4gBxsSFxT1awzo/gdN58"],
+								
+								[
+								"Menards.com Save/Load App Stage Login",
+								"#workedWhenOnDevPCWithStageSaving", 					
+								"laox@my.uwstout.edu", 
+								"lowltnum"],
+								
+								
+								[
+								"intermiscdb-d.menards.net",
+								"http://intermiscdb-s.menards.net", 					
+								"mc_designit_user", 
+								"7gIsbNgbQVZP1K3XS46DFWU="]
+								
+								
+								
+								
+							];
+						
+							data2D.sort(); // sort alphabetically - looks at first index only
+							//Utils_display2dDataWithLink(data2D, headerData);
+								
+						
+							$("table.acc").html( utils.display2dDataWithLink(data2D, headerData) );
+						});
+					});
+				});
+				</script>
+				
+			</table>
+		</section>
+		
+		<a href="accencrypt.html" target="_blank" style="color:#2B8FFF">#####</a>
+		
+	</section>
+</div>
+</body>
+
+</html>

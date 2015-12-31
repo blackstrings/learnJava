@@ -1,0 +1,83 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("C++");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	<section>
+		<h1>C++</h1>
+		<p>A scripting language we use for some of our legacy apps (Fence, Polebarn, Garage).</p>
+		
+		<section>
+			<h1>Hints</h1>
+			<p> <a href="vs6.html">Visual Studio 6</a> is the IDE we use to code in C++.</p>
+			<p>To build these app we have to manually put together the build. Unlike our Java apps we can use Maven to package our app.</p>
+			<p>
+			The reason we do not use Visual Studio 7 or higher is because our legacy C++ apps is using the ZAPP framework for buttons and 3D rendering, which ZAPP in return does not work so well with the newer versions of Visual Studio.
+			</p>
+		</section>
+		
+		<section>
+			<h1>Major Difference from Java Apps</h1>
+			<ul>
+				<li><a href="javacpp.html" target="_blank">Differences</a></li>
+				<li><a href="environment.html">Environment Pointing</a></li>
+				<li><a href="memcache.html">MemCache</a> is used to cache data for C app data to make it load faster</li>
+				<li>All our c++ apps should be located under C:/mes folder to function properly</li>
+				<li>C++ is a middle level programming language vs the high level language Java</li>
+				<li>You have to manage your own garbage collection</li>
+				<li>Uses pointers</li>
+				<li>Define methods and variables in header files (fileName.h)</li>
+				<li>Implement the methods in .cpp files</li>
+			</ul>
+			
+<pre>
+// ScreenButtons points to GetButtonInfo();
+ScreenButtons->GetButtonInfo
+
+// pointers
+
+</pre>
+		</section>
+		
+		<section>
+			<h1>Tips</h1>
+			<ul>
+				<li>To perform a System.out.print() like in java
+					<ul>
+						<li>MessageBox(NULL, "meow", "Roof", MB_OK);</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		
+		
+		
+		<section>
+			<h1>Help Links</h1>
+			<ul>
+				<li><a href="http://www.cplusplus.com/doc/tutorial/arrays/">
+				CPP tutorials</a></li>
+				<li><a target="_blank" href="http://cslibrary.stanford.edu/102/PointersAndMemory.pdf">Pointers</a></li>
+			</ul>
+		</section>
+		
+	</section>
+
+</div>
+
+</body>
+</html>

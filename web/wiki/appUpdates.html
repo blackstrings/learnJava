@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("AppUpdates");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>App Updates - Latest News</h1>
+		<section>
+			<h1>Test</h1>
+			<section>
+			<p>Apps currently change on a going basis. Here are updates from team members of latest changes for history tracking.</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Roofing</h1>
+			<section id="blog">
+				<div>
+					
+					<h1>Change from sockets to web services <span style="float:right">5/20/2015</span></h1>
+					<p>
+	So after going through several rings of fire (certs and firewall changes), Roofing and Siding estimator applications will work for Local, Dev and Stage.  Hopefully prod too when the time comes. 
+	But there is one catch.  With the new web services for creating estimates, stage and dev (local is probably set to stage for your PCs) can no longer use actual store numbers when using the override technique.  If you try then you will get estimate ID of 0 because the new web service non prod will actively block it.
+	So for dev and stage you will have to use 8888, 5555 or 4444.  If the pricing doesn’t exist please let me know and I’ll inform the proper teams to update the pricing.
+
+					</p>
+				</div>
+			</section>
+		</section>
+		
+	</section>
+	
+
+</div>
+</body>
+</html>

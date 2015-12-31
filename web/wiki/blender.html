@@ -1,0 +1,540 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Blender");
+				});
+			});
+		});
+	</script>
+	<style>
+	
+	</style>
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<section>
+		<h1>Blender</h1>
+		<p>
+		A free 3d Software we can use to create 3d objects.
+		</p>
+		
+		
+		<section>
+		
+			<h1>Object Transform Property Window(s)</h1>
+			<section>
+				<p>Select obj and press N to bring up the transform property window.<br>
+				Also the T key brings up the transform tools window</p>
+			</section>
+			
+			<h1>3D Cursor / crosshair left mouse</h1>
+			<section>
+				<section class="box">
+					<p>The 3d cursor that helps you change the pivot point of an object. works in all mode.</p>
+					<p>Simple test is left mouse click somewhere in 3d > shft + A > add a obj and it will be placed where 3d cursor is.</p>
+					<img src="images/blender3dcursor1.png" class="pix50 popup"/>
+					<img src="images/blender3dcursor2.png" class="pix50 popup"/>
+					
+					<p>Pres N to bring up the transform property window > scroll down to find 3d cursor window </p>
+					<img src="images/blender3dcursor4.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Snapping 3dCursor</h2>
+					<p>
+					Shift + C = to center grid<br>
+					Shift + S > Cursor to grid
+					</p>
+				</section>
+				<section class="box">
+					<h2>Locking with View</h2>
+					<p>
+					Problem with zooming focus camera rate with mouse wheel?
+					Use view property and check the lock to cursor3d to control your zoom rate and view.
+					Press N to bring up the transform panel first then look for the view window.
+					</p>
+					<img src="images/blender3dcursor3.png" class="fit popup"/>
+				</section>
+			</section>
+			
+			
+			
+			<h1>Snapping []</h1>
+			<section>
+				<section class="box">
+					<p>In object mode, use shft+tab to turn on snapping and again to turn off. </p>
+					<p>move object by right click and hold, then use x,y,z to further combine and snap to an axis </p>
+					<img src="images/blenderSnapping1.png" class="fit popup"/>
+				</section>
+			</section>
+			
+			<h1>Create Mesh []</h1>
+			<section>
+				<section class="box">
+					<h2>shortcut create</h2>
+					<p>LMB to place 3d cursor in scene > Shft + A > select mesh</p>
+					<p>Upon creation, you get a little window to define its final properties before the mesh is final</p>
+					<img src="images/blenderCreateMesh1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Slice</h2>
+					<p>edit mode > select edge > T to bring up left panel > loop cut and slide</p>
+				</section>
+			</section>
+			
+			<h1>Transformation [] Reset []</h1>
+			<section>
+				<section class="box">
+					<h2>Move, rotate, scale</h2>
+					<p>In blender the keys are G(grab), R(rotate), S(scale) - then combine with xyz for axis control, and shft for smaller control</p>
+					<p>Shortcut to move in axis is press G, then MMB and drag in a direction</p>
+				</section>
+				<section class="box">
+					<h2>Freeze Transformation</h2>
+					<p>You are done scaling, translating, rotating, now you want object to set object to have zero values for export</p>
+					<p>Zero out object's transformation, Obj shape size, stays the same.</p>
+					<p>In blender, it is known as apply. Object mode > select object > Ctrl + A > choose one or all (one at a time) to reset </p>
+				</section>
+				<section class="box">
+					<h2>Undo Transformation</h2>
+					<p>In blender, it is known as clear. Move, rotate, scale back to orginal values  = Alt + G</p>
+				</section>
+			</section>
+			
+			<h1>Normals []</h1>
+			<section>
+				<section class="box">
+					<h2>Recalculate All Sides</h2>
+					<p>Select obj > edit mode > Face > A for all face selected</p>
+					<p>Ctrl + N = recalculate all normals face outside</p>
+					<p>Ctrl + Shft + N = recalculate all normals face inside</p>
+				</section>
+				<section class="box">
+					<h2>Flip 1 Face</h2>
+					<p>Edit mode > select face > press T > shading/UVs </p>
+					<img src="images/blenderNormals1.png" class="fit popup"/>
+				</section>
+			</section>
+			
+			<h1>Object Info []</h1>
+			<section>
+				<section class="box">
+					<h2>Vertex Count, edge count</h2>
+					<p>Top right hand corner will display the total vertex in scene</p>
+					<p>To view individual object count, select obj > edit mode > and top right hand vertex will update to object only</p>
+				</section>
+			</section>
+			
+			<h1>Scaling 3D Obj</h1>
+			<section>
+				<section class="box">
+					<h2>Basic</h2>
+					<p>Object mode > S</p>
+					<p>use x,y,z to further combine and snap to an axis scale mode. Combine with numpad view 7,1,3 for better view </p>
+				</section>
+				<section class="box">
+					<h2>Reset Scale</h2>
+					<p>After modifying object to scale, Ctrl+A > Scale to reset the size to 1 </p>
+				</section>
+			</section>
+			
+			<!-- camera main -->
+			<h1>Camera []</h1>
+			<section>
+				<section class="box">
+					<h2>Lens modification</h2>
+					<p>Default is 35mm, to change focal length select the camera icon</p>
+					<img src="images/blenderCamera1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Ortho</h2>
+					<p>Select Cam > Camera Len Icon/Context > Select Ortho</p>
+					<img src="images/blenderCamera2.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Set Active Cam</h2>
+					<p>When you have multiple camera, to set new camera as your numpad 0, select cam > Ctrl + 0, then use numpad 0 to toggle in view</p>
+				</section>
+				<section class="box">
+					<h2>Cam Point To Current View</h2>
+					<p>Navigate normally in 3d perspective to where you want the cam to face and see > select camera in outline > Ctrl + Alt + numPad 0</p>
+					<p>or 3D View menu: View -> Align View -> Align Active Camera to View</p>
+				</section>
+				<section class="box">
+					<h2>Cam Point To Object</h2>
+					<p>Add a constaint to an object, more advance, but not efficient</p>
+				</section>
+				
+			</section>
+			
+			<h1>Render []</h1>
+			<section>
+				<section class="box">
+					<p>Align camera to view (ctrl + Alt + 0) then Press F12 to preview render, esc to close. You must manually
+					 save the file doing it this way<p>
+				</section>
+				<section class="box">
+					<p>Render 1 frame vs animation. Clicking the action icon will render animation. 
+					Warning:It will start rendering 250 frames by default. 
+					Esc to stop and again to close render view.
+					Change the start and end to 1 to render just one frame.</p>
+					<img src="images/blenderRender1.png" class="fit popup"/>
+					<p>icon above is usually located at the bottom of each view</p>
+					<img src="images/blenderRender2.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Transparent Background</h2>
+					<p>Make sure you obj has a material. > output set to RGBA > Shading to Transparent </p>
+					<img src="images/blenderRender3.png" class="fit popup"/>
+					<p>or</p>
+					<img src="images/blenderRender4.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>More Smooth Render</h2>
+					<p>Subdivision</p>
+					<p>Ctrl+1 - Ctrl+5 will smooth your object. Ctrl+0 to return to no sub. This will increase smoothness in render.</p>
+				</section>
+				<section class="box">
+					<h2>Transparent Texture</h2>
+					<p>you have to enable Z-transparency and set alpha of the material to '0'</p>
+					<img src="images/blenderRender6.png" class="fit popup"/>
+					<p>then tell blender texture should affect alpha channel</p>
+					<img src="images/blenderRender5.png" class="fit popup"/>
+					
+				</section>
+			</section>
+			
+			<h1>UV Editor []</h1>
+			<section>
+				<section class="box">
+					<p>Where you wrap texture around 3d objects</p>
+					<img src="images/blenderUV1.png" class="fit popup"/>
+					
+					<p>Shft+F10 to jump to UV Editor view. use Shft+F5 to go back to standard view. </p>
+					<p>NOtE: To see any uvs, you must also load an image, Alt + O</p>
+					<p>
+					Select your obj > edit mode > vertex > A for all >
+					 then U for unwrap, or UV > unwarp</p>
+					 <p>If the object doesn't alredy have UV created, press U > choose cube projection or smart projection, then unwrap</p>
+					 <p>If object does not have UV, you will not see a UV tab</p>
+					
+				</section>
+				<section class="box">
+					<h2>Cutting UV</h2>
+					<p>
+					AKA marking Seams. select vertices like a line of vertices (Shft+Alt+LMB on a vertex) >
+						 Ctrl + E (bring up mesh menu) > Edges > and mark seams. This will to tell UV editor 
+						 to cut the seam where selected.
+					</p>
+					<img src="images/blenderUV3.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Unwrapping UV</h2>
+					<p>
+					Ensure you have mark seams to edge using Cutting UV. Have another window with UV Editor open.
+					Select object > Edit mode > A to select all vertices > U (unwrap menu) > unwrap. The UV Editor should show unwrapped UVs.
+					</p>
+					<img src="images/blenderUV2.png" class="fit popup"/>
+					<p>
+					In UV Editor, to move uv islands, select a vertex, Press L to auto slect the island.
+					Use (S)cale, (R)otate, (G)rab, (B)order, (A)select/deselect all to move the islands.
+					</p>
+				</section>
+				<section class="box">
+					<h2>Display Object with Texture</h2>
+					<p>Set shading to texture in view port</p>
+					<img src="images/blenderUV4.png" class="fit popup"/>
+					<p>
+					Base on your lighting, you'll see parts of your model shaded. Add more lights to rough out your shading.
+					To make your texture renderable, you need to add new material to the object.
+					</p>
+					
+				</section>
+				
+			</section>
+			
+			
+			
+			<h1>Context [] Property Panel</h1>
+			<section>
+				<section class="box">
+					<p>When you select an 3d object in view, this panel will dynamically change.</p>
+					<img src="images/blenderContextPanel1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<p>Lighting property can be modify using this panel</p>
+				</section>
+			</section>
+			
+			<!-- Adding Material/Texture -->
+			<h1>Material [] & Texture [] (material/texture)</h1>
+			<section>
+				<section class="box">
+					<h2>Add Material</h2>
+					<p>To see renderable texture, object must have material and texture setup.
+					Select object > go to Material Context > create new material
+					Also create a texture. You can then preview the shader in view, without having to render.
+					After setup, you can render and will see material with texture.
+					</p>
+					<img src="images/blenderTexture1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Add Texture File</h2>
+					<p>To use an image as texture > texture context > set type to Image or Movie
+					 > then load your file
+					</p>
+					<img src="images/blenderTexture3.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Preview of your shader</h2>
+					<p>After you add material and texture you can use the preivew window to see it</p>
+					<img src="images/blenderTexture2.png" class="fit popup"/>
+				</section>
+			</section>
+			
+			<h1>Selection []</h1>
+			<section>
+				<section class="box">
+					<h2>Single/Multi Selection</h2>
+					<p>Right click to select the obj, vertext, edge, face. B + LMB drag to select multiple selecitons. Shft to selected addon selections.</p>
+				</section>
+			</section>
+			
+			
+			<h1>View [] Mode and Panel</h1>
+			<section>
+				<section class="box">
+					<p>Controls what object is lock, selectable, renderable, and can be used for selection</p>
+					<img src="images/blenderView1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Toggle Camera View Mode</h2>
+					<p>Use the num key pads<br>
+					0 = cam/user perspective<br>
+					7 = top ortho<br>
+					1 = side ortho<br>
+					3 = front ortho<br>
+					5 = perspecitve vs ortho</p>
+					. = focus cam back to center of scene if nothing is selected
+					. = focus cam to selected object
+					Ctrl + Shft + MMB + hold = move mouse forward and back to slowly zoom in
+					
+					</p>
+					<p>If zooming becomes too slow, select object in object mode, press . to reset the zoom factor</p>
+					<p>Set the active camera as main = Ctrl + 0 then use numpad 0 to change view</p> 
+					
+				</section>
+				<section class="box">
+					<h2>Toggle wireframe/x-ray</h2>
+					<p>press z or see image</p>
+					<img src="images/blenderView2.png" class="fit popup"/>
+				</section>
+			</section>
+			
+			<h1>Edit Mode</h1>
+			<section>
+				<section class="box">
+					<h2>basic</h2>
+					<p>Move, Scale, Rotate, use the gimbal panel tool at the bottom in boject mode.
+					clicking will show the icon in the screen view.</p>
+					<img src="images/blenderEditMode1.png" class="fit popup"/>
+				</section>
+			</section>
+			
+			<h1>Workspace Layout</h1>
+			<section>
+				<section class="box">
+					<p>Control Right/Left arrow to toggle between different workspace. Ex: UV workspace, default.</p>
+				</section>
+			</section>
+		
+			<h1>Tips</h1>
+			<section>
+			<table width="100%" class="shortcutKeys">
+			
+				<th colspan="2">Universal Edit</th>
+				<tr>
+					<td> Tab </td>
+					<td> Toggle between object and edit mode Then Ctrl + 1,2,3 to toggle between vertex,edge,face</td>
+				</tr>
+				<tr>
+					<td> S </td>
+					<td> Scale + dial numbers + xyz for direction or Shft+xyz for global/local switch</td>
+				</tr>
+				<tr>
+					<td> R </td>
+					<td> Rotate + dial numbers + xyz for direction</td>
+				</tr>
+				<tr>
+					<td> G </td>
+					<td> Grab/Move + dial numbers + xyz for direction</td>
+				</tr>
+				<tr>
+					<td> Alt + S </td>
+					<td> Shrink/Grow with mouse move</td>
+				</tr>
+				<tr>
+					<td> Ctrl + middle mouse click + move </td>
+					<td> pan in/out </td>
+				</tr>
+				<tr>
+					<td> W </td>
+					<td> More Subdivision options</td>
+				</tr>
+				<tr>
+					<td> X </td>
+					<td> Delete Menu</td>
+				</tr>
+				<tr>
+					<td> Alt + Space </td>
+					<td> Orientation</td>
+				</tr>
+				<tr>
+					<td> Ctrl + Space </td>
+					<td> Transform Manipulators</td>
+				</tr>
+				<tr>
+					<td> Cutting Face </td>
+					<td> Be in edit mode > Tools > Add > Loop Cut and Slide</td>
+				</tr>
+				
+				<!-- CAMERA Key-->
+				<th colspan="2">Camera/View Mode</th>
+				<tr>
+					<td> Use number key pad </td>
+					<td> 7 = top, 5 = perspective, 1 and 3 for side veiw</td>
+				</tr>
+				<tr>
+					<td> Ctrl + 0 </td>
+					<td> Set active camera as main, select cam first</td>
+				</tr>
+				<tr>
+					<td> X-Ray </td>
+					<td> Z</td>
+				</tr>
+				
+				
+				
+				<th colspan="2">Vertex</th>
+				<tr>
+					<td> Ctrl + V </td>
+					<td> Vertex Option</td>
+				</tr>
+				<tr>
+					<td> Alt + M </td>
+					<td> With two vertex, face, selected, when press, merges two vertex with options.</td>
+				</tr>
+				<tr>
+					<td> Shft + V </td>
+					<td> Slide vertex.</td>
+				</tr>
+				
+				<th colspan="2">Edges</th>
+				<tr>
+					<td> Ctrl + E </td>
+					<td> Edge Option</td>
+				</tr>
+				
+				
+				<th colspan="2">Faces</th>
+				<tr>
+					<td> Ctrl + F </td>
+					<td> Face Option</td>
+				</tr>
+				<tr>
+					<td> Ctrl+R</td>
+					<td> Create edge loop + mouse scroll or pageUpDown or more edges </td>
+				</tr>
+				<tr>
+					<td> K</td>
+					<td> Knife/Cut faces : use Shft + K for cut selected face only : ctrl to snap center</td>
+				</tr>
+				<tr>
+					<td> E </td>
+					<td> Extrude</td>
+				</tr>
+				<tr>
+					<td> P </td>
+					<td> Extract selected into separate mesh object</td>
+				</tr>
+				<tr>
+					<td> Y </td>
+					<td> Extract selected within mesh</td>
+				</tr>
+				<tr>
+					<td> Ctrl + B </td>
+					<td> Bevel</td>
+				</tr>
+				
+				
+				
+				<th colspan="2">Objects</th>
+				<tr>
+					<td> Shft + A </td>
+					<td> Add new mesh, LMB to place 3d cursor first then press shorcut key to add a mesh to this point</td>
+				</tr>
+				<tr>
+					<td> Ctrl + J </td>
+					<td> Combine meshes, Joins the selected meshes together into one</td>
+				</tr>
+				<tr>
+					<td> Shft + D </td>
+					<td> Duplicate - use G + xyz to snap to axis</td>
+				</tr>
+				<tr>
+					<td> F3 </td>
+					<td> Repeat last action, after you choose, press again to go faster</td>
+				</tr>
+				
+				
+				<th colspan="2">Pivots</th>
+				<tr>
+					<td> Ctrl + Shft + Alt + C </td>
+					<td> Center Pivot > origin to geometry</td>
+				</tr>
+			</table>
+			
+			<br>
+			
+			<table width="100%" class="shortcutKeys">
+				<th colspan="2">Hints</th>
+				<tr>
+					<td width="200px"> Select 3D object in general</td>
+					<td> Use the right click instead of the left click </td>
+				</tr>
+				<tr>
+					<td> Select by Face, vertex, edge</td>
+					<td> First go into edit mode, then look for the 3 icons to switch between the kind of selection.
+					<img src="images/blenderSelections.png">
+					</td>
+				</tr>
+				<tr>
+					<td> Move Rotate Scale</td>
+					<td> 
+					<img src="images/blenderMoveRotateScale.png">
+					</td>
+				</tr>
+				<tr>
+					<td> Close windows</td>
+					<td> 
+					You can try click&Drag the upper right corner of one window and drop over another window. If that doesn't work, hover between two windows and you get an arrow, right click and select "Join Area" and select the window you wish to replace.
+					<img src="images/blenderScreenMerge.png" width="100%" />
+					</td>
+				</tr>
+			</table>
+			</section>
+		</section>
+		
+	</section>
+
+</div>
+</body>
+</html>

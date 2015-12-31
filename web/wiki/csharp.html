@@ -1,0 +1,213 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("C# (CSharp)");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	<section>
+		<h1>CSharp</h1>
+		<p>A scripting language under .NET framework for applications that uses Unity for its 3D. Depending on the type of app or project you want to create, you will choose a starting template. Console app that does not depend on gui sould use the console app template, where apps that depend on user clicking buttons and images should use a gui template to start their application. Each temple is setup to come with the correct libraries for developing .net apps.</p>
+		
+		<section>
+			<h1>C# Compilier and Version</h1>
+			<section>
+			<p>
+			Like java's Compilier, .Net needs a compilier to convert the pretty codes into machine code. C#'s compiler is called CLR (common langauge runtime). The CRL supports compiling codes in a ways that allow interactions with other languages. Note that the CRL does have its own version separate from the .net framework version. To know what CRL version is being run with what .net framework version, <a class="link" href="https://msdn.microsoft.com/en-us/library/8bs2ecf4(v=vs.110).aspx" target="_blank">Click here</a>
+			</p>
+		
+		
+			<p>To enable and wire the c# compiler, so you can compile .net classes on your command line or IDE, on a pc just add the compiler to the system's path. The compilier is csc.exe located under c/windows/microsoft/.net/frameworks/versionXXX/. Copy this and paste it to your systems path to allow you to type csc at the command line to compile classes.
+			</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Assembly</h1>
+			<section>
+				<p>
+				Think of an assembly as an application where multiple classes were combined to make the app or dll file. So a group of class that belong together is an assembly. Usually they are combined into a dll for code reuse. Assemblies also holds meta-data like a maven project that uses a pom file to keep track of versioning and dependencies.
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>.NET version</h1>
+			<section>
+				<ul>
+					<li> To know what .net versions are installed on your machine, use either method below</li>
+					<li>windows explorer c:/windows/microsoft/.net/versionXXX/</li>
+					<li>Type regedit in RUN  > SOFTWARE\Microsoft\NET Framework Setup\NDP </li>
+				</ul>
+				
+			</section>
+		</section>
+		
+		<section>
+			<h1>Basic</h1>
+			<section>
+<pre>
+//AddCalculator.cs
+using System;
+
+namespace MyUtil.Devices
+{
+	public class AddCalculator
+	{
+		public int x {get;set;}	//fields
+		public int y {get;set;}	//fields
+		
+		public AddCalculator(int x, int y){	//constructor
+			this.x = x;
+			this.y = y;
+		}
+		
+		public void add(){
+			string input = Console.ReadLine();
+			Console.WriteLine("You typed: " + input);
+			System.Console.WriteLine(x+y);	//writes to console
+			System.Console.ReadKey();		//pause the app
+		}
+	}
+}
+</pre>			
+<pre>
+//MyDemo.cs
+using System;
+using MyUtil.Devices;
+
+namespace Demos
+{
+	public class MyDemo
+	{
+		public static void Main(){		//main always has to be declared within a class
+			start();
+		}
+		
+		private static void start(){	//make this method static if inside the main class
+			AddCalculator calc = new AddCalculator(5,5);
+			calc.add();
+		}
+	}
+}
+</pre>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Compiling</h1>
+			<section>
+<pre>
+//command line
+csc MyDemo.cs 						//compile creates MyDemo.exe
+csc MyDemo.cs Class1.cs Class2.cs 	//compile creates MyDemo.exe when you have multiple classes
+csc /target:library /out:UtilLib.dll UtilA.cs UtilB.cs	//compile creates UtilLib.dll
+csc /reference:UtilLib.dll MyDemo.cs //compile with library creates MyDemo.exe
+</pre>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Passing Parameter to Base Class (Super constructor)</h1>
+			<section>
+<pre>
+public ClassA(string name) : base(name){
+	...
+|
+</pre>		</section>
+		</section>
+		
+		
+		<section>
+			<h1>Extending class and multiple interface</h1>
+			<p>In c#, you can only extend one class, but can implement multiple interfaces.</p>
+			<section>
+<pre>
+public ClassA : BaseClass, IVhehicle, ITransporter {
+	...
+|
+</pre>		</section>
+		</section>
+		
+		<section>
+			<h1>References</h1>
+			<section>
+				<p>
+				References are basically c# libraries (which usually are seen as .DLL files) or in Java a.k.a. packages. When you include a c# reference library, the concept is similar to the "import" keyword in Java. You include c# references into the current project if you want to use classes from that DLL or library.
+				</p>
+				<p>
+				When you refernce a DLL, all the classes from that DLL is immediately available to use.
+				You can call a class like this: Web.Utils.Email email = new Web.Utils.Email().<br>
+				If you don't want to type the full path, use the "using" keyword. ex: using Web.Utils at the top of the class.
+				The "using" keyword can be setup as a namespace alias as well.
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>using vs import </h1>
+			<section>
+				<p>If you're coming from java, In c# the keyword "using" is nowhere the same as the java "import" keyword. The "using" keyword allows you to use a Type without typing the full namespace path. ex: at the top of the class, Without explicitly defining using Utils.Web, you would have to type Utils.Web.SomeClass every time you want to use the class.
+				</p>
+				<p>The keyword "import" in java is more equivalent to the process of when you include a DLL library to the References folder</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Difference from Java Apps</h1>
+			<section>
+			<ul>
+				<li>You can have multiple main, but you'll need to specify which one to use at compile time, whereas in java, you only have to specifcy during runtime, not compile time as it doesn't care how many main you have</li>
+				<li>if you don't have a csharp editor, you'll have to comment out all the main except the one you are going to use</li>
+				<li>public static Main(string [] args){} -- Uppercase Main and string is lowercase</li>
+				<li>All objects extend the object class, you can do Object obj = 5;</li>
+				<li>The csharp class file name does not have to be the named the same as the declared class, ex: MyObject.cs can change its declared class to public class NewClassName{}</li>
+				<li>standard practice is however, one class per file for organization purposes</li>
+				<li>namespace is like packages in java, but can has differences, standard practice is namespace should be same as folder the class file is in</li>
+				<li>You can declare many classes in one file and multiple namespaces</li>
+				<li>namespace Com.Utils.Web (Pascal Naming)</li>
+				<li>namespace Com.WebObjects.Http (My own design naming convention) choose one or the other to follow</li>
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Creating DLL (Library)</h1>
+			<section>
+			<ul>
+				<li>csc /target:library /out:MyUtils MyClassUtils1.cs MyClassUtils2.cs</li>
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Visual Studio Community 2015</h1>
+			<section>
+				<p><a href="visualstudio.html">VS Community Tools 2015</a></p>
+				<ul>
+					<li>F11 to debug and jump to static Main method and f10 or shift+f11 to jump down codes. </li>
+					<li>a window will only appear if you dubug it line by line otherwise the window will close too fast to see anything.</li>
+					<li>there is no console out window inside the editor, but uses the command window as the console window</li>
+					<li>F5 to debug</li>
+				</ul>
+			</section>
+		</section>
+		
+	</section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("TC Server (Tom Cat)");
+				});
+			});
+		});
+	</script>
+</head>
+
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>TC Server</h1>
+		<p>TC Server is the new server from JBoss. TC stands for tom cat. Wade is the new framework to overwrite all our applications.</p>
+		<section>
+			<h1>Intro to TC Server</h1>
+			
+			<section>
+				<h2>What is a server?</h2>
+				<p>A server is basically a computer machine like your personal PC. 
+				True servers, however are built differently than your everday PC and have more processing power.
+				The purpose of a server, is to manage multiple PCs rather than 1 PC. For every one PC there is a User. If you are the only user 
+				on your PC
+				running under one network, there is no need for a server. When you have a business that starts to have more than 1 PC and use the same network,
+				then you want to start thinking about using a server to manage multiple PC.
+				</p>
+				
+				<p>
+				For example, in a business you have 100 computers and users. You want to control user access permission on confidential data on each department.
+				A server can help manage and give access to certain groups of users.
+				Or when running a website, a server can use load balancers to help distribute incoming visitors evenly on a site that uses multiple servers,
+				so that your site don't end up crashing when you have millions of visitors visiting your site on one server.
+				</p>
+			</section>
+			
+			<section>
+				<h2>Installation</h2>
+				<ul>
+					<li>Email desktop support to install you the following.</li>
+					<li>You may not need to know what version to install. 
+					CHS will pick it for you i believe, though you can specify which version.</li>
+					<li>TcServer (TomCat Server)</li>
+					<li>Apache</li>
+				</ul>
+			</section>
+			
+			<h1>Installation 2 - manual checks<a name="installation2"></a></h1>
+			<section>
+				
+				<ul>
+					<li>To run roofing and siding correctly with products after initial installation</li>
+					<li>The following jar files are needed to be in place in order to make successful SQL connections in Roofing/Siding</li>
+					<img src="images/tcserver-4.png" />
+					<li>ItemDisplayController com.informix.jdbc.IfxDriver log means you don't have the ifxjdbc jar above.
+						connection is trying to call a class which no jar files have.</li>
+				</ul>
+				
+				<h2>Context file and properties are in place</h2>
+				<ul>
+					<li>Context file usually located and named TOMCAT_ROOT/webapp/your-app-name/META-INF directory</li>
+					<li>Context file should be copied over to tomcat server @ TOMCAT_ROOT_INSTANCE/conf/Catalina/localhost/your-app-name.xml</li>
+					<li>For roofing its context is called RoofingEstimator.xml and SidingEstimator.xml for siding</li>
+					<li>copy and paste the context file to C:\app\tcserver\designit\conf\Catalina\localhost\ here </li>
+					<li>copy and paste appConfig.properties to the correct location. the environment.properties defines this path</li>
+					<li>Also look at the tcserver log to see where the file should be located. create folders if necesary insdie designit instance</li>
+				</ul>
+				
+				<h2>Additional Mod to context file</h2>
+				<ul>
+					<li>Siding uses load-time-weaving AOP to log for SLA -- check to make sure you have below in context file</li>
+					<li>therefore to use tomcat's loadtime weaving properly we need this in SidingEstimator.xml</li>
+					<li>
+					&lt;!-- needed for loadTime weaving --&gt; <br>
+					&lt;Loader loaderClass=&quot;org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader&quot;/&gt;
+					</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h2>How to test if tcserver is installed and running</h2>
+				<p>
+					type in localhost:8080 to a browser url and it should take you to the green tcserver welcome page with congratulations!
+				</p>
+				<p><a href="http://stackoverflow.com/questions/14036859/how-to-access-tomcat-from-another-computer">More info</a></p>
+			</section>
+			
+			<section>
+				<h2>Creating a java webapp</h2>
+				<p>
+					To put your java webapp up on a server such as JBoss or TomCat, your app has to be created under a java webapp framework.
+					Chances are, you won't be creating web apps froms scratch, the web app is ready for you, you just have to build it and deploy it to tcserver.
+					Anyhow, Java Web apps can be built using multiple frameworks. One of the two common ones is ANT or SpringSourceTools. SpringSourceTools seems
+					more relavent to most web apps we use.
+				</p>
+			</section>
+			
+			<section>
+				<h2>Instances</h2>
+				<p>
+					TCserver lets you create and run your own tcserver instances so that the main tcserver instance isn't affected in case of a problem.
+					By working with your own local instances, you have more control of which apps gets run on what server instances.
+					This also allows for each instances to have it's own setup configured differently to another instance.
+				</p>
+				</p>
+					at c: > app > tcserver > though not all folders are instances, all your instances will be located here as a folder. For example, "designit".
+					Usually you should be able to create an instance of tcserver, give it a name
+					then start the instance.
+					You can create your own instances and call it whatever, using the shell script but it is not advise 
+					as menards locks down your access to any new instances.
+				</p>
+				<p>
+					Anyhow, as of 10/2015, designit is the only instance we can work with in tcserver.
+					Meaning all webapps' WAR files should be place inside this instance, as it's the only way to run the webapps properly.
+					 When you start the instance using the start stop method above, 
+					 it is then, that you can hit your web app using the correct url at http://localhost:8080/wepAppFolderName/
+				</p>
+			</section>
+			
+			<h1>debugging on tcserver using eclipse remote debug<a name="debug"></a></h1>
+			<section>
+				<p>by default, eclipse cannot remote debug tcserver without setting up a debug port. you need to do the following manually.</p>
+				<ul>
+					<li>wrapper.conf > add -Xdebug</li>
+					<li>wrapper.conf > add -Xrunjdwp:transport=dt_socket,address=YOUR_PORT_CHOICE,server=y,suspend=n</li>
+					<img src="images/tcserver-3.png" width="100%" />
+					<li>Then in eclipse, set your remote debugger to point to the new debug port you have just set up</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Running and Stopping instances</h1>
+			<section>
+				
+				<ul>
+					<li>After installation, you'll have a "app" folder under C: drive</li>
+					<li>Visit app and you will see tcserver</li>
+					<li>Inside tcserver you'll see a few sh (shell), bat (batch), cmd (command) files</li>
+					<li>You should see a designit folder, that is your instance</li>
+					<li><img src="images/tcserver-1.png" width="100%"></li>
+					<li>These are your tools to use in the command line to stop, start your tcserver and create, delete, update new tcserver instances</li>
+					<li>Hint, don't try to create new instances, as we are locked down access to only designit</li>
+				</ul>
+			</section>
+			
+			
+			<section>
+				<h2>Deploying your webapp to your local tcserver instance and running it</h2>
+				<ul>
+					<li>once you have pulled in all the packages into eclipse workspace you are ready to build your WAR file</li>
+					<li>WAR file holds all the contents of your webapp combined, it is like a suitcase you then put it on tcserver</li>
+					<li>This example we will using Roofing</li>
+					<img src="images/tcserver-build.png" width="100%" />
+					<li>After build success, there are a few methods to get your war or wepApp root folder to the tcserver</li>
+					<li>MethodA - copy and paste the war under your app > target > RoofingEstimator.war </li>
+					<li>Paste it to c: > app > tcserver > designit > webapps</li>
+					<li>stop and start your instance</li>
+					<li>back in tcserver > desginit > webapps - the war file will have unzipped itself and crated a folder</li>
+					<li>Inside the folder you will see a structure of 3 folders (META-INF, web, WEB-INF) </li>
+					<li>This is the standard structure of a webapp in tcserver</li>
+					<li>Now to run your app, you just have to know or figure out the correct url to hit the first page</li>
+					<li>Usually for a basic web app, the first page can be hit by typing the app root folder</li>
+					<img src="images/tcserver-runningApp.png" width="100%" />
+					<li>for more setup webapp projects like Roofing, you'll need to call a start servlet (screen1102.do) and pass in get parameters after the ?</li>
+					<li>You can even visit the kioskURL if you want to see examples or if you need shorcuts to hit local host for particular apps</li>
+					<li>before starting the instance, you can change a folder to like xaiartifactidTEST, start the instance, and still browse to the app</li>
+					<li>Just ensure you use the new correct url http://localhost:8080/xaiartifactidTEST/ </li>
+					<li>Keep in mind, if you have a war present, it will repopulate the folder if the folder is missing</li>
+				</ul>
+			</section>
+			
+		</section>
+		
+		
+		<section>
+			<h1>Understanding how to run apache & tcserver pages (on your pc, tablet, remote pc, etc)</h1>
+			<section>
+			
+				<p>Keep in mind apache server and tcserver are two different things or servers. Apache is a web server, and tcserver is an application server.
+				</p>
+				<ul>
+					<h2>Apache pages</h2>
+					<li>http://10.3.44.191/ = will take you to apache index.html landing page. This is your pc's default web hosting port</li>
+					<li>When you don't append any other port, using http and calling your ip address takes you to your pc default web port</li> 
+					<li>http://ids-design-2189.menards.net/ = the same thing as using your ip</li>
+					<li>Note: apache2.2 is installed in both the x86 and the c:app, but the real apache running is in the x86 so you can't modify even the it works page</li>
+					</li>When you target your ip address, it is running the apache index page in c:program x86/apache not your c:app/appache
+					<a href="https://www.apachelounge.com/viewtopic.php?p=25167">More info</a></li>
+					<li>apache's conf documentRoot sets the default landing page</li>
+					<li>When you use localhost alone that is your ipaddress targeting apache pages</li>
+					
+					<h2>TC Server pages</h2>
+					<li>When you append the 8080, localhost:8080, that will now target your tcserver as your tcserver is set to port 8080</li>
+					<li>http://localhost:8080/ takes you to your default tc frabricated server page, and it shows you that tc is up and working</li>
+					<li>https://isids-4139-64b/Garage = tcserver</li>
+					<li>When on tablets, you need to add the .menards.net to your computerName</li>
+					<li>https://isids-4139-64b.menards.net/Garage/index.html - when you want to access remotely someone's local tcserver</li>
+					<li>10.44.333:8080/Garage/index.html - targeting a IP address with port will also get you to hit a tcserver or application server</li>
+					<li>just as long as your local tcserver is set to run on port 8080</li>
+				</ul>
+				<p>For more info how url address work, visit <a href="networking.html"> networking</a></p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>If you want a clean refresh of your entire eclipse workspace use
+			</h1>
+			<ul>
+				<li>Open Command Prompt > cd /app/tcserver > TCStopCleanStart.cmd </li>
+				<li>This will stop the server, perform maven clean, package build on workspace, copy new WAR to webapps folder, start TCServer</li>
+				<li>TCStopCleanStart.cmd web -- will copy just the webapp folder to the server</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Updating The Project When JSP or web changes only</h1>
+			<p>If there are no java changes, you do not need to build the project in Eclipse.</p>
+			<p>If you made jsp, vm, or html changes in the eclipse workspace, you can use this below to copy over to the server without building
+			<ul>
+				<li>Use command promtp > run tcserver (above) > TCStopCleanStart.cmd web </li>
+			</ul>
+			
+			<p>
+				If you made web changes on the actual files on the server, you can just refresh the page, just make sure to copy the server files to the eclipse workspace when you are in your final stages.
+			</p>
+		</section>
+		
+		<section>
+			<h1>Viewing Remote Server logs for Store purposes</h1>
+			<section>
+				<p>
+				Your local tcServer is just an instance for you. A store with issues will be logging to the actual remote menard webapp server.
+				And as you may know, there are two store servers we use nation wide to host roofing and siding and other webapps.
+				App 1 and App2.
+				To see the logs, you'll need to get access to these servers through a connection using
+				either filezilla/putty/winSCP and visit <a href="logs.html#server">logs<a> for details.
+				</p>
+			</section>
+		</section>
+		
+		
+	</section>
+	
+	
+</div>
+</body>
+</html>

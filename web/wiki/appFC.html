@@ -1,0 +1,135 @@
+<html>
+<head>
+
+
+<!-- To use jquery if you host the file on your web server -->
+<!-- <script src="jquery-1.11.2.min.js"></script> -->
+
+<!-- to use jquery if you want to just include it from google or Microsoft -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<!-- fight club - kicks starts everything -->
+<script data-main="js/mainFC" src="js/lib/require.js"></script>
+<!-- <script src="javascript/json/jsonFightClub.js"></script> -->
+<style>
+body {
+	margin:0 300px; background-color:#fff; /* #1C1C1C */
+	font-size:10px;
+} 
+section {}
+div#fcard {overflow:auto;}
+div#fcard aside{width:270px; float:right;}
+
+/* nav */
+div#fcard nav#demoFnav{
+	width:375px;
+	background-color:#000;
+	margin:5px;
+	display:inline-block;
+}
+div#fcard nav#demoFnav ul li{
+	list-style-type: none;
+	color:#5C5C5C;
+	width:94%;
+	margin:5px 5px;
+	padding-top:3px;
+	padding-bottom:6px;
+	padding-left:13px;
+	
+background: rgb(69,72,77); 
+/* Old browsers */
+background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 95%, rgba(40,40,40,1) 98%); 
+/* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,1)), color-stop(95%,rgba(0,0,0,1)), color-stop(98%,rgba(40,40,40,1))); 
+/* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 95%,rgba(40,40,40,1) 98%); 
+/* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 95%,rgba(40,40,40,1) 98%); 
+/* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 95%,rgba(40,40,40,1) 98%); 
+/* IE10+ */
+background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 95%,rgba(40,40,40,1) 98%); 
+/* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#282828',GradientType=0 ); 
+/* IE6-9 */
+
+
+
+}
+.fighterName {font-size:14px; color:#000; }
+.fCard {
+	width:250px; border:thin solid grey; margin:5px;display:inline-block;
+	-moz-user-select: none; 
+	/*cursor:not-allowed; 	makes it even more obvious*/
+	-khtml-user-select: none; 
+	-webkit-user-select: none; 
+	-o-user-select: none; 
+
+	/*gradient effect http://www.colorzilla.com/gradient-editor/ */
+	/*
+	background: #b7deed;
+	background: -moz-linear-gradient(top,  #b7deed 0%, #71ceef 59%, #71ceef 59%, #21b4e2 60%, #b7deed 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b7deed), color-stop(59%,#71ceef), color-stop(59%,#71ceef), color-stop(60%,#21b4e2), color-stop(100%,#b7deed));
+	background: -webkit-linear-gradient(top,  #b7deed 0%,#71ceef 59%,#71ceef 59%,#21b4e2 60%,#b7deed 100%); 
+	background: -o-linear-gradient(top,  #b7deed 0%,#71ceef 59%,#71ceef 59%,#21b4e2 60%,#b7deed 100%); 
+	background: -ms-linear-gradient(top,  #b7deed 0%,#71ceef 59%,#71ceef 59%,#21b4e2 60%,#b7deed 100%); 
+	background: linear-gradient(to bottom,  #b7deed 0%,#71ceef 59%,#71ceef 59%,#21b4e2 60%,#b7deed 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', endColorstr='#b7deed',GradientType=0 );
+	*/
+}
+#fCard aside section {text-align:center; margin:5px 0; background: transparent;}
+#fCard aside .vs {color:green; margin:0 10px; font-size:14px; font-style:italic;}
+#fCard aside header {
+	text-align:right; 
+	color:#000;
+	/* background-color:rgba(256,256,256,.2); */
+	padding:3px;
+}
+#fCard footer {text-align:center; padding:3px; color:#000;}
+
+</style>
+</head>
+
+<body>
+
+		<section>
+			<h1>Test Page</h1>
+			<button class="testButton">test button</button>
+			<script>
+				//testings
+				
+				//how to call module(s) using requirejs, it is best to use require even though you may have loaded the file in the main.js
+				//if the file exist, it won't load another, so it doesn't hure to keep using the require
+				//this ensures that before you make method calls, the module exists
+
+				//if you are calling inline, and the config isn't setup up ,you'll have call the path explicitly
+				require(["app/utils", "app/fightClub"], function(u, f){
+					//call the module methods here if you want to use it temporrary
+					console.log(u.getTodaysDate());
+					//console.log(u.capFirstLetter("cat is the best place to be in ther here"));
+				});
+				
+				
+			</script>
+			
+			<!-- contents -->
+			<div id="fcard">
+				<nav id="demoFnav">
+				</nav>
+				<aside>
+					<span id="demoF_Right"></span>
+				</aside>
+			</div>
+			
+			
+		</section>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,521 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "JSON";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+<!-- To use jquery if you host the file on your web server -->
+<!-- <script src="jquery-1.11.2.min.js"></script> -->
+
+<!-- to use jquery if you want to just include it from google or Microsoft -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<!-- fight club api -->
+<script data-main="js/mainFC" src="javascript/require.js"></script>
+<script src="javascript/json/jsonFightClub.js"></script>
+<style>
+div#fcard {overflow:auto;}
+div#fcard aside{width:270px; float:right;}
+div#fcard nav#demoFnav{
+	width:375px;
+	background-color:#000;
+	margin:5px;
+	display:inline-block;
+}
+div#fcard nav#demoFnav ul li{
+	list-style-type: none;
+	color:#00ffff;
+	width:94%;
+	margin:5px 5px;
+	padding-top:3px;
+	padding-bottom:6px;
+	padding-left:13px;
+	
+background: rgb(69,72,77); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(69,72,77,1) 0%, rgba(0,0,0,1) 95%, rgba(40,40,40,1) 98%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,1)), color-stop(95%,rgba(0,0,0,1)), color-stop(98%,rgba(40,40,40,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 95%,rgba(40,40,40,1) 98%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 95%,rgba(40,40,40,1) 98%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 95%,rgba(40,40,40,1) 98%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(69,72,77,1) 0%,rgba(0,0,0,1) 95%,rgba(40,40,40,1) 98%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#282828',GradientType=0 ); /* IE6-9 */
+
+
+
+}
+.fighterName {font-size:14px; color:#000; }
+.fCard {
+	width:250px; border:thin solid grey; margin:5px;display:inline-block;
+	-moz-user-select: none; 
+	/*cursor:not-allowed; 	makes it even more obvious*/
+	-khtml-user-select: none; 
+	-webkit-user-select: none; 
+	-o-user-select: none; 
+
+	/*gradient effect http://www.colorzilla.com/gradient-editor/ */
+	background: #b7deed; /* Old browsers */
+	background: -moz-linear-gradient(top,  #b7deed 0%, #71ceef 59%, #71ceef 59%, #21b4e2 60%, #b7deed 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b7deed), color-stop(59%,#71ceef), color-stop(59%,#71ceef), color-stop(60%,#21b4e2), color-stop(100%,#b7deed)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #b7deed 0%,#71ceef 59%,#71ceef 59%,#21b4e2 60%,#b7deed 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #b7deed 0%,#71ceef 59%,#71ceef 59%,#21b4e2 60%,#b7deed 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #b7deed 0%,#71ceef 59%,#71ceef 59%,#21b4e2 60%,#b7deed 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #b7deed 0%,#71ceef 59%,#71ceef 59%,#21b4e2 60%,#b7deed 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', endColorstr='#b7deed',GradientType=0 ); /* IE6-9 */
+}
+#fCard aside section {text-align:center; margin:5px 0; background: transparent;}
+#fCard aside .vs {color:green; margin:0 10px; font-size:14px; font-style:italic;}
+#fCard aside header {
+	text-align:right; 
+	color:#000;
+	/* background-color:rgba(256,256,256,.2); */
+	padding:3px;
+}
+#fCard footer {text-align:center; padding:3px; color:#000;}
+
+</style>
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+		<h1>JSON</h1>
+		<p><a href="http://secretgeek.net/json_3mins" style="color:#00ffee">What is JSON?</a>Json is just a string of data. Same as XML. These two formats are used as a temporary data storage before it parses its string properties into objects. JSon however, is basically a quick and better version of using XML to store properties and parse objects' values inside javascript. If you use AJAX it pairs up really good with JSON. With JSON, you can write quick property values like a hashmap and pass it back and forth like an object and can access the properties. In xml, you would have to create an xml file, and then parse the file to get the values. In JSon, you save an extra step.
+		</p>
+		
+		<p>
+		One tip when looking at JSON is to pay attention to the { } and the [] symbols. when you see the [] it is starting an array within {}.
+		</p>
+		
+		<section>
+			<h1>JSON SampleA</h1>
+<pre>
+&lt;script&gt;
+
+	//example A
+	var simpleJSONtext = '{&quot;fName&quot;:&quot;Tom&quot;, &quot;lName&quot;:&quot;Tonal&quot;, &quot;age&quot;:&quot;9&quot;}';
+	var objA = <span style="color:#FFD52D">JSON.parse(<span style="color:black">simpleJSONtext</span>)</span>;
+				
+	//we can use the object like this to get the values
+	document.write(objA.fName + " " + objA.lName);
+	
+&lt;/script&gt;
+</pre>
+
+		<p>exampleA parsed into javascript object would Produces the following: <br/>
+		<span id="demoA" style="color:#FFD52D"></span> </p>
+		
+		<script>
+		// example A
+		function demoA(){
+			var simpleJSONtext = '{"fName":"Tom", "lName":"Tonal", "age":"9"}';
+			var objA = JSON.parse(simpleJSONtext);
+			document.getElementById("demoA").innerHTML = 
+				objA.fName + " " + objA.lName + " " + objA.age;
+		}
+		demoA();
+		
+		</script>
+		
+		</section>
+		
+		
+		<!--------- sample B ------>
+		<section>
+		<h1>JSON sampleB</h1>
+		<p>
+		Notice the that going to next line you need to add the single quotes. In this case, it is good to assign employees into an array. Each worker would be identified by their id 0,1,2, etc.. and then using the id in combination with the description, you can grab a worker's specif value.
+		</p>
+<pre>
+&lt;p id=&quot;demoB&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+
+// JSON text
+var arrayJSON = '{&quot;employees&quot;:[ ' + 
+'{&quot;firstName&quot;:&quot;John&quot;,&quot;lastName&quot;:&quot;Miller&quot;},' + 
+'{&quot;firstName&quot;:&quot;May&quot;,&quot;lastName&quot;:&quot;Samber&quot;},' + 
+'{&quot;firstName&quot;:&quot;Katy&quot;,&quot;lastName&quot;:&quot;Smock&quot;}]}';
+
+//example B
+var objB = <span style="color:#FFD52D">JSON.parse(<span style="color:black">arrayJSON</span>)</span>;
+			
+//loop through objB
+for(var i=0; i&lt;size; i++){ 
+	tempStr = objB.employees[i].firstName + 
+	&quot; &quot; + 
+	objB.employees[i].lastName + 
+	&quot;&lt;br/&gt;&quot;; 
+	
+	str += tempStr; //append string 
+}
+
+document.getElementById("demoB").innerHTML = str;
+			
+&lt;/script&gt;
+</pre>
+		<p>exampleA parsed into javascript object would Produces the following: <br/>
+		<span id="demoB" style="color:#FFD52D"></span> </p>
+
+		<script>
+		function demoB(){
+			var arrayStringJSON = '{"employees":[ ' +
+				'{"firstName":"John","lastName":"Miller"},' +
+				'{"firstName":"May","lastName":"Samber"},' +
+				'{"firstName":"Katy","lastName":"Smock"}]}';
+
+			var objB = JSON.parse(arrayStringJSON);
+			
+			var size = objB.employees.length;
+			var tempStr = "";
+			var str = "";
+			
+			for(var i=0; i<size; i++){
+				tempStr = objB.employees[i].firstName 
+				+ " " 
+				+ objB.employees[i].lastName 
+				+ "<br/>";
+				
+				str += tempStr;	//append string
+			}
+			
+			document.getElementById("demoB").innerHTML = str;
+			
+			//document.getElementById("demo").innerHTML =
+			//obj2.employees[1].firstName + " " + obj2.employees[1].lastName;
+		}
+		demoB();
+
+		</script>
+		
+		</section>
+		
+		
+		<!--------- sample c ------>
+		<section>
+		<h1>JSON sampleC</h1>
+<pre>
+&lt;script&gt;
+
+// this is just psuedo, the real code will have single quotes ' and + signs for going to next line
+{"skills": {
+	"web":[
+		{"name": "html", 
+		 "years": "5"
+		},
+		{"name": "css", 
+		 "years": "3"
+		}],
+	"database":[
+		{"name": "sql", 
+		 "years": "7"
+		}]
+}}
+
+//example C
+var objC = <span style="color:#FFD52D">JSON.parse(<span style="color:black">complexJSONtext</span>)</span>;
+				
+&lt;/script&gt;
+</pre>
+		
+		<p><span id="demoC">Not yet implemented</span></p>
+
+		<script>
+		// example B
+		
+		//tricky because you have to work with 2d arrays [0][0] to get the values
+		function demoC(){
+			var complexJSON = '{"skills": {' +
+				'"web":[' +
+					'{"name": "html", "years": "5"},' +				// array index 0
+					'{"name": "css", "years": "3"}],' +				// array index 1
+				'"material":[' +
+					'{"name": "metal", "weight": "5.33"},' +		// array index 0
+					'{"name": "plastic", "weight": "3.11"}],' +		// array index 1
+				'"database":[' +
+					'{"name": "sql", "years": "7"}] }}';
+			
+			var obj = JSON.parse(complexJSON);
+			
+			var x;
+			var y;
+			var z;
+			var str = "";
+			
+			for(x in obj.skills){
+				//x now represents web, material, database
+				
+				//optional seperator
+				str += "<br>";
+			
+				for(y in obj.skills[x]){
+					//now y represents the array index in web
+					//web[0], web[1] -- the index is what y carries
+					
+					//optional seperator
+					if(y != 0)
+						str += " : ";
+					
+					
+					//tricky because you have to work with 2d arrays [0][0] to get the values
+					//so we want web[0], web[1]
+					for(z in obj.skills[x][y]){
+						//z now carries the category value such as "name", "years", "weight", etc
+						
+						//you could turn z into an obj and then call the variable name for easier reading
+						//var tempObj = obj.skills[x][y];
+						//str += tempObj[z];
+						
+						str += obj.skills[x][y][z];
+						//the first call will look like this in hardcode
+						//obj.skills["web"][0].name
+					}
+					
+					/*
+					for(z in y){
+						str += "k";
+					}
+					*/
+					
+					//str += y;
+					
+					/*
+					for(z in name){
+					str += y.toString() + " "; 
+					+ " : " 
+					//+ obj.skills.web[i].years
+					+ "<br/>";
+					
+					}
+					*/
+					
+				}
+				
+				
+			}
+			
+			document.getElementById("demoC").innerHTML = str + " ---- " + obj.skills["web"][0].name;	// it is important that the id is instantiated first before this script is run
+		}
+		demoC();
+		
+		
+		</script>
+		
+		</section>
+		
+		<section>
+		<h1>JSON sample D - Complex json string</h1>
+		<p><span id="demoD"></span></p>
+		<p><span id="demoD2" style="white-space:pre;"></span></p>
+		
+		<script>
+		function demoD(){
+		
+			var myJson = '{"levels":[{"id":"1","name":"Keysfall","events":[0,0,0,0],"difficulty":1,"monid":[10001,10003]},{"id":"2","name":"Molten Cave","completed":"0","difficulty":3,"monid":[10001,10003]}],"qst":[{"id":1,"name":"The Fallen One","req":[0],"status":0},{"id":2,"name":"Son of Diety","req":[1],"status":0},{"id":3,"name":"Kratos Falls","req":[1,2],"status":0},{"id":4,"name":"The Rolling Storm","req":[2,3],"status":0}],"npc":[{"id":1,"name":"Billy","startWorld":1,"startPosX":33.3,"startPosY":5,"qst":[1,2]},{"id":2,"name":"Mary","startWorld":1,"startPosX":38,"startPosY":5,"qst":[3,4,5]}],"mon":[{"id":1,"type":"crab","elemental":["water","earth"],"name":"Lone Crab","baselvl":1,"baseatk":5,"basedef":10,"parts":[{"prefabId":1002,"type":"body","name":"body","hp":20,"itemId":[101,104,122]},{"prefabId":1002,"type":"leg","name":"Golden Leg","hp":20,"itemId":[101,104,122]}]}]}';
+			
+			var obj = JSON.parse(myJson);
+			
+			//to see a pretty version in the console, (jsonObj, null, spacing)
+			var steve = JSON.stringify(obj, null, 5);
+			//console.log(steve);	//turn on if you want to see it in the console
+		
+			//if you want to see the json in the console just log the variable
+			console.log("" + obj);
+		
+			//test
+			var npcId = 2;
+			var size = obj.npc.length;
+			var result = "";
+			for(var i=0; i<size; i++){
+				if(obj.npc[i].id == 1){
+					result = obj.npc[i].name;
+				}
+			}
+			
+			//the html string for outline
+			var strStart = "<ul>";
+			var strEnd = "</ul>";
+			var strFinal = "";
+			
+			for(var x in obj.qst){
+				var t = obj.qst[x];
+				//console.log(obj.qst[x].name);
+				result += "<li>" + obj.qst[x].name + "</li>";
+			}
+			
+			strFinal = strStart + result + strEnd;
+			
+			//var result = "hello " + obj.npc[0].id;
+			document.getElementById("demoD").innerHTML = strFinal; //obj.npc[0].name; 
+			document.getElementById("demoD2").innerHTML = steve; //obj.npc[0].name; 
+			//console.log(result + "e");
+			//["web"][0].name;
+		}
+		demoD();
+		</script>
+		</section>
+		
+		<section>
+			<h1>Json Sample E - Using Array Literal</h1>
+			<p><span id="demoE"></span></p>
+			<script>
+			function demoE(){
+				
+				//array literal json
+				var myArrayJson = [
+					{
+					"name":"tom mickin",
+					"score":99
+					},
+					{
+					"name":"kim pursue",
+					"score":22
+					}
+				];
+				
+				//debug in console that there's nothing wrong with the array
+				//console.log(myArrayJson);
+				
+				//read out the json
+				readJson(myArrayJson);
+				
+			}
+			function readJson(myArrayJson){
+					var str = "";
+					var i;
+					for(i=0; i<myArrayJson.length; i++){
+						str += myArrayJson[i].name + " : " + myArrayJson[i].score + "<br>";
+					}
+					document.getElementById("demoE").innerHTML = str;
+			}
+			demoE();
+			</script>
+		</section>
+		
+		<section>
+			<h1>Json Sample F - fight card example - Better example checkout <a href="appFC.html">FCardPage</a></h1>
+			
+			<script>
+			//jquery functions has to exist before the elements
+			$(function(){ 						// this is the short version of the doc ready
+					//all jquery methods goes into here
+					
+					//hide method
+					$("#showAll").click(function(){
+						//$(this).hide();
+						//console.log("clicked show all");
+						document.getElementById("demoF_Right").innerHTML = fightClub.print.printAllFcardsToHTMLDiv(fightClub.commonMethods.getJsonObj());
+					});
+					
+					//show method
+					$("#showUpcoming").click(function(){
+						//$("li").show();
+						document.getElementById("demoF_Right").innerHTML =  fightClub.print.printNextMatchFcards(fightClub.commonMethods.getJsonObj());
+						//console.log("clicked show upcoming");
+					});
+				});
+			</script>
+			
+			<!-- contents -->
+			<div id="fcard">
+				<nav id="demoFnav">
+				</nav>
+				<aside>
+					<span id="demoF_Right"></span>
+				</aside>
+			</div>
+			
+			<!-- test div
+			<div class="fcard" style="border:thin solid #000000">
+				<header>Fight Title</header>
+				<section class="main"><p>f1 vs. f2</p></section>
+				<footer>Winner: </footer>
+			</div>
+			-->
+			
+			<script>
+				
+				function demoF(){
+				
+					//test data
+					/*
+					var jsonStr = '{"matches":[{"date":20140130,"startTime":1300,"timezone":"pacific","mainFcardIds":[10001001,10001002,10001003,10001004,10001005],"subFcardIds":[10001001,10001002,10001003,10001004,10001005]},{"date":20140122,"startTime":1300,"timezone":"pacific","mainFcardIds":[10001001,10001002,10001003]}],"fcards":[{"id":10001001,"date":20140130,"fighterIds":[1001,1002],"w":1001},{"id":10001002,"date":20140130,"fighterIds":[1002,1003],"w":1003},{"id":10001003,"date":20140130,"fighterIds":[1001,1003],"w":0}],"peoples":[{"id":1001,"fname":"tom","lname":"krome","w":33,"l":2,"titles":["Toprank","Toprank","AroundTheRank"]},{"id":1002,"fname":"kim","lname":"lop","w":12,"l":2,"titles":["Toprank","Toprank","AroundTheRank"]},{"id":1003,"fname":"sarah","lname":"utto","w":5,"l":3,"titles":["Toprank","Toprank","AroundTheRank"]},{"id":1004,"fname":"Mike","lname":"Monel","w":1,"l":1,"titles":[]}]}';
+					
+					var obj = JSON.parse(jsonStr);
+					*/
+					
+					//console testing
+					//var objStr = JSON.stringify(obj, null, 5);
+					//console.log(objStr);	//turn on if you want to see the pretty json in the console
+					//fightClub.print.printJsonObjToConsole();
+					
+					//printFcard(10001001, obj);
+				
+					//print all fcards by default
+					document.getElementById("demoF_Right").innerHTML = fightClub.print.printAllFcardsToHTMLDiv(fightClub.commonMethods.getJsonObj());
+					
+					//left nav buttons
+					var navArrayList = [
+						{
+							"linkName":"Show All", 
+							"id":"showAll"
+						}, 
+						{
+							"linkName":"Show Upcoming",
+							"id":"showUpcoming"
+						}
+					];
+					document.getElementById("demoFnav").innerHTML = fightClub.print.printLeftNav(navArrayList);
+					
+					var fcard = new FCard(10001002, fightClub.commonMethods.getJsonObj());
+					//fcard.init(10001002, fightClub.commonMethods.getJsonObj());
+					//console.log(fcard.getFCardId());
+					//console.log(fcard.getFighterIds().toString());
+					//console.log(fcard.callPrivateMethod());
+					//console.log(fcard.getFighterNames().toString());
+					var test;
+				}
+				demoF();
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</script>
+		</section>
+		
+	</section>
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

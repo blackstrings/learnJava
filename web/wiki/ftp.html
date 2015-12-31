@@ -1,0 +1,122 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("FTP");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>FTP to the kiosk PCs in the Lab (Cant connect to Beast machine anymore however)</h1>
+		<p>If you ever want to transfer data, images, files from and between the lab PC and your PC, use FTP on your PC to connect to the lab PC. You can't do it vice-versa. For the beast machine, just use the T drive as Beast has access to that drive.
+		</p>
+		
+		<section>
+			<h1>Steps</h1>
+			<section>
+			<ul>
+				<li>open a Window Explorer window > Type in URL below to connect to the 8888 01 PC</li>
+				<li>\\10.88.88.64\c$  -- for 8888 01</li>
+				<li>or use the DNS name</li>
+				<li>desgnit.menards.8888.64</li>
+				<li>user and pass are <a href="acc.html">Here</a></li>
+				<li>Sometimes you will need to use one or the other logins depending one which machine you connect to</li>
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Check if a PC is up and running anywhere</h1>
+			<section>
+			<ul>
+				<li>Windows CMD > ping -t dsgnit01.storeNumber.st.menards.net</li>
+				<li>If there's ping then the PC is up and running, if not, then it is off</li>
+				<li>ex: ping -t dsgnit01.3011.st.menards.net</li>
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Connect to a PC running anywhere external - (this is not screen control) - get the ip using(nslookup)</h1>
+			<section>
+			<ul>
+				<li>First check if the PC has ping using above method
+				<li>Windows CMD > nslookup dsgnit01.storeNumber.st.menards.net : use st for external and leave out for internal</li>
+				<li>4444 are consider external, 8888 internal</li>
+				<li>get the address or IP and use that in the windows explorer</li>
+				<li>ex: \\10.11.11.l111\c$</li>
+				<li>Put in proper user and pass when prompt</li>
+			</ul>
+			<br>
+			<ul>
+				<li>flooring kiosk</li>
+				<li>nslookup ucflcw01.4444.st.menards.net</li>
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Connect directly and control PC screen - User sees your every move</h1>
+			<section>
+			<ul>
+				<li>You must first signed a registration doc form before you can have proper athenthication</li>
+				<li>Must call and make communication first to the client that you will be remoting into the PC</li>
+				<li>No communication = no remoting > Terminate connection if you are leaving for any reason or done fixing issue</li>
+				<li>start > all programs > symantec > pcA quick connect</li>
+				<li>type IP or DNS ex: dsgnit01.4444.st.menards.net</li>
+				<li>connect > if popup click yes > trust always</li>
+				<li>there are two types of login</li>
+				<li>Store login: user:menardsdesignit - pass:S0FuNNy#1</li>
+				<li>campus login: use windows credential - user: menards\username</li>
+				<li>will take 30-50 secons to connect if no one is there to click yes on their end</li>
+				<li>The client has the ability to deny on their end, if not response auto connection will take place</li>
+				<li>After connecting, you must use notepad (something similar) and post the following message</li>
+				<li>Hello, this is Xai Lao from the IS Department team and I have current control of your PC</li>
+				<li>Log your access and keep it for min 6 months</li>
+				<h2>Usage once connected</h2>
+				<li><img src="images/ftp-pcanywhere.png" /></li>
+				<li>To end > end session (on left hand side)</li>
+				<li>F6 to bring up program manager</li>
+				<li>To use alt-tab or ctrl-alt-del you need to have your scroll lock on</li>
+				<li>use chat window for informing client</li>
+				
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Connect to Beast</h1>
+			<section>
+				<p>Use the T Drive, cannot have access to it anymore as pass and user changed</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Get screen capture or file of the kiosk PC in lab</h1>
+			<section>
+				<ul>
+					<li>Print/Screen on windows will copy the screen to the clipboard, you need to paste using paint program to save it.</li>
+					<li>F6 to and put in pass to Open windows explorer and create a new bitmap file in a folder (logs is a good place)</li>
+					<li>open the bitmap file and paste ctl + V and save the file</li>
+					<li>Back at your PC, FTP C dollar sign into that pc and grab that image</li>
+				</ul>
+			</section>
+		</section>
+		
+	</section>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Command Line");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	<section>
+		<h1>Command Line</h1>
+		<p>The admin control line that can pretty much change anything in your system.</p>
+		
+		<section>
+		<h1>Start the command</h1>
+			<section>
+				<p>
+				Windows + R > cmd
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Shortcut Keys</h1>
+			<table class="keys" width="100%"></table>
+			<script>
+				require(['./commonWiki'], function (common) {
+					require(["jquery", "app/wikiUtils"], function($, utils){
+						$(function(){
+							// header data
+							var headerData = ["shorcut", "command"];
+							// 2d data
+							// (url, title) These are direct url links, if the file is moved the link will be broken
+							// [name, link, user, pass]
+							var data2D = [
+								[
+								"help",
+								"#a", 
+								"help"],
+								
+								[
+								"change directory",
+								"#a", 
+								"chdir"],
+								
+								[
+								"force shutdown",
+								"#a", 
+								"shutdown -s -t 0"],
+								
+								];
+								$("table.keys").html( utils.display2dDataWithLink(data2D, headerData) );
+						});
+					});
+				});
+			</script>
+			
+		</section>
+		
+		<section>
+			<h1>Force Quit Any Task</h1>
+			<section>
+				<img src="images/commandline1.png" />
+			</section>
+		</section>
+		
+		
+	</section>
+
+</div>
+</body>
+</html>

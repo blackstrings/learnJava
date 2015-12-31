@@ -1,0 +1,104 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "Avetti";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+		<h1>Avetti</h1>
+		<p>An online database we use mostly for viewing product details</p>
+		
+		<section>
+			<h1>Highlights</h1>
+			<p>
+			To get access, provide your computer name and IP and ask team lead to forward your request to Internet Team for the stage preview environment. There are 4 environments total, but stage preveiw is where you will mostly be on. If you find yourself you need access to all 4 environments, just ask for those environments.
+			</p>
+			
+			<p>
+			Your usernameand pass will be sent to you via email and once you log in, you will be prompt to modify your default password.
+			</p>
+		</section>
+		
+		<section>
+			<h1>Link to Environments</h1>
+			<script>
+			var headers = ["environments", "user", "pass" ];
+			var data2d = [
+				[
+				"stage-preview",
+				"https://stagepreview-internal-mcom.menards.net/staging/loginadmin.html",
+				"xlao",
+				"letters1"
+				],
+				
+				[
+				"stage-main",
+				"https://stageprocessing-mcom.menards.net/main/loginadmin.html",
+				"no-access-yet",
+				"no-pass-yet"
+				],
+				
+				[
+				"prod",
+				"https://preview.menards.com/staging/loginadmin.html",
+				"no-access-yet",
+				"no-pass-yet"
+				],
+				
+				[
+				"dev-preview",
+				"https://devpreview-external-mcom.menards.net/staging/loginadmin.html",
+				"no-access-yet",
+				"no-pass-yet"
+				]
+			];
+			
+			</script>
+			
+			<table class="acc" width="100%">
+				<script>
+					data2d.sort();
+					Utils_display2dDataWithLink(data2d, headers);
+				</script>
+			</table>
+			
+		</section>
+		
+	</section>
+	
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

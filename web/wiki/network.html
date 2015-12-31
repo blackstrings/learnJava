@@ -1,0 +1,96 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("TC Server (Tom Cat)");
+				});
+			});
+		});
+	</script>
+</head>
+
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>TC Server - Wade</h1>
+		<p>TC Server is the new server from JBoss. TC stands for tom cat. Wade is the new framework to overwrite all our applications.</p>
+		<section>
+			<h1>Networking Intro</h1>
+			
+			<section>
+				<h2>Networking Basics</h2>
+				<p>
+				Allowing multiple computers to communicate back and forth under the same network. One way computers communicate between each other is through a network,
+				in which assigns a computer a unique IP address. It is how PC1 can locate and communicate with PC2.
+				</p>
+			</section>
+		
+		</section>
+		
+		<section>
+			<h1>Terms</h1>
+			<section>
+				<h2>IP</h2>
+				<section>
+					<ul>
+						<li>IP = Internet Protocol = example: 192.168.1.1</li>
+						<li>192 is an address</li>
+						<li>168 is a sub address under 192</li>
+						<li>and so on are sub addresses</li>
+						<li>You can find your ip address in command window, ipconfig</li>
+					</ul>
+				</section>
+				
+				<h2>Ports</h2>
+				<section>
+					<p>
+					Using ports is just a way to organize the different types of communication between computers.
+					</p>
+					<ul>
+						<li>the common port for web is 8080</li>
+						<li>Some ports are restricted for only certain usage</li>
+						<li><a href="http://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/">More about ports</a></li>
+					</ul>
+				</section>
+			
+			</section>
+				<h1>Accessing your web ports</h1>
+			<section>
+				<ul>
+					<h2>Apache pages</h2>
+					<li>localhost = your ip address</li>
+					<li>ex: 10.3.44.191 = same as typing localhost</li>
+					<li>http://10.3.44.191/ = will take you to apache index.html landing page. This is your pc's default web hosting port, ofcourse you can change
+					your default landing page</li>
+					<li>When you don't append any other port, using http and calling your ip address takes you to your pc default web port</li> 
+					<li>http://ids-design-2189.menards.net/ = the same thing as using your ip</li>
+					<li>Note: apache2.2 is installed in both the x86 and the c:app, but the real apache running is in the x86 so you can't modify even the it works page</li>
+					</li>When you target your ip address, it is running the apache index page in c:program x86/apache not your c:app/appache
+					<a href="https://www.apachelounge.com/viewtopic.php?p=25167">More info</a></li>
+					<li>apache's conf documentRoot sets the default landing page</li>
+					<li>When you use localhost alone that is your ipaddress targeting apache pages</li>
+					
+					<h2>TC Server pages</h2>
+					<li>When you append the port 8080, localhost:8080, that will now target your tcserver as your tcserver is set to port 8080</li>
+					<li>http://localhost:8080/ takes you to your default tc frabricated server page, and it shows you that tc is up and working</li>
+					<li>https://isids-4139-64b/Garge = tcserver</li>
+					<li>When on tablets, you need to add the .menards.net to your computerName</li>
+					<li>https://isids-4139-64b.menards.net/Garage/index.html - when you want to access remotely someone's local tcserver</li>
+				</ul>
+			</section>
+		
+		
+	</section>
+	
+	
+</div>
+</body>
+</html>

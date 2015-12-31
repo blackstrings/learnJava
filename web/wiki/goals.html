@@ -1,0 +1,66 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "Goals";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+		<h1>Goals</h1>
+		<p>Goals are simply something we set and look forward to meeting each year. We each will have individual goals set for ourselves. </p>
+		
+		<section>
+			<h1>Test-Driven Developemtn (TDD)</h1>
+			<ul>
+				<li>The idea in TDD is to implement code that makes the product work and no more. </li>
+				<li>Also Test-driven development is a development technique where you must first write a test that fails before you write new functional code.</li>
+				<li>Take small steps</li>
+				<li>TDD Rhythm
+					<ol>
+						<li>1. Quickly add a test</li>
+						<li>2. Run all tests and see the new one fail</li>
+						<li>3. Make a little change</li>
+						<li>4. Run all tests and see them all succeed</li>
+						<li>5. Refactor to remove duplication</li>
+					</ol>
+				</li>
+			</ul>
+		</section>
+		
+	</section>
+	
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

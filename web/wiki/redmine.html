@@ -1,0 +1,356 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Redmine");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Redmine</h1>
+		<p>A third-party online site we use to track issues and work on as our primary everyday tasks. It helps us manage, maintain, and track down old, new, and current tickets. It is a process that organizes our tickets from the Menard business team -- they make the tickets, we work on it..</p>
+		
+		<p>
+		This is how we monitor our time spent working here at Menards in the IS department. Aside from clocking in the moment we get into our work office, we also have to clock/time stamp each ticket that we work on. If we are helping a team mate or working
+		</p>
+		<section>
+			<h1>Setup</h1>
+			<ul>
+				<li>You'll need a login to access the Menard Remine.</li>
+				<li><a href="http://redmine.menards.net/login" target="_blank">
+				http://redmine.menards.net/login
+				</a>
+				</li>
+				
+			</ul>
+		</section>
+		
+		<section>
+			<h1>CHEAT SHEET for learning the Whole Redmine Process for Newbies</h1>
+			<section>
+			<form>
+			
+			<!---------------------------------------------------------------->
+			<!--  DISCOVERY	 -->
+			<!---------------------------------------------------------------->
+			<h2>Discovery (find out how much hours it may take to complete this MCR)</h2>
+			<h3>Eclipse</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Talk to a primary or secondary to know where to begin if not sure<br>
+			<input type="radio" name="test">Download from SVN the staging branch of the app<br>
+			<input type="radio" name="test">Try to figure out what is needed to make these changes<br>
+			<input type="radio" name="test">Get a rough estimate and send the ticket back to the Team lead with description if any and estimated hour<br>
+			
+			
+			<!---------------------------------------------------------------->
+			<!--  BUSINESS DESIGN	 -->
+			<!---------------------------------------------------------------->
+			<h2>Business Design (Create the Business Design document)</h2>
+			<h3>Microsoft Word</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Usually you can find the info and requirements in the Redmine Ticket to put on the BD<br>
+				<ul>
+					<li>Get the BD template named something like "Design#####-example.doc" and modify it</li>
+					<li>The title on doc is same as Redmine ticket</li>
+					<li>Login into Redmine > get to the ticket > look at description </li>
+					<li>Copy & Paste description to the business requirement section</li>
+					<li>Add a screen shots of current and future if applicable</li>
+					<li>Delete stuff from the template that doesn't apply</li>
+					<li>Save BD as "DICDesignMCR_NUMBER_GOES_HERE.doc"</li>
+					<li>Save > attach BD doc to the redmine ticket and send it back to team lead under the same status Business Design</li>
+				</ul>
+			
+			
+			<p>There are stages before the Test Design, but newbies usually will start here at this stage</p>
+			
+			<!---------------------------------------------------------------->
+			<!-- TEST DESIGN -->
+			<!---------------------------------------------------------------->
+			<h2>Test Design (creating the test scripts, cases, suite in RQM)</h2>
+			<h3>Redmine</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Login & View Assigned <a href="redmine.html">Redmine</a> Ticket, you will have one when you start your first redmine ticket<br>
+			<input type="radio" name="test">Record Start Time for this MCR into excel (optional)<br>
+			<input type="radio" name="test">Check category section to know what app you will be working in<br>
+			<input type="radio" name="test">Open/Read attached <a href="businessdesign.html">Business Design</a> (BD) word doc<br>
+			<input type="radio" name="test">Understand what you will need to fix in the BD (Business description on page 2)<br>
+				<ul>
+					<li>Sometimes the description may or may not be detailed enough to make the responsible programmer (you) understand what the business team whants you to fix</li>
+					<li>If so, ask for help by other team members or teamlead, or worse case, you'll have to send back the MCR to the business team to further correct the description</li>
+				</ul>
+
+			<br>
+			
+			<h3>Eclipse || Visual Studio 6 || Heidi || ETC (this step can be skipped)</h3><br><!-- Jump Software -->
+			<input type="radio" name="test">If needed, prepare to do some simple application test if possible to understand the BD and causes<br>
+			<input type="radio" name="test">Update the app workspace to the latest staging using SVN before testing<br>
+			<input type="radio" name="test">Perform necessary test untill you understand what the BD is asking you to fix<br>
+			
+			<br>
+			
+			<h3>RQM (once you get how to test the design)</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Create Test Script<br>
+				<ul>
+					<li>Login into <a href="rqm.html">RQM</a> > Construction > Create > Test Script </li>
+					<li>Name = Redmine MCR "subject" value</li>
+					<li>Owner = Primary/Secondary</li>
+					<li>Team Area = IDS - Design IT Team</li>
+					<li>Save</li>
+				</ul>
+			
+			<input type="radio" name="test">Open Application at your computer with the right IDE (Depends on business design, you may or may not do this)<br>
+			<input type="radio" name="test">Add the necessary Steps to run through the app to cover the business design requirements <br>
+				<ul>
+					<li>To know requirements to cover, you have to look carefully at what the business design wants</li>
+					<li>With experience, you'll start to know what to test for</li>
+					<li>Every action you click on the app screen should be recorded as a step in RQM as a step</li>
+					<li>Expected results should be enter when you expect something that will full fill what is described in the BD
+				</ul>
+				
+			<input type="radio" name="test">Create test case, test suite<br>
+				<ul>
+					<li>Test script: same name as MCR </li>
+					<li>Team Area: IDS Design-It Team</li>
+					<li>Owner: primary</li>
+					<li>IS-System: Design-it</li>
+					<li>IS-System-Application: Design-it Deck</li>
+					<li>save</li>
+					<li></li>
+					<li>Test case: same name as test script</li>
+					<li>Team Area: IDS Design-It Team</li>
+					<li>Owner: primary</li>
+					<li>IS-System: Design-it</li>
+					<li>IS-System-Application: Design-it Deck</li>
+					<li>save</li>
+					<li></li>
+					<li>Create Test Suite</li>
+					<li>Name: MCR-[MCR#] ex: MCR-129949</li>
+					<li>Team area: IDS Design-It Team</li>
+					<li>Owner: primary person</li>
+					<li>IS-system: DesignIt</li>
+					<li>IS-System-Application: Internal</li>
+					<li>save</li>
+					
+				</ul>
+			<input type="radio" name="test">Assign test script to test case, test case to test suite (search by id for faster locating)<br>
+				
+			
+			<br>
+			
+			<h3>Redmine</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Edit MCR and update to Test Design<br>
+				<ul>
+					<li>Assign to: unchanged (should still be your name)</li>
+					<li>Status: Test Design to Tech Design</li>
+					<li>RQM: Name of the test suite created in RQM or ex: MCR-124494</li>
+					<li>Description > edit > copy/paste Test Suite URL into bottom of description</li>
+					<li>Log Time -- Activity: Design</li>
+					<li>Spent Time: example for 1hr 30 min put 1.5</li>
+					<li>Comment: Test Design</li>
+					<li>Submit</li>
+				</ul>
+			<br>
+			
+			<!---------------------------------------------------------------->
+			<!-- TECH DESIGN -->
+			<!---------------------------------------------------------------->
+			<h2>Tech Design (Modify BD word doc to instruct what you will be doing)</h2>
+			<h3>Business Design (BD)</h3> <!-- Jump Software -->
+			
+			<input type="radio" name="test">Open and modify BD<br>
+				<ul>
+					<li>Record Start Time in excel (optional)</li>
+					<li>Open and Save As to new file name: insert "Tech" into the file name</li>
+					<li>ex: DICDesign122834.docx >> DICTechDesign122834.docx</li>
+					<li>Make sure you put the instructions in the correct section within the document</li>
+					<li>Ask for help if not sure which section to put in</li>
+					<li>Basically these specific instructions should allow anyone to make the changes for you if you are absent for work</li>
+					<li>Copy and paste code as needed if the code section is small enough</li>
+					<li>Highlight Old from New changes within the codes if pasting codes</li>
+					<li>If complicated changes are going to be made, ask mentor or teamlead for help on how to write these instructions</li>
+					<li>Put n/a under DIC Engineering Book section if not adding any new functions</li>
+					<li>When done, Save</li>
+				</ul>
+			
+			<h3>Redmine</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Edit MCR and update to Test Design Review<br>
+				<ul>
+					<li>Assign to: Primary/Secondary</li>
+					<li>Attach the modify tech BD</li>
+					<li>If there is SQL data changed, attached that template too</li>
+					<li>Log Time</li>
+					<li>Activity: Design</li>
+					<li>Comment: Tech Design</li>
+					<li>Submit</li>
+					<li>Wait for assigned person to send you back the MCR in construction status (you'll get an email)</li>
+				</ul>
+			
+			<!---------------------------------------------------------------->
+			<!-- CONSTRUCTION -->
+			<!---------------------------------------------------------------->
+			<h2>Construction (Request branch & apply actual changes to codes or data)</h2>
+			<h3>Outlook</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Check status if MCR is in construction, if so proceed, if not check MCR notes on what went wrong<br>
+			<input type="radio" name="test">Email release managers for a branch, if MCR is not mySQL data related<br>
+				<ul>
+					<li>email: dirm@menards.net</li>
+					<li>subject: Feature Branch needed</li>
+					<li>Msg: Can I please get a feature branch for [ApplicationName] + [Redmine#] + [Release Date, check MCR target version date to know the Month or release quarter] ex: Deck Redmine#233234 Q3R1</li>
+					<li>send email and wait, when you get an email back saying feature branch has been created, proceed</li>
+				</ul>
+			
+			<h3>Eclipse (if Java App, otherwise skip)</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Create a new folder in your workspace named something like "workspace+[MCR#]" ex: workspace122834 <br>
+				<ul>
+					<li><img src="images/redmine-construction-eclipse1.png"></li>
+				</ul>
+				
+			<input type="radio" name="test">SVN only the feature branch into the created workspace, and create these framework folders (3D, Common, Reaf)  <br>
+				<ul>
+					<li><img src="images/redmine-construction-eclipse2.png"></li>
+				</ul>
+				
+			<input type="radio" name="test">Close all three framework projects inside eclipse except the app (right-click > close proj)
+			<br>
+			<input type="radio" name="test">Right click and run the app.launch file to see if it works, if so, make changes stated in BD and test till things work 
+			<br>
+			
+			<br>
+			
+			<h3>SVN</h3><br>
+			<input type="radio" name="test">When app runs properly after code changes > window explorer > rightclick on folder or specific files > Tortoise SVN > check for modification > will run Wintail (if install) to verify code changes between original and new codes
+			<br>
+			
+			<input type="radio" name="test">SVN commit just the feature branch folder back if all changes are good
+			<br>
+				<ul>
+					<li>Comment: refs #[redmine#] then say whatever you did</li>
+					<li>Click OK (not merge)</li>
+				</ul>
+			
+			<br>
+			<h3>Visual Studio 6 (if C++ App, otherwise skip)</h3> <!-- Jump Software -->
+			<br>
+			
+			<h3>Redmine</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Edit and Update MCR and submit<br>
+				<ul>
+					<li>Edit MCR</li>
+					<li>Assign to: unchanged (should still be you)</li>
+					<li>status: Construction to Code Review</li>
+					<li>% done: to 100%</li>
+					<li>If SQL changes, Change Production Data Changes to Yes</li>
+					<li>Function Releae Notes: [desc for the business team who created ticket] ex: Show correct image on button if pressed</li>
+					<li>Technical Release Notes: [desc for the coders] ex: image source tag change from buttons/img1.png to buttons/img2.png
+					</li>
+					<li>Log time for construction</li>
+					<li>Comment: Construction</li>
+					<li>submit</li>
+				</ul>
+			
+			<!---------------------------------------------------------------->
+			<!-- CODE REVIEW -->
+			<!---------------------------------------------------------------->
+			<h2>Code Review (upload and allow other team members to review your code changes)</h2>
+			<h3>Code Collaborator (CC) Client tool</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Record Start time in excel (optional)<br>
+			<input type="radio" name="test">Install the client CC if not have > run setup > open<br>
+			<input type="radio" name="test">Prepare to upload feature branch to Code Colaborator (can be done two ways, using the client CC tool or the web CC browser -- client tool is faster but web CC is easier)<br>
+			<br>
+			
+			<h3>Method 1 <br>
+			TortoiseSVN - Using the CC web browser (easier but slightly slower)
+			</h3>
+				<ul>
+				<li>After you commit your feature branch to the Repo using tortoiseSVN</li>
+				<li>CC browser > create new review</li>
+				<li>Title: MCR# + [Redmine Ticket Name]</li>
+				<li>Overview: subject of MCR</li>
+				<li>Restrict Access: Anyone</li>
+				<li>Restrict uploads: No</li>
+				<li>Deadline: leave default</li>
+				<li>Set Author (you), at least 2 Reviewers (Primary, Secondary, Tertery), include everyone else as Observers</li>
+				<li>Attach Checked-in Changelist 
+				<img src="images/cc-2.png" width="90%">
+				</li>
+				<li>Middle mouse click "Apply and Continue Review" to see a temp page</li>
+				<li>After verify everything is correct > apply and begin review</li>
+			</ul>
+			
+			<br>
+			
+			<h3>Method 1 cont. - Redmine</h3>
+			<input type="radio" name="test">Copy CC review # or URL to MCR description > submit<br>
+			
+			<br>
+			
+			<br>
+			
+			<h3>Method 2 - Using CC Client Tool (more advance)</h3>
+				<ul>
+					<li>Add subversion diffs</li>
+					<li>Title: MCR# + [Redmine Ticket Name]  </li>
+					<li>Next</li>
+					<li>Branches/Tags tab</li>
+					<li>Before Sub. URL: SVN staging url</li>
+					<li>After Subversion URL: your feature branch SVN url</li>
+				</ul>
+				
+			<h3>Method 2 cont. - TortoiseSVN </h3>
+				<ul>
+					<li>Open explorer window and locate your workspace</li>
+					<li>Right-click > tortoiseSVN that explorer window > Repo Browser</li>
+					<li>go to your feature branch > right click > show log</li>
+					<li><a href="images/redmine-codereview2.png" target="_blank"><img width="100%" src="images/redmine-codereview2.png"></a></li>
+					
+					<li><a href="images/redmine-codereview1.png" target="_blnak"><img width="100%" src="images/redmine-codereview1.png"></a></li>
+					<li>Click finish when done and CC browser will launch allowing you to review and assign reviewers before you launch</li>
+				</ul>
+			
+			<br>
+			
+			<h3>Method 2 cont. - Code Collaborator (browser)</h3>
+			<input type="radio" name="test">Assign Reviewers (they are primary, secondary, and tertery and then observers if want<br>
+				<ul>
+					<li>After assigning wait for all reviews to pass</li>
+					<li>if not pass, make necessary changes until pass</li>
+				</ul>
+			
+			<h3>Redmine</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Everyone will get emailed automatically, When all reviewers pass the review, assign MCR to Merica and submit no need to put any notes<br>
+			
+			
+			
+			<!---------------------------------------------------------------->
+			<!-- TESTING -->
+			<!---------------------------------------------------------------->
+			<h2>Testing (Test RQM test cases in Lab Room on specified kiosks machine)</h2>
+			<h3>Redmine</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Look up MCR, find RQM ID<br>
+			
+			<h3>RQM</h3> <!-- Jump Software -->
+			<input type="radio" name="test">login, and Look up RQM test case #ID<br>
+			<input type="radio" name="test">Run test cases in parallel and pass them if they pass, if fail talk to person who created the RQM first before failing it<br>
+			
+			<h3>Redmine</h3> <!-- Jump Software -->
+			<input type="radio" name="test">Edit MCR, Assign to Merica, Status:Automated Testing, note: testing pass, Logtime<br>
+			
+			
+			</form>
+			<section>
+		</section>
+		
+	</section>
+	
+</div>
+</body>
+</html>

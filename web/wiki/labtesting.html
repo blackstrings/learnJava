@@ -1,0 +1,150 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Lab Testing");
+				});
+			});
+		});
+	</script>
+</head>
+	
+<body>
+	<div id="contents">
+		<section>
+		
+			<h1>RQM - Lab Testing and how it works</h1>
+			
+			<p>
+			Lab testing is when we go to the lab room and run RQM/MCR test or regression test cases on the Beast machine. This process requires us to move constantly back and forth between the Beast machine and the Kiosk nearby as we perform the test cases. We don't really need to use the Beast Machine, but it is the closes PC that has access to the internet or the RQM online site where we can record our test cases results.
+			</p>
+			
+			<p>At Menards we need to be able to test and simulate kiosks located at an actual Menard store properly, so we need to have these kiosks PC machines in handy to test against. So, in the lab we have kiosks that are built just like the ones in the store. Each Kiosk in the lab is assigned a test store number.</p>
+			
+			<p>For example, the Menard store in Wausau is code numbered 3016, Eau Claire East is 3053, Eau Claire West is 3011 and so forth as each store has a unique 4 digit number. All kiosk computers located in each store will be based off their store number and so when orders are made from a paticular store, the processed order will remember the store number and the kiosk # the order was from. Which then, POS (department) will receive that paticular order and will know which store that order came from and which kiosk.</p>
+			
+			<p>But because our Kiosks are in a lab environment for testing purposes and are not in an actual store, you may ask how do we simulate a kiosk at an actual store then. Simply, we use a test store number instead which don't represent a physical store but a fake store. There are multiple test store numbers. These test store numbers are 4444, 5555, 6666, 8888, 9696. So the computers in the lab are label with these test store numbers -- confusing? if so, imagine that these test store exist only in our dreams and are not physical stores like Eau Claire East and West. When we make orders on our test kiosk, they will still show up under POS, but will be from the test stores and POS will ignore these orders.
+			</p>
+			
+			
+			<p>So Really, the kiosks are just computers, either XP or Windows 7. Each kiosk represent or points to our fake store number for testing purposes. Our test store (computers like 8888) will simulate staging (a phase where where we manually install our apps onto these computers if we need to perform testing). 5555 is our production test store computers where we don't manually install our test apps onto but instead another team uses the software Altiris to perform a remote install of our apps onto these computers during deployment test release phases. When all test have passed on the 5555, then Altiris will release the passed final versions onto the 4444, which are our test stores. Whatever we see on the 4444 computers, is what we will also see at an actual physical store. The imaging team then will send auto updates to the store at East and then at West for finalizing our test. Once our apps passed at those store, the imaging team will gradually send auto install to all the stores nation wide.
+			</p>
+			
+			
+			<p>You will use the computer in the lab to do the testing (usually the beast) as we want to simulate a kiosk that is at a store. You will use one screen for RQM while the other kiosk screen to perform your test.</p>
+			
+			<p>You don't actually have to use the beast computer, and can use your office computer, but the beast is the closest to the kiosks that can access RQM</p>
+			
+			<section>
+				<h1>Tecnical - Pausing and resuming test cases in RQM</h1>
+				<section>
+				<ul>
+					<li>To pause a script: click pause button</li>
+					<li>To resume a script: find and open the suite or test case you have started. Look under Execution Records and click on the paused icon to resume.</li>
+				</ul>
+				</section>
+			</section>
+			
+			<section>
+				<h1>Designit Apps for both 4444 and 8888</h1>
+				<section>
+					<p>When we test, we have to make sure we are pointed to the appropriate environment and the case often switches depending on the test case you are running.
+					First thing and foremost, Make sure to override the store service id in the envrionment, change it to 3011. Location of the file is under c:\menards\env\DesignItConfig\VERSION\designItConfigData.properties
+					</p>
+					
+					<p>
+					If you are testing a regular MCR, most of the time your environment should be pointed to env=stage.ua-designit.store and not internal.store. Unless otherwise mentioned in the test case to use a specific environmnet, keep the environment pointed to stage.
+					</p>
+					<p>
+					For regression testing, you often would want to point your environment to prod.main.store unless otherwise specified by the test case.
+					</p>
+				</section>
+			</section>
+			
+			<section>
+				<h1>Siding, Roofing, Gutter</h1>
+				<p>These 3 are a little different when testing these app. You have to make sure your environment is pointing to kiosk-stage in order to load in products when using them. Follow instruction below to do this:</p>
+				
+				
+				<h2>8888 Lab Computers</h2>
+				<ul>
+					<li>On 8888 Test Lab Computer > F6 > enter pass > Explorer > Menards > Utils > MenardAppMenu > dsgnit.xml</li>
+					<li>Scroll to the bottom and you should see a set of 3 similar lines</li>
+					<li>Change the argument to look like below if you see "designit.mymenards" anywhere in the argument</li>
+					<li>The AppArg should be: (note the & should be spelled out with its caracter code)</li>
+					<li>AppArg = http://stage-kiosk.mymenards.com/..../sidingEstimator/screen1100.do?dispatch=restart&amp;selection(storeNumer)=3011"</li>
+					<li>for prod use = http://design-it.mymenards.com/..../(storeNumber)=3011
+					<li>Keyword is "stage-kiosk" and &amp;selection(storeNumber)=3011</li>
+				</ul>
+				<h2>4444 Lab Computers</h2>
+				<ul>
+					<li>On 8888 Test Lab Computer > F6 > enter pass > Explorer > Menards > Utils > MenardAppMenu > dsgnit.xml</li>
+					<li>Scroll to the bottom and you should see a set of 3 similar lines</li>
+					<li>The AppArg should be: (note the & should be spelled out with its caracter code)</li>
+					<li>AppArg = http://stage-kiosk.mymenards.com/..../sidingEstimator/screen1100.do?dispatch=restart&amp;selection(storeNumer)=3011"</li>
+					<li>Keyword is "stage-kiosk" and &amp;selection(storeNumber)=3011</li>
+				</ul>
+				
+				<h2>Gutter speical exception</h2>
+				
+				<ul>
+					<li>For Gutter, the line change is towards the top where the button tag is with the rest of the other apps</li>
+					<li>http://stage-kiosk.mymenards.com/sidingEstimator/screen1100.do?dispatch=restart&amp;selection(gutterOnly)=true&amp;selection(storeNumer)=3011</li>
+				</ul>
+				
+				<p style="color:yellow;">Make sure to kill and restart MenardsApp once these files change in order for the change to take place, otherwise you will still not see products</p>
+				
+			</section>
+			
+			<section>
+				<h1>Testing Web App Start login screen</h1>
+				<ul>
+					<li>When it comes to RQM testing, and we have to test the web app start screen (which is the login screen) we cannot test that on the kiosk. Instead we test it at our PC</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h1>Environment Tuning and Testing on Java Apps (Landscaping, Deck)</h1>
+				<ul>
+					<li>for product and general testing: stage.main.internal.store</li>
+					<li>for save & recall: stage.staging.internal.store = stagepreview internal</li>
+					<li>Test Enterprise PC also when you test 8888</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h1>If products not showing, make sure to Override the store in configProperties</h1>
+				<ul>
+					<li>C:\menards\env\DesignItConfig</li>
+					<li>overrideStoreServiceId=3011</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h1>How to know if app is the latest testing RC</h1>
+				<section>
+				For C++ apps, check under the c/mes or somefolder (talk to c++ app users). For java, check under c\mendards\ and corresponding app jar date. Their date should be close to your testing date. If not, you may not be testing the latest RC.
+				</section>
+			</section>
+			
+			<section>
+				<h1>Regression Testing Tips</h1>
+				<section>
+				
+					<ul>
+						<li>Deck - the basematerials are generated off of stage - if you use prod, materials list will drasitcally not match</li>
+					</ul>
+				
+				</section>
+			</section>
+			
+		</section>
+
+	</div>
+</body>
+</html>

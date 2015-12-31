@@ -1,0 +1,91 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "Time Log";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+		<h1>Time Log</h1>
+		<p>There are two types of time log at Menards in the IS department. One is the punch/out time using your Menard ID card. The second is the time log we track under <a href="redmine.html">Redmine</a>. Redmine keeps track of your personal logs while you are working and what areas you are working and how long you spent working in that area.
+		</p>
+		<section>
+			<h1>Missed Punch In/Out</h1>
+			<ul>
+				<li>You can use Mymenards.com to make time adjustments</li>
+				<li>IS Tools > Tech Resources > Time Card Adjustments</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Lab Testing</h1>
+			<ul>
+				<li><a href="labtesting.html">Lab Testing Info</a></li>
+				<li>For roofing, siding and gutter, you have to point the URL/environment to the stage environment when <a href="labtesting.html">lab testing</a>
+					<ul>
+						<li>On 8888 test store, F6 > pass > MyComputer > C > Menards > Utils > MenardAppMenu > dsgnit.xml</li>
+						<li>Right click on dsgnit.xml and open in notepad</li>
+						<li>scroll to the bottom set of tags, one is for gutter, roofing, and siding, set all three to the following</li>
+						<li>AppArg should = stage-kiosk...=restart&amp;selection(storeNumber)=3011"...</li>
+						<li>save</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Setup</h1>
+			<ul>
+				<li>Eclipse</li>
+				<li>Java</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Updating or request new sprites</h1>
+			<ul>
+				<li>Look under siding workspace > media > sprites</li>
+				<li>Find all buttons that are similar > duplicate and save it into a organized folder</li>
+				<li>ex: WitchWalls folder would have all witchWall buttons in it</li>
+				<li>Create MCR request for sprite and attach the zip folder and description describing what is what and what to do</li>
+				<li>Attach the MCR# to the parent ticket if there is such a ticket</li>
+			</ul>
+		</section>
+		
+	</section>
+	
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

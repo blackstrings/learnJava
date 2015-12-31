@@ -1,0 +1,102 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("SLA");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>SLA</h1>
+		<p>Each week (Usually Wednesday) we get an EAM ticket that shows where things slowed down in our apps. We have to look into these EAM and then give an explanation to each issues. There is a cheat sheet we can use to match up the problems constantly updated by a previous SLA person. If there is no match up in the cheat sheet, we have to investigate and give a proper explanation. We can use microsoft word or some text software to save and archive our report in.</p>
+		
+		<p>
+		The cheat sheet could be updated and can be found here F/Designit/SLA/SLA List.docx
+		</p>
+		
+		<section>
+			<h1>Using Dynatrace</h1>
+			<section>
+				<p>If when <a href="truesight.html" class"link">True Sight</a> doesn't work, <a href="dynatrace.html" class="link">dynatace</a> can help find more detail info of where the issue is coming from. For example, a siding Screen1601.do was nowhere to be found using true sight (the method below). But dynatrace was able to find the issue.</p>
+				<ul>
+					<dl>To use Dynatrace, you have to have the software installed on your machine first</dl>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Instructions for SLA in EAM - using True Sight</h1>
+			<section>
+				<ul>
+					<li>Open EAM using internet explorer > menards portal > EAM > Login.</li>
+					<li>Filter > Assigned To : DESIGN-IT  > filter</li>
+					<li>Look for EAM that has the name: ISINF-COST </li>
+					<li>Go through each EAM by double clicking on them</li>
+					
+					<h2>Per EAM</h2>
+					<li>assign the ticket to you > Change assigned-to to your name (have to search by your username not your full name) > save </li>
+					<li>Read the ticket comments > copy & paste report to a new word document > save word doc > fileName = ticket number</li>
+					<li>For each report, you want to provide a reasoning or resolution, sometimes even creating a MCR to fix it. </li>
+					
+					<h2>Investigating each issue</h2>
+					<li>After creating word doc for each ticket, there may be multiple issues per ticket.</li>
+					<img src="images/sla_issues1.png" />
+					<li>You will not be able to tell when these issues occur by just looking at the percentage, you'll have to dig deeper into them using True Sight</li>
+					<li>If you see an issue you are familiar with there may be already a MCR or resolution for it, check the cheat sheet</li>
+					
+					<h2>True Sight</h2>
+					<li>To further look into a particular issue, you can use True Sight</li>
+					<li><a href="https://md-tsanalyzer/" target="_blank">True Sight</a></li>
+					<li>Login > Incidents > filter 3-4 days ago to current > performance > any</li>
+					<li>If you are looking for an issue in siding, search for siding > double click</li>
+					
+						<img style="border:thin solid #000000; margin-bottom:5px" src="images/sla-truesight1.png" width="50%" />
+						<img style="border:thin solid #000000; margin-bottom:5px" src="images/sla-truesight2.png" width="50%" />
+						<img style="border:thin solid #000000; margin-bottom:5px" src="images/sla-truesight3.png" width="50%" />
+					<li>What you want to look for in true sight is find the matching error
+						<ul>
+							<li>/mvkd/web/index.jsp  75%  is the SLA issue</li>
+							<li>In truesight when you dive into the session, under each IP, you want to look for index.jsp</li>
+							<li>If there is a match, it'll let you know more details on it</li>
+							<li>Click on the match, and it will take you into the details</li>
+							<li>Everything following it will give you an idea of the issue</li>
+							<li><img style="border:thin solid #000000; margin-bottom:5px" src="images/sla-truesight4.png" width="30%" />
+						</ul>
+					</li>
+					
+					<h2>Closing the EAM</h2>
+					<li>For incidents you can't resolve, put "Can't find trances of these incidents"</li>
+					<li>For incidents you do find, list the resolution underneath the SLA issue</li>
+					<li>Once all done copy & paste back the report into the EAM resolve comment box</li>
+					<li>If text is too large put "see comments" and put the resolutions in the comment</li>
+					<li>Set the status to "Closed" to close the EAM > save > leave the assigned-to to your name</li>
+					<li>Move on to next EAM ticket till you finish, no need to inform teamLead that you completed EAM SLA tickets</li>
+				
+				</ul>
+				
+				
+				<p>
+				Go to Incidents, filter by performance, filter by watchpoints, look for your app, siding, roofing, etc.
+				</p>
+			</section>
+			
+		</section>
+		
+		
+	</section>
+
+</div>
+</body>
+</html>

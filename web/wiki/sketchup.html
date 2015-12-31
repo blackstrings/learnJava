@@ -1,0 +1,106 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "SketchUp";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<script src="javascript/canvas/Canvas1.js"></script>
+
+	<section>
+		<h1>SketchUp</h1>
+			<table width="100%" class="shortcutKeys">
+			
+				<th colspan="2">Short Cuts</th>
+				<tr>
+					<td> Multiple Copies </td>
+					<td> Select obj > hold ctrl > drag move obj to destination > let go > type "*5" to get 5 copies</td>
+				</tr>
+				<tr>
+					<td> Locking axis bar </td>
+					<td> use arrow key to lock direction you want</td>
+				</tr>
+				<tr>
+					<td> Move by precise unit </td>
+					<td> select move tool > click once on obj > move obj in direction you want > type "2'" to move obj 2 feet</td>
+				</tr>
+				<tr>
+					<td> Drawing a shape precisely </td>
+					<td> draw a rectangle > type in "4', 5'" you'll get 4x5 > pull tool > pull up > type 6'</td>
+				</tr>
+				<tr>
+					<td> Mirroring objects</td>
+					<td> 3 ways, use plugin Mirror.rb, use scale tool type in -1, right click flip by axis (you can't define a plane though)</td>
+				</tr>
+				<tr>
+					<td> Extrude face </td>
+					<td> P > Select a face and click drag</td>
+				</tr>
+				<tr>
+					<td> Follow Me Tool </td>
+					<td> draw a diagonal line at corner of cube > follow me > click drag around edge</td>
+				</tr>
+				<tr>
+					<td> Fill Hole in outline </td>
+					<td> Line tool > draw a line between any 2 segments</td>
+				</tr>
+				<tr>
+					<td> Rotate object </td>
+					<td> Press "M" > hover mouse over the + symbol > click once > drag > dial in degree</td>
+				</tr>
+				<tr>
+					<td> Align to or from center of obj </td>
+					<td> M > hover mouse over any edge center and slowly move toward the center of object</td>
+				</tr>
+				<tr>
+					<td> Move by vertex</td>
+					<td> don't select anything > M > click drag on vertex (must not be in component mode)</td>
+				</tr>
+				<tr>
+					<td> Offset lines </td>
+					<td> press O > click on any lines > drag</td>
+				</tr>
+				
+				
+				<th colspan="2">Vertex</th>
+				<tr>
+					<td> new</td>
+					<td> new</td>
+				</tr>
+			</table>
+	</section>
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

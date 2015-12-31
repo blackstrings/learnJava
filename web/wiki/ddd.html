@@ -1,0 +1,114 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Domain Design Driven (DDD)");
+				});
+			});
+		});
+	</script>
+	<style>
+	section.custUL ul li li{
+		margin-left:20px;
+	}
+	</style>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Domain Driven Design</h1>
+		<section>
+		<p>DDD is like a design pattern (concept written by Eric Evans 2003) where the application is designed around the domain rather than the software. The main layers are presentation(GUI UI), Application, Domain, Infrastructure.</p>
+		
+		<p>One way to start thinking of ddd, is that if a bounded context, if stripped apart and brought into another ddd application, it should be able to adapt easily.</p>
+		
+		</section>
+		
+		
+		
+		<section>
+			<h1>Terminology</h1>
+			<section class="custUL">
+				<ul>
+					<dl>Layers</dl>
+					<li>Presentation Layer (gui and ui)</li>
+					<li>Application Layer (controllers that interacts back and forth with domain, ui, and data layer, or other services)
+						<ul>
+							<li>controllers should only handle the flow of process</li>
+							<li>Keep logic out of here</li>
+						</ul>
+					</li>
+					<li>Domain Layer ( business rules and logic resides, your domain models are defined )</li>
+					<li>Infrastructure Layer (how it connects to database and other gateways)</li>
+				</ul>
+				<ul>
+					<dl>Strategy Layer</dl>
+					<li>Bounded Context
+						<dd>Think of bounded context as a conceptual boundary around the whole application. Bounded Contexts are relatively small; smaller than we might at first imagine. It is large enough only to capture the complete Ubiquitous Language of the isolated business domain, and no larger.</dd>
+					</li>
+						
+					<li>Aggregate</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Online DDD links explanations</h1>
+			<section>
+				<ul>
+					<li><a href="http://www.informit.com/articles/article.aspx?p=1944876&seqNum=3" target="_blank">Example 1</a></li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Vocabs</h1>
+			<section>
+				<ul>
+					<li>Ubiquitious Langauge
+						<dd>A language or vocabularies related to the domain model that developers and the business can come together to agree upon. Because technical vocabulary from the business may not be easily understood by the devlopers as developers are more used to terms dealing with algorithms and computation. Therefore, the domain expert plays an important role in determining what vocabulary makes more sense to use or not to use in the program so that the business and the developers can agree on which will make communication easier between the business and developers. Overall, ubiquitious langauge is a shared team langauge created and used by the developer and the domain expert. A ubiquitious langauge defined in one bounded context can have a different meaning in another boudned context.</dd>
+					</li>
+					<li>Domain Expert
+						<dd>The domain expert isn't one by job title but instead are the ones who know the line of business. They can be your product designer or even your sales person. It is basically the person how knows more about what you are working on than anyone else.
+						</dd>
+					<li>
+					Ubiquitous Language
+					</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Getting the best model</h1>
+			<section>
+				<p>The domain experts can help you come up with the best design model approach</p>
+				<img src="images/ddd1.png" >
+			</section>
+		</section>
+		
+		<section>
+			<h1>Domain</h1>
+			<section>
+				<p>Domain is the software you are designing for. For example, Deck is the domain object if you are building an app to purchase a deck.</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Application (layer, service)</h1>
+			<section>
+				<p>Acts like the business action. When implementing code to change a customer name, refactor out the code so it only does that and nothing else</p>
+			</section>
+		</section>
+	</section>
+	
+</div>
+</body>
+</html>

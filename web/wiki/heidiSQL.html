@@ -1,0 +1,173 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("MYSQL - Heidi");
+				});
+			});
+		});
+	</script>
+	<style>
+	ul#customQuery li ul li{
+		margin-bottom:1px;
+		background-color:#000;
+		list-style-type:none;
+		font-family: "courier";
+		font-size:12px;
+	}
+	</style>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>HeidiSQL</h1>
+		<p>A client SQL tool we use for reading and writing data related to our design-it applications</p>
+		
+		<p>Our applications constantly pull data from our mySQL servers for image paths, SKU, and string data.  Our applications need access to our mySQL server to read data such as things like string paths locations for our images, so that our applications can pull the correct image paths from within the application's workspace and display the image on the kiosk</p>
+		
+		<section>
+			<h1>Highlights</h1>
+			<ul>
+				<li>We have two types of user login to get into our Design-it database:
+					<ul>
+						<li>mc_design_ro --- READ ONLY</li>
+						<li>mc_designit_user <-- READ and WRITE</li>
+					</ul>
+				</li>
+				<li>Our data is hosted on the MCOM and somewhere else</li>
+				<li>Passwords for each user account can be retrieved from teamlead</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Need to look up your guestId, so you can search in Heidi what projects were saved under your guestId?</h1>
+			<p>Using these links below you can pull up your guestId by logging in using your mCom login account. There are two types of account, your stagePreview and your actual mCom account</p>
+			<script>
+				/*
+				Loop through array and write the data to html
+				*/
+			
+				//test out 2d array
+				// (url, title) These are direct url links, if the file is moved the link will be broken
+				var data2D = [
+					["file:///F:/DesignIt/MISC/authenticateUserForms/devpreview.html", "devpreview.html"],
+					["file:///F:/DesignIt/MISC/authenticateUserForms/local-staging.html", "local-staging.html"],
+					["file:///F:/DesignIt/MISC/authenticateUserForms/prodmain.html", "prodmain.html"],
+					["file:///F:/DesignIt/MISC/authenticateUserForms/prodpreview.html", "prodpreview.html"],
+					["file:///F:/DesignIt/MISC/authenticateUserForms/stagemain.html", "stagemain.html"],
+					["file:///F:/DesignIt/MISC/authenticateUserForms/stagepreview.html", "stagepreview.html <-- use this one for during testing in the lab"],
+					["file:///F:/DesignIt/MISC/authenticateUserForms/stagepreviewshelving.html", "stagepreviewshelving.html"]
+				];
+				
+				var str1 = "<li><a href=\"";
+				var str2 = "\" target=\"_blank\">";
+				var str3 = "</a></li>";
+				
+				// write 2D array into html list
+			
+				document.write("<ul>");
+				
+				var size = data2D.length;
+					// to get size of inner array
+					// var size = data2D[0].length;
+				
+				for(row=0; row<size; row++){
+					
+					// we only need to jump one col, so 1 is used
+					for(col=0; col<1; col++){
+					
+						document.write( str1 + data2D[row][col] + str2 + data2D[row][col+1] + str3 );
+						
+					}
+					
+				}
+				document.write("</ul>");
+			
+			</script>
+			
+		</section>
+		
+		<section>
+			<h1>SQL data change</h1>
+			<li>If you need to update,replace SQL data in a MCR, you'll have to pro
+		</section>
+		
+		<section>
+			<h1>Setup</h1>
+			<ul>
+				<li>Google and install the latest Heidi SQL</li>
+				<li>Start up the tool after installation</li>
+				<li>Use settings below to crate two preset profiles, so you don't have to enter each time you launch Heidi
+					<ul>
+						<li>Host: stagedb-mcom-staging.menards.net</li>
+						<li>User: create two workspace using user names above</li>
+						<li>Pass: get from team lead for each user</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>MySQL Query Examples</h1>
+			<ul id="customQuery">
+				<li>select * from three_d_attributes t where t.texture_path_txt='images/textures/boards/composite/rusticReversibleRedWoodWoodgrainBoardEnd.p';</li>
+				<li>select one or more rows that have the following specify ids, when you put a variable after the table, it gives it a variable name
+					<ul><li>select * from items i where i.menards_sku in (1791111, 1791122);</li></ul>
+				</li>
+				<li>To know if an item is guest orderable: In the read only table
+					<ul>
+					<li>select * from main_common_loaded.sku_price_status s where s.menards_sku=1891155;</li>
+					</ul>
+				</li>
+				<li>Search by partial string
+					<ul>
+					<li>where s.menards_sku like = '%cat%'</li>
+					<li>where (i.age = 12 and i.name = 'Test' or i.color like '%red%' or i.color like '%lack%')</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		
+		
+		<section>
+			<h1>Database Relationships</h1>
+			<p>
+				<ul>
+					<li>one to one:	
+						<ul>
+							<li>product has a product description specifically about that product</li>
+							<li>when you have too much column in one table, you can split up the table to ref another table, used for optionals cols</li>
+						</ul>
+					</li>
+					<li>one to many:	
+						<ul>
+							<li>mother can give birth to many children, but not the other way around</li>
+						</ul>
+					</li>
+					<li>many to many:
+						<ul>
+							<li>A parent can have many children, one children can have or belong to many parents</li>
+							<li>author can write many books, one book can be written by many authors</li>
+							<li>customer can have many addresses, one address can have or be shared by many customers</li>
+							<li>when this occurs, you want to have a junction or intermediate table to handle and connect the two tables</li>
+						</ul>
+					</li>
+				</ul>
+			</p>
+			<p>Reference tables are used in environments where one table relies on a code rather than an id. Where a code can represent a defined number of possible seletions. Take for example, order status. You would have ORDER table and REF_ORDER_STATUS table. ORDER table would have a code that reference the REF_ORDER_STATUS.
+			
+			</p>
+		</section>
+	</section>
+
+</div>
+</body>
+</html>

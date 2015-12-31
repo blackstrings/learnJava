@@ -1,0 +1,77 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("System V");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<section>
+		<h1>System V</h1>
+		<p>A application located usually at the Menards stores, aka blue screen that allows team members to look up SKU items and locate items as well as perform special orders and many other store related functions.</p>
+		
+		<p>It also host a database where stores pull their product information from such as, SKU, prices, availability, etc. We also use System V's server to test and collect product data for our apps.</p>
+		<section>
+			<h1>Highlights</h1>
+			<p>When testing our application during the final stage, we will connect our apps to System 5 for testing. This will give us a exact simulation of an actual Menards store.</p>
+		</section>
+		
+		<section>
+			<h1>Competitor</h1>
+			<ul>
+				<li><a href="mcom.html">MCOM</a></li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Functions and Usage</h1>
+			<ul>
+				<li>You will need a department or team member user and pass for login</li>
+				<li>SO = Special Order and look up</li>
+				<li>Item inventory look up or QTY and orders and last recieved</li>
+				<li>SKU look up</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>To run System V here at the office</h1>
+			<section>
+				<p>In the lab, run system v off an enterprise machine. Say if you made esitmate on a 8888, to pull that order from system V, you want to use an 8888 enterprise machine to run system V. If you run system V on 8888 enterprise, you can only see orders made from 8888 store PCs and not orders from any other store such as 4444 or 5555. If you want to see orders from real store transactions, say from store 3011, you have to use system V on a machine at the store, not here in the lab. It is currently not possible to run system V on a PC here at the office to pull orders made at an actual store, to do that you would use the database instead rather than on System V.
+				</p>
+				
+				<h1>Steps</h1>
+				<ul>
+					<li>team #:100</li>
+					<li>pass: 01</li>
+					<li>Department function > service desk > 78 > enter > order #</li>
+					<li>Browse through items and check the pricing or whatever you want</li>
+					<li>When done > F4 > void order > this will delete the order and you will never see it again, which is fine once you are done check if you don't need that order anymore</li>
+					<li>Continue Further if you need to print</li>
+					<li>Confirm (enter)</li>
+					<li>Team#:774335, then testName or use any</li>
+					<li>your phone number</li>
+					<li>f2 > email</li>
+					<li>Alt + tab</li>
+					<li>Open myMenards > email user:letme pass:helpu</li>
+					<li>submit > click on email > click on pdf > then you can print the pdf or just view it</li>
+				</ul>
+			</section>
+		</section>
+	</section>
+	
+
+</div>
+</body>
+</html>

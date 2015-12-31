@@ -1,0 +1,295 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Javascripts");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>Javascript</h1>
+		<p>Unlike Java, javascript uses a prototype like concept to create classes.<br/>
+		Example: <a class="link" href="javascriptOOP.html">OOP in javascript</a>
+		</p>
+		
+		<section>
+			<h1>Hashtables</h1>
+<pre>
+&lt;script&gt;
+
+// method 1 - init
+var myHash = new Hash("One", "1000", "Two", "2000");
+
+// method 2 - put
+var hashData = {};
+hashData["ProductUpdate"] = ["garageProductUpdate.html"];
+hashData["ProductRemove"] = ["garageProductRemove.html"];
+
+// method 3 - init
+var hashData = {
+	"ProductUpdate" : "garageProductUpdate.html",
+	"ProductRemove" : "garageProductRemove.html"
+}
+				
+&lt;/script&gt;
+</pre>
+		</section>
+		
+		<section>
+			<h1>Hash examples</h1>
+			
+			<script>
+			
+				/*Hash test*/
+				
+				// method 1 to put items into hash
+				//var hashData = new Hash("ProductUpdate", "garageProductUpdate.html");	// one way to write values during initialize
+					
+				// method 2 to put items into hash
+				/*var hashData = {};	// new hash object
+				hashData["ProductUpdate"] = ["garageProductUpdate.html"];
+				hashData["ProductRemove"] = ["garageProductRemove.html"];
+				*/
+				
+				// method 2.5 pushing data into array
+				//hashData.push("something");
+				
+				// method 3 to put items into hash
+				var hashData = {
+					"ProductUpdate" : "garageProductUpdate.html",
+					"ProductRemove" : "garageProductRemove.html"
+				}
+				keys = Object.keys(hashData); 	// get key names
+				// to get key values put below in a for loop
+					// hashData[keys[i]]
+				keys.sort(); 	// sort alphabetically
+				
+				// prepare to write data into a <ul> html
+				var str1 = "<li><a href=\"";
+				var str2 = "\" target=\"_blank\">";
+				var str3 = "</a></li>";
+				
+				document.write("<ul>");	// open tag
+				
+				// loop through keys to get key values
+				 for(var i=0; i<keys.length; i++) {
+					
+					// write data to html
+					document.write( 
+					  str1 							// open the <a> tag
+					+ hashData[keys[i]] 			// the link
+					+ str2 + keys[i] 				// the title
+					+ str3 ); 						// clost the <a> tag
+		
+				 }
+				 document.write("</ul>");	// close tag
+				
+			</script>
+			
+			
+		</section>
+		
+		<section>
+			<h1>2D Array</h1>
+<pre>
+&lt;script&gt;
+
+// method 1 - init
+var data2D = [
+	["garageProductUpdate.html", "ProductUpdate"],
+	["garageProductRemove.html", "ProductRemove"]
+];
+
+// reading 2D array
+for(row=0; row&lt;size; row++){l
+
+	// we only need to jump one col, so 1 is used
+	for(col=0; col&lt;1; col++){
+	
+		// write data to html
+		document.write( 
+		str1 						
+		+ data2D[row][col] 				// the link
+		+ str2 + data2D[row][col+1] 	// the title
+		+ str3 ); 						
+		
+	}
+	
+}
+				
+&lt;/script&gt;
+</pre>
+		</section>
+		
+		<section>
+			<h1>2D Array</h1>
+				<script>
+				// Loop through array and write the data to html
+				// This script helps sort the list in alphabetical order
+				
+				
+				/**
+				 * test out 2d array
+				 * (url, title)
+				 */
+				
+				var data2D = [
+					["garageProductUpdate.html", "ProductUpdate"],
+					["garageProductRemove.html", "ProductRemove"]
+				];
+				
+				var str1 = "<li><a href=\"";
+				var str2 = "\" target=\"_blank\">";
+				var str3 = "</a></li>";
+				
+				// write 2D array into html list
+				
+				document.write("<ul>"); // open tag
+				
+				var size = data2D.length;
+					// to get size of inner array
+					// var size = data2D[0].length;
+				
+				for(row=0; row<size; row++){
+					// we only need to jump one col, so 1 is used
+					for(col=0; col<1; col++){
+					
+						// write data to html
+						document.write( 
+						str1 							// open the <a> tag
+						+ data2D[row][col] 				// the link
+						+ str2 + data2D[row][col+1] 	// the title
+						+ str3 ); 						// clost the <a> tag
+					
+					}
+				}
+				document.write("</ul>");	// close tag
+				
+				</script>
+		</section>
+		
+		<section>
+			<h1>MultiDimensional Arrays</h1>
+<pre>
+function createArray(length) {
+	var arr = new Array(length || 0), 
+		i = length; 
+	
+	if (arguments.length &gt; 1) { 
+		var args = Array.prototype.slice.call(arguments, 1); 
+		while(i--) arr[length-1 - i] = createArray.apply(this, args); 
+	} 
+	return arr; 
+}
+// you can use it like this
+// var arr3x3 = createArray(3,3);
+</pre>
+		</section>
+		
+		<section>
+			<h1>Javascript best practices</h1>
+			<a href="http://www.w3schools.com/js/js_examples.asp">Click Here</a><br/>
+			<span id="demoD"></span>
+			<script>
+				var myFunc = function(){
+					var x1 = {};
+					var x2 = "";
+					var x3 = 0;
+					var x4 = false;
+					var x5 = [];
+					var x6 = /()/;
+					var x7 = function(){};
+
+					document.getElementById("demoD").innerHTML =
+					"x1: " + typeof x1 + "<br>" +
+					"x2: " + typeof x2 + "<br>" +
+					"x3: " + typeof x3 + "<br>" +
+					"x4: " + typeof x4 + "<br>" +
+					"x5: " + typeof x5 + "<br>" +
+					"x6: " + typeof x6 + "<br>" +
+					"x7: " + typeof x7 + "<br>";
+				}
+				myFunc();
+			</script>
+			
+		</section>
+		
+		<section>
+			<h1>Creating Modular Javascript</h1>
+			<p>To create modular javascript, you have to use a design pattern that can handle your namespacing and methods.
+			One recommendation is for when working with larger applications, you need to handle namespacing, script loading. The popular approach is including the library Require.js or curl.js as they are not native to the browser.</p> 
+			
+			<p>
+			RequireJS - takes care of module script dependency. Say if ScriptA requires ScriptB to load first but you import ScriptA before ScriptB. You will get errors saying Script B doesn't exist. RequireJS ensures that all scripts are loaded asyncronously.
+			</p>
+			
+			<p>Synchronous vs Asyncronous
+			Synchronous means one step at a time or before step 2 can run, step 1 has to complete first.
+			Asyncronous means any step can run simultaneously together or one step can start at any time without having to wait for another step to complete. Kinda of like multi-threading.
+			</p>
+			
+			<p><span id="modelDemo"></span></p>
+			
+			<script>
+				//modular pattern - that works for small projects - not recommended for large applications
+				//this is a self invoking method that when called, it defines itself and calls itself
+				(function(){
+					//private var
+					var str = "I am a self invoked method";
+					//you have to use window, but myModule1 can be any package name
+					window.myModule1 = {
+						getOrderId: function(){
+							return str;
+						}
+					};
+				})()
+				//test and call the module above method
+				console.log(window.myModule1.getOrderId());
+				
+				//another way to create a module/class, a more preferred way would be to refactored into a seperate js file then use require js
+				var myMod = {};
+				
+				myMod.jump = function(){
+					console.log("jumping");
+				}
+				
+				myMod.jump();
+				
+				
+				
+				//but what happens when you want to call this method again for later use
+				//that's where require.js or curl.js comes into play and it helps turn javascript into a form as if you were developing in java or c#
+				//ES6 aka Harmony however, will replace require.js and curl.js
+				//example of ES6
+				
+				
+				
+				//one way to call a function from a bundle in es6
+				//import { multi } from 'javascript/json/utils';
+				//multi(3);
+				
+				//another way to call the method from a bundle in es6
+				//import "javascript/json/utils" as utilies;	//choose your own namespace, in this case I decided to call the imported utils utillis
+				//utillies.multi(3);
+				
+			</script>
+		</section>
+		
+	</section>
+	
+
+</div>
+</body>
+</html>

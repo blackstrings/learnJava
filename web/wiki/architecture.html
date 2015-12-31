@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Lab Testing");
+				});
+			});
+		});
+	</script>
+</head>
+	
+<body>
+	<div id="contents">
+		<section>
+		
+			<h1>Software Architecture</h1>
+			
+			<p>
+			<a href="http://programmers.stackexchange.com/questions/218011/how-accurate-is-business-logic-should-be-in-a-service-not-in-a-model">Some good architecture Link</a>
+			</p>
+			
+			<section>
+				<h1>DTO vs Domain Model</h1>
+				<section>
+					<p>
+					If objects have no business logic in them at all, they are just DTO. Best to just turn them into DTO purely.
+					</p>
+				</section>
+			</section>
+			
+			<section>
+				<h1>Domain Driven Design (DDD)</h1>
+				<section>
+					<p>
+					Everything is bulit around the domain. Technology is not an issue.
+					</p>
+				</section>
+			</section>
+			
+			<section>
+				<h1>Model, View, *</h1>
+				<section>
+					<p>
+					MVC, MVP, MVVM, MV* ... etc there are no services. If there are, the term is used to refer to any generic object, which that can be injected into a controller or view model.
+					</p>
+					<p>
+					MVC - the controller is injected with the model and view. Controller acts like the service, but not really. One controller for each model.
+					</p>
+				</section>
+			</section>
+			
+			<section>
+				<h1>RPC-style distributed architecture (SOAP, UDDI, BPEL, etc.)</h1>
+				<section>
+					<p>Here is another architecture</p>
+				</section>
+			</section>
+			
+		</section>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Siding");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<script>
+		//enable common collapser
+		require(['./commonWiki'], function (common) {
+			require(["app/wikiUtils"], function(utils){
+				utils.enableCommonCollapser();
+			});
+		});
+	</script>
+
+	<section id="start">
+		<h1>Siding</h1>
+		<p>Siding is a a web app used for walls that runs on our <a href="jboss.html">JBOSS</a> server.
+		</p>
+		
+		<section>
+			<h1>Installing and running Siding one any environment</h1>
+			<section>
+			<ul>
+				<li><a href="tcserver.html">You must install Tcserver first to run this app</a></li>
+				<li><a href="webapps.html">Running & Debugging Webapps</a></li>
+				<li>Special case: open Configure Java > put in exception list due to the new java 7 update security reasons. Allows you to run siding.</li>
+				<img src="images/siding-1.png" class="fit10 popup" /><img src="images/siding-1a.png" class="percent10 popup" />
+				<li>For each environment dev, stage, prod, and for each app server, you will need to add an exception list for them</li>
+				<li>ex: visit any stage link, you will see that the url is something like "http://kiosk-stage1-app-kvm:8080"</li>
+				<li>Add that url, with or without the :8080 to your java exception list</li>
+				<li>If ever roofing or siding isn't showing up, some basic checks are to make sure that url for that app is added, you are using IE, enterprise is turned on</li>
+			</ul>
+			</section>
+			
+			
+			<section>
+			<h2>Tcserver Checks</h2>
+				<ul>
+					<li>Siding uses AOP load-time-weaving for logging SLA stuff</li>
+					<li>We need to make sure the loader code below is in tcserver > designit > conf > catalina > localhost > SidingEstimator.xml</li>
+					<li>
+					&lt;Loader loaderClass=&quot;org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader&quot;/&gt;
+					</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Highlights</h1>
+			<section>
+			<ul>
+				<li>Like Roofing, Siding uses "Struts" (a design pattern) to design how data connects within the app</li>
+				<li>Sprites - buttons that look similar are grouped and put into one big image and then sliced into individual sprites at load time. This is to speed up loading times. It does this by loading just one image instead of multiple images.<li>
+				<li>Change blocks and see it implemented automatically on screen</li>
+				<li>Unlike C++ apps, to get the material list with SKU numbers you have to either print out the estimation or look in the JBoss server log. You won't be able to access the JBoss server, so as a team member that has access if you need more info</li>
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>The Life Cyle of Siding's Database Changes</h1>
+			<section>
+				<ul>
+					<li>You do your data changes on Dev using the LB link <img src="images/sidingData1.png" class="fit popup"></li>
+					<li>This is how we make changes to the database<br><img src="images/sidingData3.png" class="fit popup"></li>
+					
+					<li>Make sure that your local files in JBoss under C:\JBoss\jboss-eap-5.2\jboss-as\server\default\deploy
+						<ul>
+							<li>sidingAdmin-ds.xml</li>
+							<li>Siding-ds.xml</li>
+							<li>SidingDesigns-ds.xml</li>
+							<li>have their &lt;connection-url&gt; pointing to dev (_d)</li>
+							<li><img src="images/sidingData2.png" class="fit popup"></li>
+						</ul>
+					</li>
+					<li>Once your work is done and reviewed then we send a DMR to DBA to merge the changes from Dev to Stage.
+					</li>
+					<li>Once we do our Stage testing then we use the DMR with a PCR to merge the changes to Prod.
+					</li>
+				</ul>
+
+</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Finding out the Pattern Selection for a Siding1, Siding2, ...</h1>
+			<section>
+				<p>
+				Note that each Siding1, Siding2, ... stores its own sides and selection pattern. That's because each 
+				Siding(which can include multiple sides) can be different. 
+				If the use only selects one type of siding, you will only see Siding1. 
+				To know the selections for that Siding1, Siding2, ..., you want to start at NewCreateEstimate.java where the 
+				houseSide is being looped. Inside the loop, it goes into each side's selectionForm and that's where you'll 
+				find the selection for that side product. Look for product.doSideEstimate(SelectionForm). If you breakpoint 
+				there you'll see what siding it is and under its selection, you'll see the key value selection pattern.
+				</p>
+				<img src="images/siding-selections.png" class="fit10 popup"/>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Understanding Siding Selections</h1>
+			<section>
+				<p>Unlike most of our other common applications, when a product button is selected on a screen, behind the scene, we would get and store this product sku and info for the final estimation. But this is not true in siding. What's so bizzare in Siding is that the final product selections are determined based on the final screen selection pattern. </p>
+				
+				<p>For example, starting at the begining screen in siding, If you select and go from screen A,B,C and then jump to screen F,G and end with Z, your final selection comes to a combination of ABCFGZ. ABCFGZ is a stored screen flow pattern in the data base in additional to the other 10,000+ patterns! This pattern is then mapped to predetermined products which we have to manually set. Though the product qty will take care of itself, we have to provide what products this pattern will and can output. This is why siding takes forever to update products, because to update one product (which there are over 10,000 different pattern selections) like a water effect, we also have to make sure we take care of the other patterns that will be affected by the change.
+				</p>
+				<p>The only Exception is Siding's additional options, which it uses a better method to select products using sidingSkuID.properties (similar to roofing). All other regular siding selections determine their products base on the screen flow pattern, which you will see it is one of the worst design implementation. When produt selections were small, this design was fine, but as the application grew, maintaining the application has become more complex than ever to maintain.
+				</p>
+				<p>
+				Here's how it works. Visit the siding admin link under the dev. Visit the link Siding Selections. This 10,000+ rows of database handles all the possible screen flows and what products each pattern gets.
+				<br>
+				<img src="images/sidingData4.png" class="fit10 popup">
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Checking estimated product SKU</h1>
+			<section>
+				<p>
+				Running the app at your PC, you can check the jboss or tcserver app_logs under SidingEST.log. The log will spit out the skus of estimated products.
+				Running the app in the test lab, there is no log to look at, therefore printout the estimate, run it through systemV using the estimate ID to check for product skus.
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Lab Testing</h1>
+			<section>
+			<ul>
+				<li><a href="labtesting.html">Lab Testing Info</a></li>
+				<li>For roofing, siding and gutter, you have to point the URL/environment to the stage environment when <a href="labtesting.html">lab testing</a>
+					<ul>
+						<li>On 8888 test store, F6 > pass > MyComputer > C > Menards > Utils > MenardAppMenu > dsgnit.xml</li>
+						<li>Right click on dsgnit.xml and open in notepad</li>
+						<li>scroll to the bottom set of tags, one is for gutter, roofing, and siding, set all three to the following</li>
+						<li>AppArg should = stage-kiosk...=restart&amp;selection(storeNumber)=3011"...</li>
+						<li>save</li>
+					</ul>
+				</li>
+			</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Round trip how values in itemAttributes.properties gets used [This is for siding's Additional Options only]</h1>
+			<section>
+				<p>Siding has two ways of retrieving data. One is for regular products and another is for additional options products. Additional options uses the itemAttributes.properties. The main products use the mySQL database to pull product info from. The screen flow in siding is also controlled through the mySQl database base on screen patterns. (bad design but we have to go with it)</p>
+				<img src="images/siding-2.png" class="fit10 popup" />
+			</section>
+		</section>
+		
+		<section>
+			<h1>Estimation</h1>
+			<section>
+				<p>
+				Estimation in siding is a little different from Roofing. There is no one class that does all the estimation (half true). Depending on the siding category, that category.java class will make the estimation. So to see what has been selected in the codes, you'll have to put a break point in the specific category class. For example, Lap.java if lap siding was chosen.
+				</p>
+				
+				<p>
+				The start of the whole application starts with CreateNewEstimatate, here's a high level glance at the entire process.
+				<br>
+				<img src="images/sidingEstimationMain.png" class="fit popup" />
+				</p>
+				
+				<p>
+				Alternative, maybe better approach is break point in NewCreateEstimate.getEstimation() by if (product != null).
+				Here you can also put a break point by selectionsForm varaible sf to see all the selections. This break point is reached per side. So if you have 4 sides, you'll loop this line 4 times.
+				<img src="images/sidingEstimate1.png" class="fit popup" />
+				</p>
+				
+				<p>
+				To trace the selected screen pattern, same break point above, but hover over selectionsForm > sidingSelection treeMap or access selectionForm variable sf.getSelection("Siding1").
+				Keep in mind that, each Side is estimated separately. (there may or may not be a final check to optimize materials). Becuse each side can have openings or doors, etc, therefore each side is best to be estimated individually.
+				</p>
+				
+				<p>
+				To trace the gathered selections for a specific side or a screen pattern, put break point under NewCreateEstimate.getEstimation() at return resultMap.
+				At this point, the products should have been estimated for all sides. Remember, one side has a screen pattern of category, profile, width, color, etc.
+				in which it determines what products are estimated for that one side.<br>
+				<img src="images/sidingEstimate2.png"  class="fit popup"/>
+				</p>
+				
+				<p>
+				To get all the possible products for that screen pattern selected, break point at any of the above, such as result map. Look into sf.getSelection("Siding1") and then under sidingSelection. These are the gathered materials that can be estimated from the pattern. It doesn't mean they all will get estimated. Each estimate category class, i.e. Steel.java, will determine from the list what gets estimated using EstimateUtils.addSizedItem and such.
+				</p>
+				
+				<p>
+				The main estimation will be named as "Siding1". Any additional adds for example, if wainscot is added, all sides of that wainscot will be grouped as "Siding2". Any other additional addons will be named "Siding3" and so on. <br>
+				<strong style="color:yellow; font-size:13px">What's also true is that every new material there are, are grouped into a new Siding.</strong>
+				<img src="images/sidingEstimation4.png" class="fit popup" />
+				</p>
+				
+				<p>
+				All sides that can estimate implement the EstimationProduct interface (i.e. Steel, Lap, Log, etc). NewCreateEstimation starts towards the last few screens in siding. NewCreateEstimate uses a factory pattern to get what EstimationProduct(Steel, Lap, etc) to return. Each side then gathers the possible materials it can estimate based on the selectionsForm (which has a screen pattern selection). The return EstimationProduct calls the getEstimation to calculate how much materials to estimate base on the possible materials the side has gather. The final materials results are stored in resultMap. Optional materials are then estimated additionally into resultMap, as it is a special sepearate estimation apart from the regular estimation.
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Known Issues or Products not showing</h1>
+			<section>
+				<p>You may not always get the qty you expect for steel qty, But this is correct for Steel, the below image looks wrong is correct. This is because steel is cut to fit the size it needs to and so the pricing is correct.</p>
+				<img src="images/sidingKnownIssues1.png" class="fit popup"/>
+			</section>
+			<section>
+				<h1>No Products</h1>
+				<p>Make sure you override the store #. So in the url at first page, 3011 should be changed to 4444 (regression) or 8888 or 6666 for regular mcr testing. However using either of these two, pricing will not be accurate as only 3011 has pricing setup. You can still use 3011 and should maybe use it, till 8888 and 6666 are stable with pricing. But if you run into missing products, run under 8888 or 6666.</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Setup</h1>
+			<section>
+				<ul>
+					<li>Eclipse</li>
+					<li>Java</li>
+					<li>JBoss or TCServer (depending on what we are currently using)</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Debugging Browser Issues</h1>
+			<section>
+				<p>
+				For IE11 siding and roofing won't show up properly unless you change the emulation settings.</p>
+				<ul>
+					<li>Start remote or local siding on first page</li>
+					<li>F12 > change to settings below</li>
+					<li>Proceed with the app</li>
+				</ul>
+				<img src="images/sidingDebug1.png" />
+				
+			</section>
+		</section>
+		
+		<section>
+			<h1>Updating or request new sprites</h1>
+			
+			<section>
+			<p><a href="webappSprite.html">More Info Here</a></p>
+				<ul>
+					<li>Look under siding workspace > media > sprites</li>
+					<li>Find all buttons that are similar > duplicate and save it into a organized folder</li>
+					<li>ex: WitchWalls folder would have all witchWall buttons in it</li>
+					<li>Create MCR request for sprite and attach the zip folder and description describing what is what and what to do</li>
+					<li>Attach the MCR# to the parent ticket if there is such a ticket</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Bottom Trims vs Wainscot (Bottom Trim is only an option for steel panel siding)</h1>
+			<section>
+				<p>
+				Keep in mind, though bottom trim is the same material as the material above it, bottom trim is a different sku so it is a different product. That is why steel bottom trims come in longer pieces, such as 12 feet and not 3 feet like regular side steel panels. It is possible to have wainscot and a bottom trim on wainscot. This means the bottom trim will be the same material as the wainscot.
+				Bottom Trim <img src="images/sidingBottomTrim.png" class="fit popup">
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Sides</h1>
+			<section>
+				<p>
+				Also see known issues for the summary screen with sides above.<br>
+				<img src="images/sidingMaterials1.png" class="fit popup">
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Adding new log file to siding</h1>
+			<section>
+				<p>There many ways to setup log4j. Siding uses the properties approach. Say you want a new type of log file for logging crashes. Aside from the already implemented logs, you can easily add a SidingCrash.log this way</p>
+				<img src="images/sidingLogs.png" class="fit popup">
+			</section>
+		</section>
+		
+		<section>
+			<h1>AOP setup for web using spring struts</h1>
+			<section>
+				<img src="images/sidingAOP.png" class="fit popup">
+			</section>
+		</section>
+		
+		
+		<section>
+			<h1>How to access the web context inside controller</h1>
+			<section>
+				<p>If you are dealing with AOP or tring to instantiate a bean, you may want to access the web context, here's how</p>
+<pre>
+ServletContext sc = request.getSession().getServletContext();
+WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(sc);
+			
+BeanTest beantest = (BeanTest) context.getBean(&quot;testBean&quot;);
+beantest.test();
+</pre>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Environment Properties</h1>
+			<section>
+				<p>
+				Siding and roofing have a similar setup for accessing environment properties. A appConfig.properties file is setup for each environment folder local,dev,stage,prod. This way at runtime, Siding will pull the correct appconfig properties depending on what environment you are in.
+				</p>
+				<p>
+				There is a catch. when running siding locally, the local/environment.properties controls which appConfig to grab. If you are not getting the right appConfig properties at runtime, the path to the appConfig.properties is probably set to a different path in the environment.properties. You can easily modify the environment to point to the correct path, either target the deploy folder or your local server sidingApp folder.
+				</p>
+				
+				<p>Use the StatsLogging class to call in the appConfig like this. There is quite a setup but if you use the class the setup is already setup. The only requirement is that you also have access to the request httpServlet as you have to pass that in.<br><br>
+				Properties appConfigProperties = StatsLogging.getAppConfigurations(request);<br>
+				appConfigProperties.getProperty("emailGroup")
+				</p>
+			</section>
+		</section>
+		
+	</section>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("True Sight - Real User Analyzer");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>True Sight</h1>
+		<p>
+		An online site used with detecting SLA performance. When we get an EAM about SLA, the assigned person of the week who is to take care of the SLA EAM tickets, will drill down to true sight to help them debug where the SLA issue is occurring in what app. True sight is one of the tools we use, but <a href="dynatrace">Dynatrace</a> is another more useful tool.
+		</p>
+		
+		<p>
+		Please refere to the <a href="sla.html" class="link">SLA</a> for instructions for the time being.
+		</p>
+		
+		
+	</section>
+
+</div>
+</body>
+</html>

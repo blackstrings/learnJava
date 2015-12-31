@@ -1,0 +1,314 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("JSTL");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	<section>
+		<h1>JSTL</h1>
+		<p>We use JSTL in our web apps. We are trying to convert java scriptlets &lt;% int num = 5; %&gt; into using jstl tags such as &lt;c:set var="num" value="5" &gt; </p>
+		
+		<p>
+		You can use single quotes instead of double quotes if you need to print double quotes inside a string.
+		</p>
+		
+		<section>
+			<h1>Highlights</h1>
+			<ul>
+				<li>When running on JBoss server, at the top of each JSP page, make sure to include the libraries:
+					<ul>
+						<li>&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%&gt;</li>
+						<li>&lt;%%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%&gt;</li>
+						<li>&lt;%%@ page isELIgnored="false" %&gt;</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Calling object methods or getters or accessors</h1>
+			<section>
+				<p>
+				JSTL is used mainly to call accessor methods, mainly getters, so it can get whatever the return value is. JSTL is not really used to call other methods that are not accssors related.
+				</p>
+				<p>If a java class has a method public String getName(), you can't just call directly "obj.getName()" in JSTL. Instead you want to just do "obj.name" and omit the get prefix and the parenthesese. Keep in mind, JSTL requires that the method was named properly in the java class, by that I mean the method name has to have the "get" word as a prefix. So in other words, the class has to have the method be named getName() in order to work when calling from JSTL. As JSTL is only mainly used for accessing variables and values, not perform any other function calls.
+			</section>
+		</section>
+		
+		<section>
+<pre>
+//samples of jstl core tags 
+&lt;c:set var=&quot;num&quot; value=&quot;5&quot;/&gt; 
+&lt;c:set var=&quot;num2&quot; value=&quot;${5}&quot;/&gt; 	// same as above 
+
+&lt;c:if test=&quot;true&quot;/&gt; 
+	&lt;p&gt;Hello world&lt;/p&gt; 
+&lt;/c:if&gt; 
+
+&lt;c:set var=&quot;x&quot; value=&quot;5&quot;/&gt; 
+&lt;c:if test=&quot;${x &lt; 5}&quot;/&gt; 		// this is how you call a set variable
+	You can do this... 
+&lt;/c:if&gt;
+
+// how to do a if-else statement
+&lt;c:choose&gt;
+	&lt;c:when test=&quot;${x &gt; 5}&quot;&gt;
+		first
+	&lt;/c:when&gt;
+	&lt;c:otherwise&gt;
+		second
+	&lt;/c:otherwise&gt;
+&lt;/c:choose&gt;
+</pre>
+		</section>
+		
+		
+		<section>
+		<h1>How to grab a java object and use it in jstl</h1>
+<pre>
+//items is the java object and is a list
+&lt;tiles:useAttribute id=&quot;itemList&quot; name=&quot;items&quot; classname=&quot;java.util.List&quot; /&gt;
+
+//you can further convert it into another jstl instance if want
+&lt;c:set var=&quot;items&quot; value=&quot;${itemList}&quot;/&gt;
+
+//how you call an object's method, notice you don't do items[0].getImage()
+&lt;c:out value=&quot;${items[0].image}/&gt;
+
+similarly, you can grab a java obj like this too
+&lt;c:set var=&quot;estimateSummary&quot; value=&quot;${estimateSummary}&quot;/&gt;
+but estimateSummary must first exist, for it to exist, there is a code at the top jsp page like this
+&lt;jsp:useBean id="estimateSummary" scope="session" class="com.menards.bmdic.roofing.gui.EstimateSummary"&gt;
+
+See how EstimateSummary is an actual java class, this class has all the return properties that allow you to call functions to return property values.
+
+</pre>
+		</section>
+		
+		
+		
+		<section>
+			<h1>jsp include to c:import</h1>
+			<section>
+				<img src="images/jstl-import1.png" />
+			</section>
+		</section>
+		
+		<section>
+		<h1>JSP to JSTL</h1>
+			<section>
+				<p>JSP variable to be usable in JSTL</p>
+				<img src="images/jstl-jsp1.png" />
+			</section>
+			<section>
+<pre>
+//if you can call this using the jsp getProperty below
+&lt;jsp:useAttribute id=&quot;itemList&quot; name=&quot;estimateSummary&quot; property=&quot;estimateNumber&quot; /&gt;
+
+//then you can call it directly in jstl like this
+&lt;c:out value=&quot;${estimateSummary.estimateNumber}&quot;/&gt;
+or simple just this too
+${estimateSummary.estimateNumber}
+
+// if you can do this in jsp
+&lt;% estimateSummary.getRoofStyle() %&gt;
+
+//to call a method in jstl do this
+&lt;c:out value=&quot;${estimateSummary.roofStyle}/&gt;
+</pre>
+			<p>
+			The reason being is because estimateSummary is a java Bean/Class that has a getter for this roofStyle variable. If you look into the class it will have a getter method getRoofStyle. JSTL by default will call this method and get the value if such method exist by just using estimateSummary.roofStyle.  If the getter did not exist, then the jstl .roofStyle will not work and will throw an exception if used.
+			</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Using JSTL in HTML</h1>
+			<section>
+				<p>Once you establish a variable in jstl like so using c:set, you can call in the jstl var directly in the html like so. Keep in mind the example has a c:set variable of name and path set. You do not have to use the c:out tag, only if you need to escape white spaces and characters.</p>
+				<img src="images/jstl-syntax1.png" />
+				</p>
+			</section>
+		</section>
+		
+		<section>
+		<h1>How to join strings in jstl</h1>
+<pre>
+&lt;c:set var=&quot;str1&quot; value=&quot;I am going&quot;/&gt; 
+&lt;c:set var=&quot;str2&quot; value=&quot;/this/path/mine/&quot;/&gt; 
+&lt;c:set var=&quot;finalString&quot; value=&quot;${str1}${str2}&quot;/&gt; 
+
+//or 
+
+This is my string: ${str1]${str2}
+</pre>
+		</section>
+		
+		<section>
+		<h1>How to call java object constants</h1>
+<pre>
+// to get constant from Product.java
+//add import of class at top of jsp page
+<%@ page import="com.menards.kiosk.util.Product" %>
+
+// import core tag
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+// you can use the constant like this 
+&lt;c:if test=&quot;${'myStr' == Product.SOME_CONSTANT_VALUE}&quot;/&gt;
+</pre>
+		</section>
+		
+		<section>
+			<h1>Things to take note</h1>
+<pre>
+&lt;c:set var=&quot;estimateSummary&quot; value=&quot;${estimateSummary}&quot;/&gt;
+
+&lt;c:set var=&quot;roofCoverStyle&quot; value=&quot;estimateSummary.roofCoverStyle&quot;/&gt;
+
+the above will return "" if roofCoverStyle does not yet exist - though the function is available. It will not be null if you test it against null.
+
+if doing a test for property, do this instead, call the property directly
+&lt;c:when test=&quot;${estimateSummary.roofCoverStyle eq 'Terra Bella Steel Shingles'}&quot;&gt;
+
+you can use test="${object.property == 'the string'}" or the eq symbol
+
+If you use c:choose, you must have at least 1 c:when and 1 c:otherwise. You can have multiple c:when and (optional) one otherwise.
+
+To print out stuff use the c:out value="this is the printout"
+</pre>
+		</section>
+		
+		<section>
+		<h1>Converting JSTL to Javascript</h1>
+<pre>
+// create jstl variable 
+&lt;c:set var=&quot;opt&quot; value=&quot;${currItem.opt }&quot;/&gt; 
+
+// open javascript
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+// convert to javascript 
+var opt = '&lt;c:out value=&quot;${opt}&quot;/&gt;'; 
+
+// you can now use var opt in javascript
+</pre>
+		</section>
+		
+		<section>
+			<h1>Javascript to JSTL</h1>
+			<p>To take a javascrip varable and pass it to a jstl is not really possible nor encourage even if so.
+			As javascript is client side and jstl jsp are server side. Even if you could find a way, it would be a bad design.</p>
+		</section>
+		
+		<!-- JSP to JSTL -->
+		<section>
+		<h1>JSP scriptlets to JSTL sample</h1>
+			<section>
+				<p>If you want to grab a string variable from the tiles-def.xml in jstl, you want to use this method</p>
+				<img src="images/jstl-tiles1.png" width="100%" />
+			</section>
+			
+		</section>
+		
+		<!-- Grabbing java objects -->
+		<section>
+		<h1>Java list objects to JSTL - using a controller or setAttribute()</h1>
+			<section>
+				<p>When you see jsp scriptlets trying to grab a list, what it is doing is basically using the Item.java class. To get the setup right before you can retrieve those list in JSTL, you have to do the following.</p>
+				<img src="images/jstl-tiles2.png" width="100%" />
+			</section>
+			
+		</section>
+		
+		<section>
+			<h1>Getting a Java object from a Java Bean and making it usable in JSTL - without controller </h1>
+			<section>
+				<figCaption>someView.jsp</figCaption>
+				<img src="images/jstl-bean1.png" width="100%" />
+				<p>
+				"selectionsMap" is a getter method in SelectionsForm class that has map return type. In order for JSTL to pick up the method, the method should be named getSelectionsMap to follow the proper naming rules.
+				</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Java Maps, Hashtable, HashMap to JSTL</h1>
+			<section>
+				<p>Make sure you input the classes you need to use at top of the jsp.
+				</p>
+				<figcaption>jsp</figcaption>
+				<img src="images/jstl-syntax2.png" width="100%" alt="jsp"/>
+				
+				<p>The java controller should somehow make the map variabel available if not already available</p>
+				<figcaption>java controller</figcaption>
+				<img src="images/jstl-syntax4.png" />
+				
+				<p>You can then test the map with something like this: assuming selectionsMap is available. To grab values by key put the key inside brackets as below with single quotes. Thre is no need to loop through a collection to get keys and values.</p>
+				<figcaption>jsp</figcaption>
+				<img src="images/jstl-syntax3.png" width="100%"/>
+				
+				<p>Check if a map key is empty or not</p>
+				<figcaption>jsp</figcaption>
+				<img src="images/jstl-syntax5.png" />
+				
+				<p>Concat string with counter variable to use for map</p>
+				<figcaption>jsp</figcaption>
+				<img src="images/jstl-syntax6.png" />
+				
+				<p>Working with list of unknown types</p>
+				<figcaption>example - estObjects</figcaption>
+				<img src="images/jstl-syntax8.png" width="100%"/>
+				
+			</section>
+		</section>
+		
+		<!-- check null -->
+		<section>
+			<h1>Checking for null in strings and maps</h1>
+			<section>
+				<figcaption>jsp</figcaption>
+				<img src="images/jstl-syntax7.png" width="100%" />
+			</section>
+		</section>
+		
+		<section>
+			<h1>Exception Will Be Thrown</h1>
+			<section>
+				<p>For object, if you try to access a getter method that doesn't exsit, unlike maps, it will throw a server error either way. In the example below, both are invalid, printMatList2 doesn't exist as a method in the object. So testing against null won't even work.</p>
+				<img src="images/jstl-exception1.png" />
+			</section>
+		</section>
+		
+		<section>
+			<h1>Formatting String Numbers</h1>
+			<section>
+				<img src="images/jstl-format1.png" width="100%" />
+			</section>
+		</section>
+		
+		<section>
+			<h1>request.getContextPath() in JSTL</h1>
+			<section>
+				<p>&lt;c:set var="url" value="${pageContext.servletContext.contextPath} /&gt;</p>
+			</section>
+		</section>
+		
+	</section>
+
+</div>
+</body>
+</html>

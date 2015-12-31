@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils", "app/DBTest"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("web Database");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<section>
+		<h1>Web Data base simple test form</h1>
+		<section>
+			<p>
+			If the browser supports indexDB, then this form is used to do local database for large data.
+			</p>
+			<section>
+				<form>
+					Roll No <input type="text" name="rollno" id="rollno"/><br>
+					Name <input type="text" name="name" id="name" /><br>            
+					<input type="button" name="addBtn" value="Add" id="addBtn"/>
+					<input type="button" name="removeBtn" value="Remove" id="removeBtn"/>
+					<input type="button" name="getBtn" value="Get" id="getBtn"/>
+					<input type="button" name="updateBtn" value="Update" id="updateBtn"/>
+				</form>
+				<div id="result"></div>
+			</section>
+		
+		</section>
+		
+	</section>
+	
+</div>
+</body>
+</html>

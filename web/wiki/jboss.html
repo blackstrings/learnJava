@@ -1,0 +1,107 @@
+<html>
+<head>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<title></title>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("JBoss");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+		<h1>JBOSS</h1>
+		<p>A J2EE (Java 2 Enterprise Edition) container that comes with either TomCat or Jelly embedded for handling HTTP request. It provides an engine for our JSP (Java Server Pages) web pages. In other words, it is used to compile our JSP dynamically on the server and turn them into HTML web pages which then sends the data to the client side. FYI: You can't just run JSP pages on a regular web server. JSP is similar to ASP and PHP. In short, using JSP, it allows you to put programming codes inside your html to generate dynamic web pages.</p>
+		<section>
+			<h1>Highlights</h1>
+			<ul>
+				<li>Typical workflow: webserver > Tomcat > JBoss > database</li>
+				<li>Used for internal applications</li>
+				<li><a href="siding.html">Siding</a> & <a href="roofing.html">Roofing</a>, and <a href="mvkd.html">Menards Virtual Kitchen Design-it (MVKD)</a> uses this</li>
+				<li>A server shared between intranet teams</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1><a name="jboss">Installing JBoss</a></h1>
+			<ul>
+				<li>Copy JBoss folder from F:/DesignIt/JBoss/jboss-5.1.0.GA to you local computer C:/JBoss</li>
+				<li>Add these two folder (RoofingEstimator.war) & (SidingEstimator.war) to C:/JBoss/jboss-5.1.0.GA/server/default/deploy</li>
+				<li>Create a shortcut of run.bat to your desktop - the file is located under C:/JBoss/jboss-5.1.0.GA/bin/</li>
+				<li>To run, just double click on the run.bat</li>
+				<li>Whatever gets created in siding or roofing will be located under the two folders you created</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Competitor</h1>
+			<ul>
+				<li>Apache - a regular webserver that handles HTTP traffic</li>
+				<li>TomCat - a servlet/JSP engine that supports JSP development. Can also sit next to another webserver to allow asp/php/perl/cgi requests</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>MCR PCI Patch Update Test</h1>
+			<p>When there is a MCR for PCI Patch, it means we have to perform a quick test on Siding, Roofing, and Menards Virtual Kitchen Design-it app</p>
+			<ul>
+				<li>To start test go to site <a href="http://stageapp1-internal-designit:8080/KioskUrls/index.html" target="_blank">here</a></li>
+				<li>Run each test below for Siding, Roofing, and MVKD</li>
+				<li>If test is under alpha or beta, click on LB under Dev under each app</li>
+				<li>Remember for siding & roofing, you need to add something like this to the end of the url: =restart&selection(storeNumber)=3011 ...</li>
+				<li>For siding test while making sure everything worked, make sure you can save & recall your design</li>
+				<li>For roofing, check that you can print okay (usually 3 minute wait for printing to start printing so give it some time)</li>
+				<li>For kitchen, just check printing and select as many as you can</li>
+				<li>Overall check if images are missing and that the app starts</li>
+				<li>At end of testing 3 apps, assign MCR back to Merica, log under construction, status to "wait for beta stage" or the next stage</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Hints and Hacks to Preview Changes</h1>
+			<section>
+				<h1>For CSS Changes</h1>
+				<p>if you are only making css changes, you can preview the changes without having to start stop jboss server. It only works on chrome and firefox. As long as you go to a new page and return you should see the changes. If this method doesn't work, you can use the below method which is slightly longer without re-deploying. If going to a new page and back doesn't preview your changes, you'll want to try clearing all your cache history.</p>
+				<p>You can even work on the css directly with firefox firebug, get the setting you like, then copy paste the css to the actual code file</p>
+				<ul>
+					<dl>Works with the following:</dl>
+					<li>Firefox - works with css changes only - go to new screen and back to see the change</li>
+					<li>Chrome - works with css changes only - you'll have to refresh the browser (CTRL+F) to see the css changes</li>
+					<li>IE - You may not have to stop/start server to see the changes - Try <strong>refresh Page</strong> first so the css cache is clear, if you don't see the changes, then you'll have to start/stop server</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h1>For JSP changes</h1>
+				<p>When you want to make just JSP changes and don't want to rebuild and deploy to see the changes, you can edit jsp pages, and stop start the server with this method to see the changes without re-deploying the app</p>
+			</section>
+			
+			<section>
+				<h1>For Java changes</h1>
+				<p>You'll have to rebuild and deploy</p>
+			</section>
+			
+			<ul>
+				<li>http://localhost:8080</li>
+				<li>Admin console</li>
+				<li>User:admin pass:admin</li>
+				<li>Web Application (WAR)s</li>
+				<li>RoofingEstimator.war</li>
+				<li>Control > click Start or Stop</li>
+			</ul>
+		</section>
+		
+	</section>
+
+</div>
+</body>
+</html>

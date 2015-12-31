@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("BuildingApps");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<div id="contents">
+	<section>
+		<h1>Building Apps</h1>
+		<section>
+		<p>You can build the apps and run it outside of eclipse.</p>
+		</section>
+		
+		<section>
+			<h1>Directions</h1>
+			<section>
+				<ul>
+					<dl>You can use the command line or build it inside eclipse</dl>
+					<li>Choose the command you want to build
+						<ul>
+							<li>mvn clean package -PstoreDeploy -Dmaven.test.skip=true</li>
+						</ul>
+					</li>
+					<li>Login using your user and pass</li>
+					<li>Point to a store with your login account and make it your store</li>
+					<li>You can now run the JNLP and it should pick up your store on stage</li>
+				</ul>
+				
+			</section>
+		</section>
+		
+		<section>
+			<h1>
+		</section>
+		
+	</section>
+</div>
+</body>
+</html>

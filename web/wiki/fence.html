@@ -1,0 +1,89 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "Fence";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+		<h1>Fence</h1>
+		<p>Fence is one of our legacy c++ applications. It is also one of the simplest application on our kiosks. It allows a guest to create a basic line drawing of what their fence layout will look like and create an estimate based on the products they selected. There are a wide range of choices to choose from.</p>
+		<section>
+			<h1>Special Notes</h1>
+			<ul>	
+				<li>Fence uses INI files for managing screen and telling the application what we want to see on the screen (btns, text, etc). In debug you will see a number ex: 200 on top left, so the file to manipulate that screen is in Step200.INI</li>
+				<li>Can't access INI files inside VS6, use window browsers instead</li>
+				<li>Adding/Deleting buttons are dynamic. If you increase the number of buttons on a page which exceeds the screen space availability, a 2nd screen will be generated automatically</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Terminology</h1>
+			<ul>
+				<li>SCodes = like SKU they are used to map to SKU numbers for easy updating purposes</li>
+				<li>INI files : use for displaying media on screen</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Setup</h1>
+			<ul>
+				<li>Visual Studio 6 (IDE) (C++)</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Side Stuff</h1>
+			<ul>	
+				<li>Preveious - go back</li>
+				<li>Textbanner - to display any text you see (except button text)</li>
+				<li>Each text you add, you have to also update the total count</li>
+				<li>Two configuration: Release & Debug - we work in debug</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Debugging Fence Product SKUs</h1>
+			<section>
+				<p>
+				If products aren't showing up, check to see if the store systems are down. For example check if sys1, 8888, 4444, 5555 is down for a specific fence sku by using a URL to see if you are getting null returns. Currently i don't know the url get it from team  member like dave b.
+				</p>
+			</section>	
+		</section>
+	</section>
+	
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

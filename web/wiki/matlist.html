@@ -1,0 +1,97 @@
+<html>
+<head>
+
+<!-- Dynamic Title -->
+<script src="javascript/Utils.js"> // call misc </script>
+<script>
+title = "Material List";
+document.write("<title>" + getMainWebTitle() + title + "</title>");
+</script>
+
+<!-- Dynamic Fonts -->
+<script src="fonts.js"> // call fonts </script>
+<script>getGoogleFonts();</script>
+<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+
+<body>
+
+<div id="contents">
+	
+	<!-- navigation include using javascript-->
+	<script src="nav.js"></script>
+	<script>createNav();</script>
+	
+	<section>
+	<h1>Material List (a.k.a option list, custom list, selection list)</h1>
+		<section>
+		
+		<p>The material list is a text file usually "material.txt" that is generated per application use when you reach the end of the kiosk app. It is basically a list of all materials gathered/selected during the application process. </p>
+		
+		<p>
+		We use this text file for testing purposes, such as to see if a certain material is selected or should or should not be there. Material list are most helpful when you need to verify of a certain item SKU was placed in the final order and such things like that.
+		
+		<p>Deck (java)</p>
+		<a href="images/matList.png" target="_blank">
+				<img src="images/matList.png" width="100%"/>
+				</a>
+				
+		<p>Garage C++</p>
+		<a href="images/matList1.png" target="_blank">
+				<img src="images/matList1.png" width="100%"/>
+				</a>
+				<br>
+				
+		</p>
+		
+		</section>
+		
+		<section>
+			<h1>Highlights</h1>
+			<ul>
+				<li>The material list is however located in two different places depending on whether the app is a Java or C++ application.
+				</li>
+				<li>
+				<strong>Java app: C:/menards/matlist/ </strong><br/>
+				All java app will generate the material list into this directory for conveniency. So they all share the same directory. Each material list from each Java app has a number identification. (ie. 24=deck, 25=landscaping, etc)
+				</li>
+				<li>
+				<strong>C++ app: C:/mes/projectName/material.txt</strong> <br/>
+				Each C++ app will generate it's own material list file inside its own workspace.
+				</li>
+				
+			</ul>
+		</section>
+		
+		<section>
+			<h1>Base List</h1>
+			<ul>
+				<li>Some app like "Polebarn" still provides a base list. It is a material list that has pre-defined selecitons. The selections will always be the same as the pre-defined materials are coded right inside the baselist function. Where the base list is used, is at the end of the app where guest can see a comparison calculation of their options price and the base price.
+				</li>
+				<li>
+				There is not a way to print the base list of materials unless you implement one. But all items that are standard are materials in the base list. Materials that say "best" or "recommended" are not in the base list as these are custom or option materials.
+				</li>
+				
+			</ul>
+		</section>
+		
+	</section>
+	
+	
+	
+	
+	
+	<!-- include footer using javascript-->
+	<script src="footer.js"></script>
+	<script>createFooter();</script>
+	
+</div>
+
+
+
+
+
+</body>
+
+</html>

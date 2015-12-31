@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils", "app/oopTest"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Javascript OOP");
+				});
+			});
+		});
+	</script>
+	
+	<!-- doing it this way is probably the best route and not use require js or modules -->
+	<script src="js/appWiki/nonRequireJS/OOP.js"></script>
+	
+	
+</head>
+
+<body>
+
+<div id="contents">
+
+	<section>
+	
+		<section>
+			<h1>Javascript in OOP</h1>
+			<p>Javascript is a prototype-base language, therefore OOP is not as straight forward coming from c++ or java.
+			</p>
+		
+		<section>
+		
+		<section>
+			<h1>Calling methods from OOP.js </h1>
+			<ul>
+				<li>Calling MYAPP.utils.addOnePlusOne() method: 
+					<ul><li>
+					<script>
+						rdocument.write(MYAPP.utils.addOnePlusOne());
+					</script>
+					</li>
+					</ul>
+				</li>
+				
+				<li>Calling MYAPP.utils.isOneGreaterThanTwo() method: 
+					<ul><li>
+					<script> 
+					document.write(MYAPP.utils.isOneGreaterThanTwo()); 
+					</script>
+					</li></ul>
+				</li>
+				
+				<li>Calling MYAPP.commonMethod.generateRandom method to log: 
+					<ul><li><script> document.write(MYAPP.commonMethod.generateRandom()); </script></li></ul>
+				</li>
+				
+				<li>Calling MYAPP.commonMethod.validateName() method: 
+					<ul><li><script> document.write(MYAPP.commonMethod.validateName("Cool")); </script></li></ul>
+				</li>
+				
+				<li>Calling MYAPP.commonMethod.properties: 
+					<ul><li><script> document.write(MYAPP.commonMethod.property1 == "something"); </script></li></ul>
+				</li>
+				
+				<li>Creating a Person object and calling methods/properties
+					<ul>
+						<li>
+							<script>
+								var person1 = new Person("Tom",55);
+								document.write("person1 name is: " + person1.name + " and  age is: " + person1.age); 
+							</script>
+						</li>
+						<li>
+							<script>
+								document.write(person1.run());
+							</script>
+						</li>
+					</ul>
+				</li>
+				
+			</p>
+		</section>
+		
+	</section>
+
+</div>
+</body>
+</html>
