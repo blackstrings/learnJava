@@ -105,6 +105,7 @@ define(function () {
 					{ "name": "Wintail", "path": "wintail.html"},
 					{ "name": "Balsamiq", "path": "balsamiq.html"},
 					{ "name": "Blender", "path": "blender.html"},
+					{ "name": "Maya", "path": "maya.html"},
 					{ "name": "GIMP", "path": "gimp.html"},
 					{ "name": "SketchUp", "path": "sketchup.html"},
 					{ "name": "Unity", "path": "unity.html"},
