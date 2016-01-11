@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - loaders - OBJ MTL loader </title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			}
+			#info {
+				color: #fff;
+				position: absolute;
+				top: 10px;
+				width: 100%;
+				text-align: center;
+				z-index: 100;
+				display:block;
+			}
+			#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+		</style>
+	</head>
+
+	<body>
+		<div>
+		<a href="threejs.html" style="color:green">&lt;&lt;BACK</a> 
+		OBJMTLLoader using tranparency material - MUST use FireFox as external loaded files are disable in chrome due to cross domain policy <br>
+		make sure the cube is 32 units tall or bigger when creating in blender, else obj may be too small.
+		For transparency, make sure mtl has d set to .9999 and not 1 or 0 and map_d set to png alpha file.
+		for double sided, do traverse and set material side to doubleside.
+		</div>
+
+		<script src="js/lib/threejs/three.min.js"></script>
+		<script src="js/lib/threejs/controls/OrbitControls.js"></script>
+		<script src="js/lib/threejs/loaders/DDSLoader.js"></script>
+		<script src="js/lib/threejs/loaders/MTLLoader.js"></script>
+		<script src="js/lib/threejs/loaders/OBJMTLLoader.js"></script>
+
+		<!--
+		<script src="js/Detector.js"></script>
+		<script src="js/libs/stats.min.js"></script>
+		-->
+		<script>
+
+			var container, stats;
+
+			var camera, scene, renderer;
+
+			var mouseX = 0, mouseY = 0;
+
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
+
+			//custom setting
+			//---------------------------------------
+			var enabelDragControl = true;
+			//---------------------------------------
+			
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.z = 100;
+
+				// CONTROLS
+				//drag controls - turn off the mouse event below if using this code
+				if(enabelDragControl){
+					controls = new THREE.OrbitControls( camera );
+					controls.maxPolarAngle = 0.9 * Math.PI / 2;
+					controls.enableZoom = true;
+				}
+				
+				// scene
+
+				scene = new THREE.Scene();
+
+				//////////////
+				// Lighting //
+				//////////////
+				var ambient = new THREE.AmbientLight( 0x444444 );
+				scene.add( ambient );
+
+				//add dl front
+				var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+				directionalLight.intensity = 3.0;
+				directionalLight.position.set( 0, 0, 1 ).normalize();
+				scene.add( directionalLight );
+				//add dl front reverse
+				var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+				directionalLight.intensity = 1.0;
+				directionalLight.position.set( 0, 0, -1 ).normalize();
+				scene.add( directionalLight );
+				
+				//add dl right to left
+				var dl2 = new THREE.DirectionalLight( 0xffeedd );
+				dl2.intensity = 1.0;
+				dl2.position.set( 1, 0, 0 ).normalize();
+				scene.add( dl2 );
+				
+				//add dl left to right
+				var dl3 = new THREE.DirectionalLight( 0xffeedd );
+				dl3.intensity = 1.0;
+				dl3.position.set( -1, 0, 0 ).normalize();
+				scene.add( dl3 );
+				
+				//add dl bottom up
+				var dl4 = new THREE.DirectionalLight( 0xffeedd );
+				dl4.intensity = 1.0;
+				dl4.position.set( 0, -1, 0 ).normalize();
+				scene.add( dl4 );
+				
+				//add dl top down
+				var dl5 = new THREE.DirectionalLight( 0xffeedd );
+				dl5.intensity = 1.0;
+				dl5.position.set( 0, 1, 0 ).normalize();
+				scene.add( dl5 );
+				//------------------------------------------------------- end of lighting
+			
+				///////////
+				// Model //
+				///////////
+
+				var onProgress = function ( xhr ) {
+					if ( xhr.lengthComputable ) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						console.log( Math.round(percentComplete, 2) + '% downloaded' );
+					}
+				};
+
+				var onError = function ( xhr ) {
+				};
+
+
+				THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+
+				var loader = new THREE.OBJMTLLoader();
+				
+				//MODEL 1
+				//loader.load( 'obj/male02/male02.obj', 'obj/male02/male02_dds.mtl', function ( object ) {
+				//loader.load( 'obj/cubeTransp/cubeLong.obj', 'obj/cubeTransp/cubeLong.mtl', function ( object ) {	//tranps cube
+				loader.load( 'obj/shelf/shelf1.obj', 'obj/shelf/shelf1.mtl', function ( object ) {	//shelf cube
+					object.position.y = 10;
+				
+					//tweak this if your model is too tall, offset it
+					//object.position.y = - 80;
+					
+					//tweak on opacity
+					/*
+					object.traverse( function( node ) {
+						if( node.material ) {
+							node.material.opacity = 1.0;
+							node.material.transparent = true;
+						}
+					} );
+					*/
+					
+					//enable double side faces
+					//note that for one object with many faces, there may be artifacts when seeing through, such as a cube.
+					object.traverse( function( node ) {
+						if( node.material ) {
+							node.material.side = THREE.DoubleSide;
+						}
+					});
+					
+					//add model to scene
+					scene.add( object );
+
+				}, onProgress, onError );
+				
+				//MODEL 2
+				//loader.load( 'obj/male02/male02.obj', 'obj/male02/male02_dds.mtl', function ( object ) {
+				loader.load( 'obj/cubeGrid/cubeBasic.obj', 'obj/cubeGrid/cubeBasic.mtl', function ( obj ) {	//grid cube
+				
+					//tweak this if your model is too tall, offset it
+					//object.position.y = - 80;
+					obj.scale.set(.5,.5,.5);	//scale down this cube by half on each scale axis
+					
+					//tweak on opacity
+					/*
+					object.traverse( function( node ) {
+						if( node.material ) {
+							node.material.opacity = 1.0;
+							node.material.transparent = true;
+						}
+					} );
+					*/
+					
+					//add model to scene
+					scene.add( obj );
+
+				}, onProgress, onError );
+				
+				//MODEL 3 - custom made
+				//-----------------------------------------------------
+				// geometry
+				var geometry = new THREE.BoxGeometry( 10, 10, 10 );
+				// params
+				//var SHADING = THREE.SmoothShading;
+				var SHADING = THREE.FlatShading;
+				var OPACITY = 0.5;
+				
+				// materials    
+				var material = new THREE.MeshLambertMaterial( {
+					color: 0xcccccc, 
+					side: THREE.FrontSide, //THREE.BackSide
+					shading: SHADING,
+					transparent: true,
+					opacity: OPACITY
+				} );       
+				
+				//combine geo and mat to create the mesh
+				var custMesh = new THREE.Mesh(geometry, material);
+				custMesh.position.y = 20;
+				scene.add(custMesh);
+				//---------------------------------------------------- end of model 3
+				
+				//////////////
+				// Renderer //
+				//////////////
+
+				renderer = new THREE.WebGLRenderer();	//if mtl has alpha, this line will work
+				//renderer = new THREE.WebGLRenderer( { alpha: true } );	//alpha
+				
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				
+				//set 3d canvas bg color
+				//renderer.setClearColor(0x000000, 0);		//default value black
+				//renderer.setClearColor( 0xf0f0f0 );		//white
+				renderer.setClearColor( 0x55ccff );			//blue
+				
+				container.appendChild( renderer.domElement );
+				
+				if(!enabelDragControl){
+					//activate auto mouse location control
+					document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				}
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				mouseX = ( event.clientX - windowHalfX ) / 2;
+				mouseY = ( event.clientY - windowHalfY ) / 2;
+
+			}
+
+			//
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+				render();
+
+			}
+
+			function render() {
+				
+				if(!enabelDragControl){
+					camera.position.x += ( mouseX - camera.position.x ) * .05;
+					camera.position.y += ( - mouseY - camera.position.y ) * .05;
+				}
+
+				camera.lookAt( scene.position );
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+
+	</body>
+</html>

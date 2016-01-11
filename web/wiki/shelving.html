@@ -1,27 +1,23 @@
 <html>
 <head>
-
-<!-- Dynamic Title -->
-<script src="javascript/Utils.js"> // call misc </script>
-<script>
-title = "Shelving";
-document.write("<title>" + getMainWebTitle() + title + "</title>");
-</script>
-
-<!-- Dynamic Fonts -->
-<script src="fonts.js"> // call fonts </script>
-<script>getGoogleFonts();</script>
-<link rel="stylesheet" type="text/css" href="main.css">
-
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Three jS");
+					
+				});
+			});
+		});
+	</script>
 </head>
 
 <body>
 
 <div id="contents">
-	
-	<!-- navigation include using javascript-->
-	<script src="nav.js"></script>
-	<script>createNav();</script>
 	
 	<section>
 		<h1>Shelving</h1>
@@ -31,26 +27,47 @@ document.write("<title>" + getMainWebTitle() + title + "</title>");
 			<h1>Highlights</h1>
 			<ul>
 				<li>Link: <a href="http://stagepreview-internal-shelving.menards.net/shelving/">staging</a></li>
+				<li>Link: <a href="https://internal-store.qa.menards.com/main/e-ShelvingKiosk.html">stage-internalStoreQA</a></li>
+				
 			</ul>
+		</section>
+		<section>
+			<h1>Low Res Creation</h1>
+			<section class="box">
+				<p>Overview process of converting a hi-res model to a lower res</p>
+				<img src="images/shelvingLowRes1.png" class="fit popup">
+			</section>
+			<section class="box">
+				<h2>Transparency MTL for ThreeJS webGL</h2>
+				<p>d 0.9999 - has to be this for threejs, don't do 1.0(no transprancy) or 0.0(100% transparency)
+				although any value other than 0 will be opaque in blender, but is fine, just enable transparency when bringing it into blender.</p>
+				<p>Kd 1.0 1.0 1.0 - you want for blender & threejs, (0 makes color very black in threejs, and opaque in blender)
+				The close the value is to zero, the darker material gets in threejs.
+				</p>
+				<p>Ni - dont matter, can be 1 or 0</p>
+				<p>illum 1 - should not be 3 or 4 for both blender and threejs(get black transparency)
+				<img src="images/shelvingMTL1.png" class="fit popup">
+			</section>
+			<section class="box">
+				<h2>Testing Shelving Locally</h2>
+				<ul>
+					<li>Make sure pointing to menards.net</li>
+					<li>Make sure data is not null, hard code the path</li>
+					<li>Make sure the canvas is bigger than the shelf we are adding</li>
+					<li>Transparency should work and alpha channel should work without moding the data</li>
+					<li>For double side to work, must turn on double on material in the child traverse</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+		
 		</section>
 		
 		
 	</section>
 	
 	
-	
-	
-	
-	<!-- include footer using javascript-->
-	<script src="footer.js"></script>
-	<script>createFooter();</script>
-	
 </div>
-
-
-
-
-
 </body>
-
 </html>

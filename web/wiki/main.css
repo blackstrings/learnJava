@@ -295,6 +295,26 @@ section a.collapseAll {
 	padding:5px; margin-right:5px;
 }
 
+.column3 {
+	-webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+	
+	-webkit-column-rule:1px solid lightblue; /* Chrome, Safari, Opera */
+    -moz-column-rule: 1px solid lightblue; /* Firefox */
+    column-rule: 1px solid lightblue;
+	
+	-webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
+
+	-webkit-column-span: all; /* Chrome, Safari, Opera */
+    column-span: all;
+	
+	-webkit-column-width: 100px; /* Chrome, Safari, Opera */
+    column-width: 100px;
+}
+
 
 /* ################################ SEARCH BOX - Autocomplete*/
 

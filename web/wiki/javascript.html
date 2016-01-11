@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <head>
 	<title></title>
 	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
@@ -12,6 +12,15 @@
 			});
 		});
 	</script>
+	<style>
+	.customOutline ul, .customOutline li{
+		margin:0;
+		padding:0;
+	}
+	.customOutline ul li {
+		margin-left:25px;
+	}
+	</style>
 </head>
 
 <body>
@@ -240,6 +249,8 @@ function createArray(length) {
 			Asyncronous means any step can run simultaneously together or one step can start at any time without having to wait for another step to complete. Kinda of like multi-threading.
 			</p>
 			
+			<p>Something like RequireJS uses AMD, which loads modules for you to use like classes and handles dependencies</p>
+			
 			<p><span id="modelDemo"></span></p>
 			
 			<script>
@@ -285,6 +296,34 @@ function createArray(length) {
 				//utillies.multi(3);
 				
 			</script>
+		</section>
+		
+		<section>
+			<h1>Min js files</h1>
+			<section>
+				<p>when you don't have min files, you'll see all the folders and sub js files that connected together to work together.
+				With min.js files, all the js files that work together, are compressed into one single file, and is a lot harder to read.
+				</p>
+				<p>
+				Example of a js library not minified
+				</p>
+				<aside style="border:thin solid #fff" class="customOutline">
+					<ul>
+						<li>main.js</li>
+						<li>methods.js</li>
+						<li>subFolder
+							<ul>
+								<li>someMod.js</li>
+								<li>someMod2.js</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</aside>
+				<p>In a minified js file, there are no folders, 
+				all the modules js files are compressed into one big file for loading optimization.
+				For eample, <a href="threejs.html" class="link" target="_blank">Three.min.js</a> is a minified version of the entire threejs library.</p>
+			</section>
 		</section>
 		
 	</section>

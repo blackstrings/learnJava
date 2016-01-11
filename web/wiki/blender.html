@@ -36,7 +36,7 @@
 				Also the T key brings up the transform tools window</p>
 			</section>
 			
-			<h1>3D Cursor / crosshair left mouse</h1>
+			<h1>3D Cursor [], crosshair left mouse</h1>
 			<section>
 				<section class="box">
 					<p>The 3d cursor that helps you change the pivot point of an object. works in all mode.</p>
@@ -48,11 +48,18 @@
 					<img src="images/blender3dcursor4.png" class="fit popup"/>
 				</section>
 				<section class="box">
-					<h2>Snapping 3dCursor</h2>
+					<h2>Snapping 3dCursor Onto</h2>
 					<p>
-					Shift + C = to center grid<br>
-					Shift + S > Cursor to grid
+					Shft + C = to center grid<br>
+					Shft + S > Cursor to grid<br>
 					</p>
+					<h2>Set 3d Cursor Accurately</h2>
+					<p>
+					select object > edit mode > select vertex,face,edge first<br>
+					Shft + S > Cursor to selected 
+					</p>
+					<h2>Set Obj to 3dCursor</h2>
+					<p>Shft + S > Selection to Cursor </p>
 				</section>
 				<section class="box">
 					<h2>Locking with View</h2>
@@ -65,6 +72,21 @@
 				</section>
 			</section>
 			
+			<h1>Pivot []</h1>
+			<section>
+				<section class="box">
+					<h2>Modify Pivot</h2>
+					<p>Modify pivote permantly or change pivot of 3d object</h2>
+					<p>to modify pivot > Snap 3d cursor to selected vertex or place on 3d object > press T > Origin > Origin to 3D Cursor</p>
+				</section>
+				<section class="box">
+					<h2>Set temp pivot</h2>
+					<p>Rotate at pivot, scale at pivot, translate at pivot
+					<p>Snap 3d cursor to a vertex or on 3d object to pivot from > pivot point btn (bottom panel) >
+					 3D Cursor > rotate </p>
+					<img src="images/blenderPivot1.png" class="fit popup"/>
+				</section>
+			</section>
 			
 			
 			<h1>Snapping []</h1>
@@ -73,6 +95,10 @@
 					<p>In object mode, use shft+tab to turn on snapping and again to turn off. </p>
 					<p>move object by right click and hold, then use x,y,z to further combine and snap to an axis </p>
 					<img src="images/blenderSnapping1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>snap obj to center of grid</h2>
+					<p>This method will use the object's pivot point > object mode > Select model > Alt + G</p>
 				</section>
 			</section>
 			
@@ -116,11 +142,133 @@
 					<p>Select obj > edit mode > Face > A for all face selected</p>
 					<p>Ctrl + N = recalculate all normals face outside</p>
 					<p>Ctrl + Shft + N = recalculate all normals face inside</p>
+					
+				</section>
+				<section class="box">
+					<h2>Display Normals</h2>
+					<p>edit mode > Press N > Mesh Display > select face to display normals</p>
+					<img src="images/blenderNormals2.png" class="fit popup"/>
 				</section>
 				<section class="box">
 					<h2>Flip 1 Face</h2>
 					<p>Edit mode > select face > press T > shading/UVs </p>
 					<img src="images/blenderNormals1.png" class="fit popup"/>
+				</section>
+			</section>
+			
+			
+			<h1>Cutting</h1>
+			<section>
+				<section class="box">
+					<h2>Cut through obj</h2>
+					<p>Use the bisect tool as the knife tool is funky. Edit mode > bisect (or spacebar > type bisect)</p>
+				</section>
+			</section>
+			
+			<h1>Combine [] Separate [] Parent []</h1>
+			<section>
+				<section class="box">
+					<h2>Combine/Separate</h2>
+					<p>This is different than parenting. Ctrl + J (combine)</p>
+					<p>edit mode > select faces > press P > select type to separate by</p>
+				</section>
+				<section class="box">
+					<h2>Parent/unparent</h2>
+					<p>Parent - Ctrl + P </p>
+					<p>UnParent - select obj > bottom menu Object > parent > clear parent</p>
+				</section>
+			</section>
+			
+			<h1>Workspace Layout []</h1>
+			<section>
+				<section class="box">
+					<h2>New Work Space</h2>
+					<p>At the top menu > select default > this will load the default layout</p>
+					<p>Now that the default layout is loaded > click + > rename the layout > modify your panels however you want > note
+					 that the layout is constantly being saved when you change the layout under that layout name
+					 </p>
+					 <img src="images/blenderLayout1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Switch Layout Shortcut</h2>
+					<p>Control Right/Left arrow to toggle between different workspace. Ex: UV workspace, default.</p>
+					<p>Ctrl + Up will focus/zoom into that window, press again to exit</p>
+				</section>
+				<section class="box">
+					<h2>Deafult Startup File</h2>
+					<p>First backup and save the default layout as the startup file with Ctrl+U</p>
+					<p>Then > modify and choose your layout and save the file > Ctrl + U > this will 
+					deafult blender to load this current file, material, layout, models at startup</p>
+				</section>
+				<section class="box">
+					<h2>Import blend file without UI changes</h2>
+					<p>
+					Load your start up file > open file > uncheck load UI at bottom.
+					</p>
+				</section>
+				<section class="box">
+					<h2>Top Bar</h2>
+					<p>
+					Top bar is simply the bottom bar with the option selected to info, incase you ever lose it.
+					</p>
+					<img src="images/blenderLayout2.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Right Side Layout</h2>
+					<p>
+					The right side bar is basicaly made up of 3 different view ports. Each one loads a different bottom menu.
+					</p>
+					<img src="images/blenderLayout3.png" class="fit popup"/>
+				</section>
+				
+			</section>
+			
+			<h1>Obj Mtl Files</h1>
+			<section>
+				<section class="box">
+					<h2>Mtl</h2>
+					<p>Order of statements doesn't matter once you start with the newmtl my_newMatName(cannot contain blank spaces). 
+					Everything from here until you
+					 specify another newmtl, will belong to this material.</p>
+					<a href="http://paulbourke.net/dataformats/mtl/" target="_blank">More Info Here</a>
+					</p>
+					<p>map_Kd = someBricks.jpg <br>
+					this path is relative to where the mtl file is. to go one folder in, do map_Kd = textures\someBricks.jpg</p>
+					</p>
+					<p>Ka = ambient reflectivity rgb</p>
+					<p>Kd = diffuse/color material</p>
+					<p>Tf = transmission filter for light pass rgb</p>
+					<p>Ks = reflectivity</p>
+					
+					
+					
+					</p>
+					<p> d alpha = transparency (some use either d or Tr, deafult = 1.0 no transparency)</p>
+					<p>Tr alpha = transparency (some use either d or Tr, deafult = 1.0 no transparency)</p>
+					
+				</section>
+				<section class="box">
+					<h2>Mtl-Shelving</h2>
+					<p>These are the mtl settings that current models follow</p>
+					<img src="images/blenderMtl1.png" class="fit popup"/>
+					
+				</section>
+			</section>
+			
+			<h1>Remove Material [] Clear Material []</h1>
+			<section>
+				<section class="box">
+					<h2>Material</h2>
+					<p>go to object material > Click the X icon then save the blender file and reload with Ctr+Shft+O to clear the material</p>
+					<img src="images/blenderMaterial1.png" class="fit popup"/>
+				</section>
+			</section>
+			
+			<h1>Display []</h1>
+			<section>
+				<section class="box">
+					<h2>All Edges</h2>
+					<p>Object mode > object properties > display > draw all edges</p>
 				</section>
 			</section>
 			
@@ -143,6 +291,34 @@
 				<section class="box">
 					<h2>Reset Scale</h2>
 					<p>After modifying object to scale, Ctrl+A > Scale to reset the size to 1 </p>
+				</section>
+			</section>
+			
+			<h1>Flip []</h2>
+			<section>
+				<section class="box">
+					<h2>Mirror</h2>
+					<p>Object mode > Shft+D (duplicat) > press T > Mirror > use setting in lower left to control the mirror</p>
+					<p>you may want to duplicate and set the pivot point before mirroring</p>
+				</section>
+				<section class="box">
+					<h2>Reset Scale</h2>
+					<p>After modifying object to scale, Ctrl+A > Scale to reset the size to 1 </p>
+				</section>
+			</section>
+			
+			<h1>Extrude []</h1>
+			<section>
+				<section class="box">
+					<h2>Along a Path</h2>
+					<p>use a curve, not yet looked into</p>
+				</section>
+				<section class="box">
+					<h2>extrude 90 degree, bend</h2>
+					<p>pipe, 90 angle</p>
+					<p>select fact > ortho top view press 7 > place 3d cursor > press T > Tools > add > Spin > dial in numbers to extrude to </p>
+					<img src="images/blenderExtrude2.png" class="pix100 popup"/>
+					<img src="images/blenderExtrude1.png" class="pix100 popup"/>
 				</section>
 			</section>
 			
@@ -206,9 +382,19 @@
 					<h2>Transparent Texture</h2>
 					<p>you have to enable Z-transparency and set alpha of the material to '0'</p>
 					<img src="images/blenderRender6.png" class="fit popup"/>
-					<p>then tell blender texture should affect alpha channel</p>
+					<p>then tell blender texture should affect alpha channel > turn on texture alpha and leave it at one.<br>
+					the .mtl will now include d set to 0.0, and map_d set to it's alpha image.
+					</p>
+					<img src="images/blenderRender7.png" class="fit popup"/>
 					<img src="images/blenderRender5.png" class="fit popup"/>
-					
+				</section>
+				<section class="box">
+					<h2>Auto Subdivision</h2>
+					<p>If your sharp edges are being rendered round, and seems like a render issue, 
+					it is probably because you have your render settings set to audo subdivide. This can happen if you accidently press the hotkey
+					 for subdividing your models</p>
+					</p>Set it to zero to go back to default, or use this as a way to subdivide all renders</p>
+					<img src="images/blenderRender8.png" class="fit popup"/>
 				</section>
 			</section>
 			
@@ -239,7 +425,7 @@
 				<section class="box">
 					<h2>Unwrapping UV</h2>
 					<p>
-					Ensure you have mark seams to edge using Cutting UV. Have another window with UV Editor open.
+					(optional) Ensure you have mark seams to edge using Cutting UV. Have another window with UV Editor open.
 					Select object > Edit mode > A to select all vertices > U (unwrap menu) > unwrap. The UV Editor should show unwrapped UVs.
 					</p>
 					<img src="images/blenderUV2.png" class="fit popup"/>
@@ -249,6 +435,16 @@
 					</p>
 				</section>
 				<section class="box">
+					<h2>Stitching UVs</h2>
+					<p>
+					Project UVs first on your selected faces in edit mode > uv editor > select all visible uvs press A > Ctrl+P (pack island) > 
+					 select 2 edges > stich (V key) > enter to confirm > continue uv editing
+					</p>
+					<img src="images/blenderUV7.png" class="fit popup"/>
+					<p>press enter to confirm after sticthing, select one edge > Press L to select island > move,rotate,scale as need</p>
+					<img src="images/blenderUV8.png" class="fit popup"/>
+				</section>
+				<section class="box">
 					<h2>Display Object with Texture</h2>
 					<p>Set shading to texture in view port</p>
 					<img src="images/blenderUV4.png" class="fit popup"/>
@@ -256,14 +452,28 @@
 					Base on your lighting, you'll see parts of your model shaded. Add more lights to rough out your shading.
 					To make your texture renderable, you need to add new material to the object.
 					</p>
-					
+				</section>
+				<section class="box">
+					<h2>UV Render Issue</h2>
+					<p>
+					Blender allows one object to have mutliple uv sets. In case your obj has multipe UV sets, to render the correct uv at render, make sure the correct uvset is selected
+					 using the camera icon by turning it on.
+					</p>
+					<img src="images/blenderUV5.png" class="fit popup"/>
+					<p>Then check to make sure you have material, texture, and texture is mapped to uv</p>
+					<img src="images/blenderUV6.png" class="fit popup"/>
 				</section>
 				
 			</section>
 			
+			<h1>Repeat Last Action []</h1>
+			<section>
+				<section class="box">
+					<p>Shft+A to create a cube and place it in a new location > F3 > select recent action to tile</p>
+				</section>
+			</section>
 			
-			
-			<h1>Context [] Property Panel</h1>
+			<h1>Context [] Property Panel []</h1>
 			<section>
 				<section class="box">
 					<p>When you select an 3d object in view, this panel will dynamically change.</p>
@@ -300,16 +510,25 @@
 				</section>
 			</section>
 			
-			<h1>Selection []</h1>
+			<h1>Selection [] Selecting []</h1>
 			<section>
 				<section class="box">
-					<h2>Single/Multi Selection</h2>
+					<h2>Single/Custom Selection</h2>
 					<p>Right click to select the obj, vertext, edge, face. B + LMB drag to select multiple selecitons. Shft to selected addon selections.</p>
+				</section>
+				<section class="box">
+					<h2>Select through obj</h2>
+					<p>Select all = Ctrl = A</p>
+					<p>select vertex/face/edge including other side =  turn on x-ray mode (Z) > B to toggle custom select > LMB drag</p>
+				</section>
+				<section class="box">
+					<h2>Deselect</h2>
+					<p>Alt + A</p>
 				</section>
 			</section>
 			
 			
-			<h1>View [] Mode and Panel</h1>
+			<h1>View [] View Mode [] and Panel</h1>
 			<section>
 				<section class="box">
 					<p>Controls what object is lock, selectable, renderable, and can be used for selection</p>
@@ -337,6 +556,10 @@
 					<p>press z or see image</p>
 					<img src="images/blenderView2.png" class="fit popup"/>
 				</section>
+				<section class="box">
+					<h2>Pop view window out</h2>
+					<p>Shft + LMB + drag on top right corner to pull out individual views</p>
+				</section>
 			</section>
 			
 			<h1>Edit Mode</h1>
@@ -349,21 +572,103 @@
 				</section>
 			</section>
 			
-			<h1>Workspace Layout</h1>
+			<h1>Node Editor [] node []</h1>
 			<section>
 				<section class="box">
-					<p>Control Right/Left arrow to toggle between different workspace. Ex: UV workspace, default.</p>
+					<p>Can be used for material editing and as an image compositing software</p>
+					<p>To use you should have two windows up, node editor and UVEditor, or load the compositing layout.</p>
+					<img src="images/blenderNode1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Basic</h2>
+					<p>To use nodes, you first need to enable nodes by checking use nodes in the Node Editor window. Make sure to check it off
+					 when you want to do regular 3d render from the camera views. Leaving it on and F12 will render the nodes instead.</p>
+					<img src="images/blenderNode2.png" class="fit popup"/>
+					<p>For image, nodes work together with the UV Editor. To see the image from nodes in the UV Editor, you need to create
+					a few things: Image, Viewer - use Shft+A > input > image and again but output > Viewer. select the node, and in UV Editor,
+					 select Viewer Node to see the image.
+					</p>
+					<img src="images/blenderNode3.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Adding Nodes</h2>
+					<p>Make sure use nodes is check > Shft+A > search for your nodes or select from popup menu</p>
+					<p>Mix, Translate, Scale, Mask, Viewer, Image, Z Combine etc to name a few</p>
+					<p>Nodes that go together: Mask,Mix</p>
+				</section>
+				<section class="box">
+					<h2>Connecting Nodes</h2>
+					<p>Blender makes it really simple to know what nodes can connect to each other. Left connectors are input and right side
+					 are outputs</p>
+					<img src="images/blenderNode4.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Combine Images</h2>
+					<p>Only one image needs to connect its Z output to the z combine, then select the viewer node to be display in UV editor.
+					 UV Editor should have viewer node selected to see it.</p>
+					<img src="images/blenderNode5.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Composite multiple views</h2>
+					<p>Method1: The trick is to duplicate the obj and turn it on its side, and render it in one layer. 
+					The render layers only work with one camera, not multiple cameras</p>
+					<p>Method2: Use two scenes, one object in each scene, then render. and you should be good. Below is more advance if you care.
+					
+					<br><a href="http://blender.stackexchange.com/questions/6277/different-camera-settings-for-different-render-layers" 
+						target="_blank" class="link">Link</a>
+						obj1 to be in layer 1 and obj2 in layer 2 > layers tab > layer1 set to render > create a 2nd scene.</p>
+					<img src="images/blenderNode7.png" class="fit popup"/>
+					<p>select link objects > select cam > U > Object and Data 
+					(make camera independent from other scene > adjust cam to your liking > still in new scene > layers tab > select 2nd layer to be render.
+					</p>
+					<img src="images/blenderNode6.png" class="fit popup"/>
 				</section>
 			</section>
-		
+			
+			
+			<h1>Render Layers [] Scene Layers []</h1>
+			<section>
+				<section class="box">
+					<p>Allow us to composite renders sepearetly like layers</p>
+				</section>
+				<section class="box">
+					<h2>Add Obj To Layer</h2>
+					<p>Select an obj > Press M > select layer. Obj can be on multipe layers, use Shft.</p>
+					<p>Press 1,2,3, to change scene layers on the first row, Alt+1, Alt+2, ... for the 2nd row</p>
+					<p>Under Layer property context > Then select each render layer, and select the layers it can render. Pressing F12 or render,
+					will render however many render layers that were checked. Name each render layer accordingly for less confusion.</p>
+					<img src="images/blenderRenderLayer1.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>More RenderLayers</h2>
+					<img src="images/blenderRenderLayer2.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Scene Layers</h2>
+					<p>Scene layers on the other hand are just for displaying what gets display on screen for easier to work with complex scene.</p>
+					<p>Only objects in scene layer will be rendered</p>
+					<p>Objects not visible in scene layer, but selected in render layers, will not render.</p>
+					Objects in scene layer but not in render layer, will still cast shadow for other objects. Use this for like shadow trick renders</p>
+				</section>
+				<section class="box">
+					<h2>Slots</h2>
+					<p>Select a different slot before rendering to store the render image in a buffer</p>
+				</section>
+				
+			</section>
+			
+			
 			<h1>Tips</h1>
 			<section>
+				<p>
+				<a href="http://www.katsbits.com/tutorials/blender/useful-keyboard-shortcuts.php#orientation" target="_blank">Another shortcut key site</a>
+				</p>
 			<table width="100%" class="shortcutKeys">
 			
 				<th colspan="2">Universal Edit</th>
 				<tr>
 					<td> Tab </td>
-					<td> Toggle between object and edit mode Then Ctrl + 1,2,3 to toggle between vertex,edge,face</td>
+					<td> Toggle between object and edit mode > Ctrl + Tab > 1,2,3 to toggle between vertex,edge,face</td>
 				</tr>
 				<tr>
 					<td> S </td>
@@ -484,6 +789,10 @@
 				<tr>
 					<td> Ctrl + J </td>
 					<td> Combine meshes, Joins the selected meshes together into one</td>
+				</tr>
+				<tr>
+					<td> press p </td>
+					<td> select object > edit mode > select faces > P > (choose separate type)</td>
 				</tr>
 				<tr>
 					<td> Shft + D </td>
