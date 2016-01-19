@@ -70,6 +70,12 @@
 					</p>
 					<img src="images/blender3dcursor3.png" class="fit popup"/>
 				</section>
+				<section class="box">
+					<h2>Move Multiple Objects as One</h2>
+					<p>No need to group or parent. Select objects you want, top view, place 3D cursor to pivote point > turn on the
+					 Manipulate Center Point > S > scale and all objects should move according to the 3D cursor as the center point.</p>
+					 <img src="images/blender3dcursor5.png" class="fit popup"/>
+				</section>
 			</section>
 			
 			<h1>Pivot []</h1>
@@ -239,7 +245,7 @@
 					<p>Kd = diffuse/color material</p>
 					<p>Tf = transmission filter for light pass rgb</p>
 					<p>Ks = reflectivity</p>
-					
+					<p>Ns = specular sharpness (range from 0-1000)</p>
 					
 					
 					</p>
@@ -249,8 +255,14 @@
 				</section>
 				<section class="box">
 					<h2>Mtl-Shelving</h2>
-					<p>These are the mtl settings that current models follow</p>
+					<p>These are the mtl settings that most current shelving models follow</p>
 					<img src="images/blenderMtl1.png" class="fit popup"/>
+					
+				</section>
+				<section class="box">
+					<h2>Illum</h2>
+					<p>What the illum numbers stand for</p>
+					<img src="images/blenderMtl2.png" class="fit popup"/>
 					
 				</section>
 			</section>
@@ -405,12 +417,12 @@
 					<img src="images/blenderUV1.png" class="fit popup"/>
 					
 					<p>Shft+F10 to jump to UV Editor view. use Shft+F5 to go back to standard view. </p>
-					<p>NOtE: To see any uvs, you must also load an image, Alt + O</p>
+					<p>NOtE: To see any uvs, you must also load an image in the UV Editor, Alt + O</p>
 					<p>
 					Select your obj > edit mode > vertex > A for all >
-					 then U for unwrap, or UV > unwarp</p>
+					 then U for unwrap, or UV > unwarp > to see something unwraped in the UV Editor</p>
 					 <p>If the object doesn't alredy have UV created, press U > choose cube projection or smart projection, then unwrap</p>
-					 <p>If object does not have UV, you will not see a UV tab</p>
+					 <p>If object does not have UV, you will not see a UV tab, so you must do project first</p>
 					
 				</section>
 				<section class="box">
@@ -450,7 +462,7 @@
 					<img src="images/blenderUV4.png" class="fit popup"/>
 					<p>
 					Base on your lighting, you'll see parts of your model shaded. Add more lights to rough out your shading.
-					To make your texture renderable, you need to add new material to the object.
+					To make your texture renderable, you need to add new material to the object and then slap on texture from a saved/open file.
 					</p>
 				</section>
 				<section class="box">
@@ -462,6 +474,24 @@
 					<img src="images/blenderUV5.png" class="fit popup"/>
 					<p>Then check to make sure you have material, texture, and texture is mapped to uv</p>
 					<img src="images/blenderUV6.png" class="fit popup"/>
+				</section>
+				<section class="box">
+					<h2>Create Texture from 3D Proportion</h2>
+					<p>
+					Top and side ortho camera should have the same Orthographic scale</p>
+					<p>Rule of thumb. If your model is created exactly the way the texture shape is, create uv using projectiong from ortho view.</p>
+					<img src="images/blenderUV9.png" class="fit popup"/>
+					<p>If your model is not created with the exact same shape, 
+					use cube (boundary) then cube projection. somethings either projection will work.</p>
+				</section>
+				<section class="box">
+					<h2>UV Cube Project Proportion</h2>
+					<p>Make sure you freeze transform or reset all rotation, scale, and location to zero</p>
+					<p>
+					Select obj > edit mode > select all verts (A) > U > project from view bound.
+					</p>
+					<p>This will create a perspective uv depending on your perspective view cam. After this, do UV again and do cube projection,
+					for some reason this will force blender to cube project proportionally.</p>
 				</section>
 				
 			</section>
@@ -552,9 +582,10 @@
 					
 				</section>
 				<section class="box">
-					<h2>Toggle wireframe/x-ray</h2>
-					<p>press z or see image</p>
+					<h2>Toggle wireframe/x-ray/texture</h2>
+					<p>press z or see image below</p>
 					<img src="images/blenderView2.png" class="fit popup"/>
+					<p>For texture mode press Alt + Z </p>
 				</section>
 				<section class="box">
 					<h2>Pop view window out</h2>
@@ -604,15 +635,24 @@
 				</section>
 				<section class="box">
 					<h2>Combine Images</h2>
-					<p>Only one image needs to connect its Z output to the z combine, then select the viewer node to be display in UV editor.
-					 UV Editor should have viewer node selected to see it.</p>
+					<p>First input is the background image. 2nd input is the foreground. Only one image needs to connect its Z output to the z combine, then select the viewer node to be display in UV editor.
+					 Z controls which layer is on top. If both are 1, the first input takes precedence. UV Editor should have viewer node selected to see it.</p>
 					<img src="images/blenderNode5.png" class="fit popup"/>
 				</section>
 				<section class="box">
-					<h2>Composite multiple views</h2>
-					<p>Method1: The trick is to duplicate the obj and turn it on its side, and render it in one layer. 
+					<h2>Combine Alphas</h2>
+					<p>This one is tricky, it's combining two alpha into one.</p>
+					<img src="images/blenderNode8.png" class="fit popup"/>
+					<p>Another example</p>
+					<img src="images/blenderNode9.png" class="fit popup"/>
+					
+				</section>
+				<section class="box">
+					<h2>Composite multiple views, Combine Rendered Textures</h2>
+					<p>Method1: The trick is to duplicate the obj. One obj in each render layer and faced a certain direction, ex: turn it on its side, and render it in one layer. 
 					The render layers only work with one camera, not multiple cameras</p>
-					<p>Method2: Use two scenes, one object in each scene, then render. and you should be good. Below is more advance if you care.
+					<p>Method2: Render out the image, save it and then bring it in into the node editor as image node. Z Combine the images</p>
+					<p>Method3: Use two scenes, one object in each scene, then render. and you should be good. Below is more advance if you care.
 					
 					<br><a href="http://blender.stackexchange.com/questions/6277/different-camera-settings-for-different-render-layers" 
 						target="_blank" class="link">Link</a>
@@ -623,6 +663,19 @@
 					</p>
 					<img src="images/blenderNode6.png" class="fit popup"/>
 				</section>
+				<section class="box">
+					<h2>Composite Node</h2>
+					<p>The composite node isn't a node that will ouput to other nodes. It is the ending node. 
+					The viewer node is used to view in the editor.
+					The composite node, is what you will see when you render pressing F12. Use either one suited for your need.</p>
+				</section>
+				<section class="box">
+					<h2>Pink Artifact</h2>
+					<p>If you see a pink texture over your object, you are in texture mode and that object in edit mode, is not loading the 
+					correct image in the uv editor. To fix select obj > edit mode > A > in uv editor choose a different texture.</p>
+				</section>
+				
+				
 			</section>
 			
 			

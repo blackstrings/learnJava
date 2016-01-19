@@ -1,0 +1,13 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl Mat1
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 3.0 3.0 3.0
+Ks 1.000000 1.000000 1.000000
+Ni 1.000000
+d 0.999
+illum 4
+map_Kd shelf2.png
+map_d shelf2.png

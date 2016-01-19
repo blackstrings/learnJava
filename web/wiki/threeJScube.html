@@ -91,7 +91,7 @@
 
 				//add dl front
 				var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-				directionalLight.intensity = 3.0;
+				directionalLight.intensity = 1.0;
 				directionalLight.position.set( 0, 0, 1 ).normalize();
 				scene.add( directionalLight );
 				//add dl front reverse
@@ -147,7 +147,8 @@
 				//MODEL 1
 				//loader.load( 'obj/male02/male02.obj', 'obj/male02/male02_dds.mtl', function ( object ) {
 				//loader.load( 'obj/cubeTransp/cubeLong.obj', 'obj/cubeTransp/cubeLong.mtl', function ( object ) {	//tranps cube
-				loader.load( 'obj/shelf/shelf1.obj', 'obj/shelf/shelf1.mtl', function ( object ) {	//shelf cube
+				var myTestObj = "bask1";
+				loader.load( 'obj/shelf/' + myTestObj + '.obj', 'obj/shelf/' + myTestObj + '.mtl', function ( object ) {	//shelf cube
 					object.position.y = 10;
 				
 					//tweak this if your model is too tall, offset it

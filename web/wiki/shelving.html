@@ -29,7 +29,7 @@
 				<li>Link: <a href="http://stagepreview-internal-shelving.menards.net/shelving/">staging</a></li>
 				<li>Link: <a href="https://internal-store.qa.menards.com/main/e-ShelvingKiosk.html">stage-internalStoreQA</a></li>
 				
-			</ul>
+			</ul>3
 		</section>
 		<section>
 			<h1>Low Res Creation</h1>
@@ -47,6 +47,8 @@
 				<p>Ni - dont matter, can be 1 or 0</p>
 				<p>illum 1 - should not be 3 or 4 for both blender and threejs(get black transparency)
 				<img src="images/shelvingMTL1.png" class="fit popup">
+				<p>After long testing, these are the final settings that matter for threeJS and should be this way for all transparency</p>
+				<img src="images/shelvingMTL2.png" class="fit popup">
 			</section>
 			<section class="box">
 				<h2>Testing Shelving Locally</h2>
@@ -54,7 +56,8 @@
 					<li>Make sure pointing to menards.net</li>
 					<li>Make sure data is not null, hard code the path</li>
 					<li>Make sure the canvas is bigger than the shelf we are adding</li>
-					<li>Transparency should work and alpha channel should work without moding the data</li>
+					<li>Transparency should work and alpha channel should work without moding the data.</li>
+					<li>One png file can act as the kd and d for transparency and carry any color. You don't need two files.</li>
 					<li>For double side to work, must turn on double on material in the child traverse</li>
 				</ul>
 			</section>
