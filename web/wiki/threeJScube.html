@@ -55,6 +55,12 @@
 			var windowHalfX = window.innerWidth / 2;
 			var windowHalfY = window.innerHeight / 2;
 
+			//do not use a zero as it results to null
+			var LightTypeEnum = {
+				"DEFAULT":1, 
+				"ONE_DIRECTIONAL_LIGHT_ANGLE_RIGHT_TO_LEFT":2
+			};	
+			
 			//custom setting
 			//---------------------------------------
 			var enabelDragControl = true;
@@ -88,41 +94,10 @@
 				//////////////
 				var ambient = new THREE.AmbientLight( 0x444444 );
 				scene.add( ambient );
-
-				//add dl front
-				var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-				directionalLight.intensity = 1.0;
-				directionalLight.position.set( 0, 0, 1 ).normalize();
-				scene.add( directionalLight );
-				//add dl front reverse
-				var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-				directionalLight.intensity = 1.0;
-				directionalLight.position.set( 0, 0, -1 ).normalize();
-				scene.add( directionalLight );
 				
-				//add dl right to left
-				var dl2 = new THREE.DirectionalLight( 0xffeedd );
-				dl2.intensity = 1.0;
-				dl2.position.set( 1, 0, 0 ).normalize();
-				scene.add( dl2 );
+				//turnOnSceneLighting(LightTypeEnum.ALL_DIRECTION);
+				turnOnSceneLighting(LightTypeEnum.ONE_DIRECTIONAL_LIGHT_ANGLE_RIGHT_TO_LEFT);
 				
-				//add dl left to right
-				var dl3 = new THREE.DirectionalLight( 0xffeedd );
-				dl3.intensity = 1.0;
-				dl3.position.set( -1, 0, 0 ).normalize();
-				scene.add( dl3 );
-				
-				//add dl bottom up
-				var dl4 = new THREE.DirectionalLight( 0xffeedd );
-				dl4.intensity = 1.0;
-				dl4.position.set( 0, -1, 0 ).normalize();
-				scene.add( dl4 );
-				
-				//add dl top down
-				var dl5 = new THREE.DirectionalLight( 0xffeedd );
-				dl5.intensity = 1.0;
-				dl5.position.set( 0, 1, 0 ).normalize();
-				scene.add( dl5 );
 				//------------------------------------------------------- end of lighting
 			
 				///////////
@@ -147,7 +122,7 @@
 				//MODEL 1
 				//loader.load( 'obj/male02/male02.obj', 'obj/male02/male02_dds.mtl', function ( object ) {
 				//loader.load( 'obj/cubeTransp/cubeLong.obj', 'obj/cubeTransp/cubeLong.mtl', function ( object ) {	//tranps cube
-				var myTestObj = "bask1";
+				var myTestObj = "chrome";
 				loader.load( 'obj/shelf/' + myTestObj + '.obj', 'obj/shelf/' + myTestObj + '.mtl', function ( object ) {	//shelf cube
 					object.position.y = 10;
 				
@@ -292,6 +267,54 @@
 				renderer.render( scene, camera );
 
 			}
+			
+			function turnOnSceneLighting(lightType){
+				if(lightType == LightTypeEnum.ONE_DIRECTIONAL_LIGHT_ANGLE_RIGHT_TO_LEFT){
+					//use one angle directional light
+					//add dl front
+					var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+					directionalLight.intensity = 1.5;
+					directionalLight.position.set( 0, .8, 1 ).normalize();
+					scene.add( directionalLight );
+				}else if(lightType == LightTypeEnum.ALL_DIRECTION){
+					//add dl front
+					var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+					directionalLight.intensity = 1.0;
+					directionalLight.position.set( 0, 0, 1 ).normalize();
+					scene.add( directionalLight );
+
+					//add dl front reverse
+					var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+					directionalLight.intensity = 1.0;
+					directionalLight.position.set( 0, 0, -1 ).normalize();
+					scene.add( directionalLight );
+					
+					//add dl right to left
+					var dl2 = new THREE.DirectionalLight( 0xffeedd );
+					dl2.intensity = 1.0;
+					dl2.position.set( 1, 0, 0 ).normalize();
+					scene.add( dl2 );
+					
+					//add dl left to right
+					var dl3 = new THREE.DirectionalLight( 0xffeedd );
+					dl3.intensity = 1.0;
+					dl3.position.set( -1, 0, 0 ).normalize();
+					scene.add( dl3 );
+					
+					//add dl bottom up
+					var dl4 = new THREE.DirectionalLight( 0xffeedd );
+					dl4.intensity = 1.0;
+					dl4.position.set( 0, -1, 0 ).normalize();
+					scene.add( dl4 );
+					
+					//add dl top down
+					var dl5 = new THREE.DirectionalLight( 0xffeedd );
+					dl5.intensity = 1.0;
+					dl5.position.set( 0, 1, 0 ).normalize();
+					scene.add( dl5 );
+				}
+			}
+			
 
 		</script>
 

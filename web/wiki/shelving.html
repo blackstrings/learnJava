@@ -29,13 +29,19 @@
 				<li>Link: <a href="http://stagepreview-internal-shelving.menards.net/shelving/">staging</a></li>
 				<li>Link: <a href="https://internal-store.qa.menards.com/main/e-ShelvingKiosk.html">stage-internalStoreQA</a></li>
 				
-			</ul>3
+			</ul>
 		</section>
 		<section>
 			<h1>Low Res Creation</h1>
 			<section class="box">
 				<p>Overview process of converting a hi-res model to a lower res</p>
 				<img src="images/shelvingLowRes1.png" class="fit popup">
+			</section>
+			<section class="box">
+				<h2>Materials</h2>
+				<p>Not all obj have a image jpeg or png texture file. Objs that are solid throughout, will usually not have a image texture and instead,
+				utilize the obj diffuse RBG to get its color. High poly count objects like baskets will utilize a transparent texture image 
+				to fake the details. Every object however should have a obj and mtl at bare minimum for shelving to work with.</p>
 			</section>
 			<section class="box">
 				<h2>Transparency MTL for ThreeJS webGL</h2>
@@ -50,6 +56,26 @@
 				<p>After long testing, these are the final settings that matter for threeJS and should be this way for all transparency</p>
 				<img src="images/shelvingMTL2.png" class="fit popup">
 			</section>
+			
+			<h1>Accessing the data server</h1>
+			<section class="box">
+				<p>Use WinSCP</p>
+				<table width="100%">
+					<tr>
+						<td>Preview read only</td>
+						<td><img src="images/shelvingData1.png" class="fit popup"></td>
+					</tr>
+				</table>
+			</section>
+			<section class="box">
+				<h2>Path to Media/Obj</h2>
+				<p>Once you login using winscp, the path to the vendors is <span style="color:red">/var/www/nas-eklka/prev/items/media</a></p>
+				<p>To access the vendor product, append the vendor name. this folder has all the vendors for all apps. So you want to narrow
+				 your search by going to specific vendors and then under Visualization</p>
+				<p>/var/www/nas-eklka/prev/items/media/RUBBE002/Visualization</p>
+			</section>
+			
+			<h1>Running the App</h1>
 			<section class="box">
 				<h2>Testing Shelving Locally</h2>
 				<ul>

@@ -242,7 +242,7 @@
 					this path is relative to where the mtl file is. to go one folder in, do map_Kd = textures\someBricks.jpg</p>
 					</p>
 					<p>Ka = ambient reflectivity rgb</p>
-					<p>Kd = diffuse/color material</p>
+					<p>Kd = diffuse/color RGB material (0,0,0 = black, .5,.5,.5 = grey, 1,1,1 = white)</p>
 					<p>Tf = transmission filter for light pass rgb</p>
 					<p>Ks = reflectivity</p>
 					<p>Ns = specular sharpness (range from 0-1000)</p>
@@ -264,6 +264,25 @@
 					<p>What the illum numbers stand for</p>
 					<img src="images/blenderMtl2.png" class="fit popup"/>
 					
+				</section>
+			</section>
+			
+			<h1><a name="modifier">Modifier []</a></h1>
+			<section>
+				<section class="box">
+					<h2>Intro</h2>
+					<p>Non-destrutive way to modify your objects. These are like transform tools.</p>
+					<p>You can add as many modifiers you want</p>
+					
+				</section>
+				<section class="box">
+					<h2>Smooth []</h2>
+					<p>Temp way is select object > Ctrl + 0 through 5 to see smooth proxy</p>
+					<p>to Alter shape permanantly > select obj > modify properties in context panel > 
+					add modifier > subdivision surface > change the smooth number > apply</p>
+					<img src="images/blenderModify1.png" class="fit popup"/>
+					<p>After applying a subd modifier > you can control more properties of smoothing</p>
+					<img src="images/blenderModify2.png" class="fit popup"/>
 				</section>
 			</section>
 			
@@ -334,6 +353,18 @@
 				</section>
 			</section>
 			
+			<h1>Duplicate []</h1>
+			<section>
+				<section class="box">
+					<h2>Repeat with translation</h2>
+					<p>Use the "repeate last" on left bar > T to bring up the menu</p>
+				</section>
+				<section class="box">
+					<h2>Extract Face</h2>
+					<p>select obj > edit mode > select faces > T > tools > add > duplicate btn</p>
+				</section>
+			</section>
+			
 			<!-- camera main -->
 			<h1>Camera []</h1>
 			<section>
@@ -363,6 +394,8 @@
 				
 			</section>
 			
+			
+			
 			<h1>Render []</h1>
 			<section>
 				<section class="box">
@@ -388,7 +421,11 @@
 				<section class="box">
 					<h2>More Smooth Render</h2>
 					<p>Subdivision</p>
-					<p>Ctrl+1 - Ctrl+5 will smooth your object. Ctrl+0 to return to no sub. This will increase smoothness in render.</p>
+					<p>Ctrl+1 - Ctrl+5 will smooth your object. Ctrl+0 to return to no sub. This will increase smoothness in render.
+					But really what this shortcut key is doing to your obj, and adding a subD modifier. If your obj doesn't already have 
+					the subD modifier applied, this shorcut will add it to that object. You can apply this smooth to the acutal mesh by 
+					accessing the <a href="#modifier">modifier properties</a>.
+					</p>
 				</section>
 				<section class="box">
 					<h2>Transparent Texture</h2>
