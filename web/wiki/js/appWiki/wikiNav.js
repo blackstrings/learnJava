@@ -181,6 +181,7 @@ define(function () {
 				"catName":"Design Patterns",
 				"links": [
 					{ "name": "Domain Driven Design (DDD)", "path": "ddd.html"},
+					{ "name": "Design Patterns Overall", "path": "designPattern.html"},
 					{ "name": "Architecture Designs", "path": "architecture.html"}
 				]
 			},

@@ -8,8 +8,8 @@ public class CardDeckDemo {
 	
 	public static void main(String [] args){
 		
-		List<String> deck = getNewDeck();
-		shuffle(deck);
+		List<String> cardDeck = getNewDeck();
+		shuffle(cardDeck);
 		
 		List<List<String>> players = getPlayers(4);
 		
@@ -17,10 +17,10 @@ public class CardDeckDemo {
 		
 		int rounds = 5;
 		for(int i=0; i<rounds; i++){
-			if(deal(deck, players, maxCardsPerPlayer)){	//deal
+			if(deal(cardDeck, players, maxCardsPerPlayer)){	//deal
 				showAllPlayerHands(players);
 				clearAllPlayerHands(players);
-				System.out.println(deck.size() + " cards left...");
+				System.out.println(cardDeck.size() + " cards left...");
 			}else{
 				System.out.println("not enough cards");
 				break;

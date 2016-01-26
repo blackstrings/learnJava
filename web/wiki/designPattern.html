@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Design Pattern");
+				});
+			});
+		});
+	</script>
+	<style>
+	span.customBorder {
+		border:thin solid #fff; 
+		padding:3px; 
+		font-size:12px; 
+		color:red; display:inline-block; 
+		background-color:black
+	}
+	</style>
+</head>
+
+<body>
+
+<div id="contents">
+	<section>
+		<h1>Design Pattern</h1>
+		<p>Ways to better program</p>
+		
+		<section>
+			<h1>Review</h1>
+			<section class="box">
+				<p>Quick recaps</p>
+				<img src="images/designPatterns1.png" class="fit popup">
+			</section>
+		</section>
+		
+		
+	</section>
+
+</div>
+</body>
+</html>
