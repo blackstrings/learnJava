@@ -1,6 +1,6 @@
 package com.xai.controllers.smart;
 
-public class CharacterB implements AIBaseController{
+public class CharacterB implements BasicHandHeldController{
 
 	@Override
 	public void keyA() {
@@ -11,6 +11,18 @@ public class CharacterB implements AIBaseController{
 	@Override
 	public void keyB() {
 		System.out.println("CharcterB action B");
+		
+	}
+
+	@Override
+	public void keyC() {
+		System.out.println("CharacterB action C");
+		
+	}
+
+	@Override
+	public void keyD() {
+		//not in use
 		
 	}
 

@@ -2,13 +2,13 @@ package com.xai.controllers.smart;
 
 public class MainController {
 
-	AIBaseController target;
+	BasicHandHeldController target;
 	
-	public MainController(AIBaseController target){
+	public MainController(BasicHandHeldController target){
 		this.target = target;
 	}
 	
-	public void replaceTarget(AIBaseController target){
+	public void replaceTarget(BasicHandHeldController target){
 		this.target = target;
 	}
 	
