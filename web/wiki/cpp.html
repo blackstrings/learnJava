@@ -79,13 +79,67 @@ int main(){
 			
 			<section class="box">
 				<h2>.cpp .h .dll</h2>
-				<p>.h are the header files (like interface in java) where the accessors for methods and fields are defined</p>
+				<p>.h are the header files (like interface in java) where the accessors, methods and fields are defined</p>
 				<p>.cpp is the implementation file where methods/fields are more defined</p>
 				<p>.dll are the libraries created when you build/compile your c++ app. Their purpose is for code reuse so you can include
 				the new dll into another c++ app.
 				All the classes gets converted into .asm or assembly language at build time and are put into the .dll file.</p>
 			</section>
 			
+			<section class="box">
+				<h2>Class Header</h2>
+				<p>
+				If in seperate file, make sure you define your methods above the main method before you can use it inside the main method.
+				Or Include the header.</p>
+<pre>
+//define
+#ifndef Ball.h
+#define Ball.h
+class Ball{
+public:
+	Ball();
+	~Ball();
+	void roll();
+	int getId();
+private:
+	int id;
+}
+#endif
+</pre>
+				</p>
+			</section>
+			
+			<section class="box">
+				<h2>#ifndef </h2>
+				<p>Used to prevent multiple includes of the same .h file. This is useful when working in large projects</p>
+				</p>After the file is included, other files that call this file will not allow the another same version of the file to be added</p>
+			</section>
+			
+		</section>
+		
+		<section>
+			<h1>Best Practices</h1>
+			<section class="box">
+				<h2>Pointers</h2>
+				<p>Avoid the use of pointers whenever possible. Usually the use is when you need to traverse through a list</p>
+			</section>
+			<section class="box">
+				<h2>Methods</h2>
+				<p>For non-primitive type/objects Pass by reference is prefered than by pointers. This involves the & symbol next to the reference name in the args</p>
+<pre>
+void eat(Fruit &someFruit){
+	...
+}
+Fruit fruit;
+eat(fruit);
+</pre>
+				<p>For primitive types, c++ passes by value, so the implementation is the same in java</p>
+<pre>
+int addFive(int num){
+	return num += 5;
+}
+</pre>
+			</section>
 		</section>
 		
 		<section>
@@ -135,16 +189,29 @@ delete p1;
 		
 		<section>
 			<h1>Methods Functions</h1>
-			<section>
-				<h2>Methods in Main class</h2>
+			<section class="box">
+				<h2>Class in Main class</h2>
 				<p>
 				Make sure you define your methods above the main method before you can use it inside the main method.
-				You implement the methods below the main method.
+				You cn implement the methods before or below the main method after you define it.
+<pre>
+//define
+class Ball{
+public:
+	Ball();
+	~Ball();
+	void roll();
+	int getId();
+private:
+	int id;
+}
+</pre>
 				</p>
 			</section>
 			<section class="box">
 				<h2>Arguments</h2>
-				<p>The idea is to use pointers when using argments. Becareful to avoid using the antiPattern.</p>
+				<p>The idea is to avoid using pointers whenever possible. Becareful to avoid using the antiPattern if you do use pointers.
+				 That is to not create new objects just so you can use pointers.</p>
 <pre>
 void eat(Fruit* f);
 

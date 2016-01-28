@@ -62,6 +62,24 @@ appName : Siding<br>
 			</section>
 			
 			<section>
+				<h1>How to test if email server working</h1>
+				<section class="box">
+					<h2>Test1</h2>
+					<p>Visit this 
+					<a href="http://www.menards.com/EmailService/error/sendGeneralErrorEmail.html?storeNumber=3011&pcType=webstart&exception=test&jreVersion=.5">
+					link</a> and see if you get the image below</p>
+					<img src="images/sendemail-test1.png" class="fit popup">
+				</section>
+				<section class="box">
+					<h2>Test2</h2>
+					<p>Use mPutty to see if you can connect to the external prod.</p>
+					<p>Select the mcom prod preset > Login with active directory > type wget http://www.menards.com</p>
+					<p>You should get some stuff within 2-5 seconds, if it takes too long, then that means you cant connect and there is
+					 a firewall issue with the server the that the app resides in</p>
+				</section>
+			</section>
+			
+			<section>
 				<h1>Setup Send Email for Webapp</h1>
 				<section>
 				
@@ -71,10 +89,9 @@ appName : Siding<br>
 						<img src="images/sendemail-1.png" class="popup fit">
 					</section>
 					
-					<section classThough it was just a slow day 
-My outlook froze on updating.
-="box">
+					<section class="box">
 						<h2>POM Dependency</h2>
+						
 						<img src="images/sendemail-pom.png" class="popup pix100">
 					</section>
 					

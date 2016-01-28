@@ -242,25 +242,43 @@
 		
 		<section>
 			<h1>Items Not Loading/showing Debugging - products not showing</h1>
-			<section>
-			<p>
-			First test stage kioskURL to see if stage is down.
-			If app is working stage isn't down. next try looking into ItemDisplayController. Everyscreen seems to use the class ItemDisplayController 
-			to make the calls to SQL connections.
-			and loads them into a ItemObjects to be ready for jsp to use to display it on screen.
-			</p>
-			<p>
-			Check your TCServer designit instance if it has the following <a href="tcserver.html#installation2" target="_blank" />JARS</a></p>
-			<p>
-			If it is your first time setting up Tcserver or roofing on your PC, also <a href="tcserver.html#installation2" target="_blank" /> view checklist </a>
-			</p>
-			<p>
-			It could be that the screenXXXX.do page onload event never was able to call the initPage() method, (method located in paging.js).
-			The initPage() handles appending the item's image path to the document. So go to browser debugger, load up the page, and find and break point at initPage().
-			If the initPage() or start() onload isn't being properly loaded, one solution is to refactor it into a jquery on document ready.
-			This was bug when running roofing/siding locally on tcserver and running in IE8 enterprise mode.
+			<section class="box">
+				<h2>Basic Check</h2>
+				<p> First test stage kioskURL to see if stage is down. </p>
+				<p>2nd check the logs on tcserver designit instance</p>
+			</section>
+			<section class="box">
+				<h2>Other Check</h2>
+				<p>If app is working stage isn't down. next try looking into ItemDisplayController. Everyscreen seems to use the class ItemDisplayController 
+				to make the calls to SQL connections.
+				and loads them into a ItemObjects to be ready for jsp to use to display it on screen.
+				</p>
+				<p>
+				Check your TCServer designit instance if it has the following <a href="tcserver.html#installation2" target="_blank" />JARS</a></p>
+				<p>
+				If it is your first time setting up Tcserver or roofing on your PC, also <a href="tcserver.html#installation2" target="_blank" /> view checklist </a>
+				</p>
+			</section>
 			
-			</p><img src="images/roofing-onload.png" />
+			<section class="box">
+				<h2>onload vs jquery</h2>
+				<p>
+				It could be that the screenXXXX.do page onload event never was able to call the initPage() method, (method located in paging.js).
+				The initPage() handles appending the item's image path to the document. So go to browser debugger, load up the page, and find and break point at initPage().
+				If the initPage() or start() onload isn't being properly loaded, one solution is to refactor it into a jquery on document ready.
+				This was bug when running roofing/siding locally on tcserver and running in IE8 enterprise mode.
+				
+				</p><img src="images/roofing-onload.png" class="fit popup" />
+			</section>
+			
+			<section class="box">
+				<h2>Logs: sku not available</h2>
+				<p>When kiosk urls are not showing products either and you get these logs, it is a DBA question not the Avetti Team.</p>
+				<p>2016-01-28 10:59:34,848 INFO  [MAIN] Screen1402DisplayControler() No Products setup for PP_SNAP_XX at store 4444</p>
+				<p>Email DBA (usually Lane Larson (DBA manager) and CC one of the roofing primaries) and see what's going on for 
+				both curhist_d or curhist_s</p>
+				<p>Usually it is the case that either we can't point to a custom store of our 
+				choice or usually the data didn't repopulate products correctly</p>
 			</section>
 		</section>
 		
@@ -464,8 +482,32 @@
 				<p>
 				The way how addOn materials are estimated is quite weird. If you select an addOn selection and enter 9 for qty, the code does not loop through that addOn (Dormer, Entry, etc) class 9 times, it only loops once. Example: If you choose addOn type A and choose qty of 4. That counts as one selection of addOn. If you continue through and proceed to select again another addon, say addOn A again and choose qty of 5, it is now 2 counts of addOn selection. So the code will loop now twice. But inside each loop, it will use the corresponding qty 4 or 5, which ever addOn selection it is on. If you choose to add another addOn selection, say addOn B with 2 qty. The total loop will now become 3, with the third loop having 3 as the multiplier.
 				</p>
-				
-				
+			</section>
+		</section>
+		
+		<section>
+			<h1>Estimate Id</h1>
+			<section class="box">
+				<h2>Basics</h2>
+				<p>Estimate Id are used in each app to determine what app it is and where to send the estimation summary data for later evaluation</p>
+				<p>One way to know what app has what estimate Id, Check the appConfig.properties for dev/stage/prod and look for sourceIdRoofing</p>
+				<p>Like Flooring, there are 3 sections in Roofing: Roofing, gutter, soffit/fasica.</p>
+			</section>
+			<section class="box">
+				<h2>Roofing</h2>
+				<p>sourceIdRoofing=29 estimateTypeIDRoofing=2200</p>
+			</section>
+			<section class="box">
+				<h2>Gutter</h2>
+				<p>sourceIdGutter=19 <br>
+				estimateTypeIDGutter=25
+</p>
+			</section>
+			<section class="box">
+				<h2>Soffit/Fascia</h2>
+				<p>sourceIdGutter=19 <br>
+estimateTypeIDGutter=25
+</p>
 			</section>
 		</section>
 		
