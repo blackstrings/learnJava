@@ -133,7 +133,11 @@
 				it will stop/interrupt the current communication during a load scene.</p>
 				<p>
 				Webplayer and webGL builds using server calls must have a crossdomainpolicy.xml set at the root level of their domain within the server.
-				Helpful links <a href="http://eyemyapps.com/wp/?p=146" target="_blank">Web comm1</a>
+				Helpful links <a href="http://eyemyapps.com/wp/?p=146" target="_blank">Web comm1</a>. If you do this however, be extra careful that only
+				 the correct game calls can talk to the server as doing this opens the portal for outside attacks.
+				</p>
+				<p>
+				However, if the game is loaded from the same web server the data is in, this cross domain issue will not occur and will load data fine.
 				</p>
 			</section>
 		</section>
@@ -188,21 +192,85 @@
 					</div>
 				</ul>
 				
-				
 			</section>
 		</section>
 		
 		<section>
-			<section>
-				<section class="box">
-					<h2>Dropdowns</h2>
-					<p>Linking dynamic dropdown btns. to map the button to a method and carry over the selection, we use lambda expression, which allows us
-						to create an annonymous expression and pass in arguments</p>
-					<img src="images/unity-dropdownbtn.png" class="fit popup">
-				</section>
+			<h1>Buttons</h1>
+			<section class="box">
+				<h2>Dropdowns</h2>
+				<p>Linking dynamic dropdown btns. to map the button to a method and carry over the selection, we use lambda expression, which allows us
+					to create an annonymous expression and pass in arguments</p>
+				<img src="images/unity-dropdownbtn.png" class="fit popup">
 			</section>
-		</section>
+			<section class="box">
+				<h2>While Pressed</h2>
+				<p>To trigger events while the button is pressed, add the event trigger to your button and choose onPointUp and onPointDown.</p>
+				<p>Then attach a gameobject with the methods</p>
+			</section>
+			<section class="box">
+				<h2>Smart Controllers</h2>
+				<p>To be able to switch player and use different actions for the same controller, use the design pattern related to the adaptor
+				 pattern. Don't directly hook up the buttons to a player game object.</p>
+			</section>
+			
+			<h1>Ads</h1>
+			<section class="box">
+				<h2>Unity Ads</h2>
+				<p>If you are targeting IOS and Andriod. here's a basic run through to get started. <a href="http://blogs.unity3d.com/2015/04/09/integrating-unity-ads/">
+				link</a></p>
+				<p>You are responsible for placing the ad and for when it should appear</p>
+			</section>
+			
+			<h1>Starting Ideas from A-Z</h1>
+			<section class="box">
+				<ul>
+					<li>Genre(Action, Education)</li>
+					<li>Art look</li>
+					<li>Audience/Age Group</li>
+					<li>Online/Offline/Login</li>
+					<li>Platform</li>
+					<li># of Players</li>
+					<li>FirstPerson or Third</li>
+					<li>Control Type(gui buttons, touch move, etc)</li>
+					<li>Ads or Buy</li>
+					<li>If Ads, will gems/energy be needed to play</li>
+					<li>GUI UI(unity, nGui, etc)</li>
+					<li>Game Rules</li>
+					<li>Save/Load or no</li>
+				</ul>
+			</section>
+			
+			<h1>Packaging Your Own DLL<h1>
+			<section class="box">
+				<p>The benefit of this is code reuse. If you update the library, the downside is that you will have to rebuild and deploy your dll.
+				Also, code debug may or may not work as you won't be able to click on a code in the unity console to jump to the code. There seems like,
+				 there is a way around this though.</p>
+				<p>Use the IDE to do it, and include the UnityEngine.dll and UnityEditor.dll</p>
+				<p>There is talk that you have to build two DLL, one to put into any urnity project folder except the Editor folder and another to put into the
+				Unity Editor folder. This is when you are using scripts that will use the Unity Editor</p>
+				<ul>
+					<li>Genre(Action, Education)</li>
+				</ul>
+			</section>
+			
+			<h1>Marketing Strategies</h1>
+			<section class="box">
+				<ul>
+					<li>First Transaction is on us</li>
+					<li>Affordable bundle but only once per week</li>
+					<li>Special weekly</li>
+				</ul>
+			</section>
+			
+			<h1>Ideas</h1>
+			<section class="box">
+				<ul>
+					<li><a href="unity1009.html">1009</a></li>
+				</ul>
+			</section>
 		
+		</section>
 	</section>
 
 </div>

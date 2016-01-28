@@ -22,8 +22,8 @@
 		<p>A scripting language we use for some of our legacy apps (Fence, Polebarn, Garage).</p>
 		
 		<section>
-			<h1>Hints</h1>
-			<p> <a href="vs6.html">Visual Studio 6</a> is the IDE we use to code in C++.</p>
+			<h1>Requirements</h1>
+			<p> <a href="vs6.html">Visual Studio 6</a> is the IDE for the old C++ apps.</p>
 			<p>To build these app we have to manually put together the build. Unlike our Java apps we can use Maven to package our app.</p>
 			<p>
 			The reason we do not use Visual Studio 7 or higher is because our legacy C++ apps is using the ZAPP framework for buttons and 3D rendering, which ZAPP in return does not work so well with the newer versions of Visual Studio.
@@ -44,27 +44,305 @@
 				<li>Implement the methods in .cpp files</li>
 			</ul>
 			
-<pre>
-// ScreenButtons points to GetButtonInfo();
-ScreenButtons->GetButtonInfo
-
-// pointers
-
-</pre>
 		</section>
 		
 		<section>
-			<h1>Tips</h1>
-			<ul>
-				<li>To perform a System.out.print() like in java
-					<ul>
-						<li>MessageBox(NULL, "meow", "Roof", MB_OK);</li>
-					</ul>
-				</li>
-			</ul>
+			<h1>Intro</h1>
+			<section class="box">
+				<h2>#includes</h2>
+				<p>To import or include Libraries or dll files that have classes in them.
+				Similar to java's import. They go at the top of the files. use quotes for custom libraries not in default c package</p>
+<pre>
+//cout
+#include &lt;iostream&gt;
+//string class
+#include &lt;string&gt;
+//exit_success
+#include &lt;cstlib&gt; 
+//your custom library
+#include "CustLib"
+</pre>
+			</section>
+			<section class="box">
+				<h2>Main Method</h2>
+				<p>Like all langauage, there is a method that initiates the start of the entire app called the main method</p>
+				<p>The main methed always returns a 0. It is optional to omit arguments. If you wish to replace the return 0 with 
+				EXIT_SUCCESS, then include the cstlib library.</p>
+<pre>
+#include &lt;iostream&gt;
+int main(){
+	cout << "hello world" << endl;
+	return 0;
+}
+</pre>
+			</section>
+			
+			<section class="box">
+				<h2>.cpp .h .dll</h2>
+				<p>.h are the header files (like interface in java) where the accessors for methods and fields are defined</p>
+				<p>.cpp is the implementation file where methods/fields are more defined</p>
+				<p>.dll are the libraries created when you build/compile your c++ app. Their purpose is for code reuse so you can include
+				the new dll into another c++ app.
+				All the classes gets converted into .asm or assembly language at build time and are put into the .dll file.</p>
+			</section>
+			
+		</section>
+		
+		<section>
+			<h1>Instantiation</h1>
+			<section class="box">
+				<h2>Stack</h2>
+				<p><a href="http://stackoverflow.com/questions/333443/c-object-instantiation">Good Read</a></p>
+				<p>The most prefered way is to create objects on the stack and let the object reallocate memory automatically
+				 through it's destructor without you having to manage and remember manually to release memory back when the object is no
+				  longer in use. Stack is size limited so very large objects will have to be created on the heap.
+				  </p>
+				  <p>
+				 Stack memory means when the variable is no longer in use or referenced, the memory will auto reallocate itself.
+				When you don't use the "new" keyword, you create memory on the stack which is what you want to do most of the time,
+				so you don't have to handle manually releasing memory back. 
+				Local variables created without "new" are on the stack memory. Or when the method returns, the local variables that were
+				created are cleared.</p>
+<pre>
+int num = 5;
+Dog d;
+Dog d(55);
+</pre>
+				<p>When you create objects this way, you don't really use a pointer, as a pointer are use to point to memory on the heap.
+				Besides, you want to avoid referencing or using pointers to ref a local memory on the stack, 
+				as the stack constantly is reallocating memory and changing.
+				</p>
+			</section>
+			<section class="box">
+				<h2>Heap</h2>
+				<p>Heap is dynamic memory allocation that occurs on the heap memory. It stays there permanently until deleted.
+				Everytime you use the "new" keyword you create memory on the heap. IMPORTANT RULE: Treat heap as a last resort thing when 
+					you can't use the stack, such as for very large obj, use the heap.</p>
+				<p>You are responsible to delete any object you
+				 create to reallocatre memory back. if you don't the memory will stay there forever, until the processor
+				  ends or restarts.</p>
+<pre>
+Dog* p1 = new Dog;
+delete p1;
+</pre>
+				<p>If you go this route using the new keyword, make use of smart pointers like the auto_ptr to manage the life time of the object</p>
+				<p>Smart pointers usually have a counter, and keeps track of the # of objects that reference it. When the counter reaches zero,
+				it is how it will know that no other objects are referencing it anymore, so the object knows when to delete itself.
+				</p>
+			</section>
+			
+		</section>
+		
+		<section>
+			<h1>Methods Functions</h1>
+			<section>
+				<h2>Methods in Main class</h2>
+				<p>
+				Make sure you define your methods above the main method before you can use it inside the main method.
+				You implement the methods below the main method.
+				</p>
+			</section>
+			<section class="box">
+				<h2>Arguments</h2>
+				<p>The idea is to use pointers when using argments. Becareful to avoid using the antiPattern.</p>
+<pre>
+void eat(Fruit* f);
+
+//antiPattern
+Fruit* f = new Fruit;
+eat(f);
+delete f;
+
+//prefered
+Fruit fruit;
+eat(&fruit);
+</pre>
+
+				<p>A better way is to use address</p>
+<pre>
+void eat(Apple& a);
+Apple a;
+eat(a);
+</pre>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Printing To Console</h1>
+			<section class="box">
+				<h2>Message box</h2>
+				<p>MessageBox(NULL, "meow", "Roof", MB_OK);</p>
+			</section>
+			<section class="box">
+				<h2>cout</h2>
+				<p>#include &lt;iostream&gt; library to use cout</p>
+				<p>cout &lt;&lt; "hello world" &lt;&lt; endl;</p>
+			</section>
+			<section class="box">
+				<h2>printf (best way)</h2>
+				<p>This method is from C not C++, printf(), but you can use it in C++</p>
+				<p>printf("hello %s. Your age is %d", name, 55)</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Accessing class fields and methods</h1>
+			<section class="box">
+				<h2>Dot method</h2>
+				<p>When working with instance of a class.</p>
+<pre>
+//create dog
+Dog d;
+//access method
+d.bark();
+//access field
+int age = d.age;
+</pre>
+				<p>More details <a href="http://stackoverflow.com/questions/11902791/what-is-the-difference-between-and-in-c">Here</a></p>
+			</section>
+			
+			<section class="box">
+				<h2>-&gt; method</h2>
+				<p>When working with pointers</p>
+<pre>
+//create pointer
+Dog * dogPtr = new Dog();
+//access method
+dogPtr->bark();
+//access field
+int age = dogPtr->age;
+</pre>
+				<p>More details <a href="http://stackoverflow.com/questions/11902791/what-is-the-difference-between-and-in-c">Here</a></p>
+			</section>
+			
+			<section class="box">
+				<h2>:: method</h2>
+				<p>When working with Static classes</p>
+<pre>
+//access method
+MyUtil::random();
+//access field
+int num = MyUtil::date;
+</pre>
+				<p>More details <a href="http://stackoverflow.com/questions/11902791/what-is-the-difference-between-and-in-c">Here</a></p>
+			</section>
 		</section>
 		
 		
+		<section>
+			<h1>Pointers</h1>
+			<section class="box">
+				<h2>Basic</h2>
+				<p>Allow a variable to reference the address and value of another variable. 
+				A pointers can change it's address by referencing another address.</p>
+				<p>You can set an address to a pointer upon creation</p>
+				<p>In C-Style, you use malloc instead of pointers to allocate memory</p>
+<pre>
+int * pointer1 = 99;
+Dog * d = new Dog();
+</pre>
+			</section>
+			
+			<section class="box">
+				<h2>Get Value of Ptr</h2>
+				<p>Put a * before the pointer name. This is called dereferencing a pointer.</p>
+<pre>
+int val = *intPtr;
+//or
+cout &lt;&lt; *intPtr;
+</pre>
+			</section>
+			
+			<section class="box">
+				<h2>Set address</h2>
+				<p>Put a * before the pointer name. This is called dereferencing a pointer.</p>
+<pre>
+int var = 99;
+
+//p1 points to address of var
+int * p1 = &var;
+
+//p2 points to same address as p1
+int * p2 = p1;
+
+//same as above
+int * p3;
+p3 = p1;
+</pre>
+			</section>
+			
+			<section class="box">
+				<h2>Const</h2>
+				<p>Its purpose is to create read only pointers so change cannot be made or alter. 
+				When used in method arguments, it is to prevent pointers from altering the value</p>
+<pre>
+//Readonly EX
+int myNum = 5;
+const int* p1 = &myNum;
+//p1 cannot change value of myNum
+</pre>
+<pre>
+//both are same
+const int * p1;
+int const * p2;
+</pre>
+
+				<p>
+				a const after the * means the pointer itself is const
+				</p>
+<pre>
+int * const p1;
+//the pointer itself cannot change address
+</pre>
+				<p>Combining both const value and const pointers</p>
+<pre>
+const int * const p1;
+</pre>	
+			</section>
+		</section>
+		
+		<section>
+			<h1>Arrays</h1>
+			<section class="box">
+				<h2>Basic</h2>
+				<p>You can assign string like values when you initate an char array.
+				Using the quotes, the \0 will be auto appended to null the end of the array.
+				</p>
+<pre>
+char name[] = "Sam";
+char name[5] = "Sam";
+</pre>
+				<p>Not using the quotes, you'll have to append the \0</p>
+<pre>
+char name[] = { 'S', 'a', 'm', '\0' }; 
+</pre>
+				<p>Once you initate the char array, you cannot simply assign new values like this</p>
+<pre>
+//error
+name = "Kim";
+//nor
+name = { 'K', 'i', 'm', '\0' };
+</pre>
+				<p>To resolve this, use the std::strcpy(a,b). Note strcpy is only for c-style strings not c++.
+				If the copy to array doesn't have enough memory, it'll still copy, just that you'll get wierd numbers
+				 at the end of the array.</p>
+<pre>
+char newName[99];
+strcpy(newName, name);
+</pre>
+				<p>If you are working with the actual string class, use the = operator instead.
+				The string is dynamic and will grow automatically behind the scene to make memory for the new string</p>
+<pre>
+string name = "Jhon";
+string name2;
+name2 = name;
+</pre>
+			</section>
+		</section>
+		
+		<section>
+		
+		</section>
 		
 		<section>
 			<h1>Help Links</h1>

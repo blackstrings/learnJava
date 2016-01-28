@@ -1,0 +1,93 @@
+<html>
+<head>
+	<title></title>
+	<script data-main="js/mainWiki" src="js/lib/require.js"></script>
+	<script>
+		//if you call it explicitly like this, you have to call the common configs again so your file path will stay relative
+		require(['./commonWiki'], function (common) {
+			require(["jquery", "app/wikiUtils"], function($, utils){
+				$(function() {
+					utils.setMainWebTitle("Unity");
+				});
+			});
+		});
+	</script>
+</head>
+
+
+<body>
+
+<div id="contents">
+
+	<section>
+	
+		<section>
+			<h1>Unity 1009 - GalaxyEvac</h1>
+			<p>Become the best GalaxyEvac(GE) member on the task force. GEs are summon by the native species on the planet, to clear pest invasions on
+			 their planet. Once pests are evacuated, the natives are willing to share materials which then can be used to better equipments and 
+			 tech.
+			</p>
+		</section>
+		
+		<section>
+			<h1>Basic</h1>
+			<section class="box">
+				<h2>Summary</h2>
+				<ul>
+				<li>Genre(Action)</li>
+				<li>Art/Look/Feel(Cartoon)</li>
+				<li>Audience/Age Group(8+)</li>
+				<li>Offline</li>
+				<li>Platform(mobile IOS Android)</li>
+				<li># of Players(1)</li>
+				<li>FirstPerson or (Third)</li>
+				<li>Control Type(Gui Buttons)</li>
+				<li>Ads or Buy (Ads)</li>
+				<li>(Energy)</li>
+				<li>GUI UI(Unity Gui)</li>
+				<li>Game Rules(see below)</li>
+				<li>Save/Load (yes)</li>
+			</ul>
+			</section>
+			<section class="box">
+				<h2>Game Rules</h2>
+				<p>Need energy to progress. A certain amt of energy per action.</p>
+			</section>
+		</section>
+		
+			<h1>Marketing Strategies</h1>
+			<section class="box">
+				<ul>
+					<li>First Transaction is on us</li>
+					<li>Affordable bundle but only once per week</li>
+					<li>Special weekly</li>
+				</ul>
+			</section>
+		</section>
+		
+		
+		<h1>Starting Ideas from A-Z</h1>
+		<section class="box">
+			<ul>
+				<li>Genre(Action, Education)</li>
+				<li>Art look</li>
+				<li>Audience/Age Group</li>
+				<li>Online/Offline/Login</li>
+				<li>Platform</li>
+				<li># of Players</li>
+				<li>FirstPerson or Third</li>
+				<li>Control Type(gui buttons, touch move, etc)</li>
+				<li>Ads or Buy</li>
+				<li>If Ads, will gems/energy be needed to play</li>
+				<li>GUI UI(unity, nGui, etc)</li>
+				<li>Game Rules</li>
+				<li>Save/Load or no</li>
+			</ul>
+		</section>
+		
+		
+	</section>
+
+</div>
+</body>
+</html>
