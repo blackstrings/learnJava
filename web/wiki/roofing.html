@@ -489,10 +489,34 @@
 			<h1>Estimate Id</h1>
 			<section class="box">
 				<h2>Basics</h2>
-				<p>Estimate Id are used in each app to determine what app it is and where to send the estimation summary data for later evaluation</p>
+				<p>Estimate Id are used in each app to determine what app it is and where to send the estimation summary data for later evaluation.
+				It also plays part in returning the saved design id for later recall.
+				EstimateId is usually called at the very last screen before saving a design so the right estimation data can be processed to the correct
+				 place.</p>
 				<p>One way to know what app has what estimate Id, Check the appConfig.properties for dev/stage/prod and look for sourceIdRoofing</p>
 				<p>Like Flooring, there are 3 sections in Roofing: Roofing, gutter, soffit/fasica.</p>
 			</section>
+			
+			<section class="box">
+				<h2>Design Id</h2>
+				<p>Design id is retrieved by using com.menards.storeservice.client.impl.StoreServiceClient.</p>
+				<p>Store service is set by StoreServiceClient storeServiceClient = 
+				new StoreServiceClient(storeServiceWsdlURL, userName, password, authType, true)</p>
+				<p>These values are stored in the app config and called into the session to be stored at runtime</p>
+				<p>When you get the store client, you generate the design id by through the createEstimate method</p>
+				<p>
+				estimateID = (int)storeServiceClient.createEstimate(Integer.parseInt(storeNumber), estimateInfoMap, guestBillToMap, itemInfo, null);
+				</p>
+				
+			</section>
+			
+			<section class="box">
+				<h2>What class</h2>
+				<p>appConfig.properties is where the value is stored. StatsLogging.java determines what estimate id is set at the very begining
+				 of the app. KisokServerClient.java gets the correct estimateId value for roofing,soffit, or gutter at the print summary when
+				 print is pressed.</p>
+			</section>
+			
 			<section class="box">
 				<h2>Roofing</h2>
 				<p>sourceIdRoofing=29 estimateTypeIDRoofing=2200</p>
@@ -508,6 +532,18 @@
 				<p>sourceIdGutter=19 <br>
 estimateTypeIDGutter=25
 </p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Sessions</h1>
+			<section class="box">
+				<h2>Basics</h2>
+				<p>To access sessions get it from the httpServletRequest</p>
+<pre>
+HttpServletRequest request;	//google how to get request
+HttpSession session = request.getSession();
+</pre>
 			</section>
 		</section>
 		

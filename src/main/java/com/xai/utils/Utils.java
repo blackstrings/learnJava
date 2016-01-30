@@ -20,15 +20,11 @@ public class Utils {
 	 * @param args
 	 */
 	public static void main(String [] args){
-		logger.info("" + Math.random());
+		//logger.info("" + Math.random());
 
-
-		int[] nums = new int[]{1,2,3,4,5};
+		System.out.println( convertScaledValueToDegree(.2f, 0, 100) );
 		
-		pass(nums);
-		for(int num : nums){
-			System.out.println(num);
-		}
+		
 		
 	}
 	
@@ -38,6 +34,12 @@ public class Utils {
 			nums2[i] = 0;
 		}
 		
+	}
+	
+	private static float convertScaledValueToDegree(float scaledValue, int min, int max){
+		
+		float convertVal = scaledValue * max;	//.5 will equal half of max
+		return convertVal;
 	}
 	
 	
