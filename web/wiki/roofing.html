@@ -512,7 +512,7 @@
 			
 			<section class="box">
 				<h2>What class</h2>
-				<p>appConfig.properties is where the value is stored. StatsLogging.java determines what estimate id is set at the very begining
+				<p>appConfig.properties is where the estimate id value is stored. StatsLogging.java determines what estimate id is set at the very begining
 				 of the app. KisokServerClient.java gets the correct estimateId value for roofing,soffit, or gutter at the print summary when
 				 print is pressed.</p>
 			</section>
@@ -536,6 +536,17 @@ estimateTypeIDGutter=25
 		</section>
 		
 		<section>
+			<h1>Printing</h1>
+			<section class="box">
+				<h2>Dimensions Layout</h2>
+				<p>Screen2992Action is the only screen that allows you to print just the layout.
+				It pulls images that are from the printDimensions path.</p>
+				<p>Do not get it confuse with the summary printout where layouts is printed as well. That uses its own jsp printout.</p>
+				<img src="images/roofing_print1.png" class="fit popup">
+			</section>
+		</section>
+		
+		<section>
 			<h1>Sessions</h1>
 			<section class="box">
 				<h2>Basics</h2>
@@ -544,6 +555,13 @@ estimateTypeIDGutter=25
 HttpServletRequest request;	//google how to get request
 HttpSession session = request.getSession();
 </pre>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Deployments</h1>
+			<section class="box">
+				<p><a href="nightTesting.html">nightly deployments and daily deployments</a></p>
 			</section>
 		</section>
 		

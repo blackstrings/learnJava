@@ -11,6 +11,10 @@ import com.opencsv.CSVReader;
 
 public class CsvReaderDemo {
 
+	/**
+	 * Simple cvs reading using an existing reader plugin
+	 * @param args
+	 */
 	public static void main(String [] args) {
 		
 	try(CSVReader reader = new CSVReader(new BufferedReader(

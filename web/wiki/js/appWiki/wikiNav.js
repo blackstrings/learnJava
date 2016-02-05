@@ -138,7 +138,7 @@ define(function () {
 					{ "name": "SLA", "path": "sla.html"},
 					{ "name": "Store Testing", "path": "storetesting.html"},
 					{ "name": "On Call", "path": "oncall.html"},
-					{ "name": "Night & Patch Testing", "path": "nightTesting.html"},
+					{ "name": "Night/Day/EAI/Patch Testing", "path": "nightTesting.html"},
 					{ "name": "Bare Metal", "path": "baremetal.html"},
 					{ "name": "Lab Testing (app)", "path": "labtesting.html"},
 					{ "name": "RQM Test Plan", "path": "rqmtestplan.html"},
@@ -234,6 +234,7 @@ define(function () {
 					{ "name": "Wifi", "path": "wifi.html"},
 					{ "name": "Phone Call Handling", "path": "phonecall.html"},
 					{ "name": "Send Email", "path": "sendEmail.html"},
+					{ "name": "RSA Token", "path": "rsatoken.html"},
 				]
 			}
 		];

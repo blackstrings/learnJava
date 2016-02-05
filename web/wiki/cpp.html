@@ -111,8 +111,56 @@ private:
 			
 			<section class="box">
 				<h2>#ifndef </h2>
+				<p>We put this in the header .h files</p>
+				<p>It basically checks itself when other classes include it</p>
 				<p>Used to prevent multiple includes of the same .h file. This is useful when working in large projects</p>
-				</p>After the file is included, other files that call this file will not allow the another same version of the file to be added</p>
+				</p>After the file is included, other files that call the same .h file, it will not allow itself to be added again</p>
+			</section>
+			
+			<section class="box">
+				<h2>forward declare</h2>
+				<p>Always forward declare what you can and avoid include if not needed</p>
+				<p>use forward in class A, if class A contains B pointer or reference ex: B* ptr;</p>
+				<p>use forward in class A, if one or more methods has B obj/pointer/reference</p>
+<pre>
+// ClassA.h
+#ifndef ....
+
+//forward declare
+class B;
+class C;
+
+#include ...
+
+Class A {
+   B* bPtr;
+   void m1(B* bPtr);
+   //B b; this would mean you need to use #include B
+}
+</pre>
+			</section>
+			
+			<section class="box">
+				<h2>Circular dependencies</h2>
+				<p>when two or more class depend on each other through pointers. ClassA depends on ClassB. ClassB depends on ClassA. The solution is forward dependency
+				 and not use include</p>
+				<p>It is a design flaw and is impossible to include each class as regular objects in each other</p>
+<pre>
+//impossible and a design flaw
+ClassA {
+   B b;
+}
+ClassB {
+   A a;
+}
+//solution
+ClassA {
+  B* ptr;
+}
+ClassB {
+  A* ptr;
+}
+</pre>
 			</section>
 			
 		</section>
@@ -139,6 +187,97 @@ int addFive(int num){
 	return num += 5;
 }
 </pre>
+			</section>
+			<section class="box">
+				<h2>Returning objects</h2>
+				<p>Avoid the use of creating a new obj inside the local scope. 
+				example below, Although b will be destroyed, a copy of b is returned back.</p>
+<pre>
+//best practie way to return
+Ball Class1::getBall(){
+	Ball b;
+	return b;
+}
+</pre>
+			</section>
+		</section>
+			
+		<section>
+			<h1>Namespaces</h1>
+			<section class="box">
+				<h2>Creating</h2>
+				<p>Used to prevent conflicts.<a href="http://stackoverflow.com/questions/41590/how-do-you-properly-use-namespaces-in-c"> More read</a></p>
+<pre>
+namespace Lao{
+   class Dog{
+      Dog::Dog();
+   };
+}
+</pre>
+			</section>
+			
+			<section class="box">
+				<h2>Nested</h2>
+				<p>Declaring nested namespace</p>
+<pre>
+namespace Lao::General{
+   class Dog{
+      Dog::Dog();
+   };
+}
+</pre>
+			</section>
+			
+			
+			<section class="box">
+				<h2>Compositing</h2>
+				<p>Combinging/Merging A and B namesspace in C</p>
+<pre>
+namespace A{
+   void AA();
+}
+namespace B{
+   void BB();
+}
+namesspace C{
+   using namespace A;
+   using namespace B;
+}
+void main(){
+   C::BB();
+   C::AA();
+}
+</pre>
+			</section>
+			
+			<section class="box">
+				<h2>Alias Namespace</h2>
+				<p>Where a namespace is too long, you can shorten it</p>
+<pre>
+namespace Lao::General::Utils{
+   class Dog{
+      Dog::Dog();
+   };
+}
+int main(){
+   namespace Short =  Lao::General::Utils;
+   Short::Dog d;
+}
+</pre>
+			</section>
+			
+			<section class="box">
+				<h2>using vs using namespace</h2>
+				<p>avoid the use of the full name space something like: using namespace std; as it imports all the fields in std and becomes more clutter.</p>
+				<p>Instead import namespace field names inside functions as you need only like this:</p>
+<pre>
+void met(){
+   using std::string;
+   string str = "hi";
+   std::cout << str << endl;
+}
+</pre>
+				
 			</section>
 		</section>
 		
@@ -190,7 +329,7 @@ delete p1;
 		<section>
 			<h1>Methods Functions</h1>
 			<section class="box">
-				<h2>Class in Main class</h2>
+				<h2>Add Class in Main class</h2>
 				<p>
 				Make sure you define your methods above the main method before you can use it inside the main method.
 				You cn implement the methods before or below the main method after you define it.
@@ -232,6 +371,8 @@ Apple a;
 eat(a);
 </pre>
 			</section>
+			
+			
 		</section>
 		
 		<section>
@@ -306,7 +447,7 @@ int num = MyUtil::date;
 				<p>In C-Style, you use malloc instead of pointers to allocate memory</p>
 <pre>
 int * pointer1 = 99;
-Dog * d = new Dog();
+Dog * d = new Dog();	//must use new if initializing pointers this way with a class
 </pre>
 			</section>
 			
@@ -370,8 +511,27 @@ const int * const p1;
 		
 		<section>
 			<h1>Arrays</h1>
+			
 			<section class="box">
-				<h2>Basic</h2>
+				<h2>c-style Array</h2>
+				<p>Unlike in java, with c-style array, You have to keep track of on your array size on your own into a variable.
+				You cannot or will find the size of the array at runtime in c++ hard to do.(also not reliable once you start using pointers). 
+				Hence std:vector is preferred over c-style array, as it does keep track of its size, use vector instead.
+				The use of vector far outweighs the old c-style array.
+				</p>
+<pre>
+//c-style array
+int dogSize = 5;
+Dog dogs[5];
+</pre>
+				<p>You can also use this strategy at runtime to find the size for c-style array: </p>
+<pre>
+int newSize = sizeof(array)/sizeof(array[0]);
+</pre>
+			</section>
+			
+			<section class="box">
+				<h2>c-style string</h2>
 				<p>You can assign string like values when you initate an char array.
 				Using the quotes, the \0 will be auto appended to null the end of the array.
 				</p>
@@ -405,6 +565,68 @@ string name2;
 name2 = name;
 </pre>
 			</section>
+			
+			<section class="box">
+				<h2>New Array</h2>
+				<p>use an array container instead of the c-style array.</p>
+<pre>
+#include &lt;array&gt;
+array&lt;type_of_array, number_of_elements&gt; ref_name = {};
+</pre>
+				<p>You can also use this strategy at runtime to find the size for c-style array: sizeof(array)/sizeof(array[0])</p>
+			</section>
+			
+			<section class="box">
+				<h2>std::vector</h2>
+				<p>Use a vector if over a c-style array.</p>
+<pre>
+#include &lt;vector&gt;
+using std::vector;
+vector&lt;Dog&gt; dogVec;
+dogVec.reserve(10)	//make room for 10 dogs
+Dog d;
+array.push_back(d);	//add, when full, array will grow
+array[0].bark();
+</pre>
+				<p>Push object through method into vector</p>
+<pre>
+//in a method
+Dog * dPtr;
+Dog d("tom");
+dPtr = &d;
+add(dPtr);
+
+void add(Dog * d){
+	dogVec.push_back(*d);
+}
+			</section>
+			
+			<section class="box">
+				<h2>Char Array</h2>
+				<p>Use only the c-style string (aka char array) when needed, otherwise, use std:string.</p>
+				<p>When you pass in any array as argument, it turns into a pointer</p>
+				<p>In c++, you cannot return a char array, but you can return a char pointer</p>
+				<p>You have to keep track of on your own the size of the array into a variable, you cannot
+				find the size of the array at runtime in c++. Hence string or vector was created which is easier to get the size.</p>
+<pre>
+//any values in [] is ignored
+void mod(char msg[]){
+	
+}
+//the arg is aka below which below is prefer
+char* mod(char * const msg){
+   return msg;
+}
+//the best way to return char array
+void mod(char * msg){
+   char str[10];
+   //do something ...
+   strcpy(msg, str);
+}
+</pre>
+				<p>So you want to create a char array, pass into function, function modifies it through pointer. You don't actually return char array</p>
+			</section>
+			
 		</section>
 		
 		<section>

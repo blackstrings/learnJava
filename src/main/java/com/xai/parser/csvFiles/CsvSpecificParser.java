@@ -25,10 +25,14 @@ import org.aspectj.org.eclipse.jdt.internal.compiler.flow.FinallyFlowContext;
  * One line for the low res data, the 2nd one for the high res data
  * So you get two lines for every line read.
  * The reason is because one line contains similar data for the high res line
+ * 
+ * FYI: The hiRes x and y dpi actually don't get used and is later replaced
+ * FYI: The hiRes scale are double the values we need, instead of / 2, we use the lowRes scales
+ * in place
  * @author xlao
  *
  */
-public class CsvParser {
+public class CsvSpecificParser {
 	
 	public enum Scale { Y, X }
 	
@@ -39,13 +43,13 @@ public class CsvParser {
 	
 	public final static Charset ENCODING = StandardCharsets.UTF_8;
 	
-	//the final string that will get output
+	//the final string that will get output or write out
 	public List<String> finalList;
 	
 	public String fileIn;
 	public String fileOut; // = "res/files/saveOut.txt";
 	
-	public CsvParser(int startingIndex, String fileIn, String fileOut){
+	public CsvSpecificParser(int startingIndex, String fileIn, String fileOut){
 		counter.index = startingIndex;
 		this.fileIn = fileIn;
 		this.fileOut = fileOut;
@@ -60,23 +64,6 @@ public class CsvParser {
 		//writes the finalList to the output file
 		writeToFile();
 	}
-	
-	
-	
-	
-	/*
-	public static void main(String [] args) throws IOException{
-		
-		
-		//read in file
-		readFile("res/files/save.txt");
-		
-		//write to file
-		writeToFile("res/files/saveOut.txt");
-		
-		
-	}
-	*/
 	
 	private void writeToFile(){
 		try{
@@ -100,21 +87,23 @@ public class CsvParser {
 	}
 	
 	/**
-	 * Really it is building the finalList string per call
-	 * but you can choose to turn on/off the print to console, default is off
+	 * Again the app builds two lines for every line read in
+	 * This method Builds the final two lines per call
+	 * you can choose to turn on/off the print to console, default is off
 	 * which is located at the end of the method
 	 * 
 	 * @param hiTexture although hiTexture is inside hiPath, we want to check if hiTexture was empty or not
 	 * @param lowTexture although lowTexture is inside lowPath, we check if lowTexture was empty or not
 	 * 
 	 */
-	private void printToConsole(Counter counter, 
+	private void buildFinalString(Counter counter, 
 			String sku, 
 			String hiPath, String hiXscale, String hiYscale, 
 			String lowPath, String lowXscale, String lowYscale,
 			String textureApp,
 			String hiTexture,
-			String lowTexture){
+			String lowTexture,
+			boolean printToConsole){
 		
 		counter.index++;
 		//System.out.println(counter.index);
@@ -141,11 +130,14 @@ public class CsvParser {
 		
 		//due to a change, hiXscale and hiYscale will not be used anymore, but is replaced
 		//instead we extract the x and y scale string from the texturePath and use those instead
-		hiXscale = getScaleFromPath(hiTexture, Scale.X);	//comment this line if you want to use the original x scale dpi
+		//The hiTexture was found to have double the value, so instead we use the value from low res
+		//hiXscale = getScaleFromPath(hiTexture, Scale.X);	//comment this line if you want to use the original x scale dpi
+		hiXscale = getScaleFromPath(lowTexture, Scale.X);
 		sb1.append(hiXscale);
 		sb1.append(",");
 		
-		hiYscale = getScaleFromPath(hiTexture, Scale.Y);	//comment this line if you want to use the original y scale dpi
+		//hiYscale = getScaleFromPath(hiTexture, Scale.Y);	//comment this line if you want to use the original y scale dpi
+		hiYscale = getScaleFromPath(lowTexture, Scale.Y);
 		sb1.append(hiYscale);
 		sb1.append(");");
 		
@@ -183,8 +175,12 @@ public class CsvParser {
 		finalList.add(sb2.toString());
 		
 		//too much for console to show all, so read the out file instead
-		//System.out.println( sb1.toString());
-		//System.out.println( sb2.toString());
+		//keep in mind it will not print all the values so use it wisely
+		//or for debugging purposes only
+		if(printToConsole){
+			System.out.println( sb1.toString());
+			System.out.println( sb2.toString());
+		}
 		
 	}
 	
@@ -310,7 +306,7 @@ public class CsvParser {
 				throw new IOException("element less than 8");	//remove when done testing
 			}
 			
-			printToConsole(counter, 
+			buildFinalString(counter, 
 					sku, 
 					hiPath,
 					hiXscale,
@@ -320,7 +316,8 @@ public class CsvParser {
 					lowYscale,
 					category.toUpperCase(),
 					hiTexture,
-					lowTexture);
+					lowTexture,
+					false);
 		}
 	}
 	

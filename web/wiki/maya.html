@@ -100,8 +100,8 @@
 				When you play simulation, if your object is moving too slow, then the object is too big.
 				</p>
 				<p>
-				Change time setting to player every 24 frames or everyframe. Which ever one that will solve when you hit play.
-				It shoudl be play every frame, but if every frame is not working, reset your entire maya preferences.
+				Change time setting to player every everyframe (if there's issuet try 24 but not recommended). Which ever one that will solve when you hit play.
+				It should be play every frame, but if every frame is not working, reset your entire maya preferences.
 
 				Set your timeline to 100. Click play.
 				</p>
@@ -179,6 +179,53 @@
 				<h2>Multiple NCloth</h2>
 				<p>For optimization, disable ncloth that are not needed when simulating other ncloths. Select ncloth object > uncheck enable in the nClothShape node.</p>
 				<p>You can create a rope using nCloth. Transform constraint one or two end of rope. Use t-shirt preset, and change stretch resistance to 1000.</p>
+			</section>
+		</section>
+		
+		<section>
+			<h1>Rigging</h1>
+			<section class="box">
+				<h2>Cheat Sheet</h2>
+				<ul>
+					<li>All joints should have y facing outward and x pointing in the direction of the next bone</li>
+					<li>Use the skeleton > orient joint tool > to fix local axes rotation</li>
+					<li>Not all bones need to connect to the root bone</li>
+					<li>Not all bones need to conect</li>
+					<li>One nurb ctrl for each IK > point constraint ctrl to ik</li>
+					<li>consider a spline technique for best rotation control.</li>
+					<li>rotate can also use a orient constraint, from ctrl to bone</li>
+					<li>One main nurbs circle controller that will move the entire character. 
+					All controllers are child of this node.</li>
+					<li>never not parent bones to the main ctrl, use sub ctrls instead</li>
+					<li>Always create nurbs circles for controls</li>
+					<li>Freeze transform every ctrl before constraining, should have all values zeroed out</li>
+				</ul>
+			</section>
+			<section class="box">
+				<h2>Animation</h2>
+				<ul>
+					<li>Do not key the main controller at all</li>
+					<li>Only use main controller to set the starting position and set maybe only one key there<li>
+					<li>make two key points on the sub ctrl (ex: hip_ctrl) at start to finish location, best way to setup starting animation</li>
+					<li>animate one ctrl at a time and try to use post-cycle if can, while incrementing timeline every x frames</li>
+				</ul>
+			</section>
+			<section class="box">
+				<h2>Blendshapes</h2>
+				<ul>
+					<li>blendshapes are good, but a jointbase system would be better for games and star wars production like, as new characters,
+					can take on the same skeletal hiearcy or easier to transfer the same rig to another character. Joint base system is ultimately the best.</li>
+					<li>Use blendshapes for facial or detail surface animation</li>
+					<li>Select all blendshapes and then select target face and apply blend shapes<li>
+					<li>You can use skeleton joints and paint weights to help with jaw blendshapes. If you do this way, make sure to manually shft
+					 select the only joints you want, then the face, then tweak the smooth bind option.
+					 the default smooth bind to selected joints. skinning fit is class linear (workds with game engines). 
+					 leave normalize weights into interactive (keeps mesh from exploding. Maintain max influence is off (allow to paint zero value).
+					 apply and test skinning. Key two or more sample key frames by rotating the joint needed. Flood the base joint 1 value the entire
+					  surface. then move from there to the next joints to apply lower values. then add morphed blendshape to the target shape.
+					 </li>
+					<li>you can insert inbetween blendshapes for finer details</li>
+				</ul>
 			</section>
 		</section>
 		
