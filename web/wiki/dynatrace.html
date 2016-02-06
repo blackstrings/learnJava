@@ -26,24 +26,66 @@
 		
 		<section>
 			<h1>Installing Dynatrace</h1>
-			<section>
-				<p>Unlike true sight, To get access, you need to install it on your machine. Ask team lead or another team member who has used it before how to install and use it.</p>
+			<section class="box">
+				<h2>Step 1</h2>
+				<p>Unlike true sight, To get access, you need to install it on your machine. 
+				First try looking on the F drive and SLA. If you see it, copy drag dynatrace folder to your desktop and run dtclient.exe.
+				Make sure your version is 6.2+</p>
+				<p>
+				If not, Ask team lead or another team member who has used it before how to install and use it.</p>
+			</section>
+			<section class="box">
+				<h2>Settings</h2>
+				<p>host: dynatrace.menards.net
+				<br>port: 2021
+				<br>
+				user and pass is Active Directory
+				</p>
 			</section>
 		</section>
 		
 		<section>
 			<h1>Usage</h1>
-			<section>
+			<section class="box">
+				<h2>Intro</h2>
 				<p>
-				DynaTrace is really good at tracking down 500 errors. In the EAM ticket, there will be a quick note on whether it is 500 errors, huge files, or performance.
-				Try using Dyna Trace to look for errors based on last week (Mon to Sat). Errors and Exceptions should help.
+				DynaTrace is really good at tracking down 500 errors. In the EAM ticket, 
+				there will be a quick note on whether it is: 404, 500 errors, or host time.
+				</p>
+				<img src="images/dynatrace4.png" class="fit popup"/>
+				
+				<p>
+				Try using Dyna Trace to look for errors based on last week or 7 days ago. Errors and Exceptions should help.</p>
 				<br>
-				<img src="images/dynatrace1.png" width="100%"/><br>
+				<img src="images/dynatrace1.png" class="fit popup"/><br>
 				
 				<br>
-				<p>In this case, this 500 error eception doesn't show anything useful</p>
-				<img src="images/dynatrace2.png" width="100%"/>
+				<p>drill down to pure paths or hover over each incident to get an idea what happened</p>
+				<img src="images/dynatrace2.png" class="fit popup"/>
 				</p>
+			</section>
+			
+			<section class="box">
+				<h2>Where to start</h2>
+				<p>Use The left panel, for any app other than visualizer, search under prod kiosk</p>
+				<img src="images/dynatrace3.png" class="fit popup"/>
+			</section>
+			<section class="box">
+				<h2>Where to Search</h2>
+				<p>For host time issues, use pure path</p>
+				<img src="images/dynatraceTrick1.png" class="pix100 popup">
+			</section>
+		</section>
+		
+		<section>
+			<h1>Tricks for faster search<h1>
+			<section>
+				<p>Use the filter to search for the app you want. such as "roofing" or "visualizer"</p>
+				<p>Keep in mind visualizer is not in prod-kiosk but instead in Prod DesighnIt Internal</p>
+				<p>Using filters</p>
+				<img src="images/dynatraceTrick1.png" class="fit popup">
+				<p>For errors, try 404 and 500 filter in dynatrace</p>
+				<p>For host time, use pure path filter and filter the name to contain exactly ex: /RoofingEstimateor/screen7302.do </p>
 			</section>
 		</section>
 		
