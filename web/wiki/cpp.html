@@ -510,7 +510,7 @@ const int * const p1;
 		</section>
 		
 		<section>
-			<h1>Arrays</h1>
+			<h1>Arrays [] Array []</h1>
 			
 			<section class="box">
 				<h2>c-style Array</h2>
@@ -520,7 +520,7 @@ const int * const p1;
 				The use of vector far outweighs the old c-style array.
 				</p>
 <pre>
-//c-style array
+//c-style reg array
 int dogSize = 5;
 Dog dogs[5];
 </pre>
@@ -567,6 +567,14 @@ name2 = name;
 			</section>
 			
 			<section class="box">
+				<h2>Pointer Array</h2>
+				<p>Use pointers to point to array</p>
+<pre>
+int* a = new int[4];
+</pre>
+			</section>
+			
+			<section class="box">
 				<h2>New Array</h2>
 				<p>use an array container instead of the c-style array.</p>
 <pre>
@@ -577,7 +585,7 @@ array&lt;type_of_array, number_of_elements&gt; ref_name = {};
 			</section>
 			
 			<section class="box">
-				<h2>std::vector</h2>
+				<h2>std::vector []</h2>
 				<p>Use a vector if over a c-style array.</p>
 <pre>
 #include &lt;vector&gt;
@@ -599,6 +607,29 @@ add(dPtr);
 void add(Dog * d){
 	dogVec.push_back(*d);
 }
+</pre>
+				<p>Multi vector</p>
+<pre>
+vector< vector<int> > a;
+
+//iteration
+for( int i(0); i &lt; a.size(); i++ )
+	for( int j(0); j &lt; a[i].size(); j++ )
+		a[i][j];
+		
+//accessing 2,2
+a[2][2];
+
+//size of first row
+a[0].size();
+
+//number of rows
+a.size();
+
+//passing to functions
+int foo( vector&lt;vector&lt;int&gt;&gt; a)
+{ return a[0][0]; }
+</pre>
 			</section>
 			
 			<section class="box">
@@ -625,6 +656,60 @@ void mod(char * msg){
 }
 </pre>
 				<p>So you want to create a char array, pass into function, function modifies it through pointer. You don't actually return char array</p>
+			</section>
+			
+			<section class="box">
+				<h2>Multi-dimensional arrays</h2>
+				<p><a href="http://www.dreamincode.net/forums/topic/144007-multidimensional-arrays/">Aka 2d arrays or more</a></p>
+				<p>You do not need to define the row in a method, just col. If you do, then you limit the method to only handle 3x3 arrays</p>
+<pre>
+//create 3x3
+int a[3][3];
+//access
+a[3][2];
+//only need to pass col
+int foo(int a[][3]){
+  return a[1][1];
+}
+</pre>
+				<p>How to know size of array, you need to know rows or col</p>
+				<p>Multi array pointers</p>
+				<p>First we declare an array of integer pointers to integer pointers</p>
+<pre>
+int **a = new int*[height];
+</pre>
+				<p>Then loop and assign pointers to all pointers in the array</p>
+<pre>
+for( int i(0); i < height; i++ ){
+  a[i] = new int[width];
+ }
+</pre>
+				<p>Use neseted loop to access 2d arrays</p>
+				<p>3d or bigger arrays</p>
+<pre>
+int a[2][2][2];
+//use triple loop to access
+for...
+ for..
+  for..
+   a[i][j][k];
+//method
+int foo(int d[][2][2]){
+  return d[1][1][1];
+}
+</pre>
+				<p>3d array pointers, visit the multi array link above</p>
+<pre>
+int ***a = new int**[Dim1];
+
+for( int i(0); i < Dim1; i++ ) 
+	a[i] = new int*[Dim2];
+
+for( int i(0); i < Dim1; i++ )
+	for( int j(0); j < Dim2; j++ )
+		a[i][j] = new int[Dim3];
+
+</pre>
 			</section>
 			
 		</section>

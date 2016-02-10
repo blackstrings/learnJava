@@ -44,11 +44,16 @@
 			<section>
 				<h1>Pointcuts</h1>
 				<section class="box">
+					<p><a href="http://www.byteslounge.com/tutorials/spring-aop-pointcut-advice-example">Read Link</a></p>
 					<p>
 					Pointcuts are what you use to indicate where in your program should another set of code enter.
-					Examples of point cuts:
+					Examples of an "Annotation pointcut":</p>
 					<img src="images/aop-2.png" class="fit popup">
-					</p>
+					<p>to target a return type you have to use the full path to the type.
+					Example where Ball is the return type</p>
+					<p>("execution(com.menards.Ball com.menards.gui.*.*(..))")</p>
+					<p>Example of non-annotation pointcut</p>
+					<img src="images/aop-pointcuts3.png" class="popup fit">
 				</section>
 				
 				<section class="box">
