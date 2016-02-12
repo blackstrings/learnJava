@@ -8,6 +8,7 @@ public class ArrayBasicDemo {
 	
 	// Variables
 	// ArrayList 1 - Initialize ArrayList
+	//
 	private List<String> names = new ArrayList<String>(){{
 		add("No");
 		add("Yes");

@@ -516,7 +516,8 @@ const int * const p1;
 				<h2>c-style Array</h2>
 				<p>Unlike in java, with c-style array, You have to keep track of on your array size on your own into a variable.
 				You cannot or will find the size of the array at runtime in c++ hard to do.(also not reliable once you start using pointers). 
-				Hence std:vector is preferred over c-style array, as it does keep track of its size, use vector instead.
+				Hence std:vector is preferred over c-style array, as it does keep track of its size, so use vector instead as it works similar to
+				java arrays.
 				The use of vector far outweighs the old c-style array.
 				</p>
 <pre>
@@ -656,6 +657,23 @@ void mod(char * msg){
 }
 </pre>
 				<p>So you want to create a char array, pass into function, function modifies it through pointer. You don't actually return char array</p>
+			</section>
+			
+			<section class="box">
+				<h2>Single Array</h2>
+				<p>You you initate</p>
+<pre>
+//3 size
+int arr[3];
+arr[0] = 33;
+arr[1] = 44;
+
+//method
+void doArr(int arr[]){
+	arr[0] = 3;
+}
+</pre>
+				<p>You can use pointers</p>
 			</section>
 			
 			<section class="box">
