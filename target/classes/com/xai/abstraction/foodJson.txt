@@ -1,0 +1,1 @@
+{"foods":[{"name":"Red Berry","id":"1","status":"raw","type":"fruit","effectors":[{"type":"hp","amt":"10"}]},{"name":"Apple","id":"2","status":"raw","type":"fruit","effectors":[{"type":"hp","amt":"20"},{"type":"status","amt":"10"}]},{"name":"Pork Steak","id":"3","status":"cooked","type":"fruit","effectors":[{"type":"hp","amt":"50"},{"type":"status","amt":"10"}]}]}

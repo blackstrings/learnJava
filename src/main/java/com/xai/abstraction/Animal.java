@@ -13,13 +13,14 @@ public abstract class Animal implements IMortal, ICanFeed {
 		this.setName(name);
 		this.setHp(hp);
 		this.setConsumableFoodTypes(consumableFoodTypes);
+		System.out.println(this.toString());
 	}
 	
 	@Override
-	public <E> void feed(Food food, E animal){
+	public <E> void feed(Food food){
 		System.out.println( getName() + " is feeding on " + food.toString());
 		if(canConsume(food)){
-			applyEffects(food.applyEffects(), (Animal)animal);
+			applyEffects(food.applyEffects());
 		}
 	}
 	
@@ -33,10 +34,10 @@ public abstract class Animal implements IMortal, ICanFeed {
 	}
 	
 	//loop through all effectors
-	private void applyEffects(List<Effector> foodEffectors, Animal animal){
+	private void applyEffects(List<Effector> foodEffectors){
 		for(Effector effector : foodEffectors){
 			if(effector instanceof EffectorHP || effector instanceof EffectorStatus){
-				effector.effect(animal);
+				effector.effect(this);
 			}
 		}
 	}

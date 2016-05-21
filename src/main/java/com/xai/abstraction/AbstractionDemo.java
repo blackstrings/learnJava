@@ -12,21 +12,20 @@ public class AbstractionDemo {
 		consumableFoodTypes.add(Food.TYPE.MEAT);
 		consumableFoodTypes.add(Food.TYPE.FRUIT);
 		
-		Bird bird = new Eagle("Berlin South Maw", 100, consumableFoodTypes);
+		Bird bird = new Eagle("Berlin South Maw", 500, consumableFoodTypes);
 		
-		//TODO create effector builder
-		List<Effector> effectors = new ArrayList<Effector>();
-		effectors.add(new EffectorHP(-110));
-		effectors.add(new EffectorStatus(-10));
 		
-		Food food = new Food("Rare Fruit", effectors, Food.STATUS.RAW, Food.TYPE.FRUIT);
 		
 		//Test actions
 		//typeOf
 		if( bird instanceof Eagle){
 			((Eagle) bird).dive();
 		}
-		bird.feed(food, bird);
+		
+		FoodFactory ff = new FoodFactory();
+		Food randFood = ff.getRandomFood();
+		bird.feed(randFood);
+		
 		System.out.println(bird);
 		bird.getIsAlive();
 		

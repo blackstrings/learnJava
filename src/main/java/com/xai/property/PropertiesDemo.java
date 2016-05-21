@@ -7,6 +7,9 @@ import java.util.Properties;
 
 /**
  * how to grab key/value from properties file
+ * Properties are good when you need simple data like key values
+ * For example, loading envrionments or configs
+ * Anything more complex than key values and has nested values, use json approach
  */
 public class PropertiesDemo {
 

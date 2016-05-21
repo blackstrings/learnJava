@@ -1,5 +1,6 @@
 package com.xai.abstraction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Food extends Item implements IConsumable{
@@ -8,7 +9,7 @@ public class Food extends Item implements IConsumable{
 	public enum TYPE {MEAT,FRUIT, VEGGIE, LIQUID}
 	private TYPE type;
 	
-	public enum STATUS {RAW,COOKED,ROTTEN}
+	public enum STATUS {RAW,COOKED, GOURMET, ROTTEN}
 	private STATUS status;
 	
 	private List<Effector> foodEffectors;
@@ -18,6 +19,14 @@ public class Food extends Item implements IConsumable{
 		setFoodEffectors(foodEffectors);
 		setStatus(status);
 		setType(type);
+	}
+	
+	//copy construct
+	public Food(Food food){
+		setName(food.getName());
+		setFoodEffectors(new ArrayList<Effector>(food.getFoodEffectors()));
+		setStatus(food.getStatus());
+		setType(food.getType());
 	}
 	
 	@Override
