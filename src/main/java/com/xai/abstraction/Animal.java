@@ -13,15 +13,36 @@ public abstract class Animal implements IMortal, ICanFeed {
 		this.setName(name);
 		this.setHp(hp);
 		this.setConsumableFoodTypes(consumableFoodTypes);
-		System.out.println(this.toString());
+		
+		//doing a tostring will not init all private variables of sub classes
+		//best to do it after creation
+		//System.out.println(this.toString());
 	}
 	
 	@Override
 	public <E> void feed(Food food){
 		System.out.println( getName() + " is feeding on " + food.toString());
 		if(canConsume(food)){
-			applyEffects(food.applyEffects());
+			
+			//applyBonuses(food);
+			applyEffectors(food.getEffectors());
 		}
+	}
+	
+	public void applyBonuses(Food food){
+		//loop through all the bonuses
+		//psuedo code
+		/*
+		for(Bonus b : Bonuses){
+			if(food.getType().name().equals(Bonus.getName()){
+				for(Effector e : food.getEffectors()){
+					if(e instanceof EffectorHP){
+						((EffectorHP)e).addEnergy(b.getBonus());;
+					}
+				}
+			}
+		}
+		*/
 	}
 	
 	private boolean canConsume(Food food){
@@ -34,11 +55,13 @@ public abstract class Animal implements IMortal, ICanFeed {
 	}
 	
 	//loop through all effectors
-	private void applyEffects(List<Effector> foodEffectors){
+	private void applyEffectors(List<Effector> foodEffectors){
 		for(Effector effector : foodEffectors){
-			if(effector instanceof EffectorHP || effector instanceof EffectorStatus){
+			
+			//We should not need to care what type of effector it is
+			//if(effector instanceof EffectorHP || effector instanceof EffectorStatus){
 				effector.effect(this);
-			}
+			//}
 		}
 	}
 	

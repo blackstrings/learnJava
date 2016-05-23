@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Eagle extends Bird {
 	
+	String headColor = "yellow";
+	
 	public Eagle(String name, int hp, List<Food.TYPE> consumableFoodTypes){
 		super(name, hp, consumableFoodTypes);
 	}
@@ -14,6 +16,6 @@ public class Eagle extends Bird {
 	
 	@Override
 	public String toString(){
-		return super.toString() + "[Eagle]";
+		return super.toString() + "[Eagle: headColor: " + headColor + "]";
 	}
 }

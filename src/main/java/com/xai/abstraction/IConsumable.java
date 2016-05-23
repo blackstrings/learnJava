@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IConsumable {
 
-	public List<Effector> applyEffects();
+	public List<Effector> getEffectors();
 	
 }

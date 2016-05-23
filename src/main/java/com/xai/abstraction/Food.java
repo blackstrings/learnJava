@@ -30,7 +30,7 @@ public class Food extends Item implements IConsumable{
 	}
 	
 	@Override
-	public List<Effector> applyEffects(){
+	public List<Effector> getEffectors(){
 		return foodEffectors;
 	}
 	

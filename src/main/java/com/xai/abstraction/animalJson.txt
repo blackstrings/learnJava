@@ -1,0 +1,1 @@
+{"bird":[{"type":"eagle","name":"Summer King Eagle","hp":"100","consumables":["meat","fruit"]},{"type":"bird","name":"Skinny Flo","hp":"100","consumables":["fruit"]}]}

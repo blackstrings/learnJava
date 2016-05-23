@@ -30,6 +30,10 @@ public class EffectorHP implements Effector {
 		this.energy = energy;
 	}
 	
+	public void addEnergy(int amt){
+		this.energy += amt;
+	}
+	
 	public String toString(){
 		return getClass().getSimpleName() + "(Engery)" + getEnergy();
 	}
