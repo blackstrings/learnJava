@@ -1,12 +1,12 @@
 package com.xai.patterns.observer.observers;
 
 import com.xai.patterns.observer.Observer;
-import com.xai.patterns.observer.Subject;
+import com.xai.patterns.observer.SubjectImpl;
 
 public class Computer extends Observer {
 	private String name;
 	
-	public Computer(Subject subject, String name){
+	public Computer(SubjectImpl subject, String name){
 		this.subject = subject;
 		this.name = name;
 		subject.attach(this);

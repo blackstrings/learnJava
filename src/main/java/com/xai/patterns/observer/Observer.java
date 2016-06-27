@@ -1,7 +1,7 @@
 package com.xai.patterns.observer;
 
 public abstract class Observer {
-	protected Subject subject;
+	protected SubjectImpl subject;
 	public abstract void update();
 	
 }

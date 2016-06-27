@@ -9,10 +9,19 @@ public class AbstractionDemo {
 		
 		//Cannot use animal factory yet it's more complicated 
 		
+		
+		
 		//TODO create food builder
 		List<Food.TYPE> consumableFoodTypes = new ArrayList<Food.TYPE>();
 		consumableFoodTypes.add(Food.TYPE.MEAT);
 		consumableFoodTypes.add(Food.TYPE.FRUIT);
+		
+		Bird realBird = new Bird("tom", 55, consumableFoodTypes);
+		
+		
+		List<Animal> animals = new ArrayList<Animal>();
+		animals.add(realBird);
+		
 		
 		Eagle bird = new Eagle("Berlin South Maw", 500, consumableFoodTypes);
 		System.out.println(bird.toString());

@@ -19,6 +19,7 @@ public abstract class Animal implements IMortal, ICanFeed {
 		//System.out.println(this.toString());
 	}
 	
+	
 	@Override
 	public <E> void feed(Food food){
 		System.out.println( getName() + " is feeding on " + food.toString());

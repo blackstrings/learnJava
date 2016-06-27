@@ -1,8 +1,8 @@
-package com.xai.patterns.decorator;
+package com.xai.patterns.decorator.demo.component;
 
-import com.xai.patterns.decorator.MyObject.Feature;
+import com.xai.patterns.decorator.demo.component.BaseObject.FeatureType;
 
-public class DecoratorDemo {
+public class ComponentDemo {
 	
 	/**
 	 * The main idea behind a decorator, is that an object can be evolved/decorated
@@ -17,10 +17,11 @@ public class DecoratorDemo {
 	 */
 	public static void main(String [] args){
 		
-		MyObject dog = ObjectBuilder.get("dog");
+		BaseObject dog = ObjectBuilder.get(EntityType.DOG);
 		
-		((Feet)dog.get(Feature.FEET)).run();
-		((Eye)dog.get(Feature.EYE)).look();
+		dog.get(FeatureType.FEET).action();
+		dog.get(FeatureType.EYE).action();
+		//((Eye)dog.get(Feature.EYE)).look();
 		
 	}
 	

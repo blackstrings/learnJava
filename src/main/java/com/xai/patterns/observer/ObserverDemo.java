@@ -6,7 +6,7 @@ import com.xai.patterns.observer.observers.Computer;
 public class ObserverDemo {
 
 	public static void main(String [] args){
-		Subject sub = new Subject();
+		SubjectImpl sub = new SubjectImpl();
 		
 		//register the subject to each observer
 		Browser b1 = new Browser(sub, "safari");
@@ -14,6 +14,8 @@ public class ObserverDemo {
 		
 		Computer c1 = new Computer(sub, "mac");
 		Computer c2 = new Computer(sub, "pc");
+		
+		sub.dettach(b2);
 		
 		//when as soon as subject changes state, 
 		//all observers will be automatically notify with the observer pattern

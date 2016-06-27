@@ -1,5 +1,7 @@
 package com.xai.anonymous;
 
+import org.aspectj.org.eclipse.jdt.internal.compiler.ast.AnnotationMethodDeclaration;
+
 public class AnonymousDemo {
 
 	public static void main(String[] args){
@@ -23,6 +25,12 @@ public class AnonymousDemo {
 		SomeClass c = new SomeClass(){
 			public void someMethod(){
 				System.out.println("ovveride method of some class");
+			}
+		};
+		
+		SomeClass c2 = new SomeClass(){
+			public void anonMethod(){
+				System.out.println("annonmous method");
 			}
 		};
 		
