@@ -5,6 +5,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * Like an arrayList sets can only have one copy of each unique array.
+ * By adding more of the same say string object, it will only carry the one same string
+ * and not create duplicates. whereas in arrayList, you can have duplicates.
+ * @author xlao
+ *
+ */
 public class SetDemo {
 
 	public static void main(String [] args){
