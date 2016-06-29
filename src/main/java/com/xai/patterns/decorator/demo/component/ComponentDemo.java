@@ -2,6 +2,11 @@ package com.xai.patterns.decorator.demo.component;
 
 import com.xai.patterns.decorator.demo.component.BaseObject.FeatureType;
 
+/**
+ * Component is also known as composite pattern.
+ * @author xlao
+ *
+ */
 public class ComponentDemo {
 	
 	/**
