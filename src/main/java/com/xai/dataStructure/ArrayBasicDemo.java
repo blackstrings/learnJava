@@ -133,6 +133,34 @@ public class ArrayBasicDemo {
 		
 		newLine("4.1 - Enhanced for loop for ArrayList (short ver)", 2);
 		
+		
+		//4.2 - proves that enhanced for loop passes by reference and not by copy
+		List<Person> persons = new ArrayList<Person>();
+		for(int i=0; i<3; i++){
+			Person temp = new Person(i);
+			temp.setName("tom"+i);
+			persons.add(temp);	
+		}
+		
+		List<Person> persons2 = new ArrayList<Person>();
+		for(Person p : persons){
+			persons2.add(p);
+		}
+		persons2.get(0).setName("Mary");
+		
+		for(Person p : persons){
+			System.out.print(p.getName() + ", ");
+		}
+		
+		System.out.println();
+		
+		for(Person p : persons2){
+			System.out.print(p.getName() + ", ");
+		}
+		newLine("4.2 - Enhanced for loop for ArrayList (short ver)", 2);
+		
+		
+		
 	}
 	
 	
