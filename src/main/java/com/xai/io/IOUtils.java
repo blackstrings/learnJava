@@ -1,6 +1,7 @@
 package com.xai.io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -8,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class IOUtils {
 
@@ -36,5 +38,17 @@ public class IOUtils {
 		}
 		return sb.toString();
 	}
+	
+	public static void writeLargerTextFile(String aFileName, List<String> aLines) {
+	    Path path = Paths.get(aFileName);
+	    try (BufferedWriter writer = Files.newBufferedWriter(path, ENCODING)){
+	      for(String line : aLines){
+	        writer.write(line);
+	        writer.newLine();
+	      }
+	    } catch (IOException e) {
+			e.printStackTrace();
+		}
+	  }
 	
 }

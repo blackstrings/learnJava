@@ -28,6 +28,10 @@ public class ReadWriteTextFileJDK7 {
 	  static Path inPath = Paths.get("res/files/testJDk7in.txt");
 	  static Path outPath = Paths.get("res/files/testJDK7out.txt");
 	  
+	  //for new files
+	  //static Path inPath = Paths.get("res/files/RawText.txt");
+	  //static Path outPath = Paths.get("res/files/RawText2.txt");
+	  
 	  
 	  final static String FILE_NAME = inPath.toString(); 
 	  final static String OUTPUT_FILE_NAME = outPath.toString();
@@ -105,8 +109,19 @@ public class ReadWriteTextFileJDK7 {
     Path path = Paths.get(aFileName);
     try (BufferedWriter writer = Files.newBufferedWriter(path, ENCODING)){
       for(String line : aLines){
-        writer.write(line);
-        writer.newLine();
+    	  
+    	  //if you want to extract certain lines only to write
+    	  /*
+    	  if(line.contains("titleTxt")){
+    		  writer.write(line);
+    	      writer.newLine();
+    	  }
+    	  */
+    	  
+    	  //if you want to extract every single line
+    	  writer.write(line);
+	      writer.newLine();
+    	  
       }
     }
   }

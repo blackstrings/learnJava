@@ -1,0 +1,99 @@
+		<put name="titleTxt"	value="Roofing Estimator" />
+		<put name="titleTxt"	value="Select type of roofing material" />
+		<put name="titleTxt"	value="Select surface to install on" />
+		<put name="titleTxt"	value="Select steel covering style" />
+		<put name="titleTxt"	value="Select roof covering style" />
+		<put name="titleTxt" 	value="Select roof covering color" />
+		<put name="titleTxt"	value="Select roof covering color" />
+		<put name="titleTxt"	value="Select roof covering color" />
+		<put name="titleTxt" 	value="Select roof fastener type" />
+		<put name="titleTxt" 	value="Choose a roof fastener location" />
+		<put name="titleTxt"	value="Select roof covering trim color" />
+		<put name="titleTxt"	value="Select soffit and fascia material type" />
+		<put name="titleTxt"	value="Select soffit and fascia color" />
+		<put name="titleTxt"	value="Select soffit and fascia color" />
+		<put name="titleTxt"	value="Colors Selected" />
+		<put name="titleTxt"	value="Select type of trim needed to secure inside edge of soffit panel" />
+		<put name="titleTxt"	value="Select fascia size" />
+		<put name="titleTxt"	value="Select ceiling panels for porches and entries if needed" />
+		<put name="titleTxt"	value="Select basic roof type" />
+		<put name="titleTxt"	value="Select basic roof type" />
+		<put name="titleTxt"	value="Select the roof style that most closely resembles your roof" />
+		<put name="titleTxt"	value="Select hip cap type" />
+		<put name="titleTxt"	value="Select dimensioning method" />
+		<put name="titleTxt"	value="Select roof slope" />
+		<put name="titleTxt"	value="Select approximate roof slope" />
+		<put name="titleTxt"	value="Dimensions needed" />
+		<put name="titleTxt"	value="Enter roof dimensions" />
+		<put name="titleTxt"	value="Select add-on roof type" />
+		<put name="titleTxt"	value="Select add-on roof style" />
+		<put name="titleTxt"	value="Enter add-on roof dimensions" />
+		<put name="titleTxt"	value="Enter quantity of this add-on roof" />
+		<put name="titleTxt"	value="Select shape of ceiling" />
+		<put name="titleTxt"	value="Enter dimensions of ceiling" />
+		<put name="titleTxt"	value="Select roof edge type" />
+		<put name="titleTxt"	value="Select roof edge color" />
+		<put name="titleTxt"	value="Select ice and water seal coverage" />
+		<put name="titleTxt"	value="Select ice and water seal type" />
+		<put name="titleTxt"	value="Select ventilation type" />
+		<put name="titleTxt"	value="Select ventilation style" />
+		<put name="titleTxt"	value="Select ventilation quantity method" />
+		<put name="titleTxt"	value="Enter quantity of this vent style" />
+		<put name="titleTxt"	value="Add optional materials" />
+		<put name="titleTxt"	value="Select pipe boot style" />
+		<put name="titleTxt"	value="Enter quantity of this pipe boot" />
+		<put name="titleTxt"	value="Select valley flashing type" />
+		<put name="titleTxt"	value="Select valley flashing style" />
+		<put name="titleTxt"	value="Select chimney style" />
+		<put name="titleTxt"	value="Enter chimney dimensions" />
+		<put name="titleTxt"	value="Select moss/mildew control strip" />
+		<put name="titleTxt"	value="Select Sno-Jacks" />
+		<put name="titleTxt"	value="Enter quantity of Sno-Jacks" />
+		<put name="titleTxt"	value="Select chimney flashing kit" />
+		<put name="titleTxt"	value="Enter quantity of chimney flashing kits" />
+		<put name="titleTxt"	value="Select pipe flashing style" />
+		<put name="titleTxt"	value="Enter quantity of this pipe boot" />
+		<put name="titleTxt"	value="Change included materials" />
+		<put name="titleTxt"	value="Select roofing nail type" />
+		<put name="titleTxt"	value="Select roofing felt type" />
+		<put name="titleTxt"	value="Select roof cement option" />
+		<put name="titleTxt"	value="Select roof cement type" />
+		<put name="titleTxt"	value="Enter roof cement quantity" />
+		<put name="titleTxt"	value="Select fastener type for roofing felt" />
+		<put name="titleTxt"	value="Add touch up kit" />
+		<put name="titleTxt"	value="Add touch up" />
+		<put name="titleTxt"	value="Add under pan" />
+		<put name="titleTxt"	value="Add under pan" />
+		<put name="titleTxt"	value="Add snow guard" />
+		<put name="titleTxt"	value="Enter snow guard quantity" />
+		<put name="titleTxt"	value="Select gutter type" />
+		<put name="titleTxt"	value="Select gutter material color" />
+		<put name="titleTxt"	value="Select gutter material color" />
+		<put name="titleTxt"	value="Select gutter material color" />
+		<put name="titleTxt"	value="Select gutter material length" />
+		<put name="titleTxt"	value="Select gutter material length" />
+		<put name="titleTxt"	value="Select gutter material length" />
+		<put name="titleTxt"	value="Select angle of your fascia" />
+		<put name="titleTxt"	value="Select angle of your fascia" />
+		<put name="titleTxt"	value="Select gutter hanger style" />
+		<put name="titleTxt"	value="Select gutter hanger style" />
+		<put name="titleTxt"	value="Enter your quantity of gutter runs" />
+		<put name="titleTxt"	value="Enter your quantity of gutter sections" />
+		<put name="titleTxt"	value="Enter your quantity of gutter ends" />
+		<put name="titleTxt"	value="Enter length of highlighted gutter run" />
+		<put name="titleTxt"	value="Enter quantity of corners for this design" />
+		<put name="titleTxt"	value="Select &quot;YES&quot; if this gutter run has ends" />
+		<put name="titleTxt"	value="Select &quot;Yes&quot; if you want to add another gutter run" />
+		<put name="titleTxt"	value="Select downspout type" />
+		<put name="titleTxt"	value="Select downspout type" />
+		<put name="titleTxt"	value="Enter return length(s) for this gutter run" />
+		<put name="titleTxt"	value="Enter downspout height(s) for this gutter run" />
+		<put name="titleTxt"	value="Select downspout position" />
+		<put name="titleTxt"	value="Select downspout discharge options if desired" />
+		<put name="titleTxt"	value="Enter quantity" />
+		<put name="titleTxt"	value="Select quantity of downspouts for highlighted gutter run" />
+		<put name="titleTxt"	value="Select additional options if desired" />
+		<put name="titleTxt"	value="Enter quantity" />
+		<put name="titleTxt"	value="Select a gutter screen style" />
+		<put name="titleTxt"	value="Select a gutter screen style" />
+		<put name="titleTxt"	value="Material list" />

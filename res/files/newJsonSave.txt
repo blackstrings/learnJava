@@ -1,0 +1,1 @@
+[{"id":1002,"dmg":6,"rare":1,"name":"Sharp Rock"},{"id":1002,"dmg":8,"rare":1,"name":"Sharp Rock"},{"id":1002,"dmg":6,"rare":1,"name":"Sharp Rock"},{"id":1002,"dmg":4,"rare":1,"name":"Sharp Rock"},{"id":1002,"dmg":4,"rare":1,"name":"Sharp Rock"}]

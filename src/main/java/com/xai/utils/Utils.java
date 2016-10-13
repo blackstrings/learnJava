@@ -1,5 +1,6 @@
 package com.xai.utils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +60,17 @@ public class Utils {
 		
 		float convertVal = scaledValue * max;	//.5 will equal half of max
 		return convertVal;
+	}
+	
+	public static double randomBetweenTwoDouble(double min, double max){
+		double offset = max-min;
+		double random = min + Math.ceil( (Math.random()*offset));
+		return formatDouble(random);
+	}
+	//to pretty format your number
+	public static double formatDouble(double num){
+		DecimalFormat df = new DecimalFormat("#0.00");
+		return Double.valueOf(df.format(num));
 	}
 	
 	
