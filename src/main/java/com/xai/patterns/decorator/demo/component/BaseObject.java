@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class BaseObject {
 	
+	enum FeatureType{
+		EYE, NOSE, FEET
+	}
+	
 	Map<FeatureType, Feature> objects = new EnumMap<FeatureType, Feature>(FeatureType.class);
 	
 	public BaseObject(){
